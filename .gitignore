@@ -1,7 +1,7 @@
 
-vendor
-!vendor/composer
-!vendor/autoload.php
+vendor/*
+!composer
+!autoload.php
 
 # Logs #
 ########
