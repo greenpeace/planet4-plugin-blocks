@@ -1,0 +1,13 @@
+{% block media %}
+    {% if ( fields ) %}
+
+        <div class="eager-wrap">
+            <div class="container">
+                {% if ( fields.attachment ) %}
+                    <img src="{{ fields.attachment }}"/>
+                {% endif %}
+            </div>
+
+        </div>
+    {% endif %}
+{% endblock %}

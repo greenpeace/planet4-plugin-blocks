@@ -148,9 +148,9 @@ if ( ! class_exists( 'P4BKS_Blocks_TwoColumn_Controller' ) ) {
 		 * Callback for the shortcode.
 		 * It renders the shortcode based on supplied attributes.
 		 *
-		 * @param array  $fields
-		 * @param string $content
-		 * @param string $shortcode_tag
+		 * @param array  $fields Array of fields that are to be used in the template.
+		 * @param string $content The content of the post.
+		 * @param string $shortcode_tag The shortcode tag (shortcake_two_columns).
 		 *
 		 * @since 0.1.0
 		 *
