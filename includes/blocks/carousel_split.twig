@@ -1,0 +1,25 @@
+{% autoescape 'html' %}
+
+{% block carousel_split %}
+
+    {% if ( fields ) %}
+
+        <div id="p4bks_carousel_split_container" class="hidden-md-down row can-do-steps shortcode-carousel-split">
+
+
+
+            {% for image in fields %}
+                {% if ( image[0] ) %}
+                    <h5>{{ image[1] }}</h5>
+                    <p>{{ image[2] }}</p>
+                    <img src="{{ image[0] }}" >
+                {% endif %}
+            {% endfor %}
+
+        </div>
+    {% endif %}
+    <div class="clear"></div>
+
+{% endblock %}
+
+{% endautoescape %}

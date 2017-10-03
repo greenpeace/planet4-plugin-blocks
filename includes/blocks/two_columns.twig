@@ -1,33 +1,37 @@
-{% block two_columns %}
+{% autoescape 'html' %}
+    {% block two_columns %}
 
     {% if ( fields ) %}
         <section id="p4bks_two_columns_container" class="shortcode-two-columns">
-            <p>
-                {% if ( fields['title_1'] ) %}
-                    <h2>{{ fields['title_1']|e('html') }}</h2>
-                {% endif %}
-                {% if ( fields['description_1'] ) %}
-                    {{ fields['description_1'] }}
-                {% endif %}
-                <br />
-                {% if ( fields['button_text_1'] and fields['button_text_1'] ) %}
-                    <a class="btn" href="{{ fields['button_link_1']|e('html_attr') }}">{{ fields['button_text_1']|e('html') }}</a>
-                {% endif %}
-            </p>
-            <p>
-                {% if ( fields['title_2'] ) %}
-                    <h2>{{ fields['title_2']|e('html') }}</h2>
-                {% endif %}
-                {% if ( fields['description_2'] ) %}
-                    {{ fields['description_2'] }}
-                {% endif %}
-                <br />
-                {% if ( fields['button_text_2'] and fields['button_text_2'] ) %}
-                    <a class="btn" href="{{ fields['button_link_2']|e('html_attr') }}">{{ fields['button_text_2']|e('html') }}</a>
-                {% endif %}
-            </p>
+            <div class="row about-info">
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    {% if ( fields.title_1 ) %}
+                        <h2>{{ fields.title_1 }}</h2>
+                    {% endif %}
+                    {% if ( fields.description_1 ) %}
+                        <p>{{ fields.description_1|raw }}</p>
+                    {% endif %}
+                    <br />
+                    {% if ( fields.button_text_1 and fields.button_text_1 ) %}
+                        <a class="btn" href="{{ fields.button_link_1 }}">{{ fields.button_text_1 }}</a>
+                    {% endif %}
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    {% if ( fields.title_2 ) %}
+                        <h2>{{ fields.title_2 }}</h2>
+                    {% endif %}
+                    {% if ( fields.description_2 ) %}
+                        <p>{{ fields.description_2|raw }}</p>
+                    {% endif %}
+                    <br />
+                    {% if ( fields.button_text_2 and fields.button_text_2 ) %}
+                        <a class="btn" href="{{ fields.button_link_2 }}">{{ fields.button_text_2 }}</a>
+                    {% endif %}
+                </div>
+            </div>
         </section>
     {% endif %}
     <div class="clear"></div>
 
-{% endblock %}
+    {% endblock %}
+{% endautoescape %}
