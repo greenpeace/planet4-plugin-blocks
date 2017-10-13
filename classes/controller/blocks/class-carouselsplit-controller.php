@@ -2,14 +2,14 @@
 
 namespace P4BKS\Controllers\Blocks;
 
-if ( ! class_exists( 'P4BKS_Blocks_CarouselSplit_Controller' ) ) {
+if ( ! class_exists( '\\P4BKS\\Controllers\\Blocks\\CarouselSplit_Controller' ) ) {
 
 	/**
-	 * Class P4BKS_Blocks_CarouselSplit_Controller
+	 * Class CarouselSplit_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
 	 */
-	class P4BKS_Blocks_CarouselSplit_Controller extends P4BKS_Blocks_Controller {
+	class CarouselSplit_Controller extends Controller {
 
 
 		/**

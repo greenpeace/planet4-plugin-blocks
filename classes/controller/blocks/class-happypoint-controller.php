@@ -2,9 +2,14 @@
 
 namespace P4BKS\Controllers\Blocks;
 
-if ( ! class_exists( 'P4BKS_Blocks_HappyPoint_Controller' ) ) {
+if ( ! class_exists( '\\P4BKS\\Controllers\\Blocks\\HappyPoint_Controller' ) ) {
 
-	class P4BKS_Blocks_HappyPoint_Controller extends P4BKS_Blocks_Controller {
+	/**
+	 * Class HappyPoint_Controller
+	 *
+	 * @package P4BKS\Controllers\Blocks
+	 */
+	class HappyPoint_Controller extends Controller {
 
 		/**
 		 * Function to load the block and define its name.

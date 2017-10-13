@@ -43,8 +43,8 @@ msgstr "Η τρέχουσα έκδοση της PHP είναι:"
 msgid "Plugin Conflict Error!"
 msgstr "Σφάλμα!"
 
-msgid "Class P4BKS_Loader already exists."
-msgstr "Η κλάση P4BKS_Loader υπάρχει ήδη."
+msgid "Class Loader already exists."
+msgstr "Η κλάση Loader υπάρχει ήδη."
 
 msgid "Settings"
 msgstr "Ρυθμίσεις"

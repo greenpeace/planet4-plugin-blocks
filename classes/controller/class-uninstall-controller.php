@@ -2,13 +2,13 @@
 
 namespace P4BKS\Controllers;
 
-if ( ! class_exists( 'P4BKS_Uninstall_Controller' ) ) {
+if ( ! class_exists( '\\P4BKS\\Controllers\\Uninstall_Controller' ) ) {
 	/**
 	 * Planet4 - Blocks uninstaller
 	 *
 	 * Used when clicking "Delete" from inside of WordPress's plugins page.
 	 */
-	class P4BKS_Uninstall_Controller {
+	class Uninstall_Controller {
 
 		/**
 		 * Initialize uninstaller

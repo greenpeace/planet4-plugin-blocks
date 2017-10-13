@@ -2,9 +2,14 @@
 
 namespace P4BKS\Controllers\Blocks;
 
-if ( ! class_exists( 'P4BKS_Blocks_TwoColumn_Controller' ) ) {
+if ( ! class_exists( '\\P4BKS\\Controllers\\Blocks\\TwoColumn_Controller' ) ) {
 
-	class P4BKS_Blocks_TwoColumn_Controller extends P4BKS_Blocks_Controller {
+	/**
+	 * Class TwoColumn_Controller
+	 *
+	 * @package P4BKS\Controllers\Blocks
+	 */
+	class TwoColumn_Controller extends Controller {
 
 
 		/**

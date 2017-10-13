@@ -7,7 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit356100170ff2882375cd04c4c76f9df3
 {
     public static $prefixLengthsPsr4 = array (
-        'P' =>
+        'P' => 
         array (
             'P4BKS\\Controllers\\Menu\\' => 23,
             'P4BKS\\Controllers\\Blocks\\' => 25,
@@ -17,37 +17,37 @@ class ComposerStaticInit356100170ff2882375cd04c4c76f9df3
     );
 
     public static $prefixDirsPsr4 = array (
-        'P4BKS\\Controllers\\Menu\\' =>
+        'P4BKS\\Controllers\\Menu\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes/controller/menu',
         ),
-        'P4BKS\\Controllers\\Blocks\\' =>
+        'P4BKS\\Controllers\\Blocks\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes/controller/blocks',
         ),
-        'P4BKS\\Controllers\\' =>
+        'P4BKS\\Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes/controller',
         ),
-        'P4BKS\\' =>
+        'P4BKS\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes',
         ),
     );
 
     public static $classMap = array (
-        'P4BKS\\Controllers\\Blocks\\P4BKS_Blocks_CarouselSplit_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-p4bks-blocks-carouselsplit-controller.php',
-        'P4BKS\\Controllers\\Blocks\\P4BKS_Blocks_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-p4bks-blocks-controller.php',
-        'P4BKS\\Controllers\\Blocks\\P4BKS_Blocks_HappyPoint_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-p4bks-blocks-happypoint-controller.php',
-        'P4BKS\\Controllers\\Blocks\\P4BKS_Blocks_StaticFourColumn_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-p4bks-blocks-staticfourcolumn-controller.php',
-        'P4BKS\\Controllers\\Blocks\\P4BKS_Blocks_Tasks_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-p4bks-blocks-tasks-controller.php',
-        'P4BKS\\Controllers\\Blocks\\P4BKS_Blocks_TwoColumn_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-p4bks-blocks-twocolumn-controller.php',
-        'P4BKS\\Controllers\\Blocks\\P4BKS_Blocks_Subheader_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-p4bks-blocks-subheader-controller.php',
-        'P4BKS\\Controllers\\Menu\\P4BKS_Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-p4bks-controller.php',
-        'P4BKS\\Controllers\\Menu\\P4BKS_Settings_Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-p4bks-settings-controller.php',
-        'P4BKS\\Controllers\\P4BKS_Uninstall_Controller' => __DIR__ . '/../..' . '/classes/controller/class-p4bks-uninstall-controller.php',
-        'P4BKS\\P4BKS_Loader' => __DIR__ . '/../..' . '/classes/class-p4bks-loader.php',
-        'P4BKS\\Views\\P4BKS_View' => __DIR__ . '/../..' . '/classes/view/class-p4bks-view.php',
+        'P4BKS\\Controllers\\Blocks\\CarouselSplit_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-carouselsplit-controller.php',
+        'P4BKS\\Controllers\\Blocks\\Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-controller.php',
+        'P4BKS\\Controllers\\Blocks\\HappyPoint_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-happypoint-controller.php',
+        'P4BKS\\Controllers\\Blocks\\StaticFourColumn_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-staticfourcolumn-controller.php',
+        'P4BKS\\Controllers\\Blocks\\Subheader_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-subheader-controller.php',
+        'P4BKS\\Controllers\\Blocks\\Tasks_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-tasks-controller.php',
+        'P4BKS\\Controllers\\Blocks\\TwoColumn_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-twocolumn-controller.php',
+        'P4BKS\\Controllers\\Menu\\Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-controller.php',
+        'P4BKS\\Controllers\\Menu\\Settings_Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-settings-controller.php',
+        'P4BKS\\Controllers\\Uninstall_Controller' => __DIR__ . '/../..' . '/classes/controller/class-uninstall-controller.php',
+        'P4BKS\\Loader' => __DIR__ . '/../..' . '/classes/class-loader.php',
+        'P4BKS\\Views\\View' => __DIR__ . '/../..' . '/classes/view/class-view.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
