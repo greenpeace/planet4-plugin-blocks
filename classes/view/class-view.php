@@ -4,12 +4,12 @@ namespace P4BKS\Views;
 
 use Timber\Timber;
 
-if ( ! class_exists( 'P4BKS_View' ) ) {
+if ( ! class_exists( '\\P4BKS\\Views\\View' ) ) {
 
 	/**
-	 * Class P4BKS_View
+	 * Class View
 	 */
-	class P4BKS_View {
+	class View {
 
 		/** @var string $template_dir The path to the template files. */
 		private $template_dir = P4BKS_INCLUDES_DIR;

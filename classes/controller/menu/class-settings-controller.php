@@ -2,12 +2,12 @@
 
 namespace P4BKS\Controllers\Menu;
 
-if ( ! class_exists( 'P4BKS_Settings_Controller' ) ) {
+if ( ! class_exists( '\\P4BKS\\Controllers\\Menu\\Settings_Controller' ) ) {
 
 	/**
-	 * Class P4BKS_Settings_Controller
+	 * Class Settings_Controller
 	 */
-	class P4BKS_Settings_Controller extends P4BKS_Controller {
+	class Settings_Controller extends Controller {
 
 		/**
 		 * Hooks the method that Creates the menu item for the current controller.

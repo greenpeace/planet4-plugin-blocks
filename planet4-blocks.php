@@ -54,13 +54,13 @@ require_once ABSPATH . 'wp-admin/includes/plugin.php';
 /* ==========================
       L O A D  P L U G I N
    ========================== */
-P4BKS\P4BKS_Loader::get_instance( [
+P4BKS\Loader::get_instance( [
 	// --- Add here your own Block Controller ---
-	'P4BKS\Controllers\Blocks\P4BKS_Blocks_StaticFourColumn_Controller',
-	'P4BKS\Controllers\Blocks\P4BKS_Blocks_TwoColumn_Controller',
-	'P4BKS\Controllers\Blocks\P4BKS_Blocks_CarouselSplit_Controller',
-	'P4BKS\Controllers\Blocks\P4BKS_Blocks_Tasks_Controller',
-	'P4BKS\Controllers\Blocks\P4BKS_Blocks_HappyPoint_Controller',
-	'P4BKS\Controllers\Blocks\P4BKS_Blocks_Subheader_Controller',
-	'P4BKS\Controllers\Menu\P4BKS_Settings_Controller',
-], 'P4BKS\Views\P4BKS_View' );
+	'P4BKS\Controllers\Blocks\StaticFourColumn_Controller',
+	'P4BKS\Controllers\Blocks\TwoColumn_Controller',
+	'P4BKS\Controllers\Blocks\CarouselSplit_Controller',
+	'P4BKS\Controllers\Blocks\Tasks_Controller',
+	'P4BKS\Controllers\Blocks\HappyPoint_Controller',
+	'P4BKS\Controllers\Blocks\Subheader_Controller',
+	'P4BKS\Controllers\Menu\Settings_Controller',
+], 'P4BKS\Views\View' );

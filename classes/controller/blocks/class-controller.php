@@ -2,29 +2,31 @@
 
 namespace P4BKS\Controllers\Blocks;
 
-use P4BKS\Views\P4BKS_View;
+use P4BKS\Views\View;
 
-if ( ! class_exists( 'P4BKS_Blocks_Controller' ) ) {
+if ( ! class_exists( '\\P4BKS\\Controllers\\Blocks\\Controller' ) ) {
 
 	/**
-	 * Class P4BKS_Blocks_Controller
+	 * Class Controller
+     *
+	 * @package P4BKS\Controllers\Blocks
 	 */
-	abstract class P4BKS_Blocks_Controller {
+	abstract class Controller {
 
 		protected $block_name = 'default';
 
-		/** @var P4BKS_View $view */
+		/** @var View $view */
 		protected $view;
 
 		/**
 		 * Creates the plugin's controller object.
 		 * Avoid putting hooks inside the constructor, to make testing easier.
 		 *
-		 * @param P4BKS_View $view The view object.
+		 * @param View $view The view object.
          *
          * @since 0.1.0
 		 */
-		public function __construct( P4BKS_View $view ) {
+		public function __construct( View $view ) {
 			$this->view = $view;
 		}
 

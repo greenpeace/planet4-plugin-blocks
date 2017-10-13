@@ -2,9 +2,14 @@
 
 namespace P4BKS\Controllers\Blocks;
 
-if ( ! class_exists( 'P4BKS_Blocks_Subheader_Controller' ) ) {
+if ( ! class_exists( '\\P4BKS\\Controllers\\Blocks\\Subheader_Controller' ) ) {
 
-	class P4BKS_Blocks_Subheader_Controller extends P4BKS_Blocks_Controller {
+	/**
+	 * Class Subheader_Controller
+	 *
+	 * @package P4BKS\Controllers\Blocks
+	 */
+	class Subheader_Controller extends Controller {
 
 		/**
 		 * Function to load the block and define its name.

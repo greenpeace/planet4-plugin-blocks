@@ -2,18 +2,18 @@
 
 namespace P4BKS\Controllers\Menu;
 
-use P4BKS\Views\P4BKS_View;
+use P4BKS\Views\View;
 
-if ( ! class_exists( 'P4BKS_Controller' ) ) {
+if ( ! class_exists( '\\P4BKS\\Controllers\\Menu\\Controller' ) ) {
 
 	/**
-	 * Class P4BKS_Controller
+	 * Class Controller
 	 *
 	 * This class will control all the main functions of the plugin.
 	 */
-	abstract class P4BKS_Controller {
+	abstract class Controller {
 
-		/** @var P4BKS_View $view */
+		/** @var View $view */
 		protected $view;
 
 
@@ -21,9 +21,9 @@ if ( ! class_exists( 'P4BKS_Controller' ) ) {
 		 * Creates the plugin's controller object.
 		 * Avoid putting hooks inside the constructor, to make testing easier.
 		 *
-		 * @param P4BKS_View $view The view object.
+		 * @param View $view The view object.
 		 */
-		public function __construct( P4BKS_View $view ) {
+		public function __construct( View $view ) {
 			$this->view = $view;
 		}
 

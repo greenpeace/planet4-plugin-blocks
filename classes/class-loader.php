@@ -2,16 +2,16 @@
 
 namespace P4BKS;
 
-if ( ! class_exists( 'P4BKS_Loader' ) ) {
+if ( ! class_exists( '\\P4BKS\\Loader' ) ) {
 
 	/**
-	 * Class P4BKS_Loader
+	 * Class Loader
 	 *
 	 * This class checks requirements and if all are met then it hooks the plugin.
 	 */
-	final class P4BKS_Loader {
+	final class Loader {
 
-		/** @var P4BKS_Loader $instance */
+		/** @var Loader $instance */
 		private static $instance;
 		/** @var array $services */
 		private $services;
@@ -28,9 +28,9 @@ if ( ! class_exists( 'P4BKS_Loader' ) ) {
 		 * @param array  $services The Controller services to inject.
 		 * @param string $view_class The View class name.
 		 *
-		 * @return P4BKS_Loader
+		 * @return Loader
 		 */
-		public static function get_instance( $services = array(), $view_class ) : P4BKS_Loader {
+		public static function get_instance( $services = array(), $view_class ) : Loader {
 			! isset( self::$instance ) and self::$instance = new self( $services, $view_class );
 			return  self::$instance;
 		}
@@ -196,7 +196,7 @@ if ( ! class_exists( 'P4BKS_Loader' ) ) {
 	deactivate_plugins( P4BKS_PLUGIN_BASENAME );
 	wp_die(
 		'<div class="error fade">' .
-		'<u>' . esc_html( P4BKS_PLUGIN_NAME ) . esc_html__( 'Conflict Error', 'planet4-blocks' ) . '</u><br /><br />' . esc_html__( 'Class P4BKS_Loader already exists.', 'planet4-blocks' ) . '<br />' .
+		'<u>' . esc_html__( 'Plugin Conflict Error', 'planet4-blocks' ) . '</u><br /><br />' . esc_html__( 'Class Loader already exists.', 'planet4-blocks' ) . '<br />' .
 		'</div>', 'Plugin Conflict Error', array(
 			'response' => \WP_Http::OK,
 			'back_link' => true,
