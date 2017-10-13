@@ -4,7 +4,7 @@ This WordPress plugin provides the necessary blocks to be used with Shortcake UI
 
 **How to develop a new block you ask?**
 
-1. Create a new controller class that extends Blocks_Controller inside directory _classes/controller/blocks_. The class name should follow naming convention, for example **Blockname**_Controller and its file name should be class-p4bks-blocks-**blockname**-controller.php. 
+1. Create a new controller class that extends Controller inside directory _classes/controller/blocks_. The class name should follow naming convention, for example **Blockname**_Controller and its file name should be class-p4bks-blocks-**blockname**-controller.php. 
 
 2. Implement its parent's class two abstract methods. In method **prepare_fields()** you need to define the blocks fields and in method **prepare_template()** you need to prepare them for rendering.
 
