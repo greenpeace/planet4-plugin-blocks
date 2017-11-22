@@ -110,20 +110,18 @@ if ( ! class_exists( 'P4BKS_Blocks_Carousel_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
-			$explodeMultipleImageArray = explode( ',',$fields['multiple_image'] );
-			$images_data = array();
+			$explodeMultipleImageArray = explode( ',', $fields['multiple_image'] );
+			$images_data               = array();
 
 			foreach ( $explodeMultipleImageArray as $imageID ) {
 
-				$image_data_array             = wp_get_attachment_image_src( $imageID, 'full' );
-
-				$images_data['image_src']     = $image_data_array[0];
-				$images_data['alt_text']      = get_post_meta( $imageID, '_wp_attachment_image_alt', true  );
-				$image_metadata               = get_post( $imageID );
-				$attachment_fields            = get_post_custom( $imageID );
-				$images_data['credits']       = ( isset( $attachment_fields['_credit_text'][0] ) && ! empty( $attachment_fields['_credit_text'][0] ) ) ? $attachment_fields['_credit_text'][0] : '';
-				$images_data['title']         = $image_metadata->post_title;
-				$images_data['description']   = $image_metadata->post_content;
+				$images_data['image']       = $this->get_image_tag( $imageID );
+				$images_data['alt_text']    = get_post_meta( $imageID, '_wp_attachment_image_alt', true );
+				$image_metadata             = get_post( $imageID );
+				$attachment_fields          = get_post_custom( $imageID );
+				$images_data['credits']     = ( isset( $attachment_fields['_credit_text'][0] ) && ! empty( $attachment_fields['_credit_text'][0] ) ) ? $attachment_fields['_credit_text'][0] : '';
+				$images_data['title']       = $image_metadata->post_title;
+				$images_data['description'] = $image_metadata->post_content;
 
 				$images[] = $images_data;
 			}

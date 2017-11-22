@@ -253,6 +253,8 @@ if ( ! class_exists( 'P4BKS_Blocks_Controller' ) ) {
 			$c     = get_called_class();
 			$sizes = [];
 			switch ( $c::BLOCK_NAME ) {
+				case 'carousel':
+				case 'carousel_header':
 				case 'carousel_split':
 					$sizes = [
 						'p4-carousel-split-image-s',
@@ -284,11 +286,10 @@ if ( ! class_exists( 'P4BKS_Blocks_Controller' ) ) {
 		 * @return string
 		 */
 		protected function get_image_tag( $image_id ) {
-			if ( function_exists( '\Planet4\Images\Sizes\construct_image_tag' ) ) {
+			$img = null;
+			if ( function_exists( '\Planet4\Images\Sizes\construct_image_object' ) ) {
 				$sizes = $this->define_image_sizes_per_block();
-				$img   = \Planet4\Images\Sizes\construct_image_tag( $image_id, $sizes );
-			} else {
-				$img = wp_get_attachment_image( $image_id );
+				$img   = \Planet4\Images\Sizes\construct_image_object( $image_id, $sizes );
 			}
 
 			return $img;
@@ -298,23 +299,14 @@ if ( ! class_exists( 'P4BKS_Blocks_Controller' ) ) {
 		 * Get an image tag based on the class (block) that is calling the method
 		 *
 		 * @param int/string $image_id    WordPress image id.
-		 * @param string     $css_classes Css classes.
-		 * @param string     $background_properties Extra css background properties.
 		 *
 		 * @return string
 		 */
-		protected function get_css_image_rules( $image_id, $css_classes, $background_properties = '' ) {
-			$img = '';
-			if ( function_exists( '\Planet4\Images\Sizes\construct_css_background_image' ) ) {
+		protected function get_css_image( $image_id ) {
+			$img = null;
+			if ( function_exists( '\Planet4\Images\Sizes\construct_css_image_object' ) ) {
 				$sizes = $this->define_image_sizes_per_block();
-				$img   = \Planet4\Images\Sizes\construct_css_background_image( $image_id, $sizes, $css_classes, $background_properties );
-			} else {
-				$source = wp_get_attachment_image_src( $image_id, 'full' );
-				if ( ! empty( $source ) ) {
-					$img = " $css_classes {
-							   background: url('$source[0]') $background_properties ;
-							} ";
-				}
+				$img   = \Planet4\Images\Sizes\construct_css_image_object( $image_id, $sizes );
 			}
 			return $img;
 		}

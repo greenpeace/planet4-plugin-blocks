@@ -17,7 +17,12 @@
 						{% if ( single_image.credits ) %}
 							<h5 class="carousal-item-credit">{{ single_image.credits }}</h5>
 						{% endif %}
-						<img src="{{ single_image.image_src }}" alt="{{ single_image.alt_text }}">
+						{% if ( single_image.image ) %}
+							<img src="{{ single_image.image.src }}"
+							     srcset="{{ single_image.image.sources|join(', ') }}"
+							     sizes="{{ single_image.image.sizes|join(', ') }}"
+							     alt="{{ single_image.image.alt }}">
+						{% endif %}
 						<div class="carousel-caption">
 							{% if ( single_image.title ) %}
 								<h3>{{ single_image.title }}</h3>

@@ -103,7 +103,7 @@ if ( ! class_exists( 'P4BKS_Blocks_HappyPoint_Controller' ) ) {
 			$opacity = number_format( ( $fields['opacity'] / 100 ), 1 );
 
 			$fields['background_html']     = wp_get_attachment_image( $fields['background'] );
-			$fields['background_src']      = $this->get_css_image_rules( $fields['background'], '.happy-point-block-wrap', 'center center no-repeat' );
+			$fields['background']          = $this->get_css_image( $fields['background'] );
 			$fields['engaging_network_id'] = get_option( 'engaging_network_form_id', '' ) ? get_option( 'engaging_network_form_id' ) : '';
 			$fields['opacity']             = $opacity;
 

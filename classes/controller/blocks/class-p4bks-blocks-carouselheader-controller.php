@@ -118,27 +118,25 @@ if ( ! class_exists( 'P4BKS_Blocks_CarouselHeader_Controller' ) ) {
 
 			$attributes_temp = [];
 			for ( $i = 1; $i < 5; $i++ ) {
-				$temp_array      = [
-					"header_$i"      => $attributes[ "header_$i" ],
-					"subheader_$i"   => $attributes[ "header_$i" ],
-					"description_$i" => $attributes[ "description_$i" ],
-					"image_$i"       => $attributes[ "image_$i" ],
-					"link_text_$i"   => $attributes[ "link_text_$i" ],
-					"link_url_$i"    => $attributes[ "link_url_$i" ],
-				];
-				$attributes_temp = array_merge( $attributes_temp, $temp_array );
-			}
-			$attributes = shortcode_atts( $attributes_temp, $attributes, $shortcode_tag );
 
-			for ( $i = 1; $i < 5; $i++ ) {
-				$temp_array = wp_get_attachment_image_src( $attributes[ "image_$i" ], 'full' );
-				if ( false !== $temp_array && ! empty( $temp_array ) ) {
-					$attributes[ "image_$i" ] = $temp_array[0];
+				$image_id   = $attributes[ "image_$i" ];
+				$temp_image = wp_get_attachment_image_src( $image_id, 'full' );
+
+				if ( false !== $temp_image && ! empty( $temp_image ) ) {
+					$temp_array      = [
+						"header_$i"      => $attributes[ "header_$i" ],
+						"subheader_$i"   => $attributes[ "header_$i" ],
+						"description_$i" => $attributes[ "description_$i" ],
+						"image_$i"       => $this->get_image_tag( $image_id ),
+						"link_text_$i"   => $attributes[ "link_text_$i" ],
+						"link_url_$i"    => $attributes[ "link_url_$i" ],
+					];
+					$attributes_temp = array_merge( $attributes_temp, $temp_array );
 				}
 			}
 
 			$block_data = [
-				'fields'              => $attributes,
+				'fields' => $attributes_temp,
 			];
 
 			// Shortcode callbacks must return content, hence, output buffering here.
