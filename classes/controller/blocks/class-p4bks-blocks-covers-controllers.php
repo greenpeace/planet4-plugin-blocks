@@ -41,10 +41,11 @@ if ( ! class_exists( 'P4BKS_Blocks_Covers_Controller' ) ) {
 				],
 				[
 					'attr'        => 'select_tag',
-					'label'       => __( 'Select a Tag', 'planet4-blocks' ),
-					'description' => __( 'Associate this block with Actions that have a specific Tag', 'planet4-blocks' ),
+					'label'       => __( 'Select Tags', 'planet4-blocks' ),
+					'description' => __( 'Associate this block with Actions that have specific Tags', 'planet4-blocks' ),
 					'type'        => 'term_select',
 					'taxonomy'    => 'post_tag',
+					'multiple'    => true,
 				],
 			];
 
@@ -84,7 +85,7 @@ if ( ! class_exists( 'P4BKS_Blocks_Covers_Controller' ) ) {
 		 * @return string
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
-			$tag_id = absint( $fields['select_tag'] );
+			$select_tags = $fields['select_tag'];
 
 			$args = [
 				'post_type'   => 'page',
@@ -96,8 +97,9 @@ if ( ! class_exists( 'P4BKS_Blocks_Covers_Controller' ) ) {
 			];
 
 			// If user selected a tag to associate with the Take Action page covers.
-			if ( $tag_id ) {
-				$args['tag_id'] = $tag_id;
+			if ( $select_tags ) {
+				$tag_ids = explode( ',', $select_tags );
+				$args['tag__in'] = $tag_ids;
 			}
 
 			$actions = get_posts( $args );
@@ -131,8 +133,9 @@ if ( ! class_exists( 'P4BKS_Blocks_Covers_Controller' ) ) {
 			}
 
 			$data = [
-				'fields' => $fields,
-				'covers' => $covers,
+				'fields'    => $fields,
+				'covers'    => $covers,
+				'is_mobile' => wp_is_mobile(),
 			];
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();

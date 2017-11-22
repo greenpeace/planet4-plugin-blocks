@@ -13,10 +13,11 @@
 		</div>
 		<div class="covers-block">
 			<div class="container">
+				{% set covers_per_row = is_mobile ? 2 : 3 %}
 				{% for cover in covers %}
 					{% if loop.index0 == 0 %}
 						<div class="row">
-					{% elseif loop.index0 is divisible by(3) %}
+					{% elseif loop.index0 % covers_per_row == 0 and loop.index0 > covers_per_row %}
 						<div class="row row-hidden" style="display: none;">
 					{% endif %}
 					<div class="col-lg-4 col-md-6">
@@ -31,11 +32,11 @@
 							<a class="btn btn-primary btn-transparent btn-block cover-card-btn" href="{{ cover.button_link }}">{{ cover.button_text }}</a>
 						</div>
 					</div>
-					{% if ( (loop.index0 % 3 == 2) or loop.last) %}
+					{% if ( ( loop.index0 % covers_per_row == (covers_per_row - 1) and loop.index0 > covers_per_row ) or loop.last) %}
 						</div>
 					{% endif %}
 				{% endfor %}
-				{% if ( covers|length > 3 and fields.button_text ) %}
+				{% if ( covers|length > covers_per_row and fields.button_text ) %}
 					<div class="col-lg-4 col-md-6 mb-5 load-more-button-div">
 						<button class="btn btn-block btn-medium btn-small btn-transparent btn-load-more-covers btn-load-more">{{ fields.button_text }}</button>
 					</div>
