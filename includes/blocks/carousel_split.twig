@@ -15,12 +15,17 @@
 					</ol>
 					<div class="carousel-inner" role="listbox">
 						{% for image in fields %}
-							{% if ( image.url ) %}
+							{% if ( image.image_tag ) %}
 								<div class="{{ loop.first ? 'carousel-item active': 'carousel-item' }}">
 									{% if ( image.credit ) %}
 										<h5 class="carousel-item-credit">{{ image.credit }}</h5>
 									{% endif %}
-									<img src="{{ image.url }}" alt="{{ image.alt }}">
+
+									<img src="{{ image.image_tag.src }}"
+									     srcset="{{ image.image_tag.sources|join(', ') }}"
+									     sizes="{{ image.image_tag.sizes|join(', ') }}"
+									     alt="{{ image.image_tag.alt }}">
+
 									<div class="carousel-caption">
 										{% if ( image.title ) %}
 											<h3>{{ image.title }}</h3>

@@ -19,20 +19,14 @@
 
 						{% for i in 1..4 %}
 
-							{% if i == 1 %}
-								{% set number_to_word = 'First' %}
-							{% elseif i == 2 %}
-								{% set number_to_word = 'Second' %}
-							{% elseif i == 3 %}
-								{% set number_to_word = 'Third' %}
-							{% elseif i == 4 %}
-								{% set number_to_word = 'Fourth' %}
-							{% endif %}
-
 							{% if ( attribute( fields, 'header_'~i ) and attribute( fields, 'image_'~i ) ) %}
 								<div class="{{ loop.first ? 'carousel-item active': 'carousel-item' }}">
 									{% if ( attribute( fields, 'image_'~i ) ) %}
-										<img src="{{ attribute( fields, 'image_'~i ) }}" alt="{{ number_to_word }} slide">
+										{% set image = fields['image_'~i] %}
+										<img src="{{ image.src }}"
+										     srcset="{{ image.sources|join(', ') }}"
+										     sizes="{{ image.sizes|join(', ') }}"
+										     alt="{{ image.alt }}">
 									{% endif %}
 									<div class="carousel-caption">
 										<div class="page-header col-md-8 col-lg-8 col-sm-12 main-header pl-0 pr-0">

@@ -1,12 +1,27 @@
 {% block happy_point %}
 	{% if ( fields ) %}
-		{% if ( fields.background_src.0 or fields.opacity ) %}
+		{% if ( fields.background or fields.opacity ) %}
 			<style>
-				{% if ( fields.background_src.0 ) %}
+
+				{% set image = fields.background %}
+				{% if ( image.src ) %}
 					.happy-point-block-wrap {
-						background: url({{ fields.background_src.0 }}) center center no-repeat;
+						background: url('{{ image.src }}') center center no-repeat;
 					}
 				{% endif %}
+
+				{% if ( image.sources and image.breakpoints ) %}
+					{% for source in image.sources %}
+						{% if (image.breakpoints[loop.index0]) %}
+							@media only screen and (max-width: {{ image.breakpoints[loop.index0] }}px) {
+								.happy-point-block-wrap {
+									background: url('{{ source }}') center center no-repeat;
+								}
+							}
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+
 				{% if ( fields.opacity ) %}
 					.happy-point-block-wrap:before {
 						opacity: {{ fields.opacity }};
