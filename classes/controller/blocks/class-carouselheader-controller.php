@@ -135,6 +135,7 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 				$temp_array = wp_get_attachment_image_src( $image_id, 'full' );
 				if ( false !== $temp_array && ! empty( $temp_array ) ) {
 					$attributes[ "image_$i" ] = $temp_array[0];
+					$attributes[ "image_{$i}_url"] = jetpack_photon_url( $temp_array[0], [ 'h' => 775 ] );
 				}
 				$temp_image                     = wp_prepare_attachment_for_js( $image_id );
 				$attributes[ "image_${i}_alt" ] = $temp_image['alt'] ?? '';
