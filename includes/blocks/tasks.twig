@@ -49,7 +49,7 @@
 													{% endif %}
 													{% if ( fields['button_text_'~i] and fields['button_link_'~i] ) %}
 														<br>
-														<a class="btn btn-small btn-medium secondary-button"
+														<a class="btn btn-small btn-medium btn-secondary"
 														   href="{{ fields['button_link_'~i] }}">{{ fields['button_text_'~i] }}
 														</a>
 													{% endif %}
@@ -116,7 +116,7 @@
 												</div>
 
 												{% if ( fields['button_text_'~i] and fields['button_text_'~i] ) %}
-													<a class="btn btn-small btn-medium secondary-button"
+													<a class="btn btn-small btn-medium btn-secondary"
 													   href="{{ fields['button_link_'~i] }}">{{ fields['button_text_'~i] }}
 													</a>
 												{% endif %}

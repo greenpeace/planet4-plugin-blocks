@@ -1,11 +1,11 @@
 {% block content_four_column %}
 
 {% if ( posts ) %}
-	<div class="four-coloum-content">
+	<div class="four-column-content">
 		<div class="container">
 
 			{% if (title) %}
-				<h2>{{ __( title, 'planet4-blocks' ) }}</h2>
+				<h2 class="page-section-header">{{ title }}</h2>
 			{% endif %}
 
 			{% for post in posts %}
@@ -16,9 +16,9 @@
 				{% endif %}
 						<div class="col-md-4 col-lg-3 col-xl-3">
 							<a href="{{ post.permalink }}">
-								<div class="four-coloum-content-wrap clearfix">
-									<div class="four-coloum-content-info">
-										<div class="four-coloum-content-symbol">
+								<div class="four-column-content-wrap clearfix">
+									<div class="four-column-content-info">
+										<div class="four-column-content-symbol">
 											{% if ( post.thumbnail ) %}
 												<img src="{{ post.thumbnail|resize(255) }}"
 													 srcset="{{ post.thumbnail|resize(255)|retina(1) }} 1x,
@@ -28,7 +28,7 @@
 													 alt="{{ post.alt_text }}">
 											{% endif %}
 										</div>
-										<div class="four-coloum-content-information">
+										<div class="four-column-content-information">
 											{% if ( post.post_title ) %}
 												<h4>{{ post.post_title|e('wp_kses_post')|raw }}</h4>
 											{% endif %}
@@ -51,7 +51,7 @@
 			{% if ( posts|length > 4 ) %}
 				<div class="row mt-5 load-more-button-div">
 					<div class="col-md-4 col-lg-3 col-xl-3 mb-5">
-						<button class="btn btn-block btn-medium btn-small btn-transparent btn-load-more">
+						<button class="btn btn-block btn-medium btn-secondary btn-load-more">
 							{{ __( 'Load More', 'planet4-blocks' ) }}
 						</button>
 					</div>

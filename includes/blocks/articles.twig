@@ -1,90 +1,80 @@
 {% block articles %}
-{% if ( recent_posts ) %}
-	<div class="article">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-lg-9">
-					{% if ( fields.article_heading ) %}
-						<h3>{{ fields.article_heading }}</h3>
-					{% endif %}
-				</div>
-				<div class="col-md-4 col-lg-3 ml-auto hidden-sm-down">
-					<a class="btn btn-medium btn-blue btn-block" href="#">{{ __( 'READ ALL THE NEWS', domain ) }}</a>
-				</div>
-				<div class="topicwise-article-section clearfix col-md-12">
-					<ul class="topicwise-article-list list-unstyled hidden-sm-down">
-						{% for key,value in recent_posts %}
-							<li class="media topicwise-article-list-item {% if key == 1 %}my-5{% endif %}">
-								<img class="d-flex mr-3 topicwise-article-image"  src="{{ value.thumbnail|resize(350) }}"
-									srcset="{{ value.thumbnail|resize(350)|retina(1) }} 1x,
-									{{ value.thumbnail|resize(350)|retina(2) }}  2x,
-									{{ value.thumbnail|resize(350)|retina(3) }}  3x,
-									{{ value.thumbnail|resize(350)|retina(4) }}  4x" alt="{{ value.alt_text }}">
-								<div class="media-body topicwise-article-body">
-								<div class="topicwise-article-tags">
-									{% if ( value.category ) %}
-										{% for category_data in value.category %}
-											<a href="{{ category_data.href }}" class="article-topic-title"> {{ category_data.name }}</a>
-										{% endfor %}
-										<span class="article-topic-title-seprater"></span>
-									{% endif %}
-									{% if ( value.tags ) %}
-										{% for tags_data in value.tags %}
-											<a href={{ tags_data.href }} class="article-topic-tag">#{{ tags_data.name }}</a>
-										{% endfor %}
-									{% endif %}
-								</div>
-								{% if ( value.post_title ) %}
-									<a href="{{ value.permalink }}" class="mt-0 mb-1 article-headline">{{ value.post_title }}</a>
-								{% endif %}
-								<div class="article-write-info">
-									{% if ( value.post_modified ) %}
-										<span class="article-date">{{ value.post_modified|date("d M, Y") }}</span>
-									{% endif %}
-								</div>
-								{% if ( value.post_excerpt ) %}
-									<p class="article-content">{{ value.post_excerpt }}</p>
-								{% endif %}
-								</div>
-							</li>
-						{% endfor %}
-					</ul>
-					<ul class="topicwise-article-list list-unstyled hidden-sm-up">
-						{% for value in recent_posts %}
-							<li class="topicwise-article-list-item article-mobile-view {% if key == 1 %}my-5{% endif %}">
-								<div class="topicwise-article-body">
-									<div class="topicwise-article-tags">
-										{% if ( value.category ) %}
-											<span class="article-topic-title">{% for category_data in value.category %} {{ category_data.name }} {% endfor %}</span>
-											<span class="article-topic-title-seprater"></span>
-										{% endif %}
-										{% if ( value.tags ) %}
-											{% for tags_data in value.tags %}
-												<span class="article-topic-tag">#{{ tags_data.name }}</span>
-											{% endfor %}
-										{% endif %}
-									</div>
-									{% if ( value.post_title ) %}
-										<h4 class="mt-0 mb-1 article-headline">{{ value.post_title }}</h4>
-									{% endif %}
-									<div class="article-write-info">
-										{% if ( value.post_modified ) %}
-											<span class="article-date">{{ value.post_modified|date("d M, Y") }}</span>
-										{% endif %}
-									</div>
-								</div>
-								<img class="d-flex mr-3 topicwise-article-image"  src="{{ value.thumbnail|resize(350) }}"
-									srcset="{{ value.thumbnail|resize(350)|retina(1) }} 1x,
-									{{ value.thumbnail|resize(350)|retina(2) }}  2x,
-									{{ value.thumbnail|resize(350)|retina(3) }}  3x,
-									{{ value.thumbnail|resize(350)|retina(4) }}  4x" alt="{{ value.alt_text }}">
+	{% if ( recent_posts ) %}
+		<section class="article-listing page-section">
+			<div class="container">
+				<div class="row">
+					<header class="col-md-12 article-listing-intro">
+						<div class="col-md-7 col-lg-8 col-xl-9">
+							{% if ( fields.article_heading ) %}
+								<h3 class="page-section-header">{{ fields.article_heading }}</h3>
+							{% endif %}
+						</div>
+						<div class="col-md-5 col-lg-4 col-xl-3 ml-auto hidden-sm-down">
+							<a class="btn btn-secondary btn-block" href="#">{{ __( 'READ ALL THE NEWS', domain ) }}</a>
+						</div>
+					</header>
 
-							</li>
+					<div class="article-list-section clearfix col-md-12">
+						{% for key,value in recent_posts %}
+							<article class="article-list-item">
+								<a href="{{ value.permalink }}" class="article-list-item-image">
+									<img class="d-flex mr-3 topicwise-article-image"
+										 src="{{ value.thumbnail|resize(350) }}"
+										 srcset="{{ value.thumbnail|resize(350)|retina(1) }} 1x,
+											 	 {{ value.thumbnail|resize(350)|retina(2) }}  2x,
+											 	 {{ value.thumbnail|resize(350)|retina(3) }}  3x,
+											 	 {{ value.thumbnail|resize(350)|retina(4) }}  4x"
+										 alt="{{ value.alt_text }}">
+								</a>
+								<div class="article-list-item-body">
+									{% if ( value.tags ) %}
+										<ul class="tags-list article-list-item-tags">
+
+											{% if ( value.category ) %}
+												{% set categories = '' %}
+												{% for category_data in value.category %}
+													{% set categories = categories ~ ' ' ~ category_data.name|e('wp_kses_post')|raw %}
+												{% endfor %}
+												<li class="tag-item tag-item--main">{{ categories|raw }}</li>
+											{% endif %}
+											{% for tags_data in value.tags %}
+												<li class="tag-item"><a href="{{ tags_data.href }}">#{{ tags_data.name }}</a></li>
+											{% endfor %}
+
+										</ul>
+									{% endif %}
+
+									<header>
+										{% if ( value.post_title ) %}
+											<h4 class="article-list-item-headline">
+												<a href="{{ value.permalink }}">{{ value.post_title }}</a>
+											</h4>
+										{% endif %}
+										<p class="article-list-item-meta">
+											{% if ( value.author ) %}
+												<span class="article-list-item-author">by <a href="#">{{ value.author }}</a></span>
+											{% endif %}
+											{% if ( value.post_modified ) %}
+												<time class="article-list-item-date" datetime="">{{ value.post_modified|date("d M, Y") }}</time>
+											{% endif %}
+										</p>
+									</header>
+
+									{% if ( value.post_excerpt ) %}
+										<p class="article-list-item-content">
+											<a href="{{ value.permalink }}">{{ value.post_excerpt|e('wp_kses_post')|raw }}</a>
+										</p>
+									{% endif %}
+								</div>
+							</article>
 						{% endfor %}
-					</ul>
+					</div>
+
+					<div class="col-md-5 col-lg-4 col-xl-3 ml-auto hidden-md-up">
+						<a class="btn btn-medium btn-secondary btn-block mt42" href="#">{{ __( 'READ ALL THE NEWS', domain ) }}</a>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-{% endif %}
+		</section>
+	{% endif %}
 {% endblock %}

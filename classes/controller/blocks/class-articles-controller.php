@@ -92,6 +92,7 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 				foreach ( $all_posts as $recent ) {
 					$recent['alt_text']  = '';
 					$recent['thumbnail'] = '';
+					$recent['author']    = get_the_author_meta( 'display_name', $recent['post_author'] );
 
 					if ( has_post_thumbnail( $recent['ID'] ) ) {
 						$recent['thumbnail'] = get_the_post_thumbnail_url( $recent['ID'], 'single-post-thumbnail' );

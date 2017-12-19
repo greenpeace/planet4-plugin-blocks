@@ -24,12 +24,10 @@
 							{% if ( attribute( fields, 'header_'~i ) and attribute( fields, 'image_'~i ) ) %}
 								<div class="{{ loop.first ? 'carousel-item active': 'carousel-item' }}">
 									{% if ( attribute( fields, 'image_'~i ) ) %}
-										<img src="{{ attribute( fields, 'image_'~i )|resize(1118,746) }}"
-											 data-background-position="{{ attribute( fields, 'focus_image_'~i )}}"
-											 srcset="{{ attribute( fields, 'image_'~i )|resize(1118,746)|retina(1) }} 1x,
-											{{ attribute( fields, 'image_'~i )|resize(1118,746)|retina(2) }}  2x,
-											{{ attribute( fields, 'image_'~i )|resize(1118,746)|retina(3) }}  3x,
-											{{ attribute( fields, 'image_'~i )|resize(1118,746)|retina(4) }}  4x" alt="{{ attribute( fields, 'image_'~i~'_alt' )}}">
+									<img src="{{ fields['image_'~i] }}"
+										data-background-position="{{ fields['focus_image_'~i] }}"
+										srcset="{{ fields['image_'~i~'_srcset'] }}"
+										alt="{{ attribute( fields, 'image_'~i~'_alt' )}}">
 									{% endif %}
 									<div class="carousel-caption">
 										<div class="container main-header">

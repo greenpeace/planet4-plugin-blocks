@@ -17,17 +17,15 @@
 					{% elseif loop.index0 % covers_per_row == 0 and loop.index0 > covers_per_row %}
 						<div class="row row-hidden" style="display: none;">
 					{% endif %}
-							<div class="col-lg-4 col-md-6">
-								<div class="cover-card" style="background-image: url({{ cover.image }});">
-									{% if ( cover.tags ) %}
-										{% for tag in cover.tags %}
-											<a class="cover-card-tag" href="{{ tag.href|e('esc_url') }}">#{{ tag.name|e('wp_kses_post')|raw }}</a>
-										{% endfor %}
-									{% endif %}
-									<h2 class="cover-card-heading">{{ cover.title|e('wp_kses_post')|raw }}</h2>
-									<p>{{ cover.excerpt|truncate(25)|e('wp_kses_post')|raw }}</p>
-									<a class="btn btn-primary btn-transparent btn-block cover-card-btn" href="{{ cover.button_link|e('esc_url') }}">{{ cover.button_text }}</a>
-								</div>
+							<div class="cover-card card-one" style="background-image: url({{ cover.image }});">
+								{% if ( cover.tags ) %}
+									{% for tag in cover.tags %}
+										<a class="cover-card-tag" href="{{ tag.href|e('esc_url') }}">#{{ tag.name|e('wp_kses_post')|raw }}</a>
+									{% endfor %}
+								{% endif %}
+								<h2 class="cover-card-heading">{{ cover.title|e('wp_kses_post')|raw }}</h2>
+								<p>{{ cover.excerpt|truncate(25)|e('wp_kses_post')|raw }}</p>
+								<a class="btn btn-action btn-block cover-card-btn" href="{{ cover.button_link|e('esc_url') }}">{{ cover.button_text }}</a>
 							</div>
 					{% if ( ( loop.index0 % covers_per_row == (covers_per_row - 1) and loop.index0 > covers_per_row ) or loop.last) %}
 						</div>
@@ -35,7 +33,7 @@
 				{% endfor %}
 				{% if ( covers|length > covers_per_row and fields.button_text ) %}
 					<div class="col-lg-4 col-md-6 mb-5">
-						<button class="btn btn-block btn-medium btn-small btn-transparent btn-load-more-covers btn-load-more">{{ fields.button_text }}</button>
+						<button class="btn btn-block btn-small btn-secondary">{{ fields.button_text }}</button>
 					</div>
 				{% endif %}
 			</div>

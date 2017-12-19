@@ -10,7 +10,7 @@
                         <p>{{ fields.description_1|e('wp_kses_post')|raw }}</p>
                     {% endif %}
                     {% if ( fields.button_text_1 and fields.button_link_1 ) %}
-                        <a href="{{ fields.button_link_1 }}" class="btn btn-light-blue btn-normal">{{ fields.button_text_1 }}</a>
+                        <a href="{{ fields.button_link_1 }}" class="btn btn-secondary">{{ fields.button_text_1 }}</a>
                     {% endif %}
                 </div>
                 <div class="col-md-12 col-lg-6 col-sm-12">
@@ -21,7 +21,7 @@
                         <p>{{ fields.description_2|e('wp_kses_post')|raw }}</p>
                     {% endif %}
                     {% if ( fields.button_text_2 and fields.button_link_2 ) %}
-                        <a href="{{ fields.button_link_2 }}" class="btn btn-light-blue btn-normal">{{ fields.button_text_2 }}</a>
+                        <a href="{{ fields.button_link_2 }}" class="btn btn-secondary">{{ fields.button_text_2 }}</a>
                     {% endif %}
                 </div>
             </div>

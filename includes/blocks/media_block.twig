@@ -1,6 +1,6 @@
 {% block media %}
 	{% if ( fields.image ) %}
-		<div class="block-media">
+		<div class="block-media container">
 			<img src="{{ fields.image|resize(640) }}"
 				 srcset="{{ fields.image|resize(640)|retina(1) }} 1x,
 						 {{ fields.image|resize(640)|retina(2) }} 2x,
