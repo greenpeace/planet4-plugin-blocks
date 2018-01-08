@@ -168,6 +168,7 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 				],
 				'campaign' => [
 					'image'       => wp_get_attachment_url( $attachment_id ),
+					'srcset'      => wp_calculate_image_srcset( ['1118', '746'], wp_get_attachment_image_src( $attachment_id, 'full' )[0], wp_get_attachment_metadata( $attachment_id ) ),
 					'name'        => $tag->name,
 					'link'        => get_tag_link( $tag ),
 					'description' => $fields['description'] ?? $tag->description,

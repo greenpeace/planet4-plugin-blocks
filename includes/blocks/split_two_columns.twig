@@ -31,9 +31,9 @@
 		<div class="split-two-column-item item--right">
 			{% if ( campaign.image ) %}
 				{% if ( campaign.focus ) %}
-					<div class="split-two-column-item-image" style="background-image:url({{ campaign.image }}); background-position:{{ campaign.focus }};"></div>
+					<div class="split-two-column-item-image" style="background-image:url({{ campaign.image }}); background-position:{{ campaign.focus }};" srcset="{{ campaign.srcset }}"></div>
 				{% else %}
-					<div class="split-two-column-item-image" style="background-image:url({{ campaign.image }});"></div>
+					<div class="split-two-column-item-image" style="background-image:url({{ campaign.image }});" srcset="{{ campaign.srcset }}"></div>
 				{% endif %}
 			{% endif %}
 			<div class="split-two-column-item-content">
