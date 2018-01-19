@@ -13,7 +13,7 @@
 
 				<div class="row limit-visibility">
 					{% for cover in covers %}
-						<div class="cover-card card-one" style="background-image: url({{ cover.image }});">
+						<div class="cover-card card-one" style="background-image: linear-gradient(180deg, rgba(213, 239, 242, 1), rgba(255, 255, 255, 0.3)), url({{ cover.image }});">
 							{% if ( cover.tags ) %}
 								{% for tag in cover.tags %}
 									<a class="cover-card-tag"
