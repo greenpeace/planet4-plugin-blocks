@@ -33,7 +33,7 @@
 												<p class="publication-date">{{ post.post_date|date('F Y') }}</p>
 											{% endif %}
 											{% if ( post.post_excerpt ) %}
-												<p class="hidden-sm-down">{{ post.post_excerpt|truncate( 30, true )|e('wp_kses_post')|raw }}</p>
+												<p class="d-none d-md-block">{{ post.post_excerpt|truncate( 30, true )|e('wp_kses_post')|raw }}</p>
 											{% endif %}
 										</div>
 									</div>

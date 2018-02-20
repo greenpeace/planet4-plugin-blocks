@@ -16,7 +16,7 @@
 				</div>
 				<div class="clearfix"></div>
 				<div class="can-do-steps">
-					<div class="hidden-md-down row">
+					<div class="d-none d-lg-flex row">
 						{% for i in 1..4 %}
 
 							{% if ( fields['title_'~i] ) %}
@@ -57,7 +57,7 @@
 						{% endfor %}
 					</div>
 
-					<div class="can-do-steps-mobile hidden-lg-up">
+					<div class="can-do-steps-mobile d-lg-none">
 						<div id="accordion" role="tablist" aria-multiselectable="true">
 							{% for i in 1..4 %}
 

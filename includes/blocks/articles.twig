@@ -9,7 +9,7 @@
 								<h3 class="page-section-header">{{ fields.article_heading }}</h3>
 							{% endif %}
 						</div>
-						<div class="col-md-5 col-lg-3 col-xl-3 ml-auto hidden-sm-down">
+						<div class="col-md-5 col-lg-3 col-xl-3 ml-auto d-none d-md-block">
 							<a class="btn btn-small btn-secondary btn-block" href="{{ fields.read_more_link }}">{{ fields.read_more_text }}</a>
 						</div>
 					</header>
@@ -62,7 +62,7 @@
 						{% endfor %}
 					</div>
 
-					<div class="col-md-4 col-lg-4 col-xl-3 ml-auto hidden-md-up">
+					<div class="col-md-4 col-lg-4 col-xl-3 ml-auto d-md-none">
 						<a class="btn btn-small btn-secondary btn-block mt15" href="#">{{ __( 'READ ALL THE NEWS', 'planet4-blocks' ) }}</a>
 					</div>
 				</div>

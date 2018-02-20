@@ -46,7 +46,7 @@
 						</div>
 					{% elseif ( ( covers|length > 4 and covers|length <= 6 and covers_view == 0 ) or
 								( covers|length > 4 and covers_view == 1 ) ) %}
-						<div class="col-lg-4 col-md-6 mb-lg-5 load-more-covers-button-div hidden-lg-up">
+						<div class="col-lg-4 col-md-6 mb-lg-5 load-more-covers-button-div d-lg-none">
 							<button class="btn btn-block btn-small btn-secondary btn-load-more-covers-click">{{ fields.button_text }}</button>
 						</div>
 					{% endif %}
