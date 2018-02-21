@@ -1,29 +1,32 @@
 {% block happy_point %}
-	{% if ( fields ) %}
-		{% if ( fields.background_src.0 or fields.opacity ) %}
-			<style>
-				{% if ( fields.background_src.0 ) %}
-					.happy-point-block-wrap {
-						background: url({{ fields.background_src.0 }}) center center no-repeat;
-					}
-				{% endif %}
-				{% if ( fields.opacity ) %}
-					.happy-point-block-wrap:before {
-						opacity: {{ fields.opacity }};
-					}
-				{% endif %}
-			</style>
-		{% endif %}
-			<div class="happy-point-block-wrap block-wide">
-				<div class="container">
-					<div class="row justify-content-md-center">
-						<div class="col-md-10 pt-20">
-							{% if ( fields.mailing_list_iframe == 'true' ) %}
-								<iframe src="{{ fields.engaging_network_id }}" allowtransparency="true" frameborder="0" scrolling="no" width="100%" height="295"></iframe>
-							{% endif %}
-						</div>
-					</div>
-				</div>
-			</div>
-	{% endif %}
+  {% if ( fields ) %}
+    {% if ( fields.background_src.0 or fields.opacity ) %}
+      <!-- <style>
+        {% if ( fields.background_src.0 ) %}
+          .happy-point-block-wrap {
+            background: url({{ fields.background_src.0 }}) center center no-repeat;
+          }
+        {% endif %}
+        {% if ( fields.opacity ) %}
+          .happy-point-block-wrap:before {
+            opacity: {{ fields.opacity }};
+          }
+        {% endif %}
+      </style> -->
+    {% endif %}
+      <div class="happy-point-block-wrap block-wide">
+        <picture>
+          <img src="{{ fields.background_src.0 }}" border="0">
+        </picture>
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col-md-10 pt-20">
+              {% if ( fields.mailing_list_iframe == 'true' ) %}
+                <iframe src="{{ fields.engaging_network_id }}" allowtransparency="true" frameborder="0" scrolling="no" width="100%" height="295"></iframe>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+  {% endif %}
 {% endblock %}
