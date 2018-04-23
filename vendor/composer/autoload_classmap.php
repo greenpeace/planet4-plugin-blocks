@@ -22,7 +22,7 @@ return array(
     'P4BKS\\Controllers\\Blocks\\StaticFourColumn_Controller' => $baseDir . '/classes/controller/blocks/class-staticfourcolumn-controller.php',
     'P4BKS\\Controllers\\Blocks\\SubMenu_Controller' => $baseDir . '/classes/controller/blocks/class-submenu-controller.php',
     'P4BKS\\Controllers\\Blocks\\Subheader_Controller' => $baseDir . '/classes/controller/blocks/class-subheader-controller.php',
-    'P4BKS\\Controllers\\Blocks\\TakeActionBoxout_Controller' => $baseDir . '/classes/controller/blocks/class-takeactionboxout-controllers.php',
+    'P4BKS\\Controllers\\Blocks\\TakeActionBoxout_Controller' => $baseDir . '/classes/controller/blocks/class-takeactionboxout-controller.php',
     'P4BKS\\Controllers\\Blocks\\Tasks_Controller' => $baseDir . '/classes/controller/blocks/class-tasks-controller.php',
     'P4BKS\\Controllers\\Blocks\\TwoColumn_Controller' => $baseDir . '/classes/controller/blocks/class-twocolumn-controller.php',
     'P4BKS\\Controllers\\Menu\\Controller' => $baseDir . '/classes/controller/menu/class-controller.php',
