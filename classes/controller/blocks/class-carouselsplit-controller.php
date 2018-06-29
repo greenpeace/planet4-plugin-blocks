@@ -25,20 +25,20 @@ if ( ! class_exists( 'CarouselSplit_Controller' ) ) {
 
 			$fields = [
 				[
-					'label'       => __( 'Images', 'planet4-blocks' ),
+					'label'       => __( 'Images', 'planet4-blocks-backend' ),
 					'attr'        => 'multiple_images',
 					'type'        => 'attachment',
 					'libraryType' => [ 'image' ],
 					'multiple'    => true,
-					'addButton'   => __( 'Select Images for Carousel', 'planet4-blocks' ),
-					'frameTitle'  => __( 'Select Images for Carousel', 'planet4-blocks' ),
+					'addButton'   => __( 'Select Images for Carousel', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Select Images for Carousel', 'planet4-blocks-backend' ),
 				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
 				// translators: A block that contains a carousel with split images.
-				'label'         => __( 'Carousel Split', 'planet4-blocks' ),
+				'label'         => __( 'Carousel Split', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/carousel_split.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,

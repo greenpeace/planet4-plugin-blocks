@@ -87,15 +87,15 @@ if ( ! class_exists( 'Loader' ) ) {
 						deactivate_plugins( P4BKS_PLUGIN_BASENAME );
 						$count = 0;
 						$message = '<div class="error fade">' .
-									'<u>' . esc_html( P4BKS_PLUGIN_NAME ) . ' > ' . esc_html__( 'Requirements Error(s)', 'planet4-blocks' ) . '</u><br /><br />';
+									'<u>' . esc_html( P4BKS_PLUGIN_NAME ) . ' > ' . esc_html__( 'Requirements Error(s)', 'planet4-blocks-backend' ) . '</u><br /><br />';
 
 						foreach ( $plugins['not_found'] as $plugin ) {
-							$message .= '<br/><strong>' . (++$count) . '. ' . esc_html( $plugin['Name'] ) . '</strong> ' . esc_html__( 'plugin needs to be installed and activated.', 'planet4-blocks' ) . '<br />';
+							$message .= '<br/><strong>' . (++$count) . '. ' . esc_html( $plugin['Name'] ) . '</strong> ' . esc_html__( 'plugin needs to be installed and activated.', 'planet4-blocks-backend' ) . '<br />';
 						}
 						foreach ( $plugins['not_updated'] as $plugin ) {
 							$message .= '<br/><strong>' . (++$count) . '. ' . esc_html( $plugin['Name'] ) . '</strong><br />' .
-										esc_html__( 'Minimum version ', 'planet4-blocks' ) . '<strong>' . esc_html( $plugin['min_version'] ) . '</strong>' .
-										'<br/>' . esc_html__( 'Current version ', 'planet4-blocks' ) . '<strong>' . esc_html( $plugin['Version'] ) . '</strong><br />';
+										esc_html__( 'Minimum version ', 'planet4-blocks-backend' ) . '<strong>' . esc_html( $plugin['min_version'] ) . '</strong>' .
+										'<br/>' . esc_html__( 'Current version ', 'planet4-blocks-backend' ) . '<strong>' . esc_html( $plugin['Version'] ) . '</strong><br />';
 						}
 
 						$message .= '</div><br />';
@@ -110,9 +110,9 @@ if ( ! class_exists( 'Loader' ) ) {
 					deactivate_plugins( P4BKS_PLUGIN_BASENAME );
 					wp_die(
 						'<div class="error fade">' .
-						'<strong>' . esc_html__( 'PHP Requirements Error', 'planet4-blocks' ) . '</strong><br /><br />' . esc_html( P4BKS_PLUGIN_NAME . __( ' requires a newer version of PHP.', 'planet4-blocks' ) ) . '<br />' .
-						'<br/>' . esc_html__( 'Minimum required version of PHP: ', 'planet4-blocks' ) . '<strong>' . esc_html( $this->required_php ) . '</strong>' .
-						'<br/>' . esc_html__( 'Running version of PHP: ', 'planet4-blocks' ) . '<strong>' . esc_html( phpversion() ) . '</strong>' .
+						'<strong>' . esc_html__( 'PHP Requirements Error', 'planet4-blocks-backend' ) . '</strong><br /><br />' . esc_html( P4BKS_PLUGIN_NAME . __( ' requires a newer version of PHP.', 'planet4-blocks-backend' ) ) . '<br />' .
+						'<br/>' . esc_html__( 'Minimum required version of PHP: ', 'planet4-blocks-backend' ) . '<strong>' . esc_html( $this->required_php ) . '</strong>' .
+						'<br/>' . esc_html__( 'Running version of PHP: ', 'planet4-blocks-backend' ) . '<strong>' . esc_html( phpversion() ) . '</strong>' .
 						'</div>', 'Plugin Requirements Error', array(
 							'response' => \WP_Http::OK,
 							'back_link' => true,
@@ -180,6 +180,7 @@ if ( ! class_exists( 'Loader' ) ) {
 		 */
 		public function load_i18n() {
 			load_plugin_textdomain( 'planet4-blocks', false, P4BKS_PLUGIN_DIRNAME . '/languages/' );
+			load_plugin_textdomain( 'planet4-blocks-backend', false, P4BKS_PLUGIN_DIRNAME . '/languages/' );
 		}
 
 		/**
@@ -197,7 +198,7 @@ if ( ! class_exists( 'Loader' ) ) {
 	deactivate_plugins( P4BKS_PLUGIN_BASENAME );
 	wp_die(
 		'<div class="error fade">' .
-		'<u>' . esc_html( P4BKS_PLUGIN_NAME ) . esc_html__( 'Conflict Error', 'planet4-blocks' ) . '</u><br /><br />' . esc_html__( 'Class P4BKS_Loader already exists.', 'planet4-blocks' ) . '<br />' .
+		'<u>' . esc_html( P4BKS_PLUGIN_NAME ) . esc_html__( 'Conflict Error', 'planet4-blocks-backend' ) . '</u><br /><br />' . esc_html__( 'Class P4BKS_Loader already exists.', 'planet4-blocks-backend' ) . '<br />' .
 		'</div>', 'Plugin Conflict Error', array(
 			'response' => \WP_Http::OK,
 			'back_link' => true,

@@ -22,18 +22,18 @@ if ( ! class_exists( 'CampaignThumbnail_Controller' ) ) {
 		public function prepare_fields() {
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-blocks' ),
+					'label' => __( 'Title', 'planet4-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Enter title', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter title', 'planet4-blocks-backend' ),
 					],
 				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Campaign Thumbnail', 'planet4-blocks' ),
+				'label'         => __( 'Campaign Thumbnail', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/campaign_thumbnail.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
@@ -139,7 +139,6 @@ if ( ! class_exists( 'CampaignThumbnail_Controller' ) ) {
 			}
 			$data = [
 				'fields' => $fields,
-				'domain' => 'planet4-blocks',
 			];
 
 			// Shortcode callbacks must return content, hence, output buffering	here.

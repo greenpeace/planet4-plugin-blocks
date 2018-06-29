@@ -83,53 +83,53 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 			$heading_options = [
 				[
 					'value' => '0',
-					'label' => __( 'None', 'planet4-blocks' ),
+					'label' => __( 'None', 'planet4-blocks-backend' ),
 				],
 			];
 			for ( $i = 1; $i < 7; $i ++ ) {
 				$heading_options[] = [
 					'value' => (string) $i,
-					'label' => __( 'Heading', 'planet4-blocks' ) . " $i",
+					'label' => __( 'Heading', 'planet4-blocks-backend' ) . " $i",
 				];
 			}
 
 			$fields = [
 				[
-					'block_heading'     => __( 'Anchor Link Submenu', 'planet4-blocks' ),
+					'block_heading'     => __( 'Anchor Link Submenu', 'planet4-blocks-backend' ),
 					'block_description' => __( 'An in-page table of contents to help users have a sense of what\'s on
-												the page and let them jump to a topic they are interested in.', 'planet4-blocks' ),
+												the page and let them jump to a topic they are interested in.', 'planet4-blocks-backend' ),
 					'attr'              => 'submenu_style',
-					'label'             => __( 'What style of menu do you need?', 'planet4-blocks' ),
-					'description'       => __( 'Associate this block with Posts that have a specific Tag', 'planet4-blocks' ),
+					'label'             => __( 'What style of menu do you need?', 'planet4-blocks-backend' ),
+					'description'       => __( 'Associate this block with Posts that have a specific Tag', 'planet4-blocks-backend' ),
 					'type'              => 'p4_radio',
 					'options'           => [
 						[
 							'value' => '1',
-							'label' => __( 'Long full-width', 'planet4-blocks' ),
+							'label' => __( 'Long full-width', 'planet4-blocks-backend' ),
 							'desc'  => 'Use: on long pages (more than 5 screens) when list items are long (+ 10 words)<br>No max items<br>recommended.',
 							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/submenu-long.jpg' ),
 						],
 						[
 							'value' => '2',
-							'label' => __( 'Short full-width', 'planet4-blocks' ),
+							'label' => __( 'Short full-width', 'planet4-blocks-backend' ),
 							'desc'  => 'Use: on long pages (more than 5 screens) when list items are short (up to 5 words)<br>No max items<br>recommended.',
 							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/submenu-short.jpg' ),
 						],
 						[
 							'value' => '3',
-							'label' => __( 'Short sidebar', 'planet4-blocks' ),
+							'label' => __( 'Short sidebar', 'planet4-blocks-backend' ),
 							'desc'  => 'Use: on long pages (more than 5 screens) when list items are short (up to 10 words)<br>Max items<br>recommended: 9',
 							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/submenu-sidebar.jpg' ),
 						],
 					],
 				],
 				[
-					'label'       => __( '<h3>Submenu title</h3>', 'planet4-blocks' ),
+					'label'       => __( '<h3>Submenu title</h3>', 'planet4-blocks-backend' ),
 					'description' => '<i>(Optional)</i><br><br><hr>',
 					'attr'        => 'title',
 					'type'        => 'text',
 					'meta'        => [
-						'placeholder' => __( 'Enter title for this block', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter title for this block', 'planet4-blocks-backend' ),
 						'data-plugin' => 'planet4-blocks',
 					],
 				],
@@ -161,7 +161,7 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Submenu', 'planet4-blocks' ),
+				'label'         => __( 'Submenu', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/submenu.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,

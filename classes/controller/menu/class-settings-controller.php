@@ -18,8 +18,8 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 
 			if ( in_array( 'administrator', $current_user->roles, true ) && current_user_can( 'manage_options' ) ) {
 				add_menu_page(
-					__( 'Blocks', 'planet4-blocks' ),
-					__( 'Blocks', 'planet4-blocks' ),
+					__( 'Blocks', 'planet4-blocks-backend' ),
+					__( 'Blocks', 'planet4-blocks-backend' ),
 					'manage_options',
 					P4BKS_PLUGIN_SLUG_NAME,
 					array( $this, 'prepare_settings' ),
@@ -36,7 +36,6 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 			$this->view->settings( [
 				'settings' => get_option( 'p4bks_main_settings' ),
 				'available_languages' => P4BKS_LANGUAGES,
-				'domain' => 'planet4-blocks',
 			] );
 		}
 

@@ -1,0 +1,30 @@
+{% block cookies %}
+
+    {% if ( data ) %}
+        <div class="cookies-block">
+            {% if ( data.title ) %}
+                <h3 class="cookies-block-title">{{ data.title }}</h3>
+            {% endif %}
+            {% if ( data.description ) %}
+                <p class="cookies-block-description">{{ data.description }}</p>
+            {% endif %}
+            {% if ( data.necessary_cookies_name and data.necessary_cookies_description ) %}
+                <label class="custom-control custom-checkbox">
+                    <input type="checkbox" id="necessary_cookies" name="necessary_cookies" value="1"
+                           class="p4-custom-control-input">
+                    <span class="custom-control-description">{{ data.necessary_cookies_name }}</span>
+                </label>
+                <p class="cookies-checkbox-description">{{ data.necessary_cookies_description }}</p>
+            {% endif %}
+            {% if ( data.all_cookies_name and data.all_cookies_description ) %}
+                <label class="custom-control custom-checkbox">
+                    <input type="checkbox" id="all_cookies" name="all_cookies" value="1"
+                           class="p4-custom-control-input">
+                    <span class="custom-control-description">{{ data.all_cookies_name }}</span>
+                </label>
+                <p class="cookies-checkbox-description">{{ data.all_cookies_description }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+{% endblock %}

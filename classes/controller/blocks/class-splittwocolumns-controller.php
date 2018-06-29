@@ -21,15 +21,15 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 		public function prepare_fields() {
 
 			$focus_options = [
-				[ 'value' => 'left top',      'label' => __( '1 - Top Left', 'planet4-blocks' ) ],
-				[ 'value' => 'center top',    'label' => __( '2 - Top Center', 'planet4-blocks' ) ],
-				[ 'value' => 'right top',     'label' => __( '3 - Top Right', 'planet4-blocks' ) ],
-				[ 'value' => 'left center',   'label' => __( '4 - Middle Left', 'planet4-blocks' ) ],
-				[ 'value' => 'center center', 'label' => __( '5 - Middle Center', 'planet4-blocks' ) ],
-				[ 'value' => 'right center',  'label' => __( '6 - Middle Right', 'planet4-blocks' ) ],
-				[ 'value' => 'left bottom',   'label' => __( '7 - Bottom Left', 'planet4-blocks' ) ],
-				[ 'value' => 'center bottom', 'label' => __( '8 - Bottom Center', 'planet4-blocks' ) ],
-				[ 'value' => 'right bottom',  'label' => __( '9 - Bottom Right', 'planet4-blocks' ) ],
+				[ 'value' => 'left top',      'label' => __( '1 - Top Left', 'planet4-blocks-backend' ) ],
+				[ 'value' => 'center top',    'label' => __( '2 - Top Center', 'planet4-blocks-backend' ) ],
+				[ 'value' => 'right top',     'label' => __( '3 - Top Right', 'planet4-blocks-backend' ) ],
+				[ 'value' => 'left center',   'label' => __( '4 - Middle Left', 'planet4-blocks-backend' ) ],
+				[ 'value' => 'center center', 'label' => __( '5 - Middle Center', 'planet4-blocks-backend' ) ],
+				[ 'value' => 'right center',  'label' => __( '6 - Middle Right', 'planet4-blocks-backend' ) ],
+				[ 'value' => 'left bottom',   'label' => __( '7 - Bottom Left', 'planet4-blocks-backend' ) ],
+				[ 'value' => 'center bottom', 'label' => __( '8 - Bottom Center', 'planet4-blocks-backend' ) ],
+				[ 'value' => 'right bottom',  'label' => __( '9 - Bottom Right', 'planet4-blocks-backend' ) ],
 			];
 
 			$option_values   = get_option( 'planet4_options' );
@@ -65,122 +65,122 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 			}
 
 			$select_issue_label = sprintf( '<h3>%1$s</h3>%2$s',
-										__( 'Issue fields (Column 1 - Left side)', 'planet4-blocks' ),
-										__( 'Select an issue', 'planet4-blocks' )
+										__( 'Issue fields (Column 1 - Left side)', 'planet4-blocks-backend' ),
+										__( 'Select an issue', 'planet4-blocks-backend' )
 			);
 			$select_tag_label   = sprintf(  '<br><hr/><br><h3>%1$s</h3>%2$s',
-										__( 'Campaign fields (Column 2 - Right side)', 'planet4-blocks' ),
-										__( 'Select a tag', 'planet4-blocks' )
+										__( 'Campaign fields (Column 2 - Right side)', 'planet4-blocks-backend' ),
+										__( 'Select a tag', 'planet4-blocks-backend' )
 			);
 
 			$fields = [
 				[
 					'attr'        => 'select_issue',
 					'label'       => $select_issue_label,
-					'description' => __( 'Associate this block to the Issue that it will talk about', 'planet4-blocks' ),
+					'description' => __( 'Associate this block to the Issue that it will talk about', 'planet4-blocks-backend' ),
 					'type'        => 'select',
 					'options'     => $options,
 				],
 				[
-					'label' => __( 'Issue Title', 'planet4-blocks' ),
+					'label' => __( 'Issue Title', 'planet4-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Enter title', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter title', 'planet4-blocks-backend' ),
 						'data-plugin' => 'planet4-blocks',
 					],
-					'description' => __( '(Optional) Fill this only if you need to override issue title.', 'planet4-blocks' ),
+					'description' => __( '(Optional) Fill this only if you need to override issue title.', 'planet4-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Issue Description', 'planet4-blocks' ),
+					'label' => __( 'Issue Description', 'planet4-blocks-backend' ),
 					'attr'  => 'issue_description',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Enter description', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter description', 'planet4-blocks-backend' ),
 					],
-					'description' => __( '(Optional) Fill this only if you need to override issue description.', 'planet4-blocks' ),
+					'description' => __( '(Optional) Fill this only if you need to override issue description.', 'planet4-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Issue link text', 'planet4-blocks' ),
+					'label' => __( 'Issue link text', 'planet4-blocks-backend' ),
 					'attr'  => 'issue_link_text',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Enter link text', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter link text', 'planet4-blocks-backend' ),
 					],
-					'description' => __( '(Optional)', 'planet4-blocks' ),
+					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Issue link path', 'planet4-blocks' ),
+					'label' => __( 'Issue link path', 'planet4-blocks-backend' ),
 					'attr'  => 'issue_link_path',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Enter link path', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter link path', 'planet4-blocks-backend' ),
 					],
-					'description' => __( '(Optional)', 'planet4-blocks' ),
+					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
-					'label'       => __( 'Issue Image', 'planet4-blocks' ),
+					'label'       => __( 'Issue Image', 'planet4-blocks-backend' ),
 					'attr'        => 'issue_image',
 					'type'        => 'attachment',
 					'libraryType' => [ 'image' ],
-					'addButton'   => __( 'Select Image for Issue', 'planet4-blocks' ),
-					'frameTitle'  => __( 'Select Image for Issue', 'planet4-blocks' ),
-					'description' => __( '(Optional)', 'planet4-blocks' ),
+					'addButton'   => __( 'Select Image for Issue', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Select Image for Issue', 'planet4-blocks-backend' ),
+					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
-					'label'       => __( 'Select focus point for issue image', 'planet4-blocks' ) . '<img src="' .
+					'label'       => __( 'Select focus point for issue image', 'planet4-blocks-backend' ) . '<img src="' .
 					                 esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png' ) ) . '" />',
 					'attr'        => 'focus_issue_image',
 					'type'        => 'select',
 					'options'     => $focus_options,
-					'description' => __( '(Optional)', 'planet4-blocks' ),
+					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
 					'attr'        => 'select_tag',
 					'label'       => $select_tag_label,
-					'description' => __( 'Associate the selected Issue with a Tag', 'planet4-blocks' ),
+					'description' => __( 'Associate the selected Issue with a Tag', 'planet4-blocks-backend' ),
 					'type'        => 'select',
 					'options'     => $select_tag_options,
 					'multiple'    => false,
 				],
 				[
-					'label' => __( 'Campaign Description', 'planet4-blocks' ),
+					'label' => __( 'Campaign Description', 'planet4-blocks-backend' ),
 					'attr'  => 'tag_description',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Enter description', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter description', 'planet4-blocks-backend' ),
 					],
-					'description' => __( '(Optional)', 'planet4-blocks' ),
+					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Campaign button text', 'planet4-blocks' ),
+					'label' => __( 'Campaign button text', 'planet4-blocks-backend' ),
 					'attr'  => 'button_text',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Enter button text', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter button text', 'planet4-blocks-backend' ),
 					],
-					'description' => __( '(Optional)', 'planet4-blocks' ),
+					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Campaign button link', 'planet4-blocks' ),
+					'label' => __( 'Campaign button link', 'planet4-blocks-backend' ),
 					'attr'  => 'button_link',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Enter button link', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter button link', 'planet4-blocks-backend' ),
 					],
-					'description' => __( '(Optional)', 'planet4-blocks' ),
+					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
-					'label'       => __( 'Campaign Image', 'planet4-blocks' ),
+					'label'       => __( 'Campaign Image', 'planet4-blocks-backend' ),
 					'attr'        => 'tag_image',
 					'type'        => 'attachment',
 					'libraryType' => [ 'image' ],
-					'addButton'   => __( 'Select Image for Campaign', 'planet4-blocks' ),
-					'frameTitle'  => __( 'Select Image for Campaign', 'planet4-blocks' ),
-					'description' => __( '(Optional)', 'planet4-blocks' ),
+					'addButton'   => __( 'Select Image for Campaign', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Select Image for Campaign', 'planet4-blocks-backend' ),
+					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
-					'label'       => __( 'Select focus point for campaign image', 'planet4-blocks' ) . '<img src="' .
+					'label'       => __( 'Select focus point for campaign image', 'planet4-blocks-backend' ) . '<img src="' .
 					                 esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png' ) ) . '" />',
 					'attr'        => 'focus_tag_image',
 					'type'        => 'select',
@@ -197,7 +197,7 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 				/*
 				 * How the shortcode should be labeled in the UI. Required argument.
 				 */
-				'label' => __( 'Split Two Columns', 'planet4-blocks' ),
+				'label' => __( 'Split Two Columns', 'planet4-blocks-backend' ),
 
 				/*
 				 * Include an icon with your shortcode. Optional.
@@ -253,9 +253,7 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 				],
 				'campaign' => [
 					'image'       => wp_get_attachment_url( $campaign_image_id ),
-					'srcset'      => wp_calculate_image_srcset( [ '1118', '746' ],
-										wp_get_attachment_image_src( $campaign_image_id, 'full' )[0],
-										wp_get_attachment_metadata( $campaign_image_id ) ),
+					'srcset'      => wp_get_attachment_image_srcset( $campaign_image_id, 'large' ),
 					'image_alt'   => get_post_meta( $campaign_image_id, '_wp_attachment_image_alt', true ),
 					'name'        => $tag instanceof \WP_Error ? '' : html_entity_decode( $tag->name ),
 					'link'        => get_tag_link( $tag ),

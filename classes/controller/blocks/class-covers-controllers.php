@@ -22,54 +22,54 @@ if ( ! class_exists( 'Covers_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-blocks' ),
+					'label' => __( 'Title', 'planet4-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Enter title', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter title', 'planet4-blocks-backend' ),
 						'data-plugin' => 'planet4-blocks',
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-blocks' ),
+					'label' => __( 'Description', 'planet4-blocks-backend' ),
 					'attr'  => 'description',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Enter description', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter description', 'planet4-blocks-backend' ),
 						'data-plugin' => 'planet4-blocks',
 					],
 				],
 				[
 					'attr'        => 'select_tag',
-					'label'       => __( 'Select Tags', 'planet4-blocks' ),
-					'description' => __( 'Associate this block with Actions that have specific Tags', 'planet4-blocks' ),
+					'label'       => __( 'Select Tags', 'planet4-blocks-backend' ),
+					'description' => __( 'Associate this block with Actions that have specific Tags', 'planet4-blocks-backend' ),
 					'type'        => 'term_select',
 					'taxonomy'    => 'post_tag',
 					'multiple'    => true,
 				],
 				[
-					'label'       => __( 'Number of covers displayed', 'planet4-blocks' ),
+					'label'       => __( 'Number of covers displayed', 'planet4-blocks-backend' ),
 					'description' => __( 'Show 1 Row: Displays 3 Covers on desktop and 2 Covers on mobile.<br> 
 										Show 2 Rows: Displays 6 Covers on desktop and 4 covers on mobile.<br>
 										(Another Row will be revealed each time the Load More button is clicked)<br>
 										Show All Covers: Displays all available Covers on desktop and 4 Covers on mobile.',
-										'planet4-blocks' ),
+										'planet4-blocks-backend' ),
 					'attr'        => 'covers_view',
 					'type'        => 'select',
 					'options'     => [
 						[
 							'value' => '0',
 							// translators: placeholder is a number.
-							'label' => __( 'Show 1 Row', 'planet4-blocks' ),
+							'label' => __( 'Show 1 Row', 'planet4-blocks-backend' ),
 						],
 						[
 							'value' => '3',
 							// translators: placeholder is a number.
-							'label' => __( 'Show 2 Rows', 'planet4-blocks' ),
+							'label' => __( 'Show 2 Rows', 'planet4-blocks-backend' ),
 						],
 						[
 							'value' => '1',
-							'label' => __( 'Show All Covers', 'planet4-blocks' ),
+							'label' => __( 'Show All Covers', 'planet4-blocks-backend' ),
 						],
 					],
 				],
@@ -82,7 +82,7 @@ if ( ! class_exists( 'Covers_Controller' ) ) {
 				/*
 				 * How the shortcode should be labeled in the UI. Required argument.
 				 */
-				'label' => __( 'Take Action Covers', 'planet4-blocks' ),
+				'label' => __( 'Take Action Covers', 'planet4-blocks-backend' ),
 
 				/*
 				 * Include an icon with your shortcode. Optional.

@@ -22,7 +22,9 @@
 						{% for i in 1..4 %}
 							{% if ( fields['title_'~i] ) %}
 								<div class="col" data-id="{{ i }}">
-									<span class="step-number" id="step-{{ i }}">{{ i }}</span>
+									<span class="step-number" id="step-{{ i }}">
+										<span class="step-number-inner">{{ i }}</span>
+									</span>
 								</div>
 							{% endif %}
 						{% endfor %}

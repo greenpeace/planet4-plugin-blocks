@@ -27,19 +27,19 @@ if ( ! class_exists( 'MediaBlock_Controller' ) ) {
 
 			$fields = [
 				[
-					'label'       => __( 'Select Image for the media block', 'planet4-blocks' ),
+					'label'       => __( 'Select Image for the media block', 'planet4-blocks-backend' ),
 					'attr'        => 'attachment',
 					'type'        => 'attachment',
 					'libraryType' => [ 'image' ],
-					'addButton'   => __( 'Select Image', 'planet4-blocks' ),
-					'frameTitle'  => __( 'Select Image', 'planet4-blocks' ),
+					'addButton'   => __( 'Select Image', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Select Image', 'planet4-blocks-backend' ),
 				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
 				// translators: A block that displays an image that supports transparency and blends with the background.
-				'label'         => __( 'Media block', 'planet4-blocks' ),
+				'label'         => __( 'Media block', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/media_block.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,

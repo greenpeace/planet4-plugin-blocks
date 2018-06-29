@@ -24,50 +24,50 @@ if ( ! class_exists( 'ContentThreeColumn_Controller' ) ) {
 		public function prepare_fields() {
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-blocks' ),
+					'label' => __( 'Title', 'planet4-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Enter title', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter title', 'planet4-blocks-backend' ),
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-blocks' ),
+					'label' => __( 'Description', 'planet4-blocks-backend' ),
 					'attr'  => 'description',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Enter description', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter description', 'planet4-blocks-backend' ),
 					],
 				],
 				[
-					'label'       => __( 'Image 1', 'planet4-blocks' ),
+					'label'       => __( 'Image 1', 'planet4-blocks-backend' ),
 					'attr'        => 'image_1',
 					'type'        => 'attachment',
 					'libraryType' => [ 'image' ],
-					'addButton'   => __( 'Select First Image', 'planet4-blocks' ),
-					'frameTitle'  => __( 'Select First Image', 'planet4-blocks' ),
+					'addButton'   => __( 'Select First Image', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Select First Image', 'planet4-blocks-backend' ),
 				],
 				[
-					'label'       => __( 'Image 2', 'planet4-blocks' ),
+					'label'       => __( 'Image 2', 'planet4-blocks-backend' ),
 					'attr'        => 'image_2',
 					'type'        => 'attachment',
 					'libraryType' => [ 'image' ],
-					'addButton'   => __( 'Select Second Image', 'planet4-blocks' ),
-					'frameTitle'  => __( 'Select Second Image', 'planet4-blocks' ),
+					'addButton'   => __( 'Select Second Image', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Select Second Image', 'planet4-blocks-backend' ),
 				],
 				[
-					'label'       => __( 'Image 3', 'planet4-blocks' ),
+					'label'       => __( 'Image 3', 'planet4-blocks-backend' ),
 					'attr'        => 'image_3',
 					'type'        => 'attachment',
 					'libraryType' => [ 'image' ],
-					'addButton'   => __( 'Select Third Image', 'planet4-blocks' ),
-					'frameTitle'  => __( 'Select Third Image', 'planet4-blocks' ),
+					'addButton'   => __( 'Select Third Image', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Select Third Image', 'planet4-blocks-backend' ),
 				]
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Three Columns', 'planet4-blocks' ),
+				'label'         => __( 'Three Columns', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/three_columns.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
@@ -99,8 +99,7 @@ if ( ! class_exists( 'ContentThreeColumn_Controller' ) ) {
 			}
 
 			$data = [
-				'fields'      => $fields,
-				'domain'      => 'planet4-blocks',
+				'fields' => $fields,
 			];
 
 			// Shortcode callbacks must return content, hence, output buffering here.

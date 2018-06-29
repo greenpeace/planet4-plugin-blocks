@@ -14,6 +14,14 @@
 				</ol>
 			{% endif %}
 			<div class="carousel-inner" role="listbox">
+				{% if images|length > 1 %}
+					<a class="carousel-control-prev" href="#{{ id }}" role="button" data-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true">
+						<i></i>
+						</span>
+						<span class="sr-only">{{ __( 'Previous' ) }}</span>
+					</a>
+				{% endif %}
 				{% for key,single_image in images %}
 					<div class="carousel-item {% if key == 0 %}active{% endif %}">
 						<img src="{{ single_image.image_src }}"
@@ -34,21 +42,15 @@
 						{% endif %}
 					</div>
 				{% endfor %}
+				{% if images|length > 1 %}
+					<a class="carousel-control-next" href="#{{ id }}" role="button" data-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true">
+						<i></i>
+						</span>
+						<span class="sr-only">{{ __( 'Next' ) }}</span>
+					</a>
+				{% endif %}
 			</div>
-			{% if images|length > 1 %}
-				<a class="carousel-control-prev" href="#{{ id }}" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true">
-					<i></i>
-					</span>
-					<span class="sr-only">{{ __( 'Previous' ) }}</span>
-				</a>
-				<a class="carousel-control-next" href="#{{ id }}" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true">
-					<i></i>
-					</span>
-					<span class="sr-only">{{ __( 'Next' ) }}</span>
-				</a>
-			{% endif %}
 		</div>
 	</div>
 </div>

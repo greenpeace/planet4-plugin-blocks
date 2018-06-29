@@ -24,26 +24,26 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 		public function prepare_fields() {
 			$fields = array(
 				array(
-					'label' => __( 'Video Title', 'planet4-blocks' ),
+					'label' => __( 'Video Title', 'planet4-blocks-backend' ),
 					'attr'  => 'video_title',
 					'type'  => 'text',
 					'meta'  => array(
-						'placeholder' => __( 'Enter video title', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter video title', 'planet4-blocks-backend' ),
 					),
 				),
 				array(
-					'label' => __( 'Youtube ID', 'planet4-blocks' ),
+					'label' => __( 'Youtube ID', 'planet4-blocks-backend' ),
 					'attr'  => 'youtube_id',
 					'type'  => 'text',
 					'meta'  => array(
-						'placeholder' => __( 'Enter youtube video id', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter youtube video id', 'planet4-blocks-backend' ),
 					),
 				)
 			);
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = array(
-				'label'         => __( 'Youtube Video', 'planet4-blocks' ),
+				'label'         => __( 'Youtube Video', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/media_video.jpg' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
@@ -68,7 +68,6 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 
 			$data = [
 				'fields' => $fields,
-				'domain' => 'planet4-blocks',
 			];
 
 			// Shortcode callbacks must return content, hence, output buffering here.

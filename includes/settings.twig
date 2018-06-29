@@ -1,7 +1,7 @@
 {% block settings_content %}
 
     <div id="settings_div" class="wrap">
-        <h2>{{ __( 'Settings', 'planet4-blocks' ) }}</h2>
+        <h2>{{ __( 'Settings', 'planet4-blocks-backend' ) }}</h2>
     </div>
 
     {{ fn( 'settings_errors' ) }}
@@ -14,10 +14,10 @@
         <br /><br />
         <table class="form-table">
             <tr valign="top">
-                <th>{{ __( 'Language', planet4-blocks ) }}:</th>
+                <th>{{ __( 'Language', 'planet4-blocks-backend' ) }}:</th>
                 <td>
                     <select id="p4bks_lang" name="p4bks_main_settings[p4bks_lang]">
-                        <option selected disabled>- {{ __( 'Select Language', 'planet4-blocks' ) }} -</option>
+                        <option selected disabled>- {{ __( 'Select Language', 'planet4-blocks-backend' ) }} -</option>
                         {% for key, language in available_languages %}
                             {% if key == settings.p4bks_lang %}
                                 <option value="{{ key }}" selected>{{ language }}</option>
@@ -29,7 +29,7 @@
                 </td>
             </tr>
         </table>
-        {{ fn( 'submit_button', __( 'Save Changes', domain ), 'primary', 'p4bks_main_settings_save_button' ) }}
+        {{ fn( 'submit_button', __( 'Save Changes', 'planet4-blocks-backend' ), 'primary', 'p4bks_main_settings_save_button' ) }}
     </form>
     <div class="clear"></div>
 

@@ -11,8 +11,13 @@
 			</picture>
 			<div class="container">
 				<div class="row justify-content-md-center">
-					{% if ( fields.mailing_list_iframe == 'true' ) %}
-						<div class="col-md-10 pt-20" id="happy-point" data-src="{{ fields.engaging_network_id }}">
+					{% if ( fields.mailing_list_iframe == 'true' or fields.iframe_url ) %}
+						{% if ( fields.iframe_url ) %}
+							{% set url = fields.iframe_url %}
+						{% else %}
+							{% set url = fields.engaging_network_id %}
+						{% endif %}
+						<div class="col-md-10 pt-20" id="happy-point" data-src="{{ url }}">
 						</div>
 					{% endif %}
 				</div>

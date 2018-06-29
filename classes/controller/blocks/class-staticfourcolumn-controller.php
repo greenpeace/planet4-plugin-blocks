@@ -29,7 +29,7 @@ if ( ! class_exists( 'StaticFourColumn_Controller' ) ) {
 			$fields = [];
 			$field   = [
 				[
-					'label' => __( 'Title', 'planet4-blocks' ),
+					'label' => __( 'Title', 'planet4-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 				],
@@ -40,50 +40,50 @@ if ( ! class_exists( 'StaticFourColumn_Controller' ) ) {
 				$field   = [
 					[
 						// translators: placeholder needs to represent the ordinal of the column, eg. 1st, 2nd etc.
-						'label'       => sprintf( __( 'Select Image for %s column', 'planet4-blocks' ),  $i ),
+						'label'       => sprintf( __( 'Select Image for %s column', 'planet4-blocks-backend' ),  $i ),
 						'attr'        => 'attachment_' . $i,
 						'type'        => 'attachment',
 						'libraryType' => [ 'image' ],
-						'addButton'   => __( 'Select Image', 'planet4-blocks' ),
-						'frameTitle'  => __( 'Select Image', 'planet4-blocks' ),
+						'addButton'   => __( 'Select Image', 'planet4-blocks-backend' ),
+						'frameTitle'  => __( 'Select Image', 'planet4-blocks-backend' ),
 					],
 					[
-						'label' => __( 'Title', 'planet4-blocks' ),
+						'label' => __( 'Title', 'planet4-blocks-backend' ),
 						'attr'  => 'title_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the column, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter title of %s column', 'planet4-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter title of %s column', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
 						],
 					],
 					[
-						'label' => __( 'Description', 'planet4-blocks' ),
+						'label' => __( 'Description', 'planet4-blocks-backend' ),
 						'attr'  => 'description_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the column, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter description of %s column', 'planet4-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter description of %s column', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
 						],
 					],
 					[
-						'label' => __( 'Text for link', 'planet4-blocks' ),
+						'label' => __( 'Text for link', 'planet4-blocks-backend' ),
 						'attr'  => 'link_text_' . $i,
 						'type'  => 'url',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the column, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter %s link text', 'planet4-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter %s link text', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
 						],
 					],
 					[
-						'label' => __( 'Url for link', 'planet4-blocks' ),
+						'label' => __( 'Url for link', 'planet4-blocks-backend' ),
 						'attr'  => 'link_url_' . $i,
 						'type'  => 'url',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the column, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter %s link url', 'planet4-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter %s link url', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
 						],
 					],
@@ -94,7 +94,7 @@ if ( ! class_exists( 'StaticFourColumn_Controller' ) ) {
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
 				// translators: A block that contains 4 different columns each one with title and description.
-				'label'         => __( 'Static Four Column', 'planet4-blocks' ),
+				'label'         => __( 'Static Four Column', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/static_four_column.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
@@ -115,6 +115,7 @@ if ( ! class_exists( 'StaticFourColumn_Controller' ) ) {
 		 */
 		public function prepare_template( $attributes, $content, $shortcode_tag ) : string {
 
+			$title           = $attributes['title'] ?? '';
 			$attributes_temp = [];
 			for ( $i = 1; $i < 5; $i++ ) {
 				$temp_array = [
@@ -136,9 +137,9 @@ if ( ! class_exists( 'StaticFourColumn_Controller' ) ) {
 			}
 
 			$block_data = [
+				'title'               => $title,
 				'fields'              => $attributes,
 				'available_languages' => P4BKS_LANGUAGES,
-				'domain'              => 'planet4-blocks',
 			];
 
 			// Shortcode callbacks must return content, hence, output buffering here.

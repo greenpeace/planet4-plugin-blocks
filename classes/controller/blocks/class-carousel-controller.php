@@ -68,15 +68,15 @@ if ( ! class_exists( 'Carousel_Controller' ) ) {
 		public function prepare_fields() {
 			$fields = array(
 				array(
-					'label' => __( 'Title', 'planet4-blocks' ),
+					'label' => __( 'Title', 'planet4-blocks-backend' ),
 					'attr'  => 'carousel_block_title',
 					'type'  => 'text',
 					'meta'  => array(
-						'placeholder' => __( 'Enter title', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter title', 'planet4-blocks-backend' ),
 					),
 				),
 				array(
-					'label'       => __( 'Select Carousel Images', 'planet4-blocks' ),
+					'label'       => __( 'Select Carousel Images', 'planet4-blocks-backend' ),
 					'attr'        => 'multiple_image',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
@@ -88,7 +88,7 @@ if ( ! class_exists( 'Carousel_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = array(
-				'label'         => __( 'Carousel', 'planet4-blocks' ),
+				'label'         => __( 'Carousel', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/take_action_carousel.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
@@ -148,7 +148,6 @@ if ( ! class_exists( 'Carousel_Controller' ) ) {
 				'id'     => $carousel_id,
 				'title'  => $carousel_title,
 				'images' => $images,
-				'domain' => 'planet4-blocks',
 			];
 
 			// Shortcode callbacks must return content, hence, output buffering here.

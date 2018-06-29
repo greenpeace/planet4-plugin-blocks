@@ -41,25 +41,25 @@ if ( ! class_exists( 'TwoColumn_Controller' ) ) {
 			$fields = [
 				// First column fields.
 				[
-					'label' => __( 'Title', 'planet4-blocks' ),
+					'label' => __( 'Title', 'planet4-blocks-backend' ),
 					'attr'  => 'title_1',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Enter title of first column', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter title of first column', 'planet4-blocks-backend' ),
 						'data-plugin' => 'planet4-blocks',
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-blocks' ),
+					'label' => __( 'Description', 'planet4-blocks-backend' ),
 					'attr'  => 'description_1',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Enter description of first column', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter description of first column', 'planet4-blocks-backend' ),
 						'data-plugin' => 'planet4-blocks',
 					],
 				],
 				[
-					'label' => __( 'Button text', 'planet4-blocks' ),
+					'label' => __( 'Button text', 'planet4-blocks-backend' ),
 					'attr'  => 'button_text_1',
 					'type'  => 'text',
 					'meta'  => [
@@ -67,34 +67,34 @@ if ( ! class_exists( 'TwoColumn_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Button link', 'planet4-blocks' ),
+					'label' => __( 'Button link', 'planet4-blocks-backend' ),
 					'attr'  => 'button_link_1',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => esc_html__( 'Enter button link of first column', 'planet4-blocks' ),
+						'placeholder' => esc_html__( 'Enter button link of first column', 'planet4-blocks-backend' ),
 						'data-plugin' => 'planet4-blocks',
 					],
 				],
 
 				// Second column fields.
 				[
-					'label' => __( 'Title', 'planet4-blocks' ),
+					'label' => __( 'Title', 'planet4-blocks-backend' ),
 					'attr'  => 'title_2',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Enter title of second column', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter title of second column', 'planet4-blocks-backend' ),
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-blocks' ),
+					'label' => __( 'Description', 'planet4-blocks-backend' ),
 					'attr'  => 'description_2',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Enter description of second column', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter description of second column', 'planet4-blocks-backend' ),
 					],
 				],
 				[
-					'label' => __( 'Button text', 'planet4-blocks' ),
+					'label' => __( 'Button text', 'planet4-blocks-backend' ),
 					'attr'  => 'button_text_2',
 					'type'  => 'text',
 					'meta'  => [
@@ -102,11 +102,11 @@ if ( ! class_exists( 'TwoColumn_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Button link', 'planet4-blocks' ),
+					'label' => __( 'Button link', 'planet4-blocks-backend' ),
 					'attr'  => 'button_link_2',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Enter button link of second column', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter button link of second column', 'planet4-blocks-backend' ),
 						'data-plugin' => 'planet4-blocks',
 					],
 				],
@@ -120,7 +120,7 @@ if ( ! class_exists( 'TwoColumn_Controller' ) ) {
 				/*
 				 * How the shortcode should be labeled in the UI. Required argument.
 				 */
-				'label' => __( 'Two Columns', 'planet4-blocks' ),
+				'label' => __( 'Two Columns', 'planet4-blocks-backend' ),
 
 				/*
 				 * Include an icon with your shortcode. Optional.

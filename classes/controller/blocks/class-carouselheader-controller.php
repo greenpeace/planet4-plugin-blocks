@@ -32,78 +32,78 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 				$field   = [
 					[
 						// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
-						'label'       => sprintf( __( 'Select file for %s image', 'planet4-blocks' ),  $i ),
+						'label'       => sprintf( __( 'Select file for %s image', 'planet4-blocks-backend' ),  $i ),
 						'attr'        => 'image_' . $i,
 						'type'        => 'attachment',
 						'libraryType' => [ 'image' ],
-						'addButton'   => __( 'Select Image', 'planet4-blocks' ),
-						'frameTitle'  => __( 'Select Image', 'planet4-blocks' ),
+						'addButton'   => __( 'Select Image', 'planet4-blocks-backend' ),
+						'frameTitle'  => __( 'Select Image', 'planet4-blocks-backend' ),
 					],
 					[
 						// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
-						'label'       => sprintf( __( 'Select focus point for image %s', 'planet4-blocks' ),  $i ) . '<img src="' . esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png') ) . '" />',
+						'label'       => sprintf( __( 'Select focus point for image %s', 'planet4-blocks-backend' ),  $i ) . '<img src="' . esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png') ) . '" />',
 						'attr'        => 'focus_image_' . $i,
 						'type'        => 'select',
 						'options'     => [
-							[ 'value' => 'left top',      'label' => __( '1 - Top Left', 'planet4-blocks' )],
-							[ 'value' => 'center top',    'label' => __( '2 - Top Center', 'planet4-blocks' )],
-							[ 'value' => 'right top',     'label' => __( '3 - Top Right', 'planet4-blocks' )],
-							[ 'value' => 'left center',   'label' => __( '4 - Middle Left', 'planet4-blocks' )],
-							[ 'value' => 'center center', 'label' => __( '5 - Middle Center', 'planet4-blocks' )],
-							[ 'value' => 'right center',  'label' => __( '6 - Middle Right', 'planet4-blocks' )],
-							[ 'value' => 'left bottom',   'label' => __( '7 - Bottom Left', 'planet4-blocks' )],
-							[ 'value' => 'center bottom', 'label' => __( '8 - Bottom Center', 'planet4-blocks' )],
-							[ 'value' => 'right bottom',  'label' => __( '9 - Bottom Right', 'planet4-blocks' )],
+							[ 'value' => 'left top',      'label' => __( '1 - Top Left', 'planet4-blocks-backend' )],
+							[ 'value' => 'center top',    'label' => __( '2 - Top Center', 'planet4-blocks-backend' )],
+							[ 'value' => 'right top',     'label' => __( '3 - Top Right', 'planet4-blocks-backend' )],
+							[ 'value' => 'left center',   'label' => __( '4 - Middle Left', 'planet4-blocks-backend' )],
+							[ 'value' => 'center center', 'label' => __( '5 - Middle Center', 'planet4-blocks-backend' )],
+							[ 'value' => 'right center',  'label' => __( '6 - Middle Right', 'planet4-blocks-backend' )],
+							[ 'value' => 'left bottom',   'label' => __( '7 - Bottom Left', 'planet4-blocks-backend' )],
+							[ 'value' => 'center bottom', 'label' => __( '8 - Bottom Center', 'planet4-blocks-backend' )],
+							[ 'value' => 'right bottom',  'label' => __( '9 - Bottom Right', 'planet4-blocks-backend' )],
 						],
 					],
 					[
-						'label' => __( 'Header', 'planet4-blocks' ),
+						'label' => __( 'Header', 'planet4-blocks-backend' ),
 						'attr'  => 'header_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter header of %s image', 'planet4-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter header of %s image', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
 							'maxlength' => 40,
 						],
 					],
 					[
-						'label' => __( 'Subheader', 'planet4-blocks' ),
+						'label' => __( 'Subheader', 'planet4-blocks-backend' ),
 						'attr'  => 'subheader_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter subheader of %s image', 'planet4-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter subheader of %s image', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
 						],
 					],
 					[
-						'label' => __( 'Description', 'planet4-blocks' ),
+						'label' => __( 'Description', 'planet4-blocks-backend' ),
 						'attr'  => 'description_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter description of %s image', 'planet4-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter description of %s image', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
 						],
 					],
 					[
-						'label' => __( 'Text for link', 'planet4-blocks' ),
+						'label' => __( 'Text for link', 'planet4-blocks-backend' ),
 						'attr'  => 'link_text_' . $i,
 						'type'  => 'url',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter link text for %s image', 'planet4-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter link text for %s image', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
 						],
 					],
 					[
-						'label' => __( 'Url for link', 'planet4-blocks' ),
+						'label' => __( 'Url for link', 'planet4-blocks-backend' ),
 						'attr'  => 'link_url_' . $i,
 						'type'  => 'url',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter link url for %s image', 'planet4-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter link url for %s image', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
 						],
 					],
@@ -114,7 +114,7 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
 				// translators: A block that contains 4 different columns each one with title and description.
-				'label'         => __( 'Carousel Header', 'planet4-blocks' ),
+				'label'         => __( 'Carousel Header', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/carousel_header.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
@@ -169,7 +169,6 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 
 			$block_data = [
 				'fields' => $attributes,
-				'domain' => 'planet4-blocks',
 			];
 
 			// Shortcode callbacks must return content, hence, output buffering here.

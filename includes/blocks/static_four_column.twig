@@ -2,8 +2,8 @@
 	{% if ( fields ) %}
 		<section class="four-column">
 			<div class="container">
-				{% if ( fields.title ) %}
-					<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+				{% if ( title ) %}
+					<h3>{{ title|e('wp_kses_post')|raw }}</h3>
 				{% endif %}
 				<div class="row">
 					{% for i in 1..4 %}

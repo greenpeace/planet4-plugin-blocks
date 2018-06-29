@@ -49,19 +49,19 @@ if ( ! class_exists( 'ContentFourColumn_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title. <i>If it is not defined, title will default to \'Publications\'</i>', 'planet4-blocks' ),
+					'label' => __( 'Title. <i>If it is not defined, title will default to \'Publications\'</i>', 'planet4-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
 						// translators: placeholder needs to represent the ordinal of the column, eg. 1st, 2nd etc.
-						'placeholder' => __( 'Enter title for this block', 'planet4-blocks' ),
+						'placeholder' => __( 'Enter title for this block', 'planet4-blocks-backend' ),
 						'data-plugin' => 'planet4-blocks',
 					],
 				],
 				[
 					'attr'        => 'select_tag',
-					'label'       => __( 'Select a Tag', 'planet4-blocks' ),
-					'description' => __( 'Associate this block with Posts that have a specific Tag', 'planet4-blocks' ),
+					'label'       => __( 'Select a Tag', 'planet4-blocks-backend' ),
+					'description' => __( 'Associate this block with Posts that have a specific Tag', 'planet4-blocks-backend' ),
 					'type'        => 'term_select',
 					'taxonomy'    => 'post_tag',
 					'multiple'    => true,
@@ -73,33 +73,33 @@ if ( ! class_exists( 'ContentFourColumn_Controller' ) ) {
 			}
 
 			$fields[] = [
-				'label'       => __( 'Number of Posts displayed', 'planet4-blocks' ),
+				'label'       => __( 'Number of Posts displayed', 'planet4-blocks-backend' ),
 				'description' => __( 'Show 1 Row: Displays 4 Posts on desktop and 3 Posts on mobile.<br> 
 									Show 2 Rows: Displays 8 Posts on desktop and 6 Posts on mobile.<br>
 									(Another Row will be revealed each time the Load More button is clicked)<br>
 									Show All Rows: Displays all available Posts on desktop and 4 Posts on mobile.',
-									'planet4-blocks' ),
+									'planet4-blocks-backend' ),
 				'attr'        => 'posts_view',
 				'type'        => 'select',
 				'options'     => [
 					[
 						'value' => '0',
-						'label' => __( 'Show 1 Row', 'planet4-blocks' ),
+						'label' => __( 'Show 1 Row', 'planet4-blocks-backend' ),
 					],
 					[
 						'value' => '3',
-						'label' => __( 'Show 2 Rows', 'planet4-blocks' ),
+						'label' => __( 'Show 2 Rows', 'planet4-blocks-backend' ),
 					],
 					[
 						'value' => '1',
-						'label' => __( 'Show All Posts', 'planet4-blocks' ),
+						'label' => __( 'Show All Posts', 'planet4-blocks-backend' ),
 					],
 				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Content Four Column', 'planet4-blocks' ),
+				'label'         => __( 'Content Four Column', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/content_four_column.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
@@ -222,7 +222,6 @@ if ( ! class_exists( 'ContentFourColumn_Controller' ) ) {
 				'title'      => ! empty( $attributes['title'] ) ? $attributes['title'] : __( 'Publications', 'planet4-blocks' ),
 				'posts'      => $posts_array,
 				'posts_view' => isset( $attributes['posts_view'] ) ? intval( $attributes['posts_view'] ) : 1,
-				'domain'     => 'planet4-blocks',
 			];
 
 			// Shortcode callbacks must return content, hence, output buffering here.

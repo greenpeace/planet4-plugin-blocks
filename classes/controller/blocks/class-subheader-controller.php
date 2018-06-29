@@ -21,12 +21,12 @@ if ( ! class_exists( 'Subheader_Controller' ) ) {
 		public function prepare_fields() {
 			$fields = array(
 				array(
-					'label' => __( 'Title', 'planet4-blocks' ),
+					'label' => __( 'Title', 'planet4-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 				),
 				array(
-					'label' => __( 'Description', 'planet4-blocks' ),
+					'label' => __( 'Description', 'planet4-blocks-backend' ),
 					'attr'  => 'description',
 					'type'  => 'textarea',
 				),
@@ -34,7 +34,7 @@ if ( ! class_exists( 'Subheader_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = array(
-				'label'         => __( 'Subheader', 'planet4-blocks' ),
+				'label'         => __( 'Subheader', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/icon_subheader.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,

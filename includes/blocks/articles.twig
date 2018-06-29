@@ -4,14 +4,9 @@
 			<div class="container">
 				<div class="row">
 					<header class="col-md-12 article-listing-intro">
-						<div class="col-md-7 col-lg-8 col-xl-9">
-							{% if ( fields.article_heading ) %}
-								<h3 class="page-section-header">{{ fields.article_heading }}</h3>
-							{% endif %}
-						</div>
-						<div class="col-md-5 col-lg-3 col-xl-3 ml-auto d-none d-md-block">
-							<a class="btn btn-small btn-secondary btn-block" href="{{ fields.read_more_link }}">{{ fields.read_more_text }}</a>
-						</div>
+						{% if ( fields.article_heading ) %}
+							<h3 class="page-section-header">{{ fields.article_heading }}</h3>
+						{% endif %}
 					</header>
 
 					<div class="article-list-section clearfix col-md-12">
@@ -41,7 +36,7 @@
 										<ul class="tags-list article-list-item-tags">
 
 											{% if ( value.page_type ) %}
-												<li class="tag-item tag-item--main">{{ value.page_type }}</li>
+												<li class="tag-item tag-item--main"><a href="{{ value.filter_url }}">{{ value.page_type }}</a></li>
 											{% endif %}
 											{% for tags_data in value.tags %}
 												<li class="tag-item"><a href="{{ tags_data.href }}">#{{ tags_data.name|e('wp_kses_post')|raw }}</a></li>
@@ -58,7 +53,7 @@
 										{% endif %}
 										<p class="article-list-item-meta">
 											{% if ( value.author ) %}
-												<span class="article-list-item-author">{{ __( 'by', domain ) }} {{ value.author }}</span>
+												<span class="article-list-item-author">{{ __( 'by', 'planet4-blocks' ) }} {{ value.author }}</span>
 											{% endif %}
 											{% if ( value.post_date ) %}
 												<time class="article-list-item-date" datetime="">{{ value.post_date|date("d M, Y") }}</time>
@@ -76,7 +71,7 @@
 						{% endfor %}
 					</div>
 
-					<div class="col-md-4 col-lg-4 col-xl-3 ml-auto d-md-none">
+					<div class="col-md-4 col-lg-4 col-xl-3 mr-auto mt-md-2">
 						<a class="btn btn-small btn-secondary btn-block mt15" href="{{ fields.read_more_link }}">{{ fields.read_more_text }}</a>
 					</div>
 				</div>

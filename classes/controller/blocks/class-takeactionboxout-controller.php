@@ -25,7 +25,7 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 			$parent_act_id = $options['act_page'];
 
 			$arguments     = [];
-			if( 0 !== absint( $parent_act_id ) ) {
+			if ( 0 !== absint( $parent_act_id ) ) {
 				$act_page = get_post( $parent_act_id );
 				$arguments = [
 					'post_type'     => 'page',
@@ -54,8 +54,8 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 			$fields = [
 				[
 					'attr'        => 'take_action_page',
-					'label'       => __( 'Select a Take Action Page', 'planet4-blocks' ),
-					'description' => __( 'Associate this block with a Take Action page', 'planet4-blocks' ),
+					'label'       => __( 'Select a Take Action Page', 'planet4-blocks-backend' ),
+					'description' => __( 'Associate this block with a Take Action page', 'planet4-blocks-backend' ),
 					'type'        => 'post_select',
 					'query'       => $take_action_pages_args,  // Filter select options only with ACT page children.
 				],
@@ -63,7 +63,7 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Take Action Boxout', 'planet4-blocks' ),
+				'label'         => __( 'Take Action Boxout', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/take_action_boxout.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
