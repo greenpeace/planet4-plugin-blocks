@@ -2,6 +2,8 @@
 vendor/*
 !vendor/composer
 !vendor/autoload.php
+yarn-error.log
+node_modules/
 
 # Translation backups #
 ################

@@ -1,0 +1,17 @@
+sudo: false
+
+language: php
+
+php:
+    - 7.0
+    - 7.1
+
+notifications:
+    email: false
+
+before_script:
+    - npm install -g stylelint eslint
+
+script:
+    - stylelint 'assets/scss/**/*.scss' 'assets/css/*.css'
+    - eslint 'assets/js/**/*.js'
