@@ -210,6 +210,11 @@ $slide-transition-speed: 1s;
       color: $black;
       padding-left: 15px;
 
+      html[dir="rtl"] & {
+        text-align: right;
+        padding-right: 15px;
+      }
+
       @include medium-and-up {
         font-size: 2.5rem;
       }
@@ -236,6 +241,11 @@ $slide-transition-speed: 1s;
       margin-bottom: 0;
       padding-left: 15px;
 
+      html[dir="rtl"] & {
+        text-align: right;
+        padding-right: 15px;
+      }
+
       @include medium-and-up {
         font-size: 1.5rem;
         margin-bottom: 34px;
@@ -256,6 +266,11 @@ $slide-transition-speed: 1s;
 
     p {
       display: none;
+
+      html[dir="rtl"] & {
+        text-align: right;
+        padding-right: 15px;
+      }
 
       @include medium-and-up {
         padding-left: 15px;
@@ -296,6 +311,11 @@ $slide-transition-speed: 1s;
         width: auto;
         bottom: inherit;
         position: inherit;
+
+        html[dir="rtl"] & {
+          margin-left: auto;
+          margin-right: 0;
+        }
       }
 
       .btn {

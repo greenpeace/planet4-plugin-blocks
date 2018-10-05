@@ -13,7 +13,12 @@ $(document).ready(function() {
 
       var margin = ((vw - width) / 2);
 
-      $(this).css('margin-left', margin + 'px');
+      if ($('html').attr('dir') === 'rtl') {
+        $(this).css('margin-left', 'auto');
+        $(this).css('margin-right', margin + 'px');
+      } else {
+        $(this).css('margin-left', margin + 'px');
+      }
     });
   }
 
