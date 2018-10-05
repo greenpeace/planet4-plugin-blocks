@@ -25,9 +25,9 @@
 										<div class="article-image-holder">
 											<a href="{{ value.permalink }}">
 												{% if ( (key +1 > fields.article_count) and fields.manual_override ) %}
-													<img class="d-flex mr-3 topicwise-article-image" src="" data-src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
+													<img class="d-flex topicwise-article-image" src="" data-src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
 												{% else %}
-													<img class="d-flex mr-3 topicwise-article-image" src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
+													<img class="d-flex topicwise-article-image" src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
 												{% endif %}
 											</a>
 										</div>
@@ -36,9 +36,9 @@
 									<div class="article-list-item-image article-list-item-image-max-width">
 										<a href="{{ value.permalink }}">
 											{% if ( (key +1 > fields.article_count) and fields.manual_override ) %}
-												<img class="d-flex mr-3 topicwise-article-image" src="" data-src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
+												<img class="d-flex topicwise-article-image" src="" data-src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
 											{% else %}
-												<img class="d-flex mr-3 topicwise-article-image" src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
+												<img class="d-flex topicwise-article-image" src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
 											{% endif %}
 										</a>
 									</div>

@@ -46,6 +46,12 @@
     height: 190px;
     object-fit: cover;
     object-position: 50% 50%;
+    margin-right: 16px;
+
+    html[dir="rtl"] & {
+      margin-right: 0;
+      margin-left: 16px;
+    }
 
     @include small-and-up {
       height: 310px;

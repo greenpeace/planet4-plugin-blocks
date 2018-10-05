@@ -22,6 +22,10 @@
     margin-bottom: 22px;
     margin-left: 0;
 
+    html[dir="rtl"] & {
+      text-align: right;
+    }
+
     @include large-and-up {
       font-size: 1.75rem;
       margin-bottom: 20px;
@@ -86,6 +90,10 @@
     filter: progid:dximagetransform.microsoft.gradient(startColorstr="#0a3351", endColorstr="#0a3351", GradientType=1);
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#0A3351', endColorstr='#0A3351' ,GradientType=0)";
 
+    html[dir="rtl"] & {
+      text-align: right;
+    }
+
     @include mobile-only {
       position: relative;
       z-index: 10;
@@ -121,6 +129,11 @@
     bottom: 80px;
     left: auto;
 
+    html[dir="rtl"] & {
+      right: auto;
+      left: 25%;
+    }
+
     @include mobile-only {
       bottom: 0;
       right: 0;
@@ -130,11 +143,21 @@
     @include small-and-up {
       bottom: 30px;
       right: 0;
+
+      html[dir="rtl"] & {
+        left: 0;
+        right: auto;
+      }
     }
 
     @include medium-and-up {
       bottom: 10px;
       margin-right: 2%;
+
+      html[dir="rtl"] & {
+        margin-right: inherit;
+        margin-left: 2%;
+      }
     }
 
     li {
