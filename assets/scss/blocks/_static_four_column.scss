@@ -98,16 +98,9 @@
     line-height: normal;
     margin-bottom: 15px;
 
-    a {
-      font-weight: 700;
-      font-family: $roboto;
-
+    html[dir="rtl"] & {
       @include medium-and-up {
-        font-size: 1.125rem;
-      }
-
-      @include x-large-and-up {
-        font-size: 1.25rem;
+        text-align: right;
       }
     }
 
@@ -123,6 +116,19 @@
 
     @include x-large-and-up {
       margin-bottom: 20px;
+    }
+
+    a {
+      font-weight: 700;
+      font-family: $roboto;
+
+      @include medium-and-up {
+        font-size: 1.125rem;
+      }
+
+      @include x-large-and-up {
+        font-size: 1.25rem;
+      }
     }
   }
 

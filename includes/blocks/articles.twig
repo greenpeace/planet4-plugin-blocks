@@ -25,9 +25,9 @@
 										<div class="article-image-holder">
 											<a href="{{ value.permalink }}">
 												{% if ( (key +1 > fields.article_count) and fields.manual_override ) %}
-													<img class="d-flex mr-3 topicwise-article-image" src="" data-src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
+													<img class="d-flex topicwise-article-image" src="" data-src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
 												{% else %}
-													<img class="d-flex mr-3 topicwise-article-image" src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
+													<img class="d-flex topicwise-article-image" src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
 												{% endif %}
 											</a>
 										</div>
@@ -36,9 +36,9 @@
 									<div class="article-list-item-image article-list-item-image-max-width">
 										<a href="{{ value.permalink }}">
 											{% if ( (key +1 > fields.article_count) and fields.manual_override ) %}
-												<img class="d-flex mr-3 topicwise-article-image" src="" data-src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
+												<img class="d-flex topicwise-article-image" src="" data-src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
 											{% else %}
-												<img class="d-flex mr-3 topicwise-article-image" src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
+												<img class="d-flex topicwise-article-image" src="{{ value.thumbnail }}" alt="{{ value.alt_text }}">
 											{% endif %}
 										</a>
 									</div>
@@ -91,12 +91,12 @@
 
 					{% if (  fields.manual_override ) %}
 						{% if ( recent_posts|length > fields.article_count ) %}
-							<div class="col-md-12 col-lg-5 col-xl-5 mr-auto mt-3 load-more-articles-button-div">
+							<div class="col-md-12 col-lg-5 col-xl-5 mt-3 load-more-articles-button-div">
 								<a class="btn btn-small btn-secondary btn-block btn-load-more-articles-click">{{ fields.read_more_text }}</a>
 							</div>
 						{% endif %}
 					{% else %}
-						<div class="col-md-12 col-lg-5 col-xl-5 mr-auto mt-3">
+						<div class="col-md-12 col-lg-5 col-xl-5 mt-3">
 							<a class="btn btn-small btn-secondary btn-block"
 							   href="{{ fields.read_more_link }}">{{ fields.read_more_text }}</a>
 						</div>
