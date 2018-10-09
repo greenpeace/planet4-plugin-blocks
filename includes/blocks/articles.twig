@@ -45,22 +45,27 @@
 								{% endif %}
 
 								<div class="article-list-item-body">
-									{% if ( value.tags or value.page_type ) %}
-										<div class="article-list-item-tags top-page-tags">
-											{% if ( value.page_type ) %}
-												<a class="tag-item tag-item--main page-type" href="{{ value.filter_url }}">{{ value.page_type|e('wp_kses_post')|raw }}</a>
-											{% endif %}
+									<div class="article-list-item-tags top-page-tags">
+										{% if ( value.page_type ) %}
+											<a class="tag-item tag-item--main page-type" href="{{ value.filter_url }}">{{ value.page_type|e('wp_kses_post')|raw }}</a>
+										{% endif %}
 
-											{% if (value.tags) %}
-												<div class="tag-wrap tags">
-													{% for tags_data in value.tags %}
-														<a class="tag-item tag" href="{{ tags_data.href }}">#{{ tags_data.name|e('wp_kses_post')|raw }}</a>
-													{% endfor %}
-												</div>
-											{% endif %}
-										</div>
-									{% endif %}
+										{% if ( value.categories ) %}
+											<div class="tag-wrap issues">
+												{% for issue in value.categories %}
+													<a class="tag-item tag-item--main" href="{{ issue.link|default('#') }}">{{ issue.name|e('wp_kses_post')|raw }}</a>
+												{% endfor %}
+											</div>
+										{% endif %}
 
+										{% if (value.tags) %}
+											<div class="tag-wrap tags">
+												{% for tags_data in value.tags %}
+													<a class="tag-item tag" href="{{ tags_data.href }}">#{{ tags_data.name|e('wp_kses_post')|raw }}</a>
+												{% endfor %}
+											</div>
+										{% endif %}
+									</div>
 									<header>
 										{% if ( value.post_title ) %}
 											<h4 class="article-list-item-headline">
