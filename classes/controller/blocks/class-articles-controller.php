@@ -288,6 +288,8 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 					$page_type      = '';
 					$page_type_id   = '';
 
+					$recent['categories'] = get_the_category($recent['ID']);
+
 					if ( $page_type_data && ! is_wp_error( $page_type_data ) ) {
 						$page_type    = $page_type_data[0]->name;
 						$page_type_id = $page_type_data[0]->term_id;
