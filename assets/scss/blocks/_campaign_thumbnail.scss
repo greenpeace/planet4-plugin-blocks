@@ -36,10 +36,6 @@
     @include medium-and-up {
       margin-left: -7.5px;
       margin-right: -7.5px;
-
-      .col-md-4 {
-        padding: 0 7.5px;
-      }
     }
 
     .thumbnail-large {
@@ -52,10 +48,6 @@
       @include medium-and-up {
         margin-bottom: 0;
         max-height: 100%;
-
-        .col-md-4 {
-          padding: 0 7.5px;
-        }
       }
 
       @include large-and-up {

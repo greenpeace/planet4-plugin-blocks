@@ -5,9 +5,14 @@
 				{% if ( fields.title ) %}
 					<h2 class="page-section-header">{{ fields.title }}</h2>
 				{% endif %}
+
+				{% if ( fields.description ) %}
+					<p class="page-section-description">{{ fields.description }}</p>
+				{% endif %}
+
 				<div class="row thumbnail-largeview-container">
 					{% for tag in fields.tags %}
-						<div class="col-md-4">
+						<div class="col-md-4 p-2">
 							<a href="{{ tag.href }}">
 								<div class="thumbnail-large">
 									{% if ( tag.image[0] ) %}
