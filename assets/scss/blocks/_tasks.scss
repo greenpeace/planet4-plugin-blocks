@@ -118,6 +118,10 @@
     text-transform: uppercase;
     font-weight: 500;
 
+    html[dir="rtl"] & {
+      margin-right: 0;
+    }
+
     @include large-and-up {
       float: none;
       width: 126px;
