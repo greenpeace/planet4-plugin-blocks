@@ -22,24 +22,24 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 		 * @since 0.1.0
 		 */
 		public function prepare_fields() {
-			$fields = array(
-				array(
+			$fields = [
+				[
 					'label' => __( 'Video Title', 'planet4-blocks-backend' ),
 					'attr'  => 'video_title',
 					'type'  => 'text',
-					'meta'  => array(
+					'meta'  => [
 						'placeholder' => __( 'Enter video title', 'planet4-blocks-backend' ),
-					),
-				),
-				array(
+					],
+				],
+				[
 					'label' => __( 'Video URL/Youtube ID', 'planet4-blocks-backend' ),
 					'attr'  => 'youtube_id',
 					'type'  => 'text',
-					'meta'  => array(
+					'meta'  => [
 						'placeholder' => __( 'Enter video URL or youtube video id', 'planet4-blocks-backend' ),
-					),
-				),
-				array(
+					],
+				],
+				[
 					'label'       => __( 'Video thumbnail image [Optional]', 'planet4-blocks-backend' ),
 					'attr'        => 'video_thumbnail_img',
 					'type'        => 'attachment',
@@ -47,16 +47,16 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 					'addButton'   => __( 'Select Video Thumbnail Image', 'planet4-blocks-backend' ),
 					'frameTitle'  => __( 'Select Video Thumbnail Image', 'planet4-blocks-backend' ),
 					'description' => __( 'Applicable for non youtube video only.' ),
-				),
-			);
+				],
+			];
 
 			// Define the Shortcode UI arguments.
-			$shortcode_ui_args = array(
+			$shortcode_ui_args = [
 				'label'         => __( 'Video block', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/media_video.jpg' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
-			);
+			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
 		}
