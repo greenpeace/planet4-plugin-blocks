@@ -32,18 +32,27 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 					),
 				),
 				array(
-					'label' => __( 'Youtube ID', 'planet4-blocks-backend' ),
+					'label' => __( 'Video URL/Youtube ID', 'planet4-blocks-backend' ),
 					'attr'  => 'youtube_id',
 					'type'  => 'text',
 					'meta'  => array(
-						'placeholder' => __( 'Enter youtube video id', 'planet4-blocks-backend' ),
+						'placeholder' => __( 'Enter video URL or youtube video id', 'planet4-blocks-backend' ),
 					),
-				)
+				),
+				array(
+					'label'       => __( 'Video thumbnail image [Optional]', 'planet4-blocks-backend' ),
+					'attr'        => 'video_thumbnail_img',
+					'type'        => 'attachment',
+					'libraryType' => [ 'image' ],
+					'addButton'   => __( 'Select Video Thumbnail Image', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Select Video Thumbnail Image', 'planet4-blocks-backend' ),
+					'description' => __( 'Applicable for non youtube video only.' ),
+				),
 			);
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = array(
-				'label'         => __( 'Youtube Video', 'planet4-blocks-backend' ),
+				'label'         => __( 'Video block', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/media_video.jpg' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
@@ -62,6 +71,29 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $fields, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
+
+			// Check video url.
+			if ( false === strstr( $fields['youtube_id'], '/' ) ) {
+				// Case 1 : Youtube video id.
+				$fields['is_youtube_video'] = true;
+			} else {
+				if ( preg_match( '/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/i', $fields['youtube_id'], $matches ) ) {
+					// Case 2 : Youtube video URL.
+					if ( isset( $matches[5] ) && $matches[5] ) {
+						// Extract youtube video ID and use with youtube embed url format.
+						$fields['youtube_id']       = $matches[5];
+						$fields['is_youtube_video'] = true;
+					}
+				} else {
+					// Case 3 : Video URL other than Youtube (GP media library video etc).
+					$fields['is_youtube_video'] = false;
+					if ( $fields['video_thumbnail_img'] ) {
+						$fields['video_thumbnail_src'] = wp_get_attachment_image_src( $fields['video_thumbnail_img'], 'retina-large' );
+					} else {
+						$fields['video_thumbnail_src'] = '';
+					}
+				}
+			}
 
 			$data = [
 				'fields' => $fields,
