@@ -32,20 +32,21 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Video URL/Youtube ID', 'planet4-blocks-backend' ),
-					'attr'  => 'youtube_id',
-					'type'  => 'text',
-					'meta'  => [
-						'placeholder' => __( 'Enter video URL or youtube video id', 'planet4-blocks-backend' ),
+					'label'       => __( 'Video URL/Youtube ID', 'planet4-blocks-backend' ),
+					'attr'        => 'youtube_id',
+					'type'        => 'text',
+					'description' => __( 'Allowed media type in Video URL - video/mp4.' ),
+					'meta'        => [
+						'placeholder' => __( 'Enter Video URL or Youtube video id', 'planet4-blocks-backend' ),
 					],
 				],
 				[
-					'label'       => __( 'Video thumbnail image [Optional]', 'planet4-blocks-backend' ),
-					'attr'        => 'video_thumbnail_img',
+					'label'       => __( 'Video poster image [Optional]', 'planet4-blocks-backend' ),
+					'attr'        => 'video_poster_img',
 					'type'        => 'attachment',
 					'libraryType' => [ 'image' ],
-					'addButton'   => __( 'Select Video Thumbnail Image', 'planet4-blocks-backend' ),
-					'frameTitle'  => __( 'Select Video Thumbnail Image', 'planet4-blocks-backend' ),
+					'addButton'   => __( 'Select Video Poster Image', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Select Video Poster Image', 'planet4-blocks-backend' ),
 					'description' => __( 'Applicable for non youtube video only.' ),
 				],
 			];
@@ -87,10 +88,10 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 				} else {
 					// Case 3 : Video URL other than Youtube (GP media library video etc).
 					$fields['is_youtube_video'] = false;
-					if ( $fields['video_thumbnail_img'] ) {
-						$fields['video_thumbnail_src'] = wp_get_attachment_image_src( $fields['video_thumbnail_img'], 'retina-large' );
+					if ( $fields['video_poster_img'] ) {
+						$fields['video_poster_img_src'] = wp_get_attachment_image_src( $fields['video_poster_img'], 'large' );
 					} else {
-						$fields['video_thumbnail_src'] = '';
+						$fields['video_poster_img_src'] = '';
 					}
 				}
 			}

@@ -11,6 +11,10 @@
     height: 240px;
     margin-bottom: 40px;
 
+    video[poster] {
+      object-fit: inherit;
+    }
+
     @include small-and-up {
       height: 240px;
     }
