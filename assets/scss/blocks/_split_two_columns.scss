@@ -43,6 +43,11 @@
     height: 100%;
     width: 100%;
     background: linear-gradient(190deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2));
+
+    html[dir="rtl"] & {
+      right: 0;
+      left: auto;
+    }
   }
 
   img {
@@ -161,11 +166,21 @@
     .item--left & {
       width: 45%;
       right: 15%;
+
+      html[dir="rtl"] & {
+        right: auto;
+        left: 15%;
+      }
     }
 
     .item--right & {
       width: 45%;
       left: 15%;
+
+      html[dir="rtl"] & {
+        left: auto;
+        right: 15%;
+      }
     }
   }
 
@@ -173,11 +188,21 @@
     .item--left & {
       width: 50%;
       right: 10%;
+
+      html[dir="rtl"] & {
+        right: auto;
+        left: 10%;
+      }
     }
 
     .item--right & {
       width: 50%;
       left: 12%;
+
+      html[dir="rtl"] & {
+        left: auto;
+        right: 12%;
+      }
     }
   }
 
@@ -185,11 +210,21 @@
     .item--left & {
       width: 42%;
       right: 15%;
+
+      html[dir="rtl"] & {
+        left: 15%;
+        right: auto;
+      }
     }
 
     .item--right & {
       width: 42%;
       left: 15%;
+
+      html[dir="rtl"] & {
+        left: auto;
+        right: 15%;
+      }
     }
   }
 
@@ -249,6 +284,11 @@
       transform: translate(0, -50%);
       right: 15px;
       pointer-events: none;
+
+      html[dir="rtl"] & {
+        right: auto;
+        left: 15px;
+      }
     }
 
     a {
@@ -279,8 +319,18 @@
     left: -25%;
     width: 80%;
 
+    html[dir="rtl"] & {
+      left: auto;
+      right: -25%;
+    }
+
     .split-two-column-item-image {
       left: 24%;
+
+      html[dir="rtl"] & {
+        left: auto;
+        right: 24%;
+      }
     }
 
     &:after {
@@ -292,15 +342,30 @@
       height: 100%;
       width: 100%;
       background: linear-gradient(100deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0));
+
+      html[dir="rtl"] & {
+        left: auto;
+        right: 0;
+      }
     }
   }
 
   .item--right {
     right: -25%;
 
+    html[dir="rtl"] & {
+      right: auto;
+      left: -25%;
+    }
+
     .split-two-column-item-image {
       right: 0;
       left: -25%;
+
+      html[dir="rtl"] & {
+        left: auto;
+        right: -25%;
+      }
     }
 
     .split-two-column-item-subtitle {
