@@ -1,4 +1,12 @@
 <?php
+/**
+ * Cookies block class
+ *
+ * @link URL
+ *
+ * @package P4BKS
+ * @since 1.9
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -87,7 +95,7 @@ if ( ! class_exists( 'Cookies_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
-			wp_enqueue_script( 'cookies', P4BKS_ADMIN_DIR . 'js/cookies.js' );
+			wp_enqueue_script( 'cookies', P4BKS_ADMIN_DIR . 'js/cookies.js', [], '0.1', true );
 
 			$block_data = [
 				'data' => [

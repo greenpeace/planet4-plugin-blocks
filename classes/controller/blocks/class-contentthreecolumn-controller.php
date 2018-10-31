@@ -1,4 +1,10 @@
 <?php
+/**
+ * Content Three Column block class
+ *
+ * @package P4BKS
+ * @since 0.1.13
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'ContentThreeColumn_Controller' ) ) {
 	 * Class ContentThreeColumn_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.13
 	 */
 	class ContentThreeColumn_Controller extends Controller {
 
@@ -62,7 +69,7 @@ if ( ! class_exists( 'ContentThreeColumn_Controller' ) ) {
 					'libraryType' => [ 'image' ],
 					'addButton'   => __( 'Select Third Image', 'planet4-blocks-backend' ),
 					'frameTitle'  => __( 'Select Third Image', 'planet4-blocks-backend' ),
-				]
+				],
 			];
 
 			// Define the Shortcode UI arguments.

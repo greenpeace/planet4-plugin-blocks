@@ -1,6 +1,9 @@
 <?php
 /**
- * The Articles block Controller.
+ * Articles block class
+ *
+ * @package P4BKS
+ * @since 0.1.14
  */
 
 namespace P4BKS\Controllers\Blocks;
@@ -11,6 +14,7 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 	 * Class Articles_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.14
 	 */
 	class Articles_Controller extends Controller {
 
@@ -42,10 +46,13 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 				return;
 			}
 
-			add_action( 'enqueue_shortcode_ui', function () {
-				wp_enqueue_script( 'submenu-view', P4BKS_ADMIN_DIR . 'js/submenu_heading_view.js', [ 'shortcode-ui' ] );
-				wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'js/blocks-ui.js', [ 'shortcode-ui' ] );
-			} );
+			add_action(
+				'enqueue_shortcode_ui',
+				function () {
+					wp_enqueue_script( 'submenu-view', P4BKS_ADMIN_DIR . 'js/submenu_heading_view.js', [ 'shortcode-ui' ], '0.1', true );
+					wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'js/blocks-ui.js', [ 'shortcode-ui' ], '0.1', true );
+				}
+			);
 		}
 
 		/**
@@ -147,8 +154,11 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 				[
 					'label'    => '<hr class="hr-dashed"><br><p>' . __( 'Manual Override', 'planet4-blocks-backend' ) . '</p>' .
 									'<p class="field-caption">' .
-									__( 'CAUTION: Adding articles individually will override the automatic functionality of this block.
-									For good user experience, please include at least three articles so that spacing and alignment of the design remains in tact.', 'planet4-blocks-backend' ) . '</p>',
+									__(
+										'CAUTION: Adding articles individually will override the automatic functionality of this block.
+										For good user experience, please include at least three articles so that spacing and alignment of the design remains in tact.',
+										'planet4-blocks-backend'
+									) . '</p>',
 					'attr'     => 'posts',
 					'type'     => 'post_select',
 					'multiple' => 'multiple',
@@ -299,10 +309,9 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 						$page_type_id = $page_type_data[0]->term_id;
 					}
 
-					$recent['page_type'] = $page_type;
+					$recent['page_type']    = $page_type;
 					$recent['page_type_id'] = $page_type_id;
-
-					$recent['permalink'] = get_permalink( $recent['ID'] );
+					$recent['permalink']    = get_permalink( $recent['ID'] );
 
 					$recent_posts[] = $recent;
 				}
@@ -340,6 +349,8 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 					'suppress_filters' => false,
 				];
 
+				// Ignore rule, arguments contain suppress_filters.
+				// phpcs:ignore
 				return wp_get_recent_posts( $args );
 			}
 
@@ -448,6 +459,8 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 				}
 			}
 
+			// Ignore rule, arguments contain suppress_filters.
+			// phpcs:ignore
 			return wp_get_recent_posts( $args );
 		}
 
@@ -489,9 +502,7 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 				$tags = [];
 			} else {
 				// Explode comma separated list of tag ids and get an array of \WP_Terms objects.
-				$tags = get_tags( [
-					'include' => $tags,
-				] );
+				$tags = get_tags( [ 'include' => $tags ] );
 			}
 
 			// If user has not provided any tag, use post's tags.
@@ -572,6 +583,8 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 				}
 			}
 
+			// Ignore rule, arguments contain suppress_filters.
+			// phpcs:ignore
 			return wp_get_recent_posts( $args );
 		}
 
@@ -601,6 +614,8 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 
 				$args['tag__in'] = [ (int) $tag_id ];
 
+				// Ignore rule, arguments contain suppress_filters.
+				// phpcs:ignore
 				return wp_get_recent_posts( $args );
 			}
 
@@ -645,6 +660,8 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 			$read_more_link           = ( ! empty( $fields['read_more_link'] ) ) ? $fields['read_more_link'] : rtrim( get_home_url(), '/' ) . '/?s=&orderby=post_date&f[ctype][Post]=3' . $read_more_filter;
 			$fields['read_more_link'] = $read_more_link;
 
+			// Ignore rule, arguments contain suppress_filters.
+			// phpcs:ignore
 			return wp_get_recent_posts( $args );
 		}
 
@@ -657,16 +674,22 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 		 */
 		private function filter_post_types( $fields ) {
 			// Filter p4_page_type keys from attributes array.
-			$post_types_temp = array_filter( (array) $fields, function ( $key ) {
-				return strpos( $key, 'p4_page_type' ) === 0;
-			}, ARRAY_FILTER_USE_KEY );
+			$post_types_temp = array_filter(
+				(array) $fields,
+				function ( $key ) {
+					return strpos( $key, 'p4_page_type' ) === 0;
+				},
+				ARRAY_FILTER_USE_KEY
+			);
 
 			$post_types = [];
 			// If any p4_page_type was selected extract the term's slug to be used in the wp query.
 			if ( ! empty( $post_types_temp ) ) {
 				foreach ( $post_types_temp as $type => $value ) {
 					if ( 'true' === $value ) {
-						$post_type    = str_replace( '_', '-',
+						$post_type    = str_replace(
+							'_',
+							'-',
 							str_replace( 'p4_page_type_', '', $type )
 						);
 						$post_types[] = $post_type;

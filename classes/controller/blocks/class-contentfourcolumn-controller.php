@@ -1,4 +1,10 @@
 <?php
+/**
+ * Split Two Columns block class
+ *
+ * @package P4BKS
+ * @since 0.1.11
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'ContentFourColumn_Controller' ) ) {
 	 * Class ContentFourColumn_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.11
 	 */
 	class ContentFourColumn_Controller extends Controller {
 
@@ -75,11 +82,13 @@ if ( ! class_exists( 'ContentFourColumn_Controller' ) ) {
 
 			$fields[] = [
 				'label'       => __( 'Number of Posts displayed', 'planet4-blocks-backend' ),
-				'description' => __( 'Show 1 Row: Displays 4 Posts on desktop and 3 Posts on mobile.<br> 
-									Show 2 Rows: Displays 8 Posts on desktop and 6 Posts on mobile.<br>
-									(Another Row will be revealed each time the Load More button is clicked)<br>
-									Show All Rows: Displays all available Posts on desktop and 4 Posts on mobile.',
-									'planet4-blocks-backend' ),
+				'description' => __(
+					'Show 1 Row: Displays 4 Posts on desktop and 3 Posts on mobile.<br> 
+					Show 2 Rows: Displays 8 Posts on desktop and 6 Posts on mobile.<br>
+					(Another Row will be revealed each time the Load More button is clicked)<br>
+					Show All Rows: Displays all available Posts on desktop and 4 Posts on mobile.',
+					'planet4-blocks-backend'
+				),
 				'attr'        => 'posts_view',
 				'type'        => 'select',
 				'options'     => [
@@ -124,15 +133,21 @@ if ( ! class_exists( 'ContentFourColumn_Controller' ) ) {
 			$post_types = [];
 
 			// Filter p4_page_type keys from attributes array.
-			$post_types_temp = array_filter( (array) $attributes, function ( $key ) {
-				return strpos( $key, 'p4_page_type' ) === 0 ;
-			}, ARRAY_FILTER_USE_KEY );
+			$post_types_temp = array_filter(
+				(array) $attributes,
+				function ( $key ) {
+					return strpos( $key, 'p4_page_type' ) === 0;
+				},
+				ARRAY_FILTER_USE_KEY
+			);
 
 			// If any p4_page_type was selected extract the term's slug to be used in the wp query below.
 			if ( ! empty( $post_types_temp ) ) {
 				foreach ( $post_types_temp as $type => $value ) {
 					if ( 'true' === $value ) {
-						$post_types[] = str_replace( '_', '-',
+						$post_types[] = str_replace(
+							'_',
+							'-',
 							str_replace( 'p4_page_type_', '', $type )
 						);
 					}

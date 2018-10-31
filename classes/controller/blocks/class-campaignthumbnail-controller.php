@@ -1,4 +1,10 @@
 <?php
+/**
+ * Campaign Thumbnail block class
+ *
+ * @package P4BKS
+ * @since 0.1.14
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'CampaignThumbnail_Controller' ) ) {
 	 * Class CampaignThumbnail_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.14
 	 */
 	class CampaignThumbnail_Controller extends Controller {
 
@@ -62,9 +69,9 @@ if ( ! class_exists( 'CampaignThumbnail_Controller' ) ) {
 				$explore_children = [];
 
 				if ( 0 !== absint( $parent_id ) ) {
-					$args = [
-						'post_type'      => 'page',
-						'post_parent'    => $parent_id,
+					$args             = [
+						'post_type'   => 'page',
+						'post_parent' => $parent_id,
 					];
 					$explore_children = get_children( $args );
 				}
@@ -74,7 +81,7 @@ if ( ! class_exists( 'CampaignThumbnail_Controller' ) ) {
 				// Here, we are getting issue page ID.
 				if ( $explore_children ) {
 					foreach ( $explore_children as $pages ) {
-						if( $pages->post_name == $category->slug ) {
+						if ( $pages->post_name === $category->slug ) {
 							$page_id = $pages->ID;
 							break;
 						}
@@ -86,11 +93,12 @@ if ( ! class_exists( 'CampaignThumbnail_Controller' ) ) {
 				if ( $tags ) {
 
 					$i = 1;
-					foreach( $tags as $tag ) {
-						if ( $context_tags->slug != $tag->slug ) {
+					foreach ( $tags as $tag ) {
+						if ( $context_tags->slug !== $tag->slug ) {
 							$tag_remapped  = [
 								'name' => html_entity_decode( $tag->name ),
 								'slug' => $tag->slug,
+								// phpcs:ignore
 								'href' => get_tag_link( $tag )
 							];
 							$attachment_id = get_term_meta( $tag->term_id, 'tag_attachment_id', true );
@@ -102,25 +110,26 @@ if ( ! class_exists( 'CampaignThumbnail_Controller' ) ) {
 
 							$fields['tags'][] = $tag_remapped;
 
-							if ( $i == 3 ) {
+							if ( 3 === $i ) {
 								break;
 							}
 
-							$i++;
+							$i ++;
 
 						}
 					}
 				}
 			} else {
 
-				$tags  = get_the_tags();
+				$tags = get_the_tags();
 				if ( $tags ) {
-					$tags  = array_slice( $tags, 0, 3 );
+					$tags = array_slice( $tags, 0, 3 );
 
 					foreach ( $tags as $tag ) {
-						$tag_remapped = [
+						$tag_remapped  = [
 							'name' => html_entity_decode( $tag->name ),
 							'slug' => $tag->slug,
+							// phpcs:ignore
 							'href' => get_tag_link( $tag ),
 						];
 						$attachment_id = get_term_meta( $tag->term_id, 'tag_attachment_id', true );

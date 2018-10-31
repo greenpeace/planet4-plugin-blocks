@@ -1,4 +1,10 @@
 <?php
+/**
+ * Base class for all the blocks
+ *
+ * @package P4BKS
+ * @since 0.1.0
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -10,15 +16,22 @@ if ( ! class_exists( 'Controller' ) ) {
 	 * Class Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.0
 	 */
 	abstract class Controller {
 
-		/** @const string BLOCK_NAME
+		/**
 		 * The block's name.
+		 *
+		 * @const string BLOCK_NAME Block's name.
 		 */
 		const BLOCK_NAME = 'default';
 
-		/** @var View $view */
+		/**
+		 * Block view object
+		 *
+		 * @var View $view
+		 */
 		protected $view;
 
 		/**
@@ -36,14 +49,14 @@ if ( ! class_exists( 'Controller' ) ) {
 		 */
 		public function load() {
 			// Check to see if Shortcake is running, with an admin notice if not.
-			add_action( 'init', array( $this, 'shortcode_ui_detection' ) );
+			add_action( 'init', [ $this, 'shortcode_ui_detection' ] );
 			// Register the shortcodes.
-			add_action( 'init', array( $this, 'shortcode_ui_register_shortcodes' ) );
+			add_action( 'init', [ $this, 'shortcode_ui_register_shortcodes' ] );
 			// Add Two Column element in UI.
-			add_action( 'register_shortcode_ui', array( $this, 'prepare_fields' ) );
+			add_action( 'register_shortcode_ui', [ $this, 'prepare_fields' ] );
 
 			// Register an admin render callback for previewing in the wysiwyg.
-			add_action( 'wp_ajax_p4bks_preview_render_' . static::BLOCK_NAME, array( $this, 'prepare_admin_preview' ) );
+			add_action( 'wp_ajax_p4bks_preview_render_' . static::BLOCK_NAME, [ $this, 'prepare_admin_preview' ] );
 		}
 
 		/**
@@ -58,7 +71,7 @@ if ( ! class_exists( 'Controller' ) ) {
 		 */
 		public function shortcode_ui_detection() {
 			if ( ! function_exists( 'shortcode_ui_register_for_shortcode' ) ) {
-				add_action( 'admin_notices', array( $this, 'shortcode_ui_notices' ) );
+				add_action( 'admin_notices', [ $this, 'shortcode_ui_notices' ] );
 			}
 		}
 
@@ -95,14 +108,15 @@ if ( ! class_exists( 'Controller' ) ) {
 				wp_doing_ajax()
 				&& is_user_logged_in()
 				&& wp_get_current_user()->has_cap( 'edit_posts' )
+				&& wp_verify_nonce( $_REQUEST['nonce'] )
 				&& isset( $_REQUEST['action'] )
-				&& $_REQUEST['action'] === 'bulk_do_shortcode'
+				&& 'bulk_do_shortcode' === $_REQUEST['action']
 			) {
 				// Render a preview iframe using a wrapper method.
-				add_shortcode( 'shortcake_' . static::BLOCK_NAME, array( $this, 'prepare_template_preview_iframe' ) );
+				add_shortcode( 'shortcake_' . static::BLOCK_NAME, [ $this, 'prepare_template_preview_iframe' ] );
 			} else {
 				// Render using the default method.
-				add_shortcode( 'shortcake_' . static::BLOCK_NAME, array( $this, 'prepare_template' ) );
+				add_shortcode( 'shortcake_' . static::BLOCK_NAME, [ $this, 'prepare_template' ] );
 			}
 		}
 
@@ -227,7 +241,7 @@ if ( ! class_exists( 'Controller' ) ) {
 					<?php do_action( 'wp_head' ); ?>
 				</head>
 				<body style="background-color: transparent;">
-					<?php echo $this->prepare_template( $fields, $content, $tag ); ?>
+					<?php echo $this->prepare_template( $fields, $content, $tag ); // WPCS: XSS ok. ?>
 				</body>
 				<footer>
 					<?php do_action( 'wp_footer' ); ?>
@@ -250,7 +264,9 @@ if ( ! class_exists( 'Controller' ) ) {
 
 			$template = P4BKS_PLUGIN_DIR . '/admin/templates/' . $template . '.tpl.php';
 			if ( file_exists( $template ) ) {
-				$contents = file_get_contents( $template );
+				global $wp_filesystem;
+
+				$contents = $wp_filesystem->get_contents( $template );
 
 				return false !== $contents ? $contents : '';
 			}

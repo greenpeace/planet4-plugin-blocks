@@ -1,4 +1,10 @@
 <?php
+/**
+ * Carousel Split block class
+ *
+ * @package P4BKS
+ * @since 0.1.11
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'CarouselSplit_Controller' ) ) {
 	 * Class CarouselSplit_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.11
 	 */
 	class CarouselSplit_Controller extends Controller {
 

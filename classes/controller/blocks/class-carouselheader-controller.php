@@ -1,4 +1,10 @@
 <?php
+/**
+ * Carousel Header block class
+ *
+ * @package P4BKS
+ * @since 0.1.14
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 	 * Class CarouselHeader_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.14
 	 */
 	class CarouselHeader_Controller extends Controller {
 
@@ -29,10 +36,10 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 			$fields = [];
 
 			for ( $i = 1; $i < 5; $i++ ) {
-				$field   = [
+				$field  = [
 					[
 						// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
-						'label'       => sprintf( __( 'Select file for %s image', 'planet4-blocks-backend' ),  $i ),
+						'label'       => sprintf( __( 'Select file for %s image', 'planet4-blocks-backend' ), $i ),
 						'attr'        => 'image_' . $i,
 						'type'        => 'attachment',
 						'libraryType' => [ 'image' ],
@@ -40,20 +47,52 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 						'frameTitle'  => __( 'Select Image', 'planet4-blocks-backend' ),
 					],
 					[
-						// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
-						'label'       => sprintf( __( 'Select focus point for image %s', 'planet4-blocks-backend' ),  $i ) . '<img src="' . esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png') ) . '" />',
-						'attr'        => 'focus_image_' . $i,
-						'type'        => 'select',
-						'options'     => [
-							[ 'value' => 'left top',      'label' => __( '1 - Top Left', 'planet4-blocks-backend' )],
-							[ 'value' => 'center top',    'label' => __( '2 - Top Center', 'planet4-blocks-backend' )],
-							[ 'value' => 'right top',     'label' => __( '3 - Top Right', 'planet4-blocks-backend' )],
-							[ 'value' => 'left center',   'label' => __( '4 - Middle Left', 'planet4-blocks-backend' )],
-							[ 'value' => 'center center', 'label' => __( '5 - Middle Center', 'planet4-blocks-backend' )],
-							[ 'value' => 'right center',  'label' => __( '6 - Middle Right', 'planet4-blocks-backend' )],
-							[ 'value' => 'left bottom',   'label' => __( '7 - Bottom Left', 'planet4-blocks-backend' )],
-							[ 'value' => 'center bottom', 'label' => __( '8 - Bottom Center', 'planet4-blocks-backend' )],
-							[ 'value' => 'right bottom',  'label' => __( '9 - Bottom Right', 'planet4-blocks-backend' )],
+						'label'   => sprintf(
+							// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
+							__( 'Select focus point for image %s', 'planet4-blocks-backend' ),
+							$i
+						) .
+							'<img src="' . esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png' ) ) . '" />',
+
+						'attr'    => 'focus_image_' . $i,
+						'type'    => 'select',
+						'options' => [
+							[
+								'value' => 'left top',
+								'label' => __( '1 - Top Left', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'center top',
+								'label' => __( '2 - Top Center', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'right top',
+								'label' => __( '3 - Top Right', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'left center',
+								'label' => __( '4 - Middle Left', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'center center',
+								'label' => __( '5 - Middle Center', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'right center',
+								'label' => __( '6 - Middle Right', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'left bottom',
+								'label' => __( '7 - Bottom Left', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'center bottom',
+								'label' => __( '8 - Bottom Center', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'right bottom',
+								'label' => __( '9 - Bottom Right', 'planet4-blocks-backend' ),
+							],
 						],
 					],
 					[
@@ -64,7 +103,7 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 							// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
 							'placeholder' => sprintf( __( 'Enter header of %s image', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
-							'maxlength' => 40,
+							'maxlength'   => 40,
 						],
 					],
 					[
@@ -108,7 +147,7 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 						],
 					],
 				];
-				$fields  = array_merge( $fields, $field );
+				$fields = array_merge( $fields, $field );
 			}
 
 			// Define the Shortcode UI arguments.

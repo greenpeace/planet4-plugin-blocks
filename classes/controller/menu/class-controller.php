@@ -1,4 +1,10 @@
 <?php
+/**
+ * Base class
+ *
+ * @package P4BKS
+ * @since 0.1.0
+ */
 
 namespace P4BKS\Controllers\Menu;
 
@@ -13,7 +19,11 @@ if ( ! class_exists( 'Controller' ) ) {
 	 */
 	abstract class Controller {
 
-		/** @var View $view */
+		/**
+		 * View object
+		 *
+		 * @var View $view
+		 */
 		protected $view;
 
 
