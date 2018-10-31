@@ -1,9 +1,14 @@
 <?php
-
-require_once __DIR__ . '/../p4-unittestcase.php';
+/**
+ * PHP unit test of carousel block
+ *
+ * @package P4BKS
+ */
 
 use P4BKS\Controllers\Blocks\Carousel_Controller as Carousel;
 use P4BKS\Views\View as View;
+
+require_once __DIR__ . '/../p4-unittestcase.php';
 
 if ( ! class_exists( 'P4_CarouselTest' ) ) {
 
@@ -40,7 +45,7 @@ if ( ! class_exists( 'P4_CarouselTest' ) ) {
 			$fields = [
 				'multiple_image' => implode( ',', $this->post_ids ),
 			];
-			$data = $this->block->prepare_data( $fields );
+			$data   = $this->block->prepare_data( $fields );
 
 			try {
 				$this->assertEquals( self::ATTACHMENTS_COUNT, count( $data['images'] ) );

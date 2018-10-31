@@ -1,4 +1,10 @@
 <?php
+/**
+ * Split Two Columns block class
+ *
+ * @package P4BKS
+ * @since 0.1.16
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 	 * Class TakeActionBoxout_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.16
 	 */
 	class TakeActionBoxout_Controller extends Controller {
 
@@ -24,9 +31,9 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 			$options       = get_option( 'planet4_options' );
 			$parent_act_id = $options['act_page'];
 
-			$arguments     = [];
+			$arguments = [];
 			if ( 0 !== absint( $parent_act_id ) ) {
-				$act_page = get_post( $parent_act_id );
+				$act_page  = get_post( $parent_act_id );
 				$arguments = [
 					'post_type'     => 'page',
 					'post_name__in' => [ $act_page->post_name ],

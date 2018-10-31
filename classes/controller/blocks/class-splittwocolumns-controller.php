@@ -1,4 +1,10 @@
 <?php
+/**
+ * Split Two Columns block class
+ *
+ * @package P4BKS
+ * @since 0.1.11
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 	 * Class SplitTwoColumns_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.11
 	 */
 	class SplitTwoColumns_Controller extends Controller {
 
@@ -21,28 +28,55 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 		public function prepare_fields() {
 
 			$focus_options = [
-				[ 'value' => 'left top',      'label' => __( '1 - Top Left', 'planet4-blocks-backend' ) ],
-				[ 'value' => 'center top',    'label' => __( '2 - Top Center', 'planet4-blocks-backend' ) ],
-				[ 'value' => 'right top',     'label' => __( '3 - Top Right', 'planet4-blocks-backend' ) ],
-				[ 'value' => 'left center',   'label' => __( '4 - Middle Left', 'planet4-blocks-backend' ) ],
-				[ 'value' => 'center center', 'label' => __( '5 - Middle Center', 'planet4-blocks-backend' ) ],
-				[ 'value' => 'right center',  'label' => __( '6 - Middle Right', 'planet4-blocks-backend' ) ],
-				[ 'value' => 'left bottom',   'label' => __( '7 - Bottom Left', 'planet4-blocks-backend' ) ],
-				[ 'value' => 'center bottom', 'label' => __( '8 - Bottom Center', 'planet4-blocks-backend' ) ],
-				[ 'value' => 'right bottom',  'label' => __( '9 - Bottom Right', 'planet4-blocks-backend' ) ],
+				[
+					'value' => 'left top',
+					'label' => __( '1 - Top Left', 'planet4-blocks-backend' ),
+				],
+				[
+					'value' => 'center top',
+					'label' => __( '2 - Top Center', 'planet4-blocks-backend' ),
+				],
+				[
+					'value' => 'right top',
+					'label' => __( '3 - Top Right', 'planet4-blocks-backend' ),
+				],
+				[
+					'value' => 'left center',
+					'label' => __( '4 - Middle Left', 'planet4-blocks-backend' ),
+				],
+				[
+					'value' => 'center center',
+					'label' => __( '5 - Middle Center', 'planet4-blocks-backend' ),
+				],
+				[
+					'value' => 'right center',
+					'label' => __( '6 - Middle Right', 'planet4-blocks-backend' ),
+				],
+				[
+					'value' => 'left bottom',
+					'label' => __( '7 - Bottom Left', 'planet4-blocks-backend' ),
+				],
+				[
+					'value' => 'center bottom',
+					'label' => __( '8 - Bottom Center', 'planet4-blocks-backend' ),
+				],
+				[
+					'value' => 'right bottom',
+					'label' => __( '9 - Bottom Right', 'planet4-blocks-backend' ),
+				],
 			];
 
 			$option_values   = get_option( 'planet4_options' );
 			$options         = [];
 			$explore_page_id = $option_values['explore_page'] ?? '';
 
-			$args = array(
-				'sort_order'   => 'asc',
-				'sort_column'  => 'post_title',
-				'child_of'     => $explore_page_id,
-				'post_type'    => 'page',
-				'post_status'  => 'publish',
-			);
+			$args    = [
+				'sort_order'  => 'asc',
+				'sort_column' => 'post_title',
+				'child_of'    => $explore_page_id,
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+			];
 			$pages   = get_pages( $args );
 			$options = [ '0' => '--Select Issue--' ];
 
@@ -64,13 +98,15 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 				];
 			}
 
-			$select_issue_label = sprintf( '<h3>%1$s</h3>%2$s',
-										__( 'Issue fields (Column 1 - Left side)', 'planet4-blocks-backend' ),
-										__( 'Select an issue', 'planet4-blocks-backend' )
+			$select_issue_label = sprintf(
+				'<h3>%1$s</h3>%2$s',
+				__( 'Issue fields (Column 1 - Left side)', 'planet4-blocks-backend' ),
+				__( 'Select an issue', 'planet4-blocks-backend' )
 			);
-			$select_tag_label   = sprintf(  '<br><hr/><br><h3>%1$s</h3>%2$s',
-										__( 'Campaign fields (Column 2 - Right side)', 'planet4-blocks-backend' ),
-										__( 'Select a tag', 'planet4-blocks-backend' )
+			$select_tag_label   = sprintf(
+				'<br><hr/><br><h3>%1$s</h3>%2$s',
+				__( 'Campaign fields (Column 2 - Right side)', 'planet4-blocks-backend' ),
+				__( 'Select a tag', 'planet4-blocks-backend' )
 			);
 
 			$fields = [
@@ -82,38 +118,38 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 					'options'     => $options,
 				],
 				[
-					'label' => __( 'Issue Title', 'planet4-blocks-backend' ),
-					'attr'  => 'title',
-					'type'  => 'text',
-					'meta'  => [
+					'label'       => __( 'Issue Title', 'planet4-blocks-backend' ),
+					'attr'        => 'title',
+					'type'        => 'text',
+					'meta'        => [
 						'placeholder' => __( 'Enter title', 'planet4-blocks-backend' ),
 						'data-plugin' => 'planet4-blocks',
 					],
 					'description' => __( '(Optional) Fill this only if you need to override issue title.', 'planet4-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Issue Description', 'planet4-blocks-backend' ),
-					'attr'  => 'issue_description',
-					'type'  => 'textarea',
-					'meta'  => [
+					'label'       => __( 'Issue Description', 'planet4-blocks-backend' ),
+					'attr'        => 'issue_description',
+					'type'        => 'textarea',
+					'meta'        => [
 						'placeholder' => __( 'Enter description', 'planet4-blocks-backend' ),
 					],
 					'description' => __( '(Optional) Fill this only if you need to override issue description.', 'planet4-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Issue link text', 'planet4-blocks-backend' ),
-					'attr'  => 'issue_link_text',
-					'type'  => 'text',
-					'meta'  => [
+					'label'       => __( 'Issue link text', 'planet4-blocks-backend' ),
+					'attr'        => 'issue_link_text',
+					'type'        => 'text',
+					'meta'        => [
 						'placeholder' => __( 'Enter link text', 'planet4-blocks-backend' ),
 					],
 					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Issue link path', 'planet4-blocks-backend' ),
-					'attr'  => 'issue_link_path',
-					'type'  => 'url',
-					'meta'  => [
+					'label'       => __( 'Issue link path', 'planet4-blocks-backend' ),
+					'attr'        => 'issue_link_path',
+					'type'        => 'url',
+					'meta'        => [
 						'placeholder' => __( 'Enter link path', 'planet4-blocks-backend' ),
 					],
 					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
@@ -128,8 +164,10 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
-					'label'       => __( 'Select focus point for issue image', 'planet4-blocks-backend' ) . '<img src="' .
-					                 esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png' ) ) . '" />',
+					'label'       => __(
+						'Select focus point for issue image',
+						'planet4-blocks-backend'
+					) . '<img src="' . esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png' ) ) . '" />',
 					'attr'        => 'focus_issue_image',
 					'type'        => 'select',
 					'options'     => $focus_options,
@@ -144,28 +182,28 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 					'multiple'    => false,
 				],
 				[
-					'label' => __( 'Campaign Description', 'planet4-blocks-backend' ),
-					'attr'  => 'tag_description',
-					'type'  => 'textarea',
-					'meta'  => [
+					'label'       => __( 'Campaign Description', 'planet4-blocks-backend' ),
+					'attr'        => 'tag_description',
+					'type'        => 'textarea',
+					'meta'        => [
 						'placeholder' => __( 'Enter description', 'planet4-blocks-backend' ),
 					],
 					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Campaign button text', 'planet4-blocks-backend' ),
-					'attr'  => 'button_text',
-					'type'  => 'text',
-					'meta'  => [
+					'label'       => __( 'Campaign button text', 'planet4-blocks-backend' ),
+					'attr'        => 'button_text',
+					'type'        => 'text',
+					'meta'        => [
 						'placeholder' => __( 'Enter button text', 'planet4-blocks-backend' ),
 					],
 					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Campaign button link', 'planet4-blocks-backend' ),
-					'attr'  => 'button_link',
-					'type'  => 'url',
-					'meta'  => [
+					'label'       => __( 'Campaign button link', 'planet4-blocks-backend' ),
+					'attr'        => 'button_link',
+					'type'        => 'url',
+					'meta'        => [
 						'placeholder' => __( 'Enter button link', 'planet4-blocks-backend' ),
 					],
 					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
@@ -180,11 +218,11 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
-					'label'       => __( 'Select focus point for campaign image', 'planet4-blocks-backend' ) . '<img src="' .
-					                 esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png' ) ) . '" />',
-					'attr'        => 'focus_tag_image',
-					'type'        => 'select',
-					'options'     => $focus_options,
+					'label'   => __( 'Select focus point for campaign image', 'planet4-blocks-backend' ) .
+								'<img src="' . esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png' ) ) . '" />',
+					'attr'    => 'focus_tag_image',
+					'type'    => 'select',
+					'options' => $focus_options,
 				],
 
 			];
@@ -197,7 +235,7 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 				/*
 				 * How the shortcode should be labeled in the UI. Required argument.
 				 */
-				'label' => __( 'Split Two Columns', 'planet4-blocks-backend' ),
+				'label'         => __( 'Split Two Columns', 'planet4-blocks-backend' ),
 
 				/*
 				 * Include an icon with your shortcode. Optional.
@@ -209,8 +247,8 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 				 * Define the UI for attributes of the shortcode. Optional.
 				 * See above, to where the the assignment to the $fields variable was made.
 				 */
-				'attrs' => $fields,
-				'post_type' => P4BKS_ALLOWED_PAGETYPE,
+				'attrs'         => $fields,
+				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
@@ -240,7 +278,7 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 			$issue_link_path   = $fields['issue_link_path'] ?? get_permalink( $issue_id );
 
 			$data = [
-				'issue' => [
+				'issue'    => [
 					'title'       => html_entity_decode( $issue_title ),
 					'description' => $issue_description,
 					'image'       => wp_get_attachment_url( $issue_image_id ),
@@ -262,6 +300,7 @@ if ( ! class_exists( 'SplitTwoColumns_Controller' ) ) {
 					'focus'       => $fields['focus_tag_image'] ?? '',
 				],
 			];
+
 			return $data;
 		}
 	}

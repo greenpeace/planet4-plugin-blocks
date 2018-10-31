@@ -1,4 +1,10 @@
 <?php
+/**
+ * View class
+ *
+ * @package P4BKS
+ * @since 0.1.0
+ */
 
 namespace P4BKS\Views;
 

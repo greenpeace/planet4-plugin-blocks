@@ -45,7 +45,7 @@ class ComposerStaticInit356100170ff2882375cd04c4c76f9df3
         'P4BKS\\Controllers\\Blocks\\ContentThreeColumn_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-contentthreecolumn-controller.php',
         'P4BKS\\Controllers\\Blocks\\Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-controller.php',
         'P4BKS\\Controllers\\Blocks\\Cookies_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-cookies-controller.php',
-        'P4BKS\\Controllers\\Blocks\\Covers_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-covers-controllers.php',
+        'P4BKS\\Controllers\\Blocks\\Covers_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-covers-controller.php',
         'P4BKS\\Controllers\\Blocks\\HappyPoint_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-happypoint-controller.php',
         'P4BKS\\Controllers\\Blocks\\MediaBlock_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mediablock-controller.php',
         'P4BKS\\Controllers\\Blocks\\MediaVideo_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mediavideo-controller.php',

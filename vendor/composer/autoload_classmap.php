@@ -15,7 +15,7 @@ return array(
     'P4BKS\\Controllers\\Blocks\\ContentThreeColumn_Controller' => $baseDir . '/classes/controller/blocks/class-contentthreecolumn-controller.php',
     'P4BKS\\Controllers\\Blocks\\Controller' => $baseDir . '/classes/controller/blocks/class-controller.php',
     'P4BKS\\Controllers\\Blocks\\Cookies_Controller' => $baseDir . '/classes/controller/blocks/class-cookies-controller.php',
-    'P4BKS\\Controllers\\Blocks\\Covers_Controller' => $baseDir . '/classes/controller/blocks/class-covers-controllers.php',
+    'P4BKS\\Controllers\\Blocks\\Covers_Controller' => $baseDir . '/classes/controller/blocks/class-covers-controller.php',
     'P4BKS\\Controllers\\Blocks\\HappyPoint_Controller' => $baseDir . '/classes/controller/blocks/class-happypoint-controller.php',
     'P4BKS\\Controllers\\Blocks\\MediaBlock_Controller' => $baseDir . '/classes/controller/blocks/class-mediablock-controller.php',
     'P4BKS\\Controllers\\Blocks\\MediaVideo_Controller' => $baseDir . '/classes/controller/blocks/class-mediavideo-controller.php',

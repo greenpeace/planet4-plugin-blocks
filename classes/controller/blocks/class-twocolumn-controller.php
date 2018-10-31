@@ -1,4 +1,10 @@
 <?php
+/**
+ * Two column block class
+ *
+ * @package P4BKS
+ * @since 0.1.14
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'TwoColumn_Controller' ) ) {
 	 * Class TwoColumn_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.14
 	 */
 	class TwoColumn_Controller extends Controller {
 
@@ -120,7 +127,7 @@ if ( ! class_exists( 'TwoColumn_Controller' ) ) {
 				/*
 				 * How the shortcode should be labeled in the UI. Required argument.
 				 */
-				'label' => __( 'Two Columns', 'planet4-blocks-backend' ),
+				'label'         => __( 'Two Columns', 'planet4-blocks-backend' ),
 
 				/*
 				 * Include an icon with your shortcode. Optional.
@@ -132,8 +139,8 @@ if ( ! class_exists( 'TwoColumn_Controller' ) ) {
 				 * Define the UI for attributes of the shortcode. Optional.
 				 * See above, to where the the assignment to the $fields variable was made.
 				 */
-				'attrs' => $fields,
-				'post_type' => P4BKS_ALLOWED_PAGETYPE,
+				'attrs'         => $fields,
+				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

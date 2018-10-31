@@ -1,4 +1,10 @@
 <?php
+/**
+ * MediaVideo block class
+ *
+ * @package P4BKS
+ * @since 0.1.13
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 	 * Class MediaVideo_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.13
 	 */
 	class MediaVideo_Controller extends Controller {
 
@@ -35,7 +42,7 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 					'label'       => __( 'Video URL/Youtube ID', 'planet4-blocks-backend' ),
 					'attr'        => 'youtube_id',
 					'type'        => 'text',
-					'description' => __( 'Allowed media type in Video URL - video/mp4.' ),
+					'description' => __( 'Allowed media type in Video URL - video/mp4.', 'planet4-blocks-backend' ),
 					'meta'        => [
 						'placeholder' => __( 'Enter Video URL or Youtube video id', 'planet4-blocks-backend' ),
 					],
@@ -47,7 +54,7 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 					'libraryType' => [ 'image' ],
 					'addButton'   => __( 'Select Video Poster Image', 'planet4-blocks-backend' ),
 					'frameTitle'  => __( 'Select Video Poster Image', 'planet4-blocks-backend' ),
-					'description' => __( 'Applicable for non youtube video only.' ),
+					'description' => __( 'Applicable for non youtube video only.', 'planet4-blocks-backend' ),
 				],
 			];
 

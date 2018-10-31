@@ -1,3 +1,4 @@
+// phpcs:ignoreFile -- this is not a php file
 <script type="text/html" id="tmpl-shortcode-ui-field-p4-radio">
 
 	<h2>{{{ data.block_heading }}}</h2>

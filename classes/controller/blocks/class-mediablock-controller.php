@@ -1,4 +1,10 @@
 <?php
+/**
+ * Cookies block class
+ *
+ * @package P4BKS
+ * @since 1.0.0
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -59,7 +65,7 @@ if ( ! class_exists( 'MediaBlock_Controller' ) ) {
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
 			$image_id           = $attributes['attachment'];
-			$image              = wp_get_attachment_image_src( $image_id , 'full' );
+			$image              = wp_get_attachment_image_src( $image_id, 'full' );
 			$fields             = [];
 			$fields['image']    = '';
 			$fields['alt_text'] = '';

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Subheader block class
+ *
+ * @package P4BKS
+ * @since 0.1.14
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'Subheader_Controller' ) ) {
 	 * Class Subheader_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.14
 	 */
 	class Subheader_Controller extends Controller {
 
@@ -54,14 +61,19 @@ if ( ! class_exists( 'Subheader_Controller' ) ) {
 		 */
 		public function prepare_data( $fields, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			$fields = shortcode_atts( array(
-				'title'       => '',
-				'description' => '',
-			), $fields, $shortcode_tag );
+			$fields = shortcode_atts(
+				[
+					'title'       => '',
+					'description' => '',
+				],
+				$fields,
+				$shortcode_tag
+			);
 
 			$data = [
 				'fields' => $fields,
 			];
+
 			return $data;
 		}
 	}

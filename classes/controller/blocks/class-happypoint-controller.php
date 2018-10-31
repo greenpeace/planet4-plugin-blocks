@@ -1,4 +1,10 @@
 <?php
+/**
+ * Happy point block class
+ *
+ * @package P4BKS
+ * @since 0.1.14
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'HappyPoint_Controller' ) ) {
 	 * Class HappyPoint_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.14
 	 */
 	class HappyPoint_Controller extends Controller {
 
@@ -89,8 +96,10 @@ if ( ! class_exists( 'HappyPoint_Controller' ) ) {
 					'attr'        => 'iframe_url',
 					'type'        => 'url',
 					'encode'      => true,
-					'description' => __( 'If a url is set in this field and the \'mailing list iframe\' option is enabled,
-									  it will override the planet4 engaging network setting.', 'planet4-blocks-backend-backend' ),
+					'description' => __(
+						'If a url is set in this field and the \'mailing list iframe\' option is enabled, it will override the planet4 engaging network setting.',
+						'planet4-blocks-backend'
+					),
 					'meta'        => [
 						'placeholder' => __( 'Enter iframe url', 'planet4-blocks-backend' ),
 					],

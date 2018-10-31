@@ -1,4 +1,10 @@
 <?php
+/**
+ * Uninstall class, containing functions to clean up plugin's data after removal.
+ *
+ * @package P4BKS
+ * @since 0.1.0
+ */
 
 namespace P4BKS\Controllers;
 

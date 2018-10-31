@@ -1,4 +1,10 @@
 <?php
+/**
+ * New covers block class
+ *
+ * @package P4BKS
+ * @since 1.19
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 	 * Class NewCovers_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 1.19
 	 */
 	class NewCovers_Controller extends Controller {
 
@@ -42,17 +49,20 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 			}
 
 			wp_enqueue_style( 'p4bks_admin_style_blocks', P4BKS_ADMIN_DIR . 'css/admin_blocks.css', [], '0.1' );
-			add_action( 'enqueue_shortcode_ui', function () {
-				wp_enqueue_script( 'submenu-view', P4BKS_ADMIN_DIR . 'js/submenu_heading_view.js', [ 'shortcode-ui' ] );
-				wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'js/blocks-ui.js', [ 'shortcode-ui' ] );
-			} );
+			add_action(
+				'enqueue_shortcode_ui',
+				function () {
+					wp_enqueue_script( 'submenu-view', P4BKS_ADMIN_DIR . 'js/submenu_heading_view.js', [ 'shortcode-ui' ], '0.1', true );
+					wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'js/blocks-ui.js', [ 'shortcode-ui' ], '0.1', true );
+				}
+			);
 		}
 
 		/**
 		 * Load underscore templates to footer.
 		 */
 		public function print_admin_footer_scripts() {
-			echo $this->get_template( 'submenu' );
+			echo $this->get_template( 'submenu' ); // WPCS: XSS ok.
 		}
 
 		/**
@@ -160,10 +170,14 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 					],
 				],
 				[
-					'label'    => '<hr class="hr-dashed"><br><p>' . __( 'Manual Override', 'planet4-blocks-backend' ) . '</p>' .
-					              '<p class="field-caption">' .
-					              __( 'CAUTION: Adding covers manually will override the automatic functionality.<br>
-									DRAG & DROP: Drag and drop to reorder cover display priority.', 'planet4-blocks-backend' ) . '</p>',
+					'label'    => '<hr class="hr-dashed"><br><p>' .
+						__( 'Manual Override', 'planet4-blocks-backend' ) . '</p>' .
+						'<p class="field-caption">' .
+						__(
+							'CAUTION: Adding covers manually will override the automatic functionality.<br>
+							DRAG & DROP: Drag and drop to reorder cover display priority.',
+							'planet4-blocks-backend'
+						) . '</p>',
 					'attr'     => 'posts',
 					'type'     => 'post_select',
 					'multiple' => 'multiple',
@@ -273,6 +287,8 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 					$args['tag__in'] = $tag_ids;
 				}
 
+				// Ignore sniffer rule, arguments contain suppress_filters.
+				// phpcs:ignore
 				return get_posts( $args );
 			}
 
@@ -308,6 +324,8 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 					$args['post_type'] = 'page';
 				}
 
+				// Ignore sniffer rule, arguments contain suppress_filters.
+				// phpcs:ignore
 				return get_posts( $args );
 			}
 
@@ -329,7 +347,7 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 			// If post_ids is empty or is not a comma separated integers string then make post_ids an empty array.
 			// If any tag is selected convert the value to an array of tag ids.
 			$post_types = $this->split_to_integers( $post_types );
-			$tag_ids = $this->split_to_integers( $tags );
+			$tag_ids    = $this->split_to_integers( $tags );
 
 			$query_args = [
 				'post_type'      => 'post',
@@ -405,9 +423,7 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 				$tags = [];
 			} else {
 				// Explode comma separated list of tag ids and get an array of \WP_Terms objects.
-				$tags = get_tags( [
-					'include' => $tag_ids,
-				] );
+				$tags = get_tags( [ 'include' => $tag_ids ] );
 			}
 
 			$covers = [];
@@ -531,12 +547,11 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 		 * Requires that shortcode, attr and nonce are passed.
 		 * Requires that the field has been correctly registred and can be found in $this->post_fields
 		 * Supports passing page number and search query string.
-		 *
 		 */
 		public function action_wp_ajax_shortcode_ui_post_field() {
 
-			$nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( $_GET['nonce'] ) : null;
-			$type  = isset( $_GET['type'] ) ? sanitize_text_field( $_GET['type'] ) : '0';
+			$nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : null; // WPCS: CSRF ok.
+			$type  = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : '0'; // WPCS: CSRF ok.
 
 			$response = array(
 				'items'          => array(),
@@ -579,7 +594,7 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 			}
 
 			if ( ! empty( $_GET['s'] ) ) {
-				$query_args['s'] = sanitize_text_field( $_GET['s'] );
+				$query_args['s'] = sanitize_text_field( wp_unslash( $_GET['s'] ) );
 			}
 
 			if ( ! empty( $_GET['include'] ) ) {

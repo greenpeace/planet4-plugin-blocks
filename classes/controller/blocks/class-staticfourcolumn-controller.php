@@ -1,4 +1,10 @@
 <?php
+/**
+ * Static Four column block class
+ *
+ * @package P4BKS
+ * @since 0.1.11
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'StaticFourColumn_Controller' ) ) {
 	 * Class StaticFourColumn_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.11
 	 */
 	class StaticFourColumn_Controller extends Controller {
 
@@ -27,20 +34,20 @@ if ( ! class_exists( 'StaticFourColumn_Controller' ) ) {
 
 			// This block will have 4 different columns with same fields.
 			$fields = [];
-			$field   = [
+			$field  = [
 				[
 					'label' => __( 'Title', 'planet4-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 				],
 			];
-			$fields  = array_merge( $fields, $field );
+			$fields = array_merge( $fields, $field );
 
 			for ( $i = 1; $i < 5; $i++ ) {
-				$field   = [
+				$field  = [
 					[
 						// translators: placeholder needs to represent the ordinal of the column, eg. 1st, 2nd etc.
-						'label'       => sprintf( __( 'Select Image for %s column', 'planet4-blocks-backend' ),  $i ),
+						'label'       => sprintf( __( 'Select Image for %s column', 'planet4-blocks-backend' ), $i ),
 						'attr'        => 'attachment_' . $i,
 						'type'        => 'attachment',
 						'libraryType' => [ 'image' ],
@@ -88,7 +95,7 @@ if ( ! class_exists( 'StaticFourColumn_Controller' ) ) {
 						],
 					],
 				];
-				$fields  = array_merge( $fields, $field );
+				$fields = array_merge( $fields, $field );
 			}
 
 			// Define the Shortcode UI arguments.
@@ -117,7 +124,7 @@ if ( ! class_exists( 'StaticFourColumn_Controller' ) ) {
 			$title           = $attributes['title'] ?? '';
 			$attributes_temp = [];
 			for ( $i = 1; $i < 5; $i++ ) {
-				$temp_array = [
+				$temp_array      = [
 					"title_$i"       => $attributes[ "title_$i" ] ?? '',
 					"description_$i" => $attributes[ "description_$i" ] ?? '',
 					"attachment_$i"  => $attributes[ "attachment_$i" ] ?? '',

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Tasks block class
+ *
+ * @package P4BKS
+ * @since 0.1.3
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'Tasks_Controller' ) ) {
 	 * Class Tasks_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.3
 	 */
 	class Tasks_Controller extends Controller {
 
@@ -51,9 +58,14 @@ if ( ! class_exists( 'Tasks_Controller' ) ) {
 
 				$fields[] =
 					[
-						// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
-						'label' => sprintf( __( 'Task %s: Title <br> 
-									<i>Title is mandatory. In order for the task to be appeared title has to be filled.</i>', 'planet4-blocks-backend' ), $i ),
+						'label' => sprintf(
+							// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
+							__(
+								'Task %s: Title <br><i>Title is mandatory. In order for the task to be appeared title has to be filled.</i>',
+								'planet4-blocks-backend'
+							),
+							$i
+						),
 						'attr'  => 'title_' . $i,
 						'type'  => 'text',
 						'meta'  => [
@@ -138,11 +150,12 @@ if ( ! class_exists( 'Tasks_Controller' ) ) {
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
 			$attributes_temp = [
-				'tasks_title'        => $attributes['tasks_title'] ?? '',
-				'tasks_description'  => $attributes['tasks_description'] ?? '',
+				'tasks_title'       => $attributes['tasks_title'] ?? '',
+				'tasks_description' => $attributes['tasks_description'] ?? '',
 			];
+
 			for ( $i = 1; $i < 5; $i++ ) {
-				$temp_array = [
+				$temp_array      = [
 					"title_$i"       => $attributes[ "title_$i" ] ?? '',
 					"description_$i" => $attributes[ "description_$i" ] ?? '',
 					"attachment_$i"  => $attributes[ "attachment_$i" ] ?? '',

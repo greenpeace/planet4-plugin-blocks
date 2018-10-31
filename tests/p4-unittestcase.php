@@ -1,4 +1,9 @@
 <?php
+/**
+ * Contains P4 Unit test case to be used as base test class for p4 blocks tests
+ *
+ * @package P4BKS
+ */
 
 /**
  * Class P4_UnitTestCase
@@ -14,41 +19,51 @@ abstract class P4_UnitTestCase extends WP_UnitTestCase {
 		register_taxonomy( 'p4-page-type', 'P4_CustomTaxonomyTest' );
 
 		// Create a user with editor role.
-		$this->factory->user->create( [
-			'role'       => 'editor',
-			'user_login' => 'p4_editor',
-		] );
+		$this->factory->user->create(
+			[
+				'role'       => 'editor',
+				'user_login' => 'p4_editor',
+			]
+		);
 
 		// Create p4-page-type terms.
-		$this->factory->term->create( [
-			'name'     => 'Story',
-			'taxonomy' => 'p4-page-type',
-			'slug'     => 'story',
-		] );
-		$this->factory->term->create( [
-			'name'     => 'Publication',
-			'taxonomy' => 'p4-page-type',
-			'slug'     => 'publication',
-		] );
-		$this->factory->term->create( [
-			'name'     => 'Press Release',
-			'taxonomy' => 'p4-page-type',
-			'slug'     => 'press-release',
-		] );
+		$this->factory->term->create(
+			[
+				'name'     => 'Story',
+				'taxonomy' => 'p4-page-type',
+				'slug'     => 'story',
+			]
+		);
+		$this->factory->term->create(
+			[
+				'name'     => 'Publication',
+				'taxonomy' => 'p4-page-type',
+				'slug'     => 'publication',
+			]
+		);
+		$this->factory->term->create(
+			[
+				'name'     => 'Press Release',
+				'taxonomy' => 'p4-page-type',
+				'slug'     => 'press-release',
+			]
+		);
 
-		$this->factory->term->create( [
-			'name'     => 'ArcticSunrise',
-			'taxonomy' => 'post_tag',
-			'slug'     => 'arcticsunrise',
-		] );
+		$this->factory->term->create(
+			[
+				'name'     => 'ArcticSunrise',
+				'taxonomy' => 'post_tag',
+				'slug'     => 'arcticsunrise',
+			]
+		);
 	}
 
 	/**
 	 * Helper method to test private methods.
 	 *
-	 * @param $object
+	 * @param Object $object Object which will be used to invoke it's function.
 	 * @param string $method_name Method name of the object.
-	 * @param array $parameters Parameters array for the method.
+	 * @param array  $parameters Parameters array for the method.
 	 *
 	 * @return mixed
 	 */
@@ -68,7 +83,7 @@ abstract class P4_UnitTestCase extends WP_UnitTestCase {
 	/**
 	 * Get p4 page type term id by providing the term's slug
 	 *
-	 * @param string $slug Term's slug
+	 * @param string $slug Term's slug.
 	 *
 	 * @return int  Term id
 	 */
@@ -84,7 +99,7 @@ abstract class P4_UnitTestCase extends WP_UnitTestCase {
 	/**
 	 * Get tag's term id by providing the tag's slug
 	 *
-	 * @param string $slug Tag's slug
+	 * @param string $slug Tag's slug.
 	 *
 	 * @return int  Term id
 	 */

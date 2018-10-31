@@ -1,9 +1,14 @@
 <?php
-
-require_once __DIR__ . '/../p4-unittestcase.php';
+/**
+ * PHP unit test of content four column block
+ *
+ * @package P4BKS
+ */
 
 use P4BKS\Controllers\Blocks\ContentFourColumn_Controller as ContentFourColumn;
 use P4BKS\Views\View as View;
+
+require_once __DIR__ . '/../p4-unittestcase.php';
 
 if ( ! class_exists( 'P4_ContentFourColumnTest' ) ) {
 
@@ -47,9 +52,11 @@ if ( ! class_exists( 'P4_ContentFourColumnTest' ) ) {
 			$tag_ids = [];
 			if ( $this->tag_names ) {
 				foreach ( $this->tag_names as $tag_name ) {
-					$tag_ids[] = $this->factory->term->create( [
-						'name' => $tag_name,
-					] );
+					$tag_ids[] = $this->factory->term->create(
+						[
+							'name' => $tag_name,
+						]
+					);
 				}
 			}
 
@@ -71,32 +78,38 @@ if ( ! class_exists( 'P4_ContentFourColumnTest' ) ) {
 			$fields = [
 				'select_tag' => implode( ',', $tag_ids ),
 			];
-			$data  = $this->block->prepare_data( $fields );
-			$found = count( $data['posts'] );
+			$data   = $this->block->prepare_data( $fields );
+			$found  = count( $data['posts'] );
 
 			try {
 				$this->assertEquals( self::POSTS_WITH_TAG_COUNT, $found );
 			} catch ( \Exception $e ) {
-				$this->fail( sprintf( '->Expected to find %d Posts with these tags, but found %d.',
-					self::POSTS_WITH_TAG_COUNT,
-					$found
-				) );
+				$this->fail(
+					sprintf(
+						'->Expected to find %d Posts with these tags, but found %d.',
+						self::POSTS_WITH_TAG_COUNT,
+						$found
+					)
+				);
 			}
 
 			// Test the number of the posts that have the first tag.
 			$fields = [
 				'select_tag' => $tag_ids[0],
 			];
-			$data  = $this->block->prepare_data( $fields );
-			$found = count( $data['posts'] );
+			$data   = $this->block->prepare_data( $fields );
+			$found  = count( $data['posts'] );
 
 			try {
 				$this->assertEquals( self::POSTS_WITH_FIRST_TAG_COUNT, $found );
 			} catch ( \Exception $e ) {
-				$this->fail( sprintf( '->Expected to find %d Posts with these tags, but found %d.',
-					self::POSTS_WITH_FIRST_TAG_COUNT,
-					$found
-				) );
+				$this->fail(
+					sprintf(
+						'->Expected to find %d Posts with these tags, but found %d.',
+						self::POSTS_WITH_FIRST_TAG_COUNT,
+						$found
+					)
+				);
 			}
 		}
 
@@ -105,12 +118,12 @@ if ( ! class_exists( 'P4_ContentFourColumnTest' ) ) {
 		 *
 		 * @return array
 		 */
-		private function get_dummy_posts() : array {
+		private function get_dummy_posts(): array {
 			return [
-				'post_author'    => 1,
-				'post_title'     => 'this is a post',
-				'post_type'      => 'post',
-				'post_status'    => 'publish',
+				'post_author' => 1,
+				'post_title'  => 'this is a post',
+				'post_type'   => 'post',
+				'post_status' => 'publish',
 			];
 		}
 	}

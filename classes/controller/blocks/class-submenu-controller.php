@@ -1,4 +1,10 @@
 <?php
+/**
+ * Submenu block class
+ *
+ * @package P4BKS
+ * @since 1.3
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 	 * Class SubMenu_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 1.3
 	 */
 	class SubMenu_Controller extends Controller {
 
@@ -37,17 +44,20 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 			}
 
 			wp_enqueue_style( 'p4bks_admin_style_blocks', P4BKS_ADMIN_DIR . 'css/admin_blocks.css', [], '0.1' );
-			add_action( 'enqueue_shortcode_ui', function () {
-				wp_enqueue_script( 'submenu-view', P4BKS_ADMIN_DIR . 'js/submenu_heading_view.js', [ 'shortcode-ui' ] );
-				wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'js/blocks-ui.js', [ 'shortcode-ui' ] );
-			} );
+			add_action(
+				'enqueue_shortcode_ui',
+				function () {
+					wp_enqueue_script( 'submenu-view', P4BKS_ADMIN_DIR . 'js/submenu_heading_view.js', [ 'shortcode-ui' ], '0.1', true );
+					wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'js/blocks-ui.js', [ 'shortcode-ui' ], '0.1', true );
+				}
+			);
 		}
 
 		/**
 		 * Load underscore templates to footer.
 		 */
 		public function print_admin_footer_scripts() {
-			echo $this->get_template( 'submenu' );
+			echo $this->get_template( 'submenu' ); // WPCS: XSS ok.
 		}
 
 		/**
@@ -77,8 +87,10 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 			$fields = [
 				[
 					'block_heading'     => __( 'Anchor Link Submenu', 'planet4-blocks-backend' ),
-					'block_description' => __( 'An in-page table of contents to help users have a sense of what\'s on
-												the page and let them jump to a topic they are interested in.', 'planet4-blocks-backend' ),
+					'block_description' => __(
+						'An in-page table of contents to help users have a sense of what\'s on the page and let them jump to a topic they are interested in.',
+						'planet4-blocks-backend'
+					),
 					'attr'              => 'submenu_style',
 					'label'             => __( 'What style of menu do you need?', 'planet4-blocks-backend' ),
 					'description'       => __( 'Associate this block with Posts that have a specific Tag', 'planet4-blocks-backend' ),
@@ -116,24 +128,26 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 				],
 				[
 					'attr'    => 'heading1',
-					'label'   => __( '<b>Submenu item #1</b>' ),
+					'label'   => __( '<b>Submenu item #1</b>', 'planet4-blocks-backend' ),
 					'type'    => 'p4_select',
 					'options' => $heading_options,
 				],
 				[
 					'attr'  => 'link1',
+					// phpcs:ignore WordPress.WP.I18n.MissingArgDomain
 					'label' => __( 'Link' ),
 					'type'  => 'p4_checkbox',
 					'value' => 'false',
 				],
 				[
 					'attr'    => 'heading2',
-					'label'   => __( '<b>Submenu item #2</b>' ),
+					'label'   => __( '<b>Submenu item #2</b>', 'planet4-blocks-backend' ),
 					'type'    => 'p4_select',
 					'options' => $heading_options,
 				],
 				[
 					'attr'  => 'link2',
+					// phpcs:ignore WordPress.WP.I18n.MissingArgDomain
 					'label' => __( 'Link' ),
 					'type'  => 'p4_checkbox',
 					'value' => 'false',
@@ -172,7 +186,7 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 
 			$menu = $this->parse_post_content( $content, [ $heading1, $heading2 ], [ $link1, $link2 ] );
 
-			wp_enqueue_script( 'submenu', P4BKS_ADMIN_DIR . 'js/submenu.js' );
+			wp_enqueue_script( 'submenu', P4BKS_ADMIN_DIR . 'js/submenu.js', [ 'jquery' ], '0.1', true );
 			wp_localize_script( 'submenu', 'submenu', $menu );
 
 			$block_data = [
@@ -220,15 +234,18 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 					}
 
 					$heading_tag2 = "h$heading2";
+					// phpcs:ignore
 					while ( $node = $node->nextSibling ) {
 
-						// If we get to the last DIV, stop.
+						// When we get to the last element, stop.
+						// phpcs:ignore WordPress.NamingConventions.ValidVariableName
 						if ( $node->nodeName === $heading_tag2 ) {
 							$child              = $this->create_menu_object( $node, $heading_tag2, $link2 );
 							$parent->children[] = $child;
 						}
 
 						// Break if we get to next heading.
+						// phpcs:ignore WordPress.NamingConventions.ValidVariableName
 						if ( $node->nodeName === $heading_tag ) {
 							break;
 						}
@@ -248,14 +265,14 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 		 *
 		 * @return \stdClass
 		 */
-		private function create_menu_object( $node, $type, $link ) {
+		private function create_menu_object( \DOMElement $node, $type, $link ) {
 			$node_value         = $node->nodeValue;
 			$menu_obj           = new \stdClass();
-			$menu_obj->text     = utf8_decode($node_value);
+			$menu_obj->text     = utf8_decode( $node_value );
 			$menu_obj->hash     = md5( $node_value );
 			$menu_obj->type     = $type;
 			$menu_obj->link     = filter_var( $link, FILTER_VALIDATE_BOOLEAN );
-			$menu_obj->id       = sanitize_title( iconv( "UTF-8", "ISO-8859-1//TRANSLIT", utf8_decode( $node_value ) ) );
+			$menu_obj->id       = sanitize_title( iconv( 'UTF-8', 'ISO-8859-1//TRANSLIT', utf8_decode( $node_value ) ) );
 			$menu_obj->children = [];
 
 			return $menu_obj;

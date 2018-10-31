@@ -1,4 +1,10 @@
 <?php
+/**
+ * Settings class
+ *
+ * @package P4BKS
+ * @since 0.1.0
+ */
 
 namespace P4BKS\Controllers\Menu;
 
@@ -22,7 +28,7 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 					__( 'Blocks', 'planet4-blocks-backend' ),
 					'manage_options',
 					P4BKS_PLUGIN_SLUG_NAME,
-					array( $this, 'prepare_settings' ),
+					[ $this, 'prepare_settings' ],
 					'dashicons-layout'
 				);
 			}
@@ -33,10 +39,12 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 		 * Render the settings page of the plugin.
 		 */
 		public function prepare_settings() {
-			$this->view->settings( [
-				'settings' => get_option( 'p4bks_main_settings' ),
-				'available_languages' => P4BKS_LANGUAGES,
-			] );
+			$this->view->settings(
+				[
+					'settings'            => get_option( 'p4bks_main_settings' ),
+					'available_languages' => P4BKS_LANGUAGES,
+				]
+			);
 		}
 
 		/**
@@ -47,7 +55,7 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 				'type'              => 'string',
 				'group'             => 'p4bks_main_settings_group',
 				'description'       => 'Planet 4 - Blocks settings',
-				'sanitize_callback' => array( $this, 'valitize' ),
+				'sanitize_callback' => [ $this, 'valitize' ],
 				'show_in_rest'      => false,
 			);
 			register_setting( 'p4bks_main_settings_group', 'p4bks_main_settings', $args );

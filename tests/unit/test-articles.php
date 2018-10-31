@@ -1,13 +1,14 @@
 <?php
-
 /**
- * The PHP unit test of article block.
+ * The PHP unit test of article block
+ *
+ * @package P4BKS
  */
-
-require_once __DIR__ . '/../p4-unittestcase.php';
 
 use P4BKS\Controllers\Blocks\Articles_Controller as Articles;
 use P4BKS\Views\View as View;
+
+require_once __DIR__ . '/../p4-unittestcase.php';
 
 if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 

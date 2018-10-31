@@ -1,4 +1,10 @@
 <?php
+/**
+ * Covers block class
+ *
+ * @package P4BKS
+ * @since 0.1.13
+ */
 
 namespace P4BKS\Controllers\Blocks;
 
@@ -8,6 +14,7 @@ if ( ! class_exists( 'Covers_Controller' ) ) {
 	 * Class Covers_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
+	 * @since 0.1.13
 	 */
 	class Covers_Controller extends Controller {
 
@@ -49,11 +56,13 @@ if ( ! class_exists( 'Covers_Controller' ) ) {
 				],
 				[
 					'label'       => __( 'Number of covers displayed', 'planet4-blocks-backend' ),
-					'description' => __( 'Show 1 Row: Displays 3 Covers on desktop and 2 Covers on mobile.<br> 
-										Show 2 Rows: Displays 6 Covers on desktop and 4 covers on mobile.<br>
-										(Another Row will be revealed each time the Load More button is clicked)<br>
-										Show All Covers: Displays all available Covers on desktop and 4 Covers on mobile.',
-										'planet4-blocks-backend' ),
+					'description' => __(
+						'Show 1 Row: Displays 3 Covers on desktop and 2 Covers on mobile.<br>
+						Show 2 Rows: Displays 6 Covers on desktop and 4 covers on mobile.<br>
+						(Another Row will be revealed each time the Load More button is clicked)<br>
+						Show All Covers: Displays all available Covers on desktop and 4 Covers on mobile.',
+						'planet4-blocks-backend'
+					),
 					'attr'        => 'covers_view',
 					'type'        => 'select',
 					'options'     => [
@@ -79,10 +88,11 @@ if ( ! class_exists( 'Covers_Controller' ) ) {
 			 * Define the Shortcode UI arguments.
 			 */
 			$shortcode_ui_args = [
+
 				/*
 				 * How the shortcode should be labeled in the UI. Required argument.
 				 */
-				'label' => __( 'Take Action Covers', 'planet4-blocks-backend' ),
+				'label'         => __( 'Take Action Covers', 'planet4-blocks-backend' ),
 
 				/*
 				 * Include an icon with your shortcode. Optional.
@@ -94,8 +104,8 @@ if ( ! class_exists( 'Covers_Controller' ) ) {
 				 * Define the UI for attributes of the shortcode. Optional.
 				 * See above, to where the the assignment to the $fields variable was made.
 				 */
-				'attrs' => $fields,
-				'post_type' => P4BKS_ALLOWED_PAGETYPE,
+				'attrs'         => $fields,
+				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
@@ -129,13 +139,14 @@ if ( ! class_exists( 'Covers_Controller' ) ) {
 				];
 				// If user selected a tag to associate with the Take Action page covers.
 				if ( $select_tags ) {
-					$tag_ids = explode( ',', $select_tags );
+					$tag_ids         = explode( ',', $select_tags );
 					$args['tag__in'] = $tag_ids;
 				}
+				// phpcs:ignore
 				$actions = get_posts( $args );
 			}
 
-			$covers  = [];
+			$covers = [];
 
 			if ( $actions ) {
 				$cover_button_text = $options['take_action_covers_button_text'] ?? __( 'Take Action', 'planet4-blocks' );
