@@ -83,10 +83,8 @@ if ( ! class_exists( 'ContentFourColumn_Controller' ) ) {
 			$fields[] = [
 				'label'       => __( 'Number of Posts displayed', 'planet4-blocks-backend' ),
 				'description' => __(
-					'Show 1 Row: Displays 4 Posts on desktop and 3 Posts on mobile.<br> 
-					Show 2 Rows: Displays 8 Posts on desktop and 6 Posts on mobile.<br>
-					(Another Row will be revealed each time the Load More button is clicked)<br>
-					Show All Rows: Displays all available Posts on desktop and 4 Posts on mobile.',
+					'Show 1 Row: Displays 4 Posts on desktop and 3 Posts on mobile.<br> Show 2 Rows: Displays 8 Posts on desktop and 6 Posts on mobile.<br>
+(Another Row will be revealed each time the Load More button is clicked)<br>Show All Rows: Displays all available Posts on desktop and 4 Posts on mobile.',
 					'planet4-blocks-backend'
 				),
 				'attr'        => 'posts_view',

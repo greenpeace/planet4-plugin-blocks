@@ -174,8 +174,7 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 						__( 'Manual Override', 'planet4-blocks-backend' ) . '</p>' .
 						'<p class="field-caption">' .
 						__(
-							'CAUTION: Adding covers manually will override the automatic functionality.<br>
-							DRAG & DROP: Drag and drop to reorder cover display priority.',
+							'CAUTION: Adding covers manually will override the automatic functionality.<br>DRAG & DROP: Drag and drop to reorder cover display priority.',
 							'planet4-blocks-backend'
 						) . '</p>',
 					'attr'     => 'posts',

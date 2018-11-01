@@ -57,10 +57,8 @@ if ( ! class_exists( 'Covers_Controller' ) ) {
 				[
 					'label'       => __( 'Number of covers displayed', 'planet4-blocks-backend' ),
 					'description' => __(
-						'Show 1 Row: Displays 3 Covers on desktop and 2 Covers on mobile.<br>
-						Show 2 Rows: Displays 6 Covers on desktop and 4 covers on mobile.<br>
-						(Another Row will be revealed each time the Load More button is clicked)<br>
-						Show All Covers: Displays all available Covers on desktop and 4 Covers on mobile.',
+						'Show 1 Row: Displays 3 Covers on desktop and 2 Covers on mobile.<br>Show 2 Rows: Displays 6 Covers on desktop and 4 covers on mobile.<br>
+(Another Row will be revealed each time the Load More button is clicked)<br>Show All Covers: Displays all available Covers on desktop and 4 Covers on mobile.',
 						'planet4-blocks-backend'
 					),
 					'attr'        => 'covers_view',

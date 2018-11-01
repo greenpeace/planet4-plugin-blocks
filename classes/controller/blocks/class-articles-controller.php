@@ -156,7 +156,7 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 									'<p class="field-caption">' .
 									__(
 										'CAUTION: Adding articles individually will override the automatic functionality of this block.
-										For good user experience, please include at least three articles so that spacing and alignment of the design remains in tact.',
+For good user experience, please include at least three articles so that spacing and alignment of the design remains in tact.',
 										'planet4-blocks-backend'
 									) . '</p>',
 					'attr'     => 'posts',

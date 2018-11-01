@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Planet4 - Blocks\n"
-"POT-Creation-Date: 2018-06-07 11:24+0000\n"
+"POT-Creation-Date: 2018-11-01 12:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,44 +22,49 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Language: "
 
-#: classes/controller/blocks/class-covers-controllers.php:142
+#: classes/controller/blocks/class-covers-controller.php:152
+#: classes/controller/blocks/class-newcovers-controller.php:471
 msgid "Take Action"
 msgstr ""
 
-#: classes/controller/blocks/class-covers-controllers.php:165
+#: classes/controller/blocks/class-covers-controller.php:175
+#: classes/controller/blocks/class-newcovers-controller.php:495
 msgid "Load More ..."
 msgstr ""
 
-#: classes/controller/blocks/class-splittwocolumns-controller.php:240
+#: classes/controller/blocks/class-splittwocolumns-controller.php:277
 msgid "Learn more about this issue"
 msgstr ""
 
-#: classes/controller/blocks/class-splittwocolumns-controller.php:261
+#: classes/controller/blocks/class-splittwocolumns-controller.php:298
 msgid "Get Involved"
 msgstr ""
 
-#: classes/controller/blocks/class-takeactionboxout-controller.php:123
+#: classes/controller/blocks/class-takeactionboxout-controller.php:129
 msgid "take action"
 msgstr ""
 
-#: classes/controller/blocks/class-contentfourcolumn-controller.php:222
+#: classes/controller/blocks/class-contentfourcolumn-controller.php:238
 msgid "Publications"
 msgstr ""
 
-#: classes/controller/blocks/class-articles-controller.php:154
+#: classes/controller/blocks/class-articles-controller.php:68
+#: classes/controller/blocks/class-articles-controller.php:210
 msgid "Related Articles"
 msgstr ""
 
-#: classes/controller/blocks/class-articles-controller.php:155
+#: classes/controller/blocks/class-articles-controller.php:69
+#: classes/controller/blocks/class-articles-controller.php:211
 msgid "READ ALL THE NEWS"
 msgstr ""
 
-#: includes/blocks/articles.twig:61
+#: includes/blocks/single_article.twig:59 includes/blocks/articles.twig:72
 msgid "by"
 msgstr ""
 
-#: includes/blocks/content_four_column.twig:60
-#: includes/blocks/content_four_column.twig:68
+#: includes/blocks/campaign_thumbnail.twig:47
+#: includes/blocks/content_four_column.twig:64
+#: includes/blocks/content_four_column.twig:72
 msgid "Load More"
 msgstr ""
 
