@@ -322,10 +322,20 @@ $slide-transition-speed: 1s;
         font-size: 0.875rem;
         line-height: 2.8;
 
+        html[dir="rtl"] & {
+          font-size: 1.175rem;
+          line-height: 2.5;
+        }
+
         @include medium-and-up {
           font-size: 1rem;
           line-height: 3;
           width: auto;
+
+          html[dir="rtl"] & {
+            font-size: 1.3rem;
+            line-height: 2.5;
+          }
         }
 
         @include large-and-up {
