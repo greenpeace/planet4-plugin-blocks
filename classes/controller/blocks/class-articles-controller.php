@@ -8,6 +8,8 @@
 
 namespace P4BKS\Controllers\Blocks;
 
+use Timber\PostQuery;
+
 if ( ! class_exists( 'Articles_Controller' ) ) {
 
 	/**
@@ -25,13 +27,14 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 		 */
 		const BLOCK_NAME = 'articles';
 
-
 		/**
 		 * Hooks all the needed functions to load the block.
 		 */
 		public function load() {
 			parent::load();
-			add_action( 'admin_enqueue_scripts', [ $this, 'load_admin_assets' ] );
+			add_action( 'admin_enqueue_scripts',    [ $this, 'load_admin_assets' ] );
+			add_action( 'wp_ajax_load_more',        [ $this, 'load_more' ] );
+			add_action( 'wp_ajax_nopriv_load_more', [ $this, 'load_more' ] );
 		}
 
 
@@ -230,21 +233,23 @@ For good user experience, please include at least three articles so that spacing
 			// 6) issue page - Get posts based on page's tags.
 			$all_posts = false;
 			if ( is_tag() && '' !== $tag_id ) {
-				$all_posts = $this->filter_posts_for_tag_page( $fields );
+				$args = $this->filter_posts_for_tag_page( $fields );
 			} elseif ( ! empty( $exclude_post_id ) ) {
-				$all_posts = $this->filter_posts_by_page_types( $fields );
+				$args = $this->filter_posts_by_page_types( $fields );
 			} elseif ( ! empty( $post_types_temp ) ) {
-				$all_posts = $this->filter_posts_by_page_types( $fields );
+				$args = $this->filter_posts_by_page_types( $fields );
 			} elseif ( ( isset( $fields['post_types'] ) && '' !== $fields['post_types'] ) ||
 						( isset( $fields['tags'] ) && '' !== $fields['tags'] ) ) {
-				$all_posts = $this->filter_posts_by_page_types_or_tags( $fields );
+				$args = $this->filter_posts_by_page_types_or_tags( $fields );
 			} elseif ( isset( $fields['posts'] ) && '' !== $fields['posts'] ) {
-				$all_posts                 = $this->filter_posts_by_ids( $fields );
+				$args                      = $this->filter_posts_by_ids( $fields );
 				$fields['manual_override'] = true;
 			} else {
-				$all_posts = $this->filter_posts_by_pages_tags( $fields );
+				$args = $this->filter_posts_by_pages_tags( $fields );
 			}
-
+			// Ignore rule, arguments contain suppress_filters.
+			// phpcs:ignore
+			$all_posts = wp_get_recent_posts( $args );
 			$recent_posts = [];
 
 			// Populate posts array for frontend template if results have been returned.
@@ -252,11 +257,62 @@ For good user experience, please include at least three articles so that spacing
 				$recent_posts = $this->populate_post_items( $all_posts );
 			}
 
+			$dataset = urldecode( http_build_query( $args, '', ' ' ) );
+			$dataset = explode( ' ', $dataset );
+
 			$data = [
 				'fields'       => $fields,
 				'recent_posts' => $recent_posts,
+				'nonce_action' => 'load_more',
+				'dataset'      => $dataset,
 			];
+
 			return $data;
+		}
+
+		/**
+		 * Callback for Lazy-loading the next results.
+		 * Gets the paged posts that belong to the next page/load and are to be used with the twig template.
+		 */
+		public function load_more() {
+
+			// If this is an ajax call.
+			if ( wp_doing_ajax() ) {
+				$nonce   = filter_input( INPUT_GET, '_wpnonce',  FILTER_SANITIZE_STRING );
+				$page    = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT );
+				$dataset = filter_input_array( INPUT_GET );
+
+				// CSRF check.
+				if ( wp_verify_nonce( $nonce, 'load_more' ) ) {
+					if ( isset( $dataset['args'] ) ) {
+						foreach ( $dataset['args'] as $key => $value ) {
+							if ( false !== strpos( $key, '[', true ) ) {
+								$new_key                       = strstr( $key, '[', true );
+								$dataset['args'][ $new_key ][] = $value;
+								unset( $dataset['args'][ $key ] );
+							}
+						}
+						unset( $dataset['args']['page'] );
+						unset( $dataset['args']['total'] );
+					}
+
+					if ( $page ) {
+						$dataset['args']['paged'] = $page;
+						$pagetype_posts = new PostQuery( $dataset['args'] );
+						foreach ( $pagetype_posts as $pagetype_post ) {
+							$recent_posts[] = $pagetype_post;
+						}
+					} else {
+						$recent_posts = new PostQuery( $dataset['args'] );
+					}
+
+					$this->view->block( static::BLOCK_NAME, [
+						'recent_posts' => $recent_posts,
+						'doing_ajax'   => true,
+					] );
+				}
+				wp_die();
+			}
 		}
 
 		/**
@@ -349,9 +405,7 @@ For good user experience, please include at least three articles so that spacing
 					'suppress_filters' => false,
 				];
 
-				// Ignore rule, arguments contain suppress_filters.
-				// phpcs:ignore
-				return wp_get_recent_posts( $args );
+				return $args;
 			}
 
 			return false;
@@ -362,7 +416,7 @@ For good user experience, please include at least three articles so that spacing
 		 *
 		 * @param array $fields Block fields values.
 		 *
-		 * @return array|false
+		 * @return array
 		 */
 		private function filter_posts_by_page_types( &$fields ) {
 
@@ -459,9 +513,7 @@ For good user experience, please include at least three articles so that spacing
 				}
 			}
 
-			// Ignore rule, arguments contain suppress_filters.
-			// phpcs:ignore
-			return wp_get_recent_posts( $args );
+			return $args;
 		}
 
 		/**
@@ -469,7 +521,7 @@ For good user experience, please include at least three articles so that spacing
 		 *
 		 * @param array $fields Block fields values.
 		 *
-		 * @return array|false
+		 * @return array
 		 */
 		private function filter_posts_by_page_types_or_tags( &$fields ) {
 
@@ -583,9 +635,7 @@ For good user experience, please include at least three articles so that spacing
 				}
 			}
 
-			// Ignore rule, arguments contain suppress_filters.
-			// phpcs:ignore
-			return wp_get_recent_posts( $args );
+			return $args;
 		}
 
 		/**
@@ -614,9 +664,7 @@ For good user experience, please include at least three articles so that spacing
 
 				$args['tag__in'] = [ (int) $tag_id ];
 
-				// Ignore rule, arguments contain suppress_filters.
-				// phpcs:ignore
-				return wp_get_recent_posts( $args );
+				return $args;
 			}
 
 			return false;
@@ -627,7 +675,7 @@ For good user experience, please include at least three articles so that spacing
 		 *
 		 * @param array $fields Block fields values.
 		 *
-		 * @return array|false
+		 * @return array
 		 */
 		private function filter_posts_by_pages_tags( &$fields ) {
 
@@ -660,9 +708,7 @@ For good user experience, please include at least three articles so that spacing
 			$read_more_link           = ( ! empty( $fields['read_more_link'] ) ) ? $fields['read_more_link'] : rtrim( get_home_url(), '/' ) . '/?s=&orderby=post_date&f[ctype][Post]=3' . $read_more_filter;
 			$fields['read_more_link'] = $read_more_link;
 
-			// Ignore rule, arguments contain suppress_filters.
-			// phpcs:ignore
-			return wp_get_recent_posts( $args );
+			return $args;
 		}
 
 		/**

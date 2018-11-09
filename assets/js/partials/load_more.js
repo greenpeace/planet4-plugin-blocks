@@ -75,6 +75,35 @@ $(document).ready(function () {
     }
   });
 
+  $('.load-more').off('click').on('click', function(e) {
+    e.preventDefault();
+
+    const next_page = parseInt(this.dataset.page) + 1;
+    const total_pages = this.dataset.total;
+    const url = p4_vars.ajaxurl + `?page=${ next_page }`;
+    this.dataset.page = next_page;
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        data: {
+          action:     'load_more',
+          args:       this.dataset,
+          '_wpnonce': $( '#_wpnonce' ).val(),
+        },
+        dataType: 'html'
+    }).done(function ( response ) {
+      // Append the response at the bottom of the results and then show it.
+        $( '.article-list-section' ).append( response );
+    }).fail(function ( jqXHR, textStatus, errorThrown ) {
+      console.log(errorThrown); //eslint-disable-line no-console
+    });
+
+    if (next_page === total_pages) {
+      $(this).fadeOut();
+    }
+  });
+
   // Add click event handler for load more button in Campaign thumbnail blocks.
   $('.btn-load-more-campaigns-click').off('click').on('click', function () {
     var $row = $('.campaign-card-column:hidden', $(this).closest('.container'));
