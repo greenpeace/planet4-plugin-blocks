@@ -282,6 +282,8 @@ For good user experience, please include at least three articles so that spacing
 				$nonce   = filter_input( INPUT_GET, '_wpnonce',  FILTER_SANITIZE_STRING );
 				$page    = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT );
 				$dataset = filter_input_array( INPUT_GET );
+				/** @var \P4_Post[] $recent_posts */
+				$recent_posts = [];
 
 				// CSRF check.
 				if ( wp_verify_nonce( $nonce, 'load_more' ) ) {
@@ -311,6 +313,9 @@ For good user experience, please include at least three articles so that spacing
 
 					if ( $recent_posts ) {
 						foreach ( $recent_posts as $key => $recent_post ) {
+							$recent_post->set_page_types();
+							$recent_post->set_tags();
+
 							Timber::render( [ 'teasers/tease-articles.twig' ], [
 								'key'         => $key,
 								'recent_post' => $recent_post,
