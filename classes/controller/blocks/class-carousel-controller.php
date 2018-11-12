@@ -121,7 +121,6 @@ if ( ! class_exists( 'Carousel_Controller' ) ) {
 			$images_data                  = [];
 
 			$images_dimensions = [];
-			$images[]          = $images_data;
 
 			foreach ( $explode_multiple_image_array as $image_id ) {
 
@@ -145,6 +144,8 @@ if ( ! class_exists( 'Carousel_Controller' ) ) {
 					$images_dimensions[] = $image_data_array[1];
 					$images_dimensions[] = $image_data_array[2];
 				}
+
+				$images[] = $images_data;
 			}
 
 			$carousel_title = ( isset( $fields['carousel_block_title'] ) && ! empty( $fields['carousel_block_title'] ) ) ? $fields['carousel_block_title'] : '';
