@@ -1,3 +1,4 @@
+/* global p4_vars */
 $(document).ready(function () {
   // Block: Content Four Column functionality.
   // Find out how many posts per row are being displayed.
@@ -84,17 +85,17 @@ $(document).ready(function () {
     this.dataset.page = next_page;
 
     $.ajax({
-        url: url,
-        type: 'GET',
-        data: {
-          action:     'load_more',
-          args:       this.dataset,
-          '_wpnonce': $( '#_wpnonce' ).val(),
-        },
-        dataType: 'html'
+      url: url,
+      type: 'GET',
+      data: {
+        action:     'load_more',
+        args:       this.dataset,
+        '_wpnonce': $( '#_wpnonce' ).val(),
+      },
+      dataType: 'html'
     }).done(function ( response ) {
-      // Append the response at the bottom of the results and then show it.
-        $( '.article-list-section' ).append( response );
+    // Append the response at the bottom of the results and then show it.
+      $( '.article-list-section' ).append( response );
     }).fail(function ( jqXHR, textStatus, errorThrown ) {
       console.log(errorThrown); //eslint-disable-line no-console
     });

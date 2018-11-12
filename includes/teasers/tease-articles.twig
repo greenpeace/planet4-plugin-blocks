@@ -1,0 +1,71 @@
+<article class="article-list-item{{ hidden }}" >
+	{% if recent_post.thumbnail_ratio < 1 %}
+		<div class="article-list-item-image">
+			<div class="article-image-holder">
+				<a href="{{ recent_post.permalink }}">
+					{% if ( (key +1 > fields.article_count) and fields.manual_override ) %}
+						<img class="d-flex mr-3 topicwise-article-image" src="" data-src="{{ recent_post.thumbnail }}" alt="{{ recent_post.alt_text }}">
+					{% else %}
+						<img class="d-flex mr-3 topicwise-article-image" src="{{ recent_post.thumbnail }}" alt="{{ recent_post.alt_text }}">
+					{% endif %}
+				</a>
+			</div>
+		</div>
+	{% else %}
+		<div class="article-list-item-image article-list-item-image-max-width">
+			<a href="{{ recent_post.permalink }}">
+				{% if ( (key +1 > fields.article_count) and fields.manual_override ) %}
+					<img class="d-flex mr-3 topicwise-article-image" src="" data-src="{{ recent_post.thumbnail }}" alt="{{ recent_post.alt_text }}">
+				{% else %}
+					<img class="d-flex mr-3 topicwise-article-image" src="{{ recent_post.thumbnail }}" alt="{{ recent_post.alt_text }}">
+				{% endif %}
+			</a>
+		</div>
+	{% endif %}
+
+	<div class="article-list-item-body">
+		{% if ( recent_post.tags or recent_post.page_type ) %}
+			<div class="article-list-item-tags top-page-tags">
+				{% if ( recent_post.page_type ) %}
+					<a class="tag-item tag-item--main page-type" href="{{ fn('get_term_link', recent_post.page_type_id) }}">{{ recent_post.page_type|e('wp_kses_post')|raw }}</a>
+				{% endif %}
+
+				{% if (recent_post.tags) %}
+					<div class="tag-wrap tags">
+						{% for tags_data in recent_post.tags %}
+							<a class="tag-item tag" href="{{ tags_data.href }}">#{{ tags_data.name|e('wp_kses_post')|raw }}</a>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		{% endif %}
+
+		<header>
+			{% if ( recent_post.post_title ) %}
+				<h4 class="article-list-item-headline">
+					<a href="{{ recent_post.permalink }}">{{ recent_post.post_title }}</a>
+				</h4>
+			{% endif %}
+			<p class="article-list-item-meta">
+				{% if ( recent_post.author ) %}
+					<span class="article-list-item-author">{{ __( 'by', 'planet4-blocks' ) }}
+						{% if not ( recent_post.author_override ) %}
+							<a href="{{ recent_post.author_url }}">{{ recent_post.author }}</a>
+						{% else %}
+							{{ recent_post.author }}
+						{% endif %}
+												</span>
+				{% endif %}
+				{% if ( recent_post.post_date ) %}
+					<time class="article-list-item-date" datetime="">{{ recent_post.post_date|date }}</time>
+				{% endif %}
+			</p>
+		</header>
+
+		{% if ( recent_post.post_excerpt ) %}
+			<p class="article-list-item-content">
+				{{ recent_post.post_excerpt|truncate( 30, true )|e('wp_kses_post')|raw }}
+			</p>
+		{% endif %}
+	</div>
+</article>

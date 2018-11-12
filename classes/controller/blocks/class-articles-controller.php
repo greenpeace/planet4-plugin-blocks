@@ -8,6 +8,7 @@
 
 namespace P4BKS\Controllers\Blocks;
 
+use Timber\Timber;
 use Timber\PostQuery;
 
 if ( ! class_exists( 'Articles_Controller' ) ) {
@@ -284,6 +285,8 @@ For good user experience, please include at least three articles so that spacing
 
 				// CSRF check.
 				if ( wp_verify_nonce( $nonce, 'load_more' ) ) {
+					Timber::$locations = P4BKS_INCLUDES_DIR;
+
 					if ( isset( $dataset['args'] ) ) {
 						foreach ( $dataset['args'] as $key => $value ) {
 							if ( false !== strpos( $key, '[', true ) ) {
@@ -298,18 +301,22 @@ For good user experience, please include at least three articles so that spacing
 
 					if ( $page ) {
 						$dataset['args']['paged'] = $page;
-						$pagetype_posts = new PostQuery( $dataset['args'] );
+						$pagetype_posts = new PostQuery( $dataset['args'], 'P4_Post' );
 						foreach ( $pagetype_posts as $pagetype_post ) {
 							$recent_posts[] = $pagetype_post;
 						}
 					} else {
-						$recent_posts = new PostQuery( $dataset['args'] );
+						$recent_posts = new PostQuery( $dataset['args'], 'P4_Post' );
 					}
 
-					$this->view->block( static::BLOCK_NAME, [
-						'recent_posts' => $recent_posts,
-						'doing_ajax'   => true,
-					] );
+					if ( $recent_posts ) {
+						foreach ( $recent_posts as $key => $recent_post ) {
+							Timber::render( [ 'teasers/tease-articles.twig' ], [
+								'key'         => $key,
+								'recent_post' => $recent_post,
+							] );
+						}
+					}
 				}
 				wp_die();
 			}
