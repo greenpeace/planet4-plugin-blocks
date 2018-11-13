@@ -251,7 +251,7 @@ For good user experience, please include at least three articles so that spacing
 			// Ignore rule, arguments contain suppress_filters.
 			// phpcs:ignore$fields['article_count']
 			$all_posts    = wp_get_recent_posts( $args );
-			$total_pages  = 0 !== $fields['article_count'] ? count( (array) $all_posts ) / $fields['article_count'] : 0;
+			$total_pages  = 0 !== $fields['article_count'] ? ceil( count( (array) $all_posts ) / $fields['article_count'] ) : 0;
 			$sliced_posts = array_slice( $all_posts, 0, $fields['article_count'] );
 			$recent_posts = [];
 
@@ -305,7 +305,7 @@ For good user experience, please include at least three articles so that spacing
 					}
 
 					if ( $page ) {
-						$dataset['args']['numberposts'] = 3;
+						$dataset['args']['numberposts'] = $dataset['args']['article_count'];
 						$dataset['args']['paged']       = $page;
 						$pagetype_posts                 = new PostQuery( $dataset['args'], 'P4_Post' );
 						foreach ( $pagetype_posts as $pagetype_post ) {
