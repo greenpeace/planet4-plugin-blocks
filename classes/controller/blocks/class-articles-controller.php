@@ -639,7 +639,7 @@ For good user experience, please include at least three articles so that spacing
 				if ( $post_tags ) {
 					$tag_id_array = [];
 					foreach ( $post_tags as $tag ) {
-						$tag_id_array[]    = $tag->term_id;
+						$tag_id_array[] = $tag->term_id;
 					}
 					$args['tag__in'] = $tag_id_array;
 				}
