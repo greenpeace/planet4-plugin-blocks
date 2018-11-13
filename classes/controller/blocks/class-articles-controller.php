@@ -33,8 +33,8 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 		 */
 		public function load() {
 			parent::load();
-			add_action( 'admin_enqueue_scripts',    [ $this, 'load_admin_assets' ] );
-			add_action( 'wp_ajax_load_more',        [ $this, 'load_more' ] );
+			add_action( 'admin_enqueue_scripts', [ $this, 'load_admin_assets' ] );
+			add_action( 'wp_ajax_load_more', [ $this, 'load_more' ] );
 			add_action( 'wp_ajax_nopriv_load_more', [ $this, 'load_more' ] );
 		}
 
@@ -282,7 +282,7 @@ For good user experience, please include at least three articles so that spacing
 
 			// If this is an ajax call.
 			if ( wp_doing_ajax() ) {
-				$nonce   = filter_input( INPUT_GET, '_wpnonce',  FILTER_SANITIZE_STRING );
+				$nonce   = filter_input( INPUT_GET, '_wpnonce', FILTER_SANITIZE_STRING );
 				$page    = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT );
 				$dataset = filter_input_array( INPUT_GET );
 				/** @var \P4_Post[] $recent_posts */
@@ -320,10 +320,13 @@ For good user experience, please include at least three articles so that spacing
 							$recent_post->set_page_types();
 							$recent_post->set_tags();
 
-							Timber::render( [ 'teasers/tease-articles.twig' ], [
-								'key'         => $key,
-								'recent_post' => $recent_post,
-							] );
+							Timber::render(
+								[ 'teasers/tease-articles.twig' ],
+								[
+									'key'         => $key,
+									'recent_post' => $recent_post,
+								]
+							);
 						}
 					}
 				}
