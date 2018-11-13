@@ -80,7 +80,7 @@ $(document).ready(function () {
     e.preventDefault();
 
     const next_page = parseInt(this.dataset.page) + 1;
-    const total_pages = this.dataset.total;
+    const total_pages = parseInt( this.dataset.total_pages );
     const url = p4_vars.ajaxurl + `?page=${ next_page }`;
     this.dataset.page = next_page;
 

@@ -249,13 +249,15 @@ For good user experience, please include at least three articles so that spacing
 				$args = $this->filter_posts_by_pages_tags( $fields );
 			}
 			// Ignore rule, arguments contain suppress_filters.
-			// phpcs:ignore
-			$all_posts = wp_get_recent_posts( $args );
+			// phpcs:ignore$fields['article_count']
+			$all_posts    = wp_get_recent_posts( $args );
+			$total_pages  = 0 !== $fields['article_count'] ? count( (array) $all_posts ) / $fields['article_count'] : 0;
+			$sliced_posts = array_slice( $all_posts, 0, $fields['article_count'] );
 			$recent_posts = [];
 
 			// Populate posts array for frontend template if results have been returned.
-			if ( false !== $all_posts ) {
-				$recent_posts = $this->populate_post_items( $all_posts );
+			if ( false !== $sliced_posts ) {
+				$recent_posts = $this->populate_post_items( $sliced_posts );
 			}
 
 			$dataset = urldecode( http_build_query( $args, '', ' ' ) );
@@ -264,6 +266,7 @@ For good user experience, please include at least three articles so that spacing
 			$data = [
 				'fields'       => $fields,
 				'recent_posts' => $recent_posts,
+				'total_pages'  => $total_pages,
 				'nonce_action' => 'load_more',
 				'dataset'      => $dataset,
 			];
@@ -302,8 +305,9 @@ For good user experience, please include at least three articles so that spacing
 					}
 
 					if ( $page ) {
-						$dataset['args']['paged'] = $page;
-						$pagetype_posts = new PostQuery( $dataset['args'], 'P4_Post' );
+						$dataset['args']['numberposts'] = 3;
+						$dataset['args']['paged']       = $page;
+						$pagetype_posts                 = new PostQuery( $dataset['args'], 'P4_Post' );
 						foreach ( $pagetype_posts as $pagetype_post ) {
 							$recent_posts[] = $pagetype_post;
 						}
@@ -397,8 +401,7 @@ For good user experience, please include at least three articles so that spacing
 		 */
 		private function filter_posts_by_ids( &$fields ) {
 
-			$fields['read_more_link'] = $fields['read_more_link'] ?? rtrim( get_home_url(), '/' ) . '/?s=&orderby=post_date&f[ctype][Post]=3';
-			$post_ids                 = $fields['posts'] ?? '';
+			$post_ids = $fields['posts'] ?? '';
 
 			// If post_ids is empty or is not a comma separated integers string then make post_ids an empty array.
 			if ( empty( $post_ids ) || ! preg_split( '/^\d+(,\d+)*$/', $post_ids ) ) {
@@ -432,8 +435,6 @@ For good user experience, please include at least three articles so that spacing
 		 */
 		private function filter_posts_by_page_types( &$fields ) {
 
-			$read_more_link = ( ! empty( $fields['read_more_link'] ) ) ? $fields['read_more_link'] : rtrim( get_home_url(), '/' ) . '/?s=&orderby=post_date&f[ctype][Post]=3';
-
 			$exclude_post_id   = (int) ( $fields['exclude_post_id'] ?? '' );
 			$ignore_categories = $fields['ignore_categories'] ?? 'false';
 			$options           = get_option( 'planet4_options' );
@@ -451,41 +452,9 @@ For good user experience, please include at least three articles so that spacing
 			// Get page/post tags.
 			$post_tags = get_the_tags();
 
-			// On other than tag page, read more link should lead to search page-preselected with current page categories/tags.
-			$read_more_filter = '';
-			if ( 'true' !== $ignore_categories ) {
-				if ( $post_categories ) {
-					foreach ( $post_categories as $category ) {
-						// For issue page.
-						if ( $category->parent === (int) $options['issues_parent_category'] ) {
-							$read_more_filter .= '&f[cat][' . $category->name . ']=' . $category->term_id;
-						}
-					}
-				}
-			}
-
-			if ( ! empty( $post_types ) ) {
-				// We cannot filter search for more than one pagetype, so use the last one.
-				$read_more_post_type = end( $post_types );
-				$page_type           = get_term_by( 'slug', wp_unslash( $read_more_post_type ), 'p4-page-type' );
-				$read_more_filter   .= $page_type instanceof \WP_Term ? '&f[ptype][' . $page_type->slug . ']=' . $page_type->term_id : '';
-			}
-
-			if ( '' === $read_more_filter ) {
-				// For normal page and post.
-				if ( $post_tags ) {
-					foreach ( $post_tags as $tag ) {
-						$read_more_filter .= '&f[tag][' . $tag->name . ']=' . $tag->term_id;
-					}
-				}
-			}
-
-			$read_more_link           = $fields['read_more_link'] ?? $read_more_link . $read_more_filter;
-			$fields['read_more_link'] = $read_more_link;
-
 			// Get all posts with arguments.
 			$args = [
-				'numberposts'      => $fields['article_count'],
+				//'numberposts'      => $fields['article_count'],
 				'orderby'          => 'date',
 				'post_status'      => 'publish',
 				'suppress_filters' => false,
@@ -537,7 +506,6 @@ For good user experience, please include at least three articles so that spacing
 		 */
 		private function filter_posts_by_page_types_or_tags( &$fields ) {
 
-			$read_more_link    = ( ! empty( $fields['read_more_link'] ) ) ? $fields['read_more_link'] : rtrim( get_home_url(), '/' ) . '/?s=&orderby=post_date&f[ctype][Post]=3';
 			$ignore_categories = $fields['ignore_categories'] ?? 'false';
 			$options           = get_option( 'planet4_options' );
 
@@ -575,43 +543,9 @@ For good user experience, please include at least three articles so that spacing
 				$tags = get_the_tags();
 			}
 
-			// On other than tag page, read more link should lead to search page-preselected with current page categories/tags.
-			$read_more_filter = '';
-			if ( 'true' !== $ignore_categories ) {
-				if ( $post_categories ) {
-					foreach ( $post_categories as $category ) {
-						// For issue page.
-						if ( $category->parent === (int) $options['issues_parent_category'] ) {
-							$read_more_filter .= '&f[cat][' . $category->name . ']=' . $category->term_id;
-						}
-					}
-				}
-			}
-
-			if ( ! empty( $post_types ) ) {
-				// We cannot filter search for more than one pagetype, so use the last one.
-				$read_more_post_type = end( $post_types );
-				$page_type_data      = get_term_by( 'term_id', $read_more_post_type, 'p4-page-type' );
-				if ( $page_type_data instanceof \WP_Term ) {
-					$read_more_filter .= '&f[ptype][' . $page_type_data->slug . ']=' . $page_type_data->term_id;
-				}
-			}
-
-			if ( '' === $read_more_filter ) {
-				// For normal page and post.
-				if ( $tags ) {
-					foreach ( $tags as $tag ) {
-						$read_more_filter .= '&f[tag][' . $tag->name . ']=' . $tag->term_id;
-					}
-				}
-			}
-
-			$read_more_link           = $fields['read_more_link'] ?? $read_more_link . $read_more_filter;
-			$fields['read_more_link'] = $read_more_link;
-
 			// Get all posts with arguments.
 			$args = [
-				'numberposts'      => $fields['article_count'],
+				//'numberposts'      => $fields['article_count'],
 				'orderby'          => 'date',
 				'post_status'      => 'publish',
 				'suppress_filters' => false,
@@ -659,16 +593,13 @@ For good user experience, please include at least three articles so that spacing
 		 */
 		private function filter_posts_for_tag_page( &$fields ) {
 
-			$tag_id                   = $fields['tags'] ?? '';
-			$tag                      = get_tag( $tag_id );
-			$tag_filter               = $tag instanceof \WP_Term ? '&f[tag][' . $tag->name . ']=' . $tag_id : '';
-			$read_more_link           = ( ! empty( $fields['read_more_link'] ) ) ? $fields['read_more_link'] : rtrim( get_home_url(), '/' ) . '/?s=&orderby=post_date&f[ctype][Post]=3' . $tag_filter;
-			$fields['read_more_link'] = $read_more_link;
+			$tag_id = $fields['tags'] ?? '';
+			$tag    = get_tag( $tag_id );
 
 			if ( $tag instanceof \WP_Term ) {
 				// Get all posts with arguments.
 				$args = [
-					'numberposts'      => $fields['article_count'],
+					//'numberposts'      => $fields['article_count'],
 					'orderby'          => 'date',
 					'post_status'      => 'publish',
 					'suppress_filters' => false,
@@ -693,7 +624,7 @@ For good user experience, please include at least three articles so that spacing
 
 			// Get all posts with arguments.
 			$args = [
-				'numberposts'      => $fields['article_count'],
+				//'numberposts'      => $fields['article_count'],
 				'orderby'          => 'date',
 				'post_status'      => 'publish',
 				'suppress_filters' => false,
@@ -704,21 +635,16 @@ For good user experience, please include at least three articles so that spacing
 
 			// For posts and pages, display related articles based on current post/page tags.
 			$current_post_type = get_post_type();
-			$read_more_filter  = '';
 
 			if ( 'post' === $current_post_type || 'page' === $current_post_type ) {
 				if ( $post_tags ) {
 					$tag_id_array = [];
 					foreach ( $post_tags as $tag ) {
 						$tag_id_array[]    = $tag->term_id;
-						$read_more_filter .= '&f[tag][' . $tag->name . ']=' . $tag->term_id;
 					}
 					$args['tag__in'] = $tag_id_array;
 				}
 			}
-
-			$read_more_link           = ( ! empty( $fields['read_more_link'] ) ) ? $fields['read_more_link'] : rtrim( get_home_url(), '/' ) . '/?s=&orderby=post_date&f[ctype][Post]=3' . $read_more_filter;
-			$fields['read_more_link'] = $read_more_link;
 
 			return $args;
 		}
