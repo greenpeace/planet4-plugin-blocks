@@ -457,7 +457,6 @@ For good user experience, please include at least three articles so that spacing
 
 			// Get all posts with arguments.
 			$args = [
-				//'numberposts'      => $fields['article_count'],
 				'orderby'          => 'date',
 				'post_status'      => 'publish',
 				'suppress_filters' => false,
@@ -548,7 +547,6 @@ For good user experience, please include at least three articles so that spacing
 
 			// Get all posts with arguments.
 			$args = [
-				//'numberposts'      => $fields['article_count'],
 				'orderby'          => 'date',
 				'post_status'      => 'publish',
 				'suppress_filters' => false,
@@ -602,7 +600,6 @@ For good user experience, please include at least three articles so that spacing
 			if ( $tag instanceof \WP_Term ) {
 				// Get all posts with arguments.
 				$args = [
-					//'numberposts'      => $fields['article_count'],
 					'orderby'          => 'date',
 					'post_status'      => 'publish',
 					'suppress_filters' => false,
@@ -627,7 +624,6 @@ For good user experience, please include at least three articles so that spacing
 
 			// Get all posts with arguments.
 			$args = [
-				//'numberposts'      => $fields['article_count'],
 				'orderby'          => 'date',
 				'post_status'      => 'publish',
 				'suppress_filters' => false,
