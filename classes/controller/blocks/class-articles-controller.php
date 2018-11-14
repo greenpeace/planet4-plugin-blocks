@@ -220,7 +220,6 @@ For good user experience, please include at least three articles so that spacing
 			$fields['read_more_text']       = $fields['read_more_text'] ?? $article_button_title;
 			$fields['article_count']        = $fields['article_count'] ?? $article_count;
 			$fields['articles_description'] = $fields['articles_description'] ?? '';
-			$fields['manual_override']      = false; // Define if specific posts where set in backend.
 
 			// Filter p4_page_type keys from fields attributes array.
 			$post_types_temp = $this->filter_post_types( $fields );
@@ -243,8 +242,7 @@ For good user experience, please include at least three articles so that spacing
 						( isset( $fields['tags'] ) && '' !== $fields['tags'] ) ) {
 				$args = $this->filter_posts_by_page_types_or_tags( $fields );
 			} elseif ( isset( $fields['posts'] ) && '' !== $fields['posts'] ) {
-				$args                      = $this->filter_posts_by_ids( $fields );
-				$fields['manual_override'] = true;
+				$args = $this->filter_posts_by_ids( $fields );
 			} else {
 				$args = $this->filter_posts_by_pages_tags( $fields );
 			}

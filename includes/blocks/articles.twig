@@ -15,21 +15,12 @@
 
 					<div class="article-list-section clearfix col-md-12">
 						{% for key,recent_post in recent_posts %}
-							{% if ( (key +1 > fields.article_count) and fields.manual_override ) %}
-								{% set hidden = ' d-none' %}
-							{% else %}
-								{% set hidden = '' %}
-							{% endif %}
 							{% include ['teasers/tease-articles.twig', 'tease-'~post.post_type~'.twig', 'tease.twig'] %}
 						{% endfor %}
 					</div>
 
 					{% if ( total_pages > 1 ) %}
-						{% if (  fields.manual_override ) %}
-							<div class="col-md-12 col-lg-5 col-xl-5 mt-3 load-more-articles-button-div">
-								<a class="btn btn-secondary btn-block btn-load-more-articles-click">{{ fields.read_more_text }}</a>
-							</div>
-						{% elseif ( fields.read_more_link ) %}
+						{% if ( fields.read_more_link ) %}
 							<div class="col-md-12 col-lg-5 col-xl-5 mr-auto mt-3">
 								<a class="btn btn-secondary btn-block"
 								   href="{{ fields.read_more_link }}">{{ fields.read_more_text }}</a>
