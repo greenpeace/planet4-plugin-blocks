@@ -65,7 +65,7 @@ gulp.task('uglify', function(){
 });
 
 gulp.task('watch', function () {
-  livereload.listen();
+  livereload.listen({'port': 35729});
   gulp.watch(path_scss, ['css:lint', 'sass']);
   gulp.watch(path_js, ['js:lint', 'uglify']);
 });
