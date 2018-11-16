@@ -9,7 +9,6 @@
 namespace P4BKS\Controllers\Blocks;
 
 use Timber\Timber;
-use Timber\PostQuery;
 
 if ( ! class_exists( 'Articles_Controller' ) ) {
 
@@ -220,6 +219,7 @@ For good user experience, please include at least three articles so that spacing
 			$fields['read_more_text']       = $fields['read_more_text'] ?? $article_button_title;
 			$fields['article_count']        = $fields['article_count'] ?? $article_count;
 			$fields['articles_description'] = $fields['articles_description'] ?? '';
+			$fields['manual_override']      = false; // Define if specific posts where set in backend.
 
 			// Filter p4_page_type keys from fields attributes array.
 			$post_types_temp = $this->filter_post_types( $fields );
@@ -242,7 +242,8 @@ For good user experience, please include at least three articles so that spacing
 						( isset( $fields['tags'] ) && '' !== $fields['tags'] ) ) {
 				$args = $this->filter_posts_by_page_types_or_tags( $fields );
 			} elseif ( isset( $fields['posts'] ) && '' !== $fields['posts'] ) {
-				$args = $this->filter_posts_by_ids( $fields );
+				$args                      = $this->filter_posts_by_ids( $fields );
+				$fields['manual_override'] = true;
 			} else {
 				$args = $this->filter_posts_by_pages_tags( $fields );
 			}
@@ -300,23 +301,17 @@ For good user experience, please include at least three articles so that spacing
 						}
 						unset( $dataset['args']['page'] );
 						unset( $dataset['args']['total'] );
-					}
 
-					if ( $page ) {
 						$dataset['args']['numberposts'] = $dataset['args']['article_count'];
-						$dataset['args']['paged']       = $page;
-						$pagetype_posts                 = new PostQuery( $dataset['args'], 'P4_Post' );
-						foreach ( $pagetype_posts as $pagetype_post ) {
-							$recent_posts[] = $pagetype_post;
+						if ( $page ) {
+							$dataset['args']['paged'] = $page;
 						}
-					} else {
-						$recent_posts = new PostQuery( $dataset['args'], 'P4_Post' );
 					}
+					$recent_posts = Timber::get_posts( $dataset['args'], 'P4_Post' , true );
 
 					if ( $recent_posts ) {
 						foreach ( $recent_posts as $key => $recent_post ) {
 							$recent_post->set_page_types();
-							$recent_post->set_tags();
 
 							Timber::render(
 								[ 'teasers/tease-articles.twig' ],
@@ -359,6 +354,7 @@ For good user experience, please include at least three articles so that spacing
 						$recent['alt_text']        = get_post_meta( $img_id, '_wp_attachment_image_alt', true );
 					}
 
+					// TODO - Update this method to use P4_Post functionality.
 					$wp_tags = wp_get_post_tags( $recent['ID'] );
 
 					$tags = [];
@@ -367,7 +363,7 @@ For good user experience, please include at least three articles so that spacing
 						foreach ( $wp_tags as $wp_tag ) {
 							$tags_data['name'] = $wp_tag->name;
 							$tags_data['slug'] = $wp_tag->slug;
-							$tags_data['href'] = get_tag_link( $wp_tag );
+							$tags_data['link'] = get_tag_link( $wp_tag );
 							$tags[]            = $tags_data;
 						}
 					}

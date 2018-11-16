@@ -24,16 +24,20 @@
 	{% endif %}
 
 	<div class="article-list-item-body">
-		{% if ( recent_post.tags or recent_post.page_type ) %}
+		{% if ( recent_post.tags or recent_post.page_type or recent_post.page_types ) %}
 			<div class="article-list-item-tags top-page-tags">
 				{% if ( recent_post.page_type ) %}
-					<a class="tag-item tag-item--main page-type" href="{{ fn('get_term_link', recent_post.page_type_id) }}">{{ recent_post.page_type|e('wp_kses_post')|raw }}</a>
+					<a class="tag-item tag-item--main page-type page-type-{{ recent_post.page_type|replace(' ', '_')|lower }}" href="{{ fn( 'get_term_link', recent_post.page_type_id ) }}">{{ recent_post.page_type|e('wp_kses_post')|raw }}</a>
+				{% else %}
+					{% for page_type in recent_post.page_types %}
+						<a class="tag-item tag-item--main page-type page-type-{{ page_type.name|replace(' ', '_')|lower }}" href="{{ page_type.link }}">{{ page_type.name|e('wp_kses_post')|raw }}</a>
+					{% endfor %}
 				{% endif %}
 
 				{% if (recent_post.tags) %}
 					<div class="tag-wrap tags">
-						{% for tags_data in recent_post.tags %}
-							<a class="tag-item tag" href="{{ tags_data.href }}">#{{ tags_data.name|e('wp_kses_post')|raw }}</a>
+						{% for tag in recent_post.tags %}
+							<a class="tag-item tag" href="{{ tag.link }}">#{{ tag.name|e('wp_kses_post')|raw }}</a>
 						{% endfor %}
 					</div>
 				{% endif %}
