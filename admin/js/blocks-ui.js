@@ -419,7 +419,7 @@ p4_blocks = {
       var view = p4_blocks.find_view(collection, 'read_more_link');
       if ('undefined' !== view) {
         if ('undefined' !== changed.value) {
-          var url = encodeURI(changed.value);
+          var url = changed.value;
           if ('undefined' !== url) {
             view.model.set('value', url);
             $("*[id^='shortcode-ui-read_more_link-']").val(url);
