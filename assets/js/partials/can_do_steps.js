@@ -1,8 +1,7 @@
-$(document).ready(function() {
+$(document).ready(function () {
   'use strict';
 
-  $('.can-do-steps .col').hover(function() {
-    const step = $(this).data('id');
-    $('#step-' + step).toggleClass('active');
+  $('.can-do-steps .col').hover(function () {
+    $(this).find('.step-number').toggleClass('active');
   });
 });

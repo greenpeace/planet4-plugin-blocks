@@ -22,7 +22,7 @@
 						{% for i in 1..4 %}
 							{% if ( fields['title_'~i] ) %}
 								<div class="col" data-id="{{ i }}">
-									<span class="step-number" id="step-{{ i }}">
+									<span class="step-number">
 										<span class="step-number-inner">{{ i }}</span>
 									</span>
 								</div>
@@ -99,7 +99,7 @@
 
 								<div class="card">
 									<a class="card-header {{ i>1 ? 'collapsed' : '' }}" role="tab" id="heading-{{ number_to_word }}"
-											data-toggle="collapse" data-target="#collapse-{{ number_to_word }}"
+											data-toggle="collapse" data-target=".card-header:hover + #collapse-{{ number_to_word }}"
 											href="#collapse-{{ number_to_word }}"
 											aria-expanded="true"
 											aria-controls="collapse-{{ number_to_word }}">
