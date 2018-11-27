@@ -1,0 +1,45 @@
+.gallery-grid {
+
+  margin-bottom: 60px;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .column {
+
+    /**
+     * Calculate the height of the cell based on the width
+     * of the viewport divided by 3 and then divide by the
+     * golden ratio to get a nice image
+     */
+    height: calc(100vw / 2 / 1.61803398875);
+    width: 50%;
+    overflow: hidden;
+
+    padding: 0 15px;
+    margin: 15px 0;
+
+    @include medium-and-up {
+      width: 33.33333%;
+      height: calc(100vw / 3 / 1.61803398875);
+    }
+
+    /*
+     * Once we have reached the max width for a row, the width
+     * of the column won't increase, so we don't want to
+     * increase the height of the cell based on the width
+     * of the viewport;
+     */
+    @media (min-width: 1140px) {
+      height: calc(1110px / 3 / 1.61803398875);
+    }
+
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+}
