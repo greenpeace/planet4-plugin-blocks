@@ -138,7 +138,7 @@ function plugin_blocks_report_view() {
 /**
  * Filters array elements on being a shortcake shortcode
  *
- * @param $shortcode
+ * @param string $shortcode The shortcode of the block we are checking.
  * @return bool
  */
 function is_shortcake( $shortcode ) {
@@ -153,13 +153,13 @@ function is_shortcake( $shortcode ) {
  */
 function plugin_blocks_report() {
 	global $wpdb, $shortcode_tags;
-	
-	//	Array filtering on shortcake shortcodes
+
+	// Array filtering on shortcake shortcodes.
 	$blocks = array_filter( array_keys( $shortcode_tags ), 'is_shortcake' );
 
 	// phpcs:disable
 	foreach ( $blocks as $block ) {
-		$block = substr($block, 10);
+		$block = substr( $block, 10 );
 		$sql = 'SELECT ID, post_title
 				FROM `wp_posts` 
 				WHERE post_status = \'publish\' 
