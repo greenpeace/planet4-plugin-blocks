@@ -354,8 +354,8 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 			$query_args = [
 				'post_type'      => 'post',
 				'orderby'        => [
-					'date'       => 'DESC',
-					'title'      => 'ASC',
+					'date'  => 'DESC',
+					'title' => 'ASC',
 				],
 				'no_found_rows'  => true,
 				'posts_per_page' => self::POSTS_LIMIT,
