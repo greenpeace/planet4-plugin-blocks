@@ -275,8 +275,11 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 					'post_type'        => 'page',
 					'post_status'      => 'publish',
 					'post_parent'      => $parent_act_id,
-					'orderby'          => 'menu_order',
-					'order'            => 'ASC',
+					'orderby'          => [
+						'menu_order' => 'ASC',
+						'date'       => 'DESC',
+						'title'      => 'ASC',
+					],
 					'suppress_filters' => false,
 					'numberposts'      => self::POSTS_LIMIT,
 				];
@@ -350,8 +353,10 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 
 			$query_args = [
 				'post_type'      => 'post',
-				'order'          => 'DESC',
-				'orderby'        => 'date',
+				'orderby'        => [
+					'date'       => 'DESC',
+					'title'      => 'ASC',
+				],
 				'no_found_rows'  => true,
 				'posts_per_page' => self::POSTS_LIMIT,
 			];

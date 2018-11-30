@@ -130,8 +130,11 @@ if ( ! class_exists( 'Covers_Controller' ) ) {
 					'post_type'        => 'page',
 					'post_status'      => 'publish',
 					'post_parent'      => $parent_act_id,
-					'orderby'          => 'menu_order',
-					'order'            => 'ASC',
+					'orderby'          => [
+						'menu_order' => 'ASC',
+						'date'       => 'DESC',
+						'title'      => 'ASC',
+					],
 					'suppress_filters' => false,
 					'numberposts'      => P4BKS_COVERS_NUM,
 				];
