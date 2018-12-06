@@ -1,0 +1,31 @@
+.counter-block {
+  text-align: center;
+
+  .counter-target {
+    display: block;
+    font-size: 100px;
+  }
+
+  .progress-container {
+    background-color: #ccc;
+    height: 1em;
+  }
+
+  .progress-bar {
+    background-color: red;
+    height: 100%;
+  }
+
+  .progress-arc {
+    fill: none;
+    stroke-width: 3;
+
+    .background {
+      stroke: #ccc;
+    }
+
+    .foreground {
+      stroke: red;
+    }
+  }
+}
