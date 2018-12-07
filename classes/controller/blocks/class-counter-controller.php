@@ -68,12 +68,12 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Text', 'planet4-blocks-backend' ) .
-								'<p class="field-caption">' . __( 'These placeholders can be used: ', 'planet4-blocks-backend' ) .
-								'<code>%completed%</code>, <code>%target%</code>, <code>%remaining%</code>.</p>',
-					'attr'  => 'text',
-					'type'  => 'text',
-					'meta'  => [
+					'label'       => __( 'Text', 'planet4-blocks-backend' ),
+					'attr'        => 'text',
+					'type'        => 'text',
+					'description' => __( 'These placeholders can be used: ', 'planet4-blocks-backend' ) .
+								'<code>%completed%</code>, <code>%target%</code>, <code>%remaining%</code>',
+					'meta'        => [
 						'placeholder' => __( 'e.g. "signatures collected of %target%"', 'planet4-blocks-backend' ),
 						'data-plugin' => 'planet4-blocks',
 					],
@@ -100,23 +100,19 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $fields, $content, $shortcode_tag ): array {
-			$completed = $fields['completed'];
-			$target    = $fields['target'];
-			$percent   = is_numeric( $completed ) && $target > 0 ? round( $completed / $target * 100 ) : 0;
+			$completed = floatval( $fields['completed'] );
+			$target    = floatval( $fields['target'] );
+
+			$fields['percent'] = $target > 0 ? round( $completed / $target * 100 ) : 0;
+			$fields['text']    = str_replace(
+				// Note: something seems to strip out sensible delimiters like {}, <>, [] and $$ in the WYSIWYG.
+				[ '%completed%', '%target%', '%remaining%' ],
+				[ $completed, $target, $target - $completed ],
+				$fields['text']
+			);
 
 			return [
-				'fields' => [
-					'style'     => $fields['style'],
-					'completed' => $completed,
-					'target'    => $target,
-					'percent'   => $percent,
-					'text'      => str_replace(
-						// Note: something seems to strip out sensible delimiters like {}, <>, [] and $$ in the WYSIWYG.
-						[ '%completed%', '%target%', '%remaining%' ],
-						[ $completed, $target, $target - $completed ],
-						$fields['text']
-					),
-				],
+				'fields' => $fields,
 			];
 		}
 	}
