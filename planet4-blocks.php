@@ -105,7 +105,7 @@ P4BKS\Loader::get_instance(
 		'P4BKS\Controllers\Blocks\HappyPoint_Controller',
 		'P4BKS\Controllers\Blocks\Subheader_Controller',
 		'P4BKS\Controllers\Blocks\SplitTwoColumns_Controller',
-		'P4BKS\Controllers\Blocks\MediaVideo_Controller',
+		'P4BKS\Controllers\Blocks\Media_Controller',
 		'P4BKS\Controllers\Blocks\CarouselHeader_Controller',
 		'P4BKS\Controllers\Blocks\Covers_Controller',
 		'P4BKS\Controllers\Blocks\NewCovers_Controller',
