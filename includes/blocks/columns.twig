@@ -1,0 +1,55 @@
+{% block four_column %}
+	{% if ( fields ) %}
+		<section class="four-column">
+			<div class="container">
+				{% if ( title ) %}
+					<h3>{{ title|e('wp_kses_post')|raw }}</h3>
+				{% endif %}
+				<div class="row">
+					{% for i in 1..4 %}
+						{% if fields['title_'~i] %}
+							<div class="col-md-6 col-lg four-column-wrap">
+								{% set link_url = fields['link_url_'~i] %}
+								{% if ( fields['attachment_'~i] and link_url ) %}
+									<div class="four-column-symbol-container">
+										<div class="four-column-symbol">
+											<a href="{{ link_url|e('esc_url') }}">
+												<img src="{{ fields['attachment_'~i] }}" alt="{{ fields['title_'~i] }}">
+											</a>
+										</div>
+									</div>
+								{% elseif (fields['attachment_'~i]) %}
+									<div class="four-column-symbol-container">
+										<img src="{{ fields['attachment_'~i] }}" alt="{{ fields['title_'~i] }}">
+									</div>
+								{% endif %}
+								<div class="four-column-information">
+									{% if ( fields['title_'~i] and link_url ) %}
+										<h5>
+											<a href="{{ link_url|e('esc_url') }}">{{ fields['title_'~i]|e('wp_kses_post')|raw }}</a>
+										</h5>
+									{% elseif ( fields['title_'~i] ) %}
+										<h5>{{ fields['title_'~i]|e('wp_kses_post')|raw }}</h5>
+									{% endif %}
+									{% if ( fields['description_'~i]  ) %}
+										<p>{{ fields['description_'~i]|e('wp_kses_post')|raw }}</p>
+									{% endif %}
+									{% if ( fields['link_text_'~i] ) %}
+										<a href="{{ link_url|e('esc_url') }}">
+											{{ fields['link_text_'~i]|e('wp_kses_post')|raw }}
+										</a>
+									{% endif %}
+									{% if ( fields['button_text_'~i] and fields['button_link_'~i] ) %}
+										<a href="{{ fields['button_link_'~i]|e('esc_url') }}" class="btn btn-secondary">
+											{{ fields['button_text_'~i]|e('wp_kses_post') }}
+										</a>
+									{% endif %}
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+{% endblock %}
