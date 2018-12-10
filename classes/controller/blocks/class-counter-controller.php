@@ -107,7 +107,7 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 			$fields['text']    = str_replace(
 				// Note: something seems to strip out sensible delimiters like {}, <>, [] and $$ in the WYSIWYG.
 				[ '%completed%', '%target%', '%remaining%' ],
-				[ $completed, $target, $target - $completed ],
+				[ number_format( $completed ), number_format( $target ), number_format( $target - $completed ) ],
 				$fields['text']
 			);
 

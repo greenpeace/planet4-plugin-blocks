@@ -43,9 +43,9 @@ if ( ! class_exists( 'P4_CounterTest' ) ) {
 			];
 			$data   = $this->block->prepare_data( $fields, '', '' );
 
-			$this->assertEquals( $data['fields']['completed'], '' );
-			$this->assertEquals( $data['fields']['target'], '' );
-			$this->assertEquals( $data['fields']['percent'], 0 );
+			$this->assertEquals( '', $data['fields']['completed'] );
+			$this->assertEquals( '', $data['fields']['target'] );
+			$this->assertEquals( 0, $data['fields']['percent'] );
 		}
 
 		/**
@@ -54,13 +54,13 @@ if ( ! class_exists( 'P4_CounterTest' ) ) {
 		public function test_text_substitution() {
 
 			$fields = [
-				'completed' => '9',
-				'target'    => '10',
+				'completed' => '999',
+				'target'    => '1000',
 				'text'      => 'Completed %completed% of %target%, only %remaining% to go!',
 			];
 			$data   = $this->block->prepare_data( $fields, '', '' );
 
-			$this->assertEquals( $data['fields']['text'], 'Completed 9 of 10, only 1 to go!' );
+			$this->assertEquals( 'Completed 999 of 1,000, only 1 to go!', $data['fields']['text'] );
 		}
 
 		/**
@@ -75,7 +75,7 @@ if ( ! class_exists( 'P4_CounterTest' ) ) {
 			];
 			$data   = $this->block->prepare_data( $fields, '', '' );
 
-			$this->assertEquals( $data['fields']['percent'], 55 );
+			$this->assertEquals( 55, $data['fields']['percent'] );
 		}
 
 	}
