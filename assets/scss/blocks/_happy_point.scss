@@ -120,18 +120,21 @@
     }
   }
 
-  img {
-    position: absolute;
-    height: auto;
-    width: 100%;
-    object-fit: cover;
+  > picture {
+    img {
+      position: absolute;
+      height: auto;
+      width: 100%;
+      object-fit: cover;
 
-    @supports (object-fit: cover) {
-      & {
-        height: 500px;
+      @supports (object-fit: cover) {
+        & {
+          height: 500px;
+        }
       }
     }
   }
+
 
   form {
     input, .custom-select {
