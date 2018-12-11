@@ -467,8 +467,7 @@ For good user experience, please include at least three articles so that spacing
 
 			if ( 'true' !== $ignore_categories ) {
 				if ( $category_id_array ) {
-					$category_ids     = implode( ',', $category_id_array );
-					$args['category'] = '( ' . $category_ids . ' )';
+					$args['category__in'] = $category_id_array;
 				}
 			}
 
@@ -557,8 +556,7 @@ For good user experience, please include at least three articles so that spacing
 
 			if ( 'true' !== $ignore_categories ) {
 				if ( $category_id_array ) {
-					$category_ids     = implode( ',', $category_id_array );
-					$args['category'] = '( ' . $category_ids . ' )';
+					$args['category__in'] = $category_id_array;
 				}
 			}
 
