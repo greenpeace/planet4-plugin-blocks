@@ -293,24 +293,24 @@ $slide-transition-speed: 1s;
     }
 
     .action-button {
-      bottom: -1.5em;
+      bottom: 60px;
       left: 0;
       right: 0;
       position: absolute;
       font-family: $roboto;
 
       @include small-and-up {
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      @include medium-and-up {
-        padding-left: 15px;
-        margin-left: 0;
         width: auto;
         bottom: inherit;
         position: inherit;
+        margin-top: 24px;
+      }
+
+      @include medium-and-up {
+        margin-top: 0;
+        padding-left: 15px;
+        margin-left: 0;
+        width: auto;
 
         html[dir="rtl"] & {
           margin-left: auto;
@@ -402,7 +402,7 @@ $slide-transition-speed: 1s;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 35px;
+    bottom: 15px;
     margin: 0;
 
     @include small-and-up {
