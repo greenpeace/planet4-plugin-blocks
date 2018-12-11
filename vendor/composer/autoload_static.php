@@ -50,6 +50,7 @@ class ComposerStaticInit356100170ff2882375cd04c4c76f9df3
         'P4BKS\\Controllers\\Blocks\\HappyPoint_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-happypoint-controller.php',
         'P4BKS\\Controllers\\Blocks\\Media_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-media-controller.php',
         'P4BKS\\Controllers\\Blocks\\NewCovers_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-newcovers-controller.php',
+        'P4BKS\\Controllers\\Blocks\\SocialMedia_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-socialmedia-controller.php',
         'P4BKS\\Controllers\\Blocks\\SplitTwoColumns_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-splittwocolumns-controller.php',
         'P4BKS\\Controllers\\Blocks\\StaticFourColumn_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-staticfourcolumn-controller.php',
         'P4BKS\\Controllers\\Blocks\\SubMenu_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-submenu-controller.php',
