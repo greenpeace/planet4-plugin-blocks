@@ -1,6 +1,6 @@
 <?php
 /**
- * PHP unit test of content four column block
+ * PHP unit test of counter block
  *
  * @package P4BKS
  */
@@ -13,7 +13,7 @@ require_once __DIR__ . '/../p4-unittestcase.php';
 if ( ! class_exists( 'P4_CounterTest' ) ) {
 
 	/**
-	 * Class P4_ContentFourColumnTest
+	 * Class P4_CounterTest
 	 *
 	 * @package Planet4_Plugin_Blocks
 	 */

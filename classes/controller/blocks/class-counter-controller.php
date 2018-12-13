@@ -33,19 +33,19 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 							'value' => 'plain',
 							'label' => __( 'Text only', 'planet4-blocks-backend' ),
 							// TODO get proper image.
-							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/take_action_covers.png' ),
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter_th_text.png' ),
 						],
 						[
 							'value' => 'bar',
 							'label' => __( 'Progress bar', 'planet4-blocks-backend' ),
 							// TODO get proper image.
-							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/campaign_covers.png' ),
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter_th_bar.png' ),
 						],
 						[
 							'value' => 'arc',
 							'label' => __( 'Progress dial', 'planet4-blocks-backend' ),
 							// TODO get proper image.
-							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/content_covers.png' ),
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter_th_arc.png' ),
 						],
 					],
 				],
@@ -81,10 +81,11 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 			];
 
 			$shortcode_ui_args = [
-				'label'     => __( 'Counter', 'planet4-blocks-backend' ),
+				'label'         => __( 'Counter', 'planet4-blocks-backend' ),
 				// TODO make preview thumbnail image.
-				'attrs'     => $fields,
-				'post_type' => P4BKS_ALLOWED_PAGETYPE,
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter_th_arc.png' ) . '" />',
+				'attrs'         => $fields,
+				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
@@ -99,7 +100,7 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 		 *
 		 * @return array The data to be passed in the View.
 		 */
-		public function prepare_data( $fields, $content, $shortcode_tag ): array {
+		public function prepare_data( $fields, $content, $shortcode_tag ) : array {
 			$completed = floatval( $fields['completed'] );
 			$target    = floatval( $fields['target'] );
 
