@@ -35,51 +35,75 @@ if ( ! class_exists( 'P4_MediaTest' ) ) {
 		 * Test YouTube input formats
 		 */
 		public function test_youtube() {
+			add_filter( 'pre_http_request', [ $this, 'mock_oembed_response' ] );
 
 			// Youtube ID.
-			$data = $this->block->prepare_data( [ 'youtube_id' => 'hW9ScsV6QJ0' ], '', '' );
-			$this->assertEquals( 'youtube', $data['fields']['type'] );
-			$this->assertEquals( 'hW9ScsV6QJ0', $data['fields']['media_id'] );
+			$data = $this->block->prepare_data(
+				[
+					'video_title' => 'Foo',
+					'youtube_id'  => 'hW9ScsV6QJ0',
+				],
+				'',
+				''
+			);
+			$this->assertEquals( 'video', $data['fields']['type'] );
+			$this->assertEquals( '__embed__', $data['fields']['embed_html'] );
 
 			// Youtube URL.
-			$data = $this->block->prepare_data( [ 'youtube_id' => 'https://www.youtube.com/watch?v=hW9ScsV6QJ0' ], '', '' );
-			$this->assertEquals( 'youtube', $data['fields']['type'] );
-			$this->assertEquals( 'hW9ScsV6QJ0', $data['fields']['media_id'] );
+			$data = $this->block->prepare_data(
+				[
+					'video_title' => 'Foo',
+					'youtube_id'  => 'https://www.youtube.com/watch?v=hW9ScsV6QJ0',
+				],
+				'',
+				''
+			);
+			$this->assertEquals( 'video', $data['fields']['type'] );
+			$this->assertEquals( '__embed__', $data['fields']['embed_html'] );
 
-			// Youtube short URL.
-			$data = $this->block->prepare_data( [ 'youtube_id' => 'https://youtu.be/hW9ScsV6QJ0' ], '', '' );
-			$this->assertEquals( 'youtube', $data['fields']['type'] );
-			$this->assertEquals( 'hW9ScsV6QJ0', $data['fields']['media_id'] );
+			remove_filter( 'pre_http_request', [ $this, 'mock_oembed_response' ] );
 		}
 
 		/**
 		 * Test Vimeo URL formats
 		 */
 		public function test_vimeo() {
+			add_filter( 'pre_http_request', [ $this, 'mock_oembed_response' ] );
 
 			// Vimeo URL.
-			$data = $this->block->prepare_data( [ 'youtube_id' => 'https://vimeo.com/112010467' ], '', '' );
-			$this->assertEquals( '112010467', $data['fields']['media_id'] );
-			$this->assertEquals( 'vimeo', $data['fields']['type'] );
+			$data = $this->block->prepare_data(
+				[
+					'video_title' => 'Foo',
+					'youtube_id'  => 'https://vimeo.com/112010467',
+				],
+				'',
+				''
+			);
+			$this->assertEquals( 'video', $data['fields']['type'] );
+			$this->assertEquals( '__embed__', $data['fields']['embed_html'] );
 
-			// Vimeo channel URL.
-			$data = $this->block->prepare_data( [ 'youtube_id' => 'https://vimeo.com/channels/staffpicks/303752260' ], '', '' );
-			$this->assertEquals( 'vimeo', $data['fields']['type'] );
-			$this->assertEquals( '303752260', $data['fields']['media_id'] );
+			remove_filter( 'pre_http_request', [ $this, 'mock_oembed_response' ] );
 		}
 
 		/**
 		 * Test SoundCloud URL formats
 		 */
 		public function test_soundcloud() {
-			add_filter( 'pre_http_request', [ $this, 'mock_soundcloud_oembed_request' ] );
+			add_filter( 'pre_http_request', [ $this, 'mock_oembed_response' ] );
 
 			// Soundcloud track URL.
-			$data = $this->block->prepare_data( [ 'youtube_id' => 'https://soundcloud.com/greenpeace-canada/ep31-the-great-bear-rainforest-spirit-bears-scientists-at-the-movies' ], '', '' );
-			$this->assertEquals( 'https://w.soundcloud.com/player/?visual=true&url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F247912018&show_artwork=true', $data['fields']['media_id'] );
-			$this->assertEquals( 'soundcloud', $data['fields']['type'] );
+			$data = $this->block->prepare_data(
+				[
+					'video_title' => 'Foo',
+					'youtube_id'  => 'https://soundcloud.com/greenpeace-canada/ep31-the-great-bear-rainforest-spirit-bears-scientists-at-the-movies',
+				],
+				'',
+				''
+			);
+			$this->assertEquals( 'audio', $data['fields']['type'] );
+			$this->assertEquals( '__embed__', $data['fields']['embed_html'] );
 
-			remove_filter( 'pre_http_request', [ $this, 'mock_soundcloud_oembed_request' ] );
+			remove_filter( 'pre_http_request', [ $this, 'mock_oembed_response' ] );
 		}
 
 		/**
@@ -89,15 +113,15 @@ if ( ! class_exists( 'P4_MediaTest' ) ) {
 
 			$data = $this->block->prepare_data(
 				[
-					'youtube_id'       => 'https://soundcloudexample.org/video.mp4',
-					'video_poster_img' => '',
+					'video_title'      => 'Foo',
+					'youtube_id'       => 'https://example.org/video.mp4',
+					'video_poster_img' => [ '' ],
 				],
 				'',
 				''
 			);
-			$this->assertEquals( 'https://soundcloudexample.org/video.mp4', $data['fields']['media_id'] );
+			$this->assertRegExp( '/<video.*video.mp4/', $data['fields']['embed_html'] );
 			$this->assertEquals( 'video', $data['fields']['type'] );
-			$this->assertEquals( '', $data['fields']['video_poster_img_src'] );
 		}
 
 		/**
@@ -105,23 +129,66 @@ if ( ! class_exists( 'P4_MediaTest' ) ) {
 		 */
 		public function test_audio() {
 			// MP3.
-			$data = $this->block->prepare_data( [ 'youtube_id' => 'https://soundcloudexample.org/sound.mp3' ], '', '' );
-			$this->assertEquals( 'https://soundcloudexample.org/sound.mp3', $data['fields']['media_id'] );
+			$data = $this->block->prepare_data(
+				[
+					'video_title' => 'Foo',
+					'youtube_id'  => 'https://example.org/sound.mp3',
+				],
+				'',
+				''
+			);
+			$this->assertRegExp( '/<audio.*sound.mp3/', $data['fields']['embed_html'] );
 			$this->assertEquals( 'audio', $data['fields']['type'] );
 
 			// WAV.
-			$data = $this->block->prepare_data( [ 'youtube_id' => 'https://soundcloudexample.org/sound.wav' ], '', '' );
-			$this->assertEquals( 'https://soundcloudexample.org/sound.wav', $data['fields']['media_id'] );
+			$data = $this->block->prepare_data(
+				[
+					'video_title' => 'Foo',
+					'youtube_id'  => 'https://example.org/sound.wav',
+				],
+				'',
+				''
+			);
+			$this->assertRegExp( '/<audio.*sound.wav/', $data['fields']['embed_html'] );
 			$this->assertEquals( 'audio', $data['fields']['type'] );
 		}
 
 		/**
-		 * Return saved HTTP response body for Soundcloud oembed request
+		 * Test unrecognised embed URL
+		 */
+		public function test_unrecognized() {
+			add_filter( 'pre_http_request', [ $this, 'mock_oembed_failure' ] );
+
+			$data = $this->block->prepare_data(
+				[
+					'video_title' => 'Foo',
+					'youtube_id'  => 'https://example.com/blarg',
+				],
+				'',
+				''
+			);
+			$this->assertEquals( false, $data['fields']['embed_html'] );
+			$this->assertEquals( 'video', $data['fields']['type'] );
+
+			remove_filter( 'pre_http_request', [ $this, 'mock_oembed_failure' ] );
+		}
+
+		/**
+		 * Return dummy HTTP response body for oembed request
 		 *
 		 * @return array
 		 */
-		public function mock_soundcloud_oembed_request() {
-			return [ 'body' => '{"version":1.0,"type":"rich","provider_name":"SoundCloud","provider_url":"http://soundcloud.com","height":400,"width":"100%","title":"Ep.31: The Great Bear Rainforest, Spirit Bears \u0026 Scientists At the Movies by Greenpeace Podcast","description":"Eduardo Sousa walks us through an incredible, historical agreement on the Pacific Coast of Canada to protect a rainforest the size of Belgium. Bonus: What exactly is a Spirit Bear? \n\nAndrew Norton answers the questions you never knew you had on the new podcast: #CompletelyOptionalKnowledge. This story: What pisses off scientists the most in the movies?\n\nMUSIC @ 01:04 : Skyline by Gentle Fire Studio","thumbnail_url":"http://i1.sndcdn.com/artworks-000147830042-0mifih-t500x500.jpg","html":"\u003Ciframe width=\"100%\" height=\"400\" scrolling=\"no\" frameborder=\"no\" src=\"https://w.soundcloud.com/player/?visual=true\u0026url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F247912018\u0026show_artwork=true\"\u003E\u003C/iframe\u003E","author_name":"Greenpeace Podcast","author_url":"http://soundcloud.com/greenpeace-canada"}' ];
+		public function mock_oembed_response() {
+			return [ 'body' => '{"version":1.0,"type":"rich","provider_name":"Mock","provider_url":"http://example.com","height":400,"width":"100%","title":"Title","description":"","thumbnail_url":"","html":"__embed__","author_name":"","author_url":""}' ];
+		}
+
+		/**
+		 * Return dummy HTTP failure for oembed request
+		 *
+		 * @return WP_Error
+		 */
+		public function mock_oembed_failure() {
+			return new WP_Error( 404, 'Not found' );
 		}
 
 	}

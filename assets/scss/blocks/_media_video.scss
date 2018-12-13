@@ -7,7 +7,8 @@
     }
   }
 
-  .video-embed, .video-player, .audio-embed, .audio-player {
+  .video-embed,
+  .audio-embed {
     margin-bottom: 40px;
 
     @include large-and-up {
@@ -41,6 +42,14 @@
     @include x-large-and-up {
       height: 630px;
     }
+  }
+
+  iframe,
+  .wp-video,
+  .wp-video-shortcode {
+    // media player element specifies width inline and WordPress attributes don't allow percentage
+    width: 100% !important;
+    height: 100% !important;
   }
 
   .container {

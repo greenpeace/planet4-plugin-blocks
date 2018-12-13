@@ -82,51 +82,42 @@ if ( ! class_exists( 'Media_Controller' ) ) {
 			$media_url        = $fields['youtube_id'];
 			$url_path_segment = wp_parse_url( $media_url, PHP_URL_PATH );
 
+			// Assume that a non-URL is a YouTube video ID, for back compat.
 			if ( false === strstr( $media_url, '/' ) ) {
-				// Case 1 : Youtube video id.
-				$fields['type']     = 'youtube';
-				$fields['media_id'] = $media_url;
-			} elseif ( preg_match( '/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/i', $media_url, $matches ) ) {
-				// Case 2 : Youtube video URL.
-				// Extract youtube video ID and use with youtube embed url format.
-				$fields['type']     = 'youtube';
-				$fields['media_id'] = $matches[5];
-			} elseif ( preg_match( '/^(https?)?:\/\/(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/i', $media_url, $matches ) ) {
-				// Case 3 : Vimeo video URL.
-				$fields['type']     = 'vimeo';
-				$fields['media_id'] = $matches[4];
-			} elseif ( preg_match( '/^(https?)?:\/\/soundcloud.com\//i', $media_url ) ) {
-				// Case 4 : Soundcloud track URL.
-				$fields['type'] = 'soundcloud';
+				$media_url = "https://www.youtube.com/watch?v={$media_url}";
+			}
 
-				// URL doesn't contain ID necessary for embed.
-				$oembed_url      = "http://soundcloud.com/oembed?url={$media_url}&format=json";
-				$oembed_response = wp_remote_get( $oembed_url );
-				$oembed_data     = json_decode( $oembed_response['body'] );
-
-				// Extract embed iframe souce URL.
-				preg_match( '/src="([^"]+)"/', $oembed_data->html, $matches );
-				$fields['media_id'] = $matches[1];
+			if ( preg_match( '/^(https?)?:\/\/soundcloud.com\//i', $media_url ) ) {
+				// Soundcloud track URL (differentiated for styling purposes).
+				$type       = 'audio';
+				$embed_html = wp_oembed_get( $media_url );
 			} elseif ( preg_match( '/\.mp4$/', $url_path_segment ) ) {
-				// Case 5 : Bare video URL.
-				$fields['type']     = 'video';
-				$fields['media_id'] = $media_url;
+				// Bare video URL.
+				$type   = 'video';
+				$poster = empty( $fields['video_poster_img'] )
+					? '' : wp_get_attachment_image_src( $fields['video_poster_img'], 'large' );
 
-				if ( ! empty( $fields['video_poster_img'] ) ) {
-					$fields['video_poster_img_src'] = wp_get_attachment_image_src( $fields['video_poster_img'], 'large' );
-				} else {
-					$fields['video_poster_img_src'] = '';
-				}
+				$embed_html = wp_video_shortcode(
+					[
+						'src'    => $media_url,
+						'poster' => $poster[0],
+					]
+				);
 			} elseif ( preg_match( '/\.(mp3|wav|ogg)$/', $url_path_segment ) ) {
-				// Case 6 : Bare audio URL.
-				$fields['type']     = 'audio';
-				$fields['media_id'] = $media_url;
+				// Bare audio URL.
+				$type       = 'audio';
+				$embed_html = wp_audio_shortcode( [ 'src' => $media_url ] );
 			} else {
-				$fields['type'] = 'unknown';
+				$type       = 'video';
+				$embed_html = wp_oembed_get( $media_url );
 			}
 
 			$data = [
-				'fields' => $fields,
+				'fields' => [
+					'title'      => $fields['video_title'],
+					'embed_html' => $embed_html,
+					'type'       => $type,
+				],
 			];
 			return $data;
 		}
