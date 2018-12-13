@@ -95,6 +95,48 @@
           left: -30%;
           height: 430px;
         }
+
+        html[dir="rtl"] & {
+          right: -25%;
+
+          @include large-and-up {
+            right: -15%;
+          }
+
+          @include x-large-and-up {
+            right: -20%;
+            height: 430px;
+          }
+        }
+      }
+    }
+
+    html[dir="rtl"] & {
+      .first-column {
+        margin-right: -50px;
+        margin-left: -130px;
+
+        img {
+          right: 35px;
+        }
+      }
+
+      .second-column {
+        transform: skew(-25deg);
+        border-left: 10px solid $brown-bg;
+        border-right: 10px solid $brown-bg;
+        z-index: 2;
+        width: 110%;
+        right: 0;
+        top: 0;
+        overflow: hidden;
+
+        img {
+          transform: skew(25deg);
+          @include mobile-only {
+            right: -50px;
+          }
+        }
       }
     }
 
