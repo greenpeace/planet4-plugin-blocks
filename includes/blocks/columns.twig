@@ -1,55 +1,50 @@
-{% block four_column %}
+{% block columns %}
 	{% if ( fields ) %}
-		<section class="four-column">
-			<div class="container">
-				{% if ( title ) %}
-					<h3>{{ title|e('wp_kses_post')|raw }}</h3>
-				{% endif %}
-				<div class="row">
-					{% for i in 1..4 %}
-						{% if fields['title_'~i] %}
-							<div class="col-md-6 col-lg four-column-wrap">
-								{% set link_url = fields['link_url_'~i] %}
-								{% if ( fields['attachment_'~i] and link_url ) %}
-									<div class="four-column-symbol-container">
-										<div class="four-column-symbol">
-											<a href="{{ link_url|e('esc_url') }}">
-												<img src="{{ fields['attachment_'~i] }}" alt="{{ fields['title_'~i] }}">
-											</a>
+		{% if fields.columns_block_style == 'tasks' %}
+			{% include 'blocks/columns_tasks.twig' %}
+		{% else %}
+			<section class="columns-block block-style-{{ fields.columns_block_style }}">
+				<div class="container">
+					{% if ( fields.columns_title ) %}
+						<h2>{{ fields.columns_title|e('wp_kses_post')|raw }}</h2>
+					{% endif %}
+					<div class="row">
+						{% for i in 1..4 %}
+							{% if fields['title_'~i] %}
+								<div class="col-md-6 col-lg column-wrap">
+									{% set title = fields['title_'~i] %}
+									{% set attachment = fields['attachment_'~i] %}
+									{% set description = fields['description_'~i] %}
+									{% set link = fields['link_'~i] %}
+									{% set cta_text = fields['cta_text_'~i] %}
+
+									{% if attachment %}
+										<div class="attachment-container">
+											{% if link %}<a href="{{ link|e('esc_url') }}">{% endif %}
+												<img src="{{ attachment }}" alt="{{ title }}">
+											{% if link %}</a>{% endif %}
 										</div>
-									</div>
-								{% elseif (fields['attachment_'~i]) %}
-									<div class="four-column-symbol-container">
-										<img src="{{ fields['attachment_'~i] }}" alt="{{ fields['title_'~i] }}">
-									</div>
-								{% endif %}
-								<div class="four-column-information">
-									{% if ( fields['title_'~i] and link_url ) %}
-										<h5>
-											<a href="{{ link_url|e('esc_url') }}">{{ fields['title_'~i]|e('wp_kses_post')|raw }}</a>
-										</h5>
-									{% elseif ( fields['title_'~i] ) %}
-										<h5>{{ fields['title_'~i]|e('wp_kses_post')|raw }}</h5>
 									{% endif %}
-									{% if ( fields['description_'~i]  ) %}
-										<p>{{ fields['description_'~i]|e('wp_kses_post')|raw }}</p>
+
+									<h3>
+										{% if link %}<a href="{{ link|e('esc_url') }}">{% endif %}
+											{{ title|e('wp_kses_post')|raw }}
+										{% if link %}</a>{% endif %}
+									</h3>
+									{% if description %}
+										<p>{{ description|e('wp_kses_post')|raw }}</p>
 									{% endif %}
-									{% if ( fields['link_text_'~i] ) %}
-										<a href="{{ link_url|e('esc_url') }}">
-											{{ fields['link_text_'~i]|e('wp_kses_post')|raw }}
-										</a>
-									{% endif %}
-									{% if ( fields['button_text_'~i] and fields['button_link_'~i] ) %}
-										<a href="{{ fields['button_link_'~i]|e('esc_url') }}" class="btn btn-secondary">
-											{{ fields['button_text_'~i]|e('wp_kses_post') }}
+									{% if cta_text %}
+										<a href="{{ link|e('esc_url') }}"{% if fields.columns_block_style == 'no_image' %} class="btn btn-secondary"{% endif %}>
+											{{ cta_text|e('wp_kses_post')|raw }}
 										</a>
 									{% endif %}
 								</div>
-							</div>
-						{% endif %}
-					{% endfor %}
+							{% endif %}
+						{% endfor %}
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		{% endif %}
 	{% endif %}
 {% endblock %}

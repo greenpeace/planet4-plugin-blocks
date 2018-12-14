@@ -4,13 +4,13 @@
 
 		<div id="p4bks_tasks_container" class="what-you-can-do-wrapper">
 			<div class="container">
-				{% if ( fields.tasks_title ) %}
-					<h3>{{ fields.tasks_title }}</h3>
+				{% if ( fields['columns_title'] ) %}
+					<h3>{{ fields['columns_title'] }}</h3>
 				{% endif %}
 				<div class="row">
-					{% if ( fields.tasks_description ) %}
+					{% if ( fields['columns_description']) %}
 						<div class="col-md-12">
-							{{ fields.tasks_description|e('wp_kses_post')|raw }}
+							{{ fields['columns_description']|e('wp_kses_post')|raw }}
 						</div>
 					{% endif %}
 				</div>
@@ -56,7 +56,7 @@
 									{% if ( fields['title_'~i] ) %}
 										<div class="col" data-id="{{ i }}">
 											{% if ( fields['attachment_'~i] ) %}
-													<a href="{{ fields['button_link_'~i] }}">
+													<a href="{{ fields['link_'~i] }}">
 														<img src="{{ fields['attachment_'~i] }}" alt=""/>
 													</a>
 											{% endif %}
@@ -68,9 +68,9 @@
 								{% for i in 1..4 %}
 									{% if ( fields['title_'~i] ) %}
 										<div class="col" data-id="{{ i }}">
-											{% if ( fields['button_text_'~i] and fields['button_link_'~i] ) %}
+											{% if ( fields['cta_text_'~i] and fields['link_'~i] ) %}
 												<a class="btn btn-small btn-medium btn-secondary"
-													 href="{{ fields['button_link_'~i] }}">{{ fields['button_text_'~i] }}
+													 href="{{ fields['link_'~i] }}">{{ fields['cta_text_'~i] }}
 												</a>
 											{% endif %}
 										</div>
@@ -121,14 +121,13 @@
 
 											<div class="accordion-image-wrap">
 												{% if ( fields['attachment_'~i] ) %}
-													{% set image_src = fields['attachment_'~i] %}
-													<img src="{{ image_src }}" alt="">
+													<img src="{{ fields['attachment_'~i] }}" alt="">
 												{% endif %}
 											</div>
 
-											{% if ( fields['button_text_'~i] and fields['button_text_'~i] ) %}
+											{% if ( fields['cta_text_'~i] and fields['cta_text_'~i] ) %}
 												<a class="btn btn-small btn-secondary"
-												   href="{{ fields['button_link_'~i] }}">{{ fields['button_text_'~i] }}
+												   href="{{ fields['link_'~i] }}">{{ fields['cta_text_'~i] }}
 												</a>
 											{% endif %}
 

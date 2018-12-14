@@ -1,6 +1,6 @@
 <?php
 /**
- * Tasks block class
+ * Columns block class
  *
  * @package P4BKS
  * @since 0.1.3
@@ -8,10 +8,10 @@
 
 namespace P4BKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Tasks_Controller' ) ) {
+if ( ! class_exists( 'Columns_Controller' ) ) {
 
 	/**
-	 * Class Tasks_Controller
+	 * Class Columns_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
 	 * @since 0.1.3
@@ -21,9 +21,11 @@ if ( ! class_exists( 'Tasks_Controller' ) ) {
 		/** @const string BLOCK_NAME */
 		const BLOCK_NAME = 'columns';
 
+		const TASK_TEMPLATE_NAME = 'tasks';
+
 		const LAYOUT_NO_IMAGE = 'no_image';
-		const LAYOUT_TASKS = 'tasks';
-		const LAYOUT_ICONS = 'icons';
+		const LAYOUT_TASKS    = 'tasks';
+		const LAYOUT_ICONS    = 'icons';
 
 		/**
 		 * Shortcode UI setup for the tasks shortcode.
@@ -37,32 +39,32 @@ if ( ! class_exists( 'Tasks_Controller' ) ) {
 		public function prepare_fields() {
 
 			$fields = [
-                [
-                    'attr'              => 'columns_block_style',
-                    'label'             => __( 'What style of column do you need?', 'planet4-blocks-backend' ),
-                    'description'       => __( 'Change the style of column that you wish to display.', 'planet4-blocks-backend' ),
-                    'type'              => 'p4_radio',
-                    'options'           => [
-                        [
-                            'value' => static::LAYOUT_NO_IMAGE,
-                            'label' => __( 'No Image', 'planet4-blocks-backend' ),
-                            'desc'  => 'Optional headers, description text and buttons in a column display.',
-                            'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/columns-no_images.jpg' ),
-                        ],
-                        [
-                            'value' => static::LAYOUT_TASKS,
-                            'label' => __( 'Tasks', 'planet4-blocks-backend' ),
-                            'desc'  => 'Used on Take Action pages, this display has ordered tasks, and call to action buttons.',
-                            'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/columns-tasks.jpg' ),
-                        ],
-                        [
-                            'value' => static::LAYOUT_ICONS,
-                            'label' => __( 'Icons', 'planet4-blocks-backend' ),
-                            'desc'  => 'For more static content, this display has an icon, header, description and text link.',
-                            'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/columns-icons.jpg' ),
-                        ],
-                    ],
-                ],
+				[
+					'attr'        => 'columns_block_style',
+					'label'       => __( 'What style of column do you need?', 'planet4-blocks-backend' ),
+					'description' => __( 'Change the style of column that you wish to display.', 'planet4-blocks-backend' ),
+					'type'        => 'p4_radio',
+					'options'     => [
+						[
+							'value' => static::LAYOUT_NO_IMAGE,
+							'label' => __( 'No Image', 'planet4-blocks-backend' ),
+							'desc'  => 'Optional headers, description text and buttons in a column display.',
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/columns-no_images.jpg' ),
+						],
+						[
+							'value' => static::LAYOUT_TASKS,
+							'label' => __( 'Tasks', 'planet4-blocks-backend' ),
+							'desc'  => 'Used on Take Action pages, this display has ordered tasks, and call to action buttons.',
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/columns-tasks.jpg' ),
+						],
+						[
+							'value' => static::LAYOUT_ICONS,
+							'label' => __( 'Icons', 'planet4-blocks-backend' ),
+							'desc'  => 'For more static content, this display has an icon, header, description and text link.',
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/columns-icons.jpg' ),
+						],
+					],
+				],
 				[
 					'label' => __( 'Columns Title', 'planet4-blocks-backend' ),
 					'attr'  => 'columns_title',
@@ -121,7 +123,7 @@ if ( ! class_exists( 'Tasks_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
-						'label'       => sprintf( __( 'Select Image for %s column', 'planet4-blocks-backend' ), $i ),
+						'label'       => sprintf( __( 'Column %s: Image', 'planet4-blocks-backend' ), $i ),
 						'attr'        => 'attachment_' . $i,
 						'type'        => 'attachment',
 						'libraryType' => [ 'image' ],
@@ -132,12 +134,12 @@ if ( ! class_exists( 'Tasks_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
-						'label' => sprintf( __( 'Column %s: Button Text', 'planet4-blocks-backend' ), $i ),
-						'attr'  => 'button_text_' . $i,
-						'type'  => 'text',
+						'label' => sprintf( __( 'Column %s: Link', 'planet4-blocks-backend' ), $i ),
+						'attr'  => 'link_' . $i,
+						'type'  => 'url',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter button text of %s column', 'planet4-blocks-backend' ), $i ),
+							'placeholder' => sprintf( __( 'Enter link for column %s', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
 						],
 					];
@@ -145,12 +147,12 @@ if ( ! class_exists( 'Tasks_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
-						'label' => sprintf( __( 'Column %s: Button Link', 'planet4-blocks-backend' ), $i ),
-						'attr'  => 'button_link_' . $i,
-						'type'  => 'url',
+						'label' => sprintf( __( 'Column %s: Call to Action', 'planet4-blocks-backend' ), $i ),
+						'attr'  => 'cta_text_' . $i,
+						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter button link of %s task/column', 'planet4-blocks-backend' ), $i ),
+							'placeholder' => sprintf( __( 'Enter text of button/link for column %s', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
 						],
 					];
@@ -180,27 +182,28 @@ if ( ! class_exists( 'Tasks_Controller' ) ) {
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
 			$attributes_temp = [
-				'columns_block_style'       => $attributes['columns_block_style'] ?? static::LAYOUT_NO_IMAGE,
+				'columns_block_style' => $attributes['columns_block_style'] ?? static::LAYOUT_NO_IMAGE,
 				'columns_title'       => $attributes['columns_title'] ?? '',
 				'columns_description' => $attributes['columns_description'] ?? '',
 			];
 
 			for ( $i = 1; $i < 5; $i++ ) {
-				$temp_array      = [
+				$column_atts     = [
 					"title_$i"       => $attributes[ "title_$i" ] ?? '',
 					"description_$i" => $attributes[ "description_$i" ] ?? '',
 					"attachment_$i"  => $attributes[ "attachment_$i" ] ?? '',
-					"button_text_$i" => $attributes[ "button_text_$i" ] ?? '',
-					"button_link_$i" => $attributes[ "button_link_$i" ] ?? '',
+					"cta_text_$i"    => $attributes[ "cta_text_$i" ] ?? '',
+					"link_$i"        => $attributes[ "link_$i" ] ?? '',
 				];
-				$attributes_temp = array_merge( $attributes_temp, $temp_array );
+				$attributes_temp = array_merge( $attributes_temp, $column_atts );
 			}
 			$attributes = shortcode_atts( $attributes_temp, $attributes, $shortcode_tag );
 
+			$image_size = static::LAYOUT_TASKS === $attributes['columns_block_style'] ? 'medium' : 'thumbnail';
 			for ( $i = 1; $i < 5; $i++ ) {
-				$temp_array = wp_get_attachment_image_src( $attributes[ "attachment_$i" ], 'medium' );
-				if ( false !== $temp_array && ! empty( $temp_array ) ) {
-					$attributes[ "attachment_$i" ] = $temp_array[0];
+				list( $src ) = wp_get_attachment_image_src( $attributes[ "attachment_$i" ], $image_size );
+				if ( $src ) {
+					$attributes[ "attachment_$i" ] = $src;
 				}
 			}
 
