@@ -154,6 +154,7 @@ if ( ! class_exists( 'HappyPoint_Controller' ) ) {
 			$fields['engaging_network_id'] = $options['engaging_network_form_id'] ?? '';
 			$fields['opacity']             = $opacity;
 			$fields['default_image']       = get_bloginfo( 'template_directory' ) . '/images/happy-point-block-bg.jpg';
+			$fields['background_alt']      = get_post_meta( $fields['background'], '_wp_attachment_image_alt', true ) ?? 'Happy point background image';
 
 			$data = [
 				'fields' => $fields,
