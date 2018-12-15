@@ -32,19 +32,16 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 						[
 							'value' => 'plain',
 							'label' => __( 'Text only', 'planet4-blocks-backend' ),
-							// TODO get proper image.
 							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter_th_text.png' ),
 						],
 						[
 							'value' => 'bar',
 							'label' => __( 'Progress bar', 'planet4-blocks-backend' ),
-							// TODO get proper image.
 							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter_th_bar.png' ),
 						],
 						[
 							'value' => 'arc',
 							'label' => __( 'Progress dial', 'planet4-blocks-backend' ),
-							// TODO get proper image.
 							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter_th_arc.png' ),
 						],
 					],
@@ -83,7 +80,7 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 			$shortcode_ui_args = [
 				'label'         => __( 'Counter', 'planet4-blocks-backend' ),
 				// TODO make preview thumbnail image.
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter_th_arc.png' ) . '" />',
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
 			];
