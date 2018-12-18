@@ -222,7 +222,7 @@ if ( ! class_exists( 'Loader' ) ) {
 			$css_blocks_creation = filectime( P4BKS_PLUGIN_DIR . '/style.css' );
 			$js_blocks_creation  = filectime( P4BKS_PLUGIN_DIR . '/main.js' );
 			// Add master theme's main css as dependency for blocks css.
-			wp_enqueue_style( 'plugin-blocks', plugins_url( P4BKS_PLUGIN_DIRNAME ) . '/style.css', [ 'bootstrap', 'slick', 'fork-awesome', 'parent-style' ], $css_blocks_creation );
+			wp_enqueue_style( 'plugin-blocks', plugins_url( P4BKS_PLUGIN_DIRNAME ) . '/style.css', [ 'bootstrap', 'slick', 'parent-style' ], $css_blocks_creation );
 			// Add master theme's main js as dependency for blocks js.
 			wp_register_script( 'plugin-blocks', plugins_url( P4BKS_PLUGIN_DIRNAME ) . '/main.js', [ 'jquery', 'main', 'slick', 'popperjs', 'bootstrapjs', 'hammer' ], $js_blocks_creation, true );
 			wp_localize_script(
