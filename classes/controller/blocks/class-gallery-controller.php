@@ -1,9 +1,8 @@
 <?php
 /**
- * Carousel block class
+ * Gallery block class
  *
  * @package P4BKS
- * @since 0.1.11
  */
 
 namespace P4BKS\Controllers\Blocks;
@@ -11,22 +10,21 @@ namespace P4BKS\Controllers\Blocks;
 if ( ! class_exists( 'Gallery_Controller' ) ) {
 
 	/**
-	 * Class Carousel_Controller
+	 * Class Gallery_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
-	 * @since 0.1.11
 	 */
 	class Gallery_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
 		const BLOCK_NAME = 'gallery';
 
-		const LAYOUT_SLIDER = 1;
+		const LAYOUT_SLIDER        = 1;
 		const LAYOUT_THREE_COLUMNS = 2;
-		const LAYOUT_GRID = 3;
+		const LAYOUT_GRID          = 3;
 
 		/**
-		 * Override this method in order to give your block its own name.
+		 * Hooks all the needed functions to load the block.
 		 */
 		public function load() {
 			add_filter( 'attachment_fields_to_edit', [ $this, 'add_image_attachment_fields_to_edit' ], null, 2 );
@@ -74,38 +72,36 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 		}
 
 		/**
-		 * Shortcode UI setup for the carousel shortcode.
-		 *
-		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
+		 * Shortcode UI setup for the gallery shortcode.
 		 */
 		public function prepare_fields() {
 			$fields = [
-                [
-                    'attr'              => 'gallery_block_style',
-                    'label'             => __( 'What style of gallery do you need?', 'planet4-blocks-backend' ),
-                    'description'       => __( 'Change the style of gallery that you wish to display your images in.', 'planet4-blocks-backend' ),
-                    'type'              => 'p4_radio',
-                    'options'           => [
-                        [
-                            'value' => static::LAYOUT_SLIDER,
-                            'label' => __( 'Slider', 'planet4-blocks-backend' ),
-                            'desc'  => 'The slider is a carousel of images. For more than 5 images, consider using a grid.',
-                            'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/gallery-slider.jpg' ),
-                        ],
-                        [
-                            'value' => static::LAYOUT_THREE_COLUMNS,
-                            'label' => __( '3 Column', 'planet4-blocks-backend' ),
-                            'desc'  => 'The 3 column image display is great for accentuating text, and telling a visual story.',
-                            'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/gallery-3-column.jpg' ),
-                        ],
-                        [
-                            'value' => static::LAYOUT_GRID,
-                            'label' => __( 'Grid', 'planet4-blocks-backend' ),
-                            'desc'  => 'The grid shows thumbnails of lots of images. Good to use when showing lots of activity.',
-                            'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/gallery-grid.jpg' ),
-                        ],
-                    ],
-                ],
+				[
+					'attr'        => 'gallery_block_style',
+					'label'       => __( 'What style of gallery do you need?', 'planet4-blocks-backend' ),
+					'description' => __( 'Change the style of gallery that you wish to display your images in.', 'planet4-blocks-backend' ),
+					'type'        => 'p4_radio',
+					'options'     => [
+						[
+							'value' => static::LAYOUT_SLIDER,
+							'label' => __( 'Slider', 'planet4-blocks-backend' ),
+							'desc'  => 'The slider is a carousel of images. For more than 5 images, consider using a grid.',
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/gallery-slider.jpg' ),
+						],
+						[
+							'value' => static::LAYOUT_THREE_COLUMNS,
+							'label' => __( '3 Column', 'planet4-blocks-backend' ),
+							'desc'  => 'The 3 column image display is great for accentuating text, and telling a visual story.',
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/gallery-3-column.jpg' ),
+						],
+						[
+							'value' => static::LAYOUT_GRID,
+							'label' => __( 'Grid', 'planet4-blocks-backend' ),
+							'desc'  => 'The grid shows thumbnails of lots of images. Good to use when showing lots of activity.',
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/gallery-grid.jpg' ),
+						],
+					],
+				],
 				[
 					'label' => __( 'Title', 'planet4-blocks-backend' ),
 					'attr'  => 'gallery_block_title',
@@ -114,24 +110,25 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 						'placeholder' => __( 'Enter title', 'planet4-blocks-backend' ),
 					],
 				],
-                [
-                    'label' => __( 'Description', 'planet4-blocks-backend' ),
-                    'attr'  => 'gallery_block_description',
-                    'type'  => 'textarea',
-                    'meta'  => [
-                        'placeholder' => __( 'Enter description for this gallery', 'planet4-blocks-backend' ),
-                        'data-plugin' => 'planet4-blocks',
-                    ],
-                ],
-                [
-                    'label'       => __( 'Select Gallery Images', 'planet4-blocks-backend' ),
-                    'attr'        => 'multiple_image',
-                    'type'        => 'attachment',
-                    'libraryType' => [ 'image' ],
-                    'multiple'    => true,
-                    'addButton'   => 'Select Gallery Images',
-                    'frameTitle'  => 'Select Gallery Images',
-                ],
+				[
+					'label' => __( 'Description', 'planet4-blocks-backend' ),
+					'attr'  => 'gallery_block_description',
+					'type'  => 'textarea',
+					'meta'  => [
+						'placeholder' => __( 'Enter description for this gallery', 'planet4-blocks-backend' ),
+						'data-plugin' => 'planet4-blocks',
+					],
+				],
+				[
+					'label'       => __( 'Select Gallery Images', 'planet4-blocks-backend' ),
+					'description' => 'Select images in the order you want them to appear.',
+					'attr'        => 'multiple_image',
+					'type'        => 'attachment',
+					'libraryType' => [ 'image' ],
+					'multiple'    => true,
+					'addButton'   => 'Select Gallery Images',
+					'frameTitle'  => 'Select Gallery Images',
+				],
 			];
 
 			// Define the Shortcode UI arguments.
@@ -156,48 +153,54 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 		 */
 		public function prepare_data( $fields, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			$explode_multiple_image_array = explode( ',', $fields['multiple_image'] );
-			$images_data                  = [];
+			$gallery_style       = $fields['gallery_block_style'] ?? static::LAYOUT_SLIDER;
+			$gallery_title       = $fields['gallery_block_title'] ?? '';
+			$gallery_description = $fields['gallery_block_description'] ?? '';
 
+			$exploded_images   = explode( ',', $fields['multiple_image'] );
 			$images_dimensions = [];
+			$image_sizes       = [
+				self::LAYOUT_SLIDER        => 'retina-large',
+				self::LAYOUT_THREE_COLUMNS => 'medium-large',
+				self::LAYOUT_GRID          => 'medium',
+			];
 
-			foreach ( $explode_multiple_image_array as $image_id ) {
+			foreach ( $exploded_images as $image_id ) {
+				$image_size = $image_sizes[ $fields['gallery_block_style'] ];
+				$image_size = $image_sizes[ $fields['gallery_block_style'] ];
+				$image_data = [];
 
-				$image_data_array            = wp_get_attachment_image_src( $image_id, 'retina-large' );
-				$images_data['image_src']    = $image_data_array[0];
-				$images_data['image_srcset'] = wp_get_attachment_image_srcset( $image_id, 'retina-large', wp_get_attachment_metadata( $image_id ) );
-				$images_data['image_sizes']  = wp_calculate_image_sizes( 'retina-large', null, null, $image_id );
-				$images_data['alt_text']     = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
-				$attachment_fields           = get_post_custom( $image_id );
-				$images_data['credits']      = '';
+				$image_data_array           = wp_get_attachment_image_src( $image_id, $image_size );
+				$image_data['image_src']    = $image_data_array[0];
+				$image_data['image_srcset'] = wp_get_attachment_image_srcset( $image_id, $image_size, wp_get_attachment_metadata( $image_id ) );
+				$image_data['image_sizes']  = wp_calculate_image_sizes( $image_size, null, null, $image_id );
+				$image_data['alt_text']     = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
+				$image_data['caption']      = wp_get_attachment_caption( $image_id );
+				$attachment_fields          = get_post_custom( $image_id );
+				$image_data['credits']      = '';
 				if ( isset( $attachment_fields['_credit_text'][0] ) && ! empty( $attachment_fields['_credit_text'][0] ) ) {
-					$images_data['credits'] = $attachment_fields['_credit_text'][0];
+					$image_data['credits'] = $attachment_fields['_credit_text'][0];
 					if ( ! is_numeric( strpos( $attachment_fields['_credit_text'][0], '©' ) ) ) {
-						$images_data['credits'] = '© ' . $images_data['credits'];
+						$image_data['credits'] = '© ' . $image_data['credits'];
 					}
 				}
-
-				$images_data['caption'] = wp_get_attachment_caption( $image_id );
 
 				if ( count( (array) $image_data_array ) >= 3 ) {
 					$images_dimensions[] = $image_data_array[1];
 					$images_dimensions[] = $image_data_array[2];
 				}
 
-				$images[] = $images_data;
+				$images[] = $image_data;
 			}
 
-            $gallery_style = ( isset( $fields['gallery_block_style'] ) && ! empty( $fields['gallery_block_style'] ) ) ? $fields['gallery_block_style'] : static::LAYOUT_SLIDER;
-			$gallery_title = ( isset( $fields['gallery_block_title'] ) && ! empty( $fields['gallery_block_title'] ) ) ? $fields['gallery_block_title'] : '';
-			$gallery_description = ( isset( $fields['gallery_block_description'] ) && ! empty( $fields['gallery_block_description'] ) ) ? $fields['gallery_block_description'] : '';
-			$gallery_id    = $this->generate_hash( $gallery_title, $images_dimensions );
+			$gallery_id = $this->generate_hash( $gallery_title, $images_dimensions );
 
 			$data = [
-				'id'     => $gallery_id,
-				'layout' => $gallery_style,
-				'title'  => $gallery_title,
-				'description'  => $gallery_description,
-				'images' => $images,
+				'id'          => $gallery_id,
+				'layout'      => $gallery_style,
+				'title'       => $gallery_title,
+				'description' => $gallery_description,
+				'images'      => $images,
 			];
 
 			return $data;
@@ -212,7 +215,7 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 		 * @return string A string that will be the carousel's id.
 		 */
 		private function generate_hash( $title, $dimensions ) {
-			$temp_string      = $title . '_' . implode( '_', $dimensions );
+			$temp_string     = $title . '_' . implode( '_', $dimensions );
 			$gallery_id_hash = hash( 'crc32', $temp_string );
 
 			return 'gallery_' . $gallery_id_hash;

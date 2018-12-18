@@ -97,13 +97,17 @@
 
 		<div class="gallery-grid">
 
+			{% if ( title ) %}
+				<h2 class="page-section-header">{{ title }}</h2>
+			{% endif %}
+
 			<div class="container">
 
-				<div class="row">
+				<div class="grid-row">
 
 					{% for single_image in images %}
 
-						<div class="column">
+						<div class="grid-item">
 							<img src="{{ single_image.image_src }}" alt="{{ single_image.alt_text }}">
 						</div>
 
