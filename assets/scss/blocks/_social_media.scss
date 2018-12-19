@@ -1,13 +1,16 @@
 .social-media-block {
+  z-index: 3;
+
   .social-media-embed {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 
-    @include large-and-up {
-      margin-bottom: 60px;
-    }
+    &.aligncenter {
+      text-align: center;
 
-    @include x-large-and-up {
-      margin-bottom: 80px;
+      > * {
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
     }
   }
 }

@@ -26,6 +26,34 @@ if ( ! class_exists( 'SocialMedia_Controller' ) ) {
 		];
 
 		/**
+		 * Hooks all the needed functions to load the block.
+		 */
+		public function load() {
+			parent::load();
+			add_action( 'admin_enqueue_scripts', [ $this, 'load_admin_assets' ] );
+		}
+
+
+		/**
+		 * Load assets only on the admin pages of the plugin.
+		 *
+		 * @param string $hook The slug name of the current admin page.
+		 */
+		public function load_admin_assets( $hook ) {
+
+			if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
+				return;
+			}
+
+			add_action(
+				'enqueue_shortcode_ui',
+				function () {
+					wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'js/blocks-ui.js', [ 'shortcode-ui' ], '0.2', true );
+				}
+			);
+		}
+
+		/**
 		 * Shortcode UI setup
 		 */
 		public function prepare_fields() {
@@ -38,6 +66,12 @@ if ( ! class_exists( 'SocialMedia_Controller' ) ) {
 					'meta'        => [
 						'placeholder' => __( 'Enter title', 'planet4-blocks-backend' ),
 					],
+				],
+				[
+					'label'       => __( 'Description', 'planet4-blocks-backend' ),
+					'attr'        => 'description',
+					'type'        => 'textarea',
+					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
 				],
 				[
 					'label'       => __( 'Embed type', 'planet4-blocks-backend' ),
@@ -53,7 +87,26 @@ if ( ! class_exists( 'SocialMedia_Controller' ) ) {
 							'label' => __( 'Facebook page', 'planet4-blocks-backend' ),
 						],
 					],
-					'description' => __( 'Use oEmbed for the following types of social media<br>- Twitter: tweet, profile, list, collection, likes, moment<br>- Facebook: post, activity, photo, video, media, question, note<br>- Instagram: image', 'planet4-blocks-backend' ),
+					'description' => __( 'Select oEmbed for the following types of social media<br>- Twitter: tweet, profile, list, collection, likes, moment<br>- Facebook: post, activity, photo, video, media, question, note<br>- Instagram: image', 'planet4-blocks-backend' ),
+				],
+				[
+					'label'   => __( 'What Facebook page content would you like to display?', 'planet4-blocks-backend' ),
+					'attr'    => 'facebook_page_tab',
+					'type'    => 'select',
+					'options' => [
+						[
+							'value' => 'timeline',
+							'label' => __( 'Timeline', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'events',
+							'label' => __( 'Events', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'messages',
+							'label' => __( 'Message input', 'planet4-blocks-backend' ),
+						],
+					],
 				],
 				[
 					'label' => __( 'URL', 'planet4-blocks-backend' ),
@@ -61,6 +114,30 @@ if ( ! class_exists( 'SocialMedia_Controller' ) ) {
 					'type'  => 'text',
 					'meta'  => [
 						'placeholder' => __( 'Enter URL', 'planet4-blocks-backend' ),
+					],
+				],
+				[
+					'label'   => __( 'Alignment', 'planet4-blocks-backend' ),
+					'attr'    => 'alignment_class',
+					'type'    => 'select',
+					'options' => [
+						[
+							'value' => '',
+							'label' => __( 'None', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'alignleft',
+							'label' => __( 'Left', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'aligncenter',
+							'label' => __( 'Center', 'planet4-blocks-backend' ),
+						],
+
+						[
+							'value' => 'alignright',
+							'label' => __( 'Right', 'planet4-blocks-backend' ),
+						],
 					],
 				],
 			];
@@ -86,12 +163,17 @@ if ( ! class_exists( 'SocialMedia_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $fields, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
-			$title      = $fields['title'] ?? '';
-			$embed_type = $fields['embed_type'] ?? 'oembed';
-			$url        = $fields['social_media_url'] ?? '';
+			$title             = $fields['title'] ?? '';
+			$description       = $fields['description'] ?? '';
+			$url               = $fields['social_media_url'] ?? '';
+			$embed_type        = $fields['embed_type'] ?? 'oembed';
+			$alignment_class   = $fields['alignment_class'] ?? '';
+			$facebook_page_tab = $fields['facebook_page_tab'] ?? 'timeline';
 
 			$data = [
-				'title' => $title,
+				'title'           => $title,
+				'description'     => $description,
+				'alignment_class' => $alignment_class,
 			];
 
 			if ( $url ) {
@@ -104,6 +186,7 @@ if ( ! class_exists( 'SocialMedia_Controller' ) ) {
 					}
 				} elseif ( 'facebook_page' === $embed_type ) {
 					$data['facebook_page_url'] = $url;
+					$data['facebook_page_tab'] = $facebook_page_tab;
 				}
 			}
 
