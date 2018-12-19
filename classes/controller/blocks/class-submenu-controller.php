@@ -126,33 +126,36 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 						'data-plugin' => 'planet4-blocks',
 					],
 				],
-				[
-					'attr'    => 'heading1',
-					'label'   => __( '<b>Submenu item #1</b>', 'planet4-blocks-backend' ),
-					'type'    => 'p4_select',
-					'options' => $heading_options,
-				],
-				[
-					'attr'  => 'link1',
-					// phpcs:ignore WordPress.WP.I18n.MissingArgDomain
-					'label' => __( 'Link' ),
-					'type'  => 'p4_checkbox',
-					'value' => 'false',
-				],
-				[
-					'attr'    => 'heading2',
-					'label'   => __( '<b>Submenu item #2</b>', 'planet4-blocks-backend' ),
-					'type'    => 'p4_select',
-					'options' => $heading_options,
-				],
-				[
-					'attr'  => 'link2',
-					// phpcs:ignore WordPress.WP.I18n.MissingArgDomain
-					'label' => __( 'Link' ),
-					'type'  => 'p4_checkbox',
-					'value' => 'false',
-				],
 			];
+
+			foreach ( range( 1, 3 ) as $i ) {
+				array_push(
+					$fields,
+					[
+						'attr'    => "heading$i",
+						'label'   => __( '<b>Submenu item</b>', 'planet4-blocks-backend' ),
+						'type'    => 'p4_select',
+						'options' => $heading_options,
+					],
+					[
+						'attr'  => "link$i",
+						// phpcs:ignore WordPress.WP.I18n.MissingArgDomain
+						'label' => __( 'Link' ),
+						'type'  => 'p4_checkbox',
+						'value' => 'false',
+					],
+					[
+						'attr'    => "style$i",
+						'label'   => __( 'List style', 'planet4-blocks-backend' ),
+						'type'    => 'p4_select',
+						'options' => [
+							'none'   => __( 'None', 'planet4-blocks-backend' ),
+							'bullet' => __( 'Bullet', 'planet4-blocks-backend' ),
+							'number' => __( 'Number', 'planet4-blocks-backend' ),
+						],
+					]
+				);
+			}
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
@@ -178,13 +181,8 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 
 			global $post;
 
-			$content  = $post->post_content;
-			$heading1 = $attributes['heading1'];
-			$heading2 = $attributes['heading2'];
-			$link1    = $attributes['link1'] ?? 'false';
-			$link2    = $attributes['link2'] ?? 'false';
-
-			$menu = $this->parse_post_content( $content, [ $heading1, $heading2 ], [ $link1, $link2 ] );
+			$content = $post->post_content;
+			$menu    = $this->parse_post_content( $content, $attributes );
 
 			wp_enqueue_script( 'submenu', P4BKS_ADMIN_DIR . 'js/submenu.js', [ 'jquery' ], '0.1', true );
 			wp_localize_script( 'submenu', 'submenu', $menu );
@@ -198,58 +196,97 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 		}
 
 		/**
-		 * Parse post's content to extract headings.
+		 * Parse post's content to extract headings and build menu
 		 *
-		 * @param string $content   Post content.
-		 * @param array  $headings  Headings attributes.
-		 * @param array  $links     Links attributes.
+		 * @param string $content Post content.
+		 * @param array  $attributes Submenu block attributes.
 		 *
 		 * @return array
 		 */
-		private function parse_post_content( $content, $headings, $links ) {
+		private function parse_post_content( $content, $attributes ) {
 
-			$heading1 = $headings[0];
-			$heading2 = $headings[1];
-			$link1    = $links[0];
-			$link2    = $links[1];
-			$menu     = [];
+			// make array of heading level metadata keyed by tag name.
+			$heading_meta  = [];
+			$nesting_level = 1;
+			foreach ( range( 1, 3 ) as $heading_num ) {
+				$heading = $this->heading_attributes( $heading_num, $attributes );
+				if ( ! $heading ) {
+					continue;
+				}
+				$heading['level']                = $nesting_level;
+				$heading_meta[ $heading['tag'] ] = $heading;
 
-			if ( $this->is_allowed_tag( $heading1 ) ) {
+				// increase the nesting level only for linked headings.
+				if ( $heading['link'] ) {
+					$nesting_level ++;
+				}
+			}
 
-				$heading_tag = "h$heading1";
-				$dom         = new \DOMDocument();
-				$dom->loadHtml( $content );
-				$xpath = new \DOMXPath( $dom );
+			$dom = new \DOMDocument();
+			$dom->loadHtml( $content );
+			$xpath = new \DOMXPath( $dom );
 
-				// Find the heading with tag name $heading_tag.
-				$nodes = $xpath->query( "//$heading_tag" );
+			// get all the headings as an array of nodes.
+			$xpath_expression = '//' . join( ' | //', array_keys( $heading_meta ) );
+			$node_list        = $xpath->query( $xpath_expression );
+			$nodes            = iterator_to_array( $node_list );
 
-				foreach ( $nodes as $node ) {
+			// process nodes array recursively to build menu.
+			return $this->build_menu( 1, $nodes, $heading_meta );
+		}
 
-					$parent = $this->create_menu_object( $node, $heading_tag, $link1 );
-					$menu[] = $parent;
+		/**
+		 * Extract shortcode attributes for given heading level.
+		 *
+		 * @param int   $menu_level Level 1, 2 or 3.
+		 * @param array $attributes Shortcode UI attributes.
+		 *
+		 * @return array|null associative array or null if menu level is not configured
+		 */
+		private function heading_attributes( $menu_level, $attributes ) {
+			return empty( $attributes[ 'heading' . $menu_level ] )
+				? null
+				: [
+					'heading' => $attributes[ 'heading' . $menu_level ],
+					'tag'     => 'h' . $attributes[ 'heading' . $menu_level ],
+					'link'    => ! empty( $attributes[ 'link' . $menu_level ] )
+						? filter_var( $attributes[ 'link' . $menu_level ], FILTER_VALIDATE_BOOLEAN )
+						: false,
+					'style'   => $attributes[ 'style' . $menu_level ] ?? 'none',
+				];
+		}
 
-					if ( ! $this->is_allowed_tag( $heading2 ) ) {
-						continue;
+		/**
+		 * Process flat array of DOM nodes to build up menu tree structure.
+		 *
+		 * @param int   $current_level Current menu nesting level.
+		 * @param array $nodes Array of heading DOM nodes, passed by reference.
+		 * @param array $heading_meta Metadata about each heading tag.
+		 *
+		 * @return array menu tree structure
+		 */
+		private function build_menu( $current_level, &$nodes, $heading_meta ) {
+			$menu = [];
+
+			// phpcs:ignore Squiz.PHP.DisallowSizeFunctionsInLoops.Found
+			while ( count( $nodes ) ) {
+				// consider first node in the list but don't remove it yet.
+				$node = $nodes[0];
+
+				$heading = $heading_meta[ $node->nodeName ];
+				if ( $heading['level'] > $current_level ) {
+					if ( count( $menu ) === 0 ) {
+						// we're skipping over a heading level so create an empty node.
+						$menu[] = new \stdClass();
 					}
+					$menu[ count( $menu ) - 1 ]->children = $this->build_menu( $current_level + 1, $nodes, $heading_meta );
+				} elseif ( $heading['level'] < $current_level ) {
+					return $menu;
+				} else {
+					$menu[] = $this->create_menu_item( $node->nodeValue, $heading['link'], $heading['style'] );
 
-					$heading_tag2 = "h$heading2";
-					// phpcs:ignore
-					while ( $node = $node->nextSibling ) {
-
-						// When we get to the last element, stop.
-						// phpcs:ignore WordPress.NamingConventions.ValidVariableName
-						if ( $node->nodeName === $heading_tag2 ) {
-							$child              = $this->create_menu_object( $node, $heading_tag2, $link2 );
-							$parent->children[] = $child;
-						}
-
-						// Break if we get to next heading.
-						// phpcs:ignore WordPress.NamingConventions.ValidVariableName
-						if ( $node->nodeName === $heading_tag ) {
-							break;
-						}
-					}
+					// remove node from list only once it has been added to the menu.
+					array_shift( $nodes );
 				}
 			}
 
@@ -259,41 +296,22 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 		/**
 		 * Create a std object representing a node/heading.
 		 *
-		 * @param \DOMElement $node  Dom element.
-		 * @param string      $type  Type/name of the tag.
-		 * @param string      $link  String that defines if the menu object should contain an anchor tag.
+		 * @param string $text Heading/menu item text.
+		 * @param bool   $link True if this menu item should link to the heading.
+		 * @param string $style List style for menu item.
 		 *
 		 * @return \stdClass
 		 */
-		private function create_menu_object( \DOMElement $node, $type, $link ) {
-			$node_value         = $node->nodeValue;
+		private function create_menu_item( $text, $link, $style ) {
 			$menu_obj           = new \stdClass();
-			$menu_obj->text     = utf8_decode( $node_value );
-			$menu_obj->hash     = md5( $node_value );
-			$menu_obj->type     = $type;
-			$menu_obj->link     = filter_var( $link, FILTER_VALIDATE_BOOLEAN );
-			$menu_obj->id       = sanitize_title( iconv( 'UTF-8', 'ISO-8859-1//TRANSLIT', utf8_decode( $node_value ) ) );
+			$menu_obj->text     = utf8_decode( $text );
+			$menu_obj->hash     = md5( $text );
+			$menu_obj->style    = $style;
+			$menu_obj->link     = $link;
+			$menu_obj->id       = sanitize_title( iconv( 'UTF-8', 'ISO-8859-1//TRANSLIT', utf8_decode( $text ) ) );
 			$menu_obj->children = [];
 
 			return $menu_obj;
-		}
-
-		/**
-		 * Decide if header should be allowed.
-		 *
-		 * @param string $heading Heading's number.
-		 *
-		 * @return bool
-		 */
-		private function is_allowed_tag( $heading ) {
-			$valid_heading_values = [ 1, 2, 3, 4, 5, 6 ];
-			$heading              = intval( $heading );
-			if ( ! empty( $heading ) &&
-				in_array( $heading, $valid_heading_values, true ) ) {
-				return true;
-			}
-
-			return false;
 		}
 	}
 }

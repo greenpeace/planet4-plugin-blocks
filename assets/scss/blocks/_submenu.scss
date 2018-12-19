@@ -11,34 +11,43 @@
     font-family: $roboto;
   }
 
-  .submenu-menu {
+  > ul {
     display: flex;
     flex-wrap: wrap;
 
-    ul.submenu-item {
+    > li {
       flex-basis: 100%;
+      margin: 0.75em 0;
       padding: 0;
 
       @include large-and-up {
         flex-basis: 50%;
       }
     }
+  }
 
-    a {
-      color: $menu-blue;
-      text-decoration: none;
-    }
+  a {
+    color: $menu-blue;
+    text-decoration: none;
+  }
 
-    ul {
-      margin: 0.75em 0;
+  ul,
+  ul ul,
+  ul ul ul {
+    margin: 0.75em 0;
+    list-style: none;
+    padding: 0 16px;
+  }
+
+  li {
+    padding-left: 16px;
+
+    &.list-style-none {
       list-style: none;
-      padding: 0 16px;
     }
 
-    li {
-      padding-left: 16px;
-
-      .submenu-link::before {
+    &.list-style-bullet {
+      &::before {
         content: "";
         background-image: url("images/icons/angle-right.svg");
         background-position: 50% 50%;
@@ -62,11 +71,15 @@
         }
       }
     }
+
+    &.list-style-number {
+      list-style: decimal;
+    }
   }
 
   &.submenu-short {
-    .submenu-menu {
-      ul.submenu-item {
+    > ul {
+      > li {
         flex-basis: 100%;
 
         @include large-and-up {
@@ -89,8 +102,8 @@
       margin: 0 0 15px 15px;
     }
 
-    .submenu-menu {
-      ul.submenu-item {
+    > ul {
+      > li {
         flex-basis: 100%;
 
         @include large-and-up {
