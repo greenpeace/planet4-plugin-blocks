@@ -116,6 +116,7 @@ P4BKS\Loader::get_instance(
 		'P4BKS\Controllers\Blocks\TakeActionBoxout_Controller',
 		'P4BKS\Controllers\Blocks\SubMenu_Controller',
 		'P4BKS\Controllers\Blocks\Cookies_Controller',
+		'P4BKS\Controllers\Blocks\SocialMedia_Controller',
 		'P4BKS\Controllers\Blocks\Counter_Controller',
 	],
 	'P4BKS\Views\View'
