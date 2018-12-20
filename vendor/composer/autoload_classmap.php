@@ -20,6 +20,7 @@ return array(
     'P4BKS\\Controllers\\Blocks\\HappyPoint_Controller' => $baseDir . '/classes/controller/blocks/class-happypoint-controller.php',
     'P4BKS\\Controllers\\Blocks\\Media_Controller' => $baseDir . '/classes/controller/blocks/class-media-controller.php',
     'P4BKS\\Controllers\\Blocks\\NewCovers_Controller' => $baseDir . '/classes/controller/blocks/class-newcovers-controller.php',
+    'P4BKS\\Controllers\\Blocks\\SocialMedia_Controller' => $baseDir . '/classes/controller/blocks/class-socialmedia-controller.php',
     'P4BKS\\Controllers\\Blocks\\SplitTwoColumns_Controller' => $baseDir . '/classes/controller/blocks/class-splittwocolumns-controller.php',
     'P4BKS\\Controllers\\Blocks\\StaticFourColumn_Controller' => $baseDir . '/classes/controller/blocks/class-staticfourcolumn-controller.php',
     'P4BKS\\Controllers\\Blocks\\SubMenu_Controller' => $baseDir . '/classes/controller/blocks/class-submenu-controller.php',
