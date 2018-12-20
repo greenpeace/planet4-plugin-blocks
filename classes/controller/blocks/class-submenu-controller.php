@@ -206,20 +206,14 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 		private function parse_post_content( $content, $attributes ) {
 
 			// make array of heading level metadata keyed by tag name.
-			$heading_meta  = [];
-			$nesting_level = 1;
+			$heading_meta = [];
 			foreach ( range( 1, 3 ) as $heading_num ) {
 				$heading = $this->heading_attributes( $heading_num, $attributes );
 				if ( ! $heading ) {
-					continue;
+					break;
 				}
-				$heading['level']                = $nesting_level;
+				$heading['level']                = $heading_num;
 				$heading_meta[ $heading['tag'] ] = $heading;
-
-				// increase the nesting level only for linked headings.
-				if ( $heading['link'] ) {
-					$nesting_level ++;
-				}
 			}
 
 			$dom = new \DOMDocument();
@@ -249,9 +243,7 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 				: [
 					'heading' => $attributes[ 'heading' . $menu_level ],
 					'tag'     => 'h' . $attributes[ 'heading' . $menu_level ],
-					'link'    => ! empty( $attributes[ 'link' . $menu_level ] )
-						? filter_var( $attributes[ 'link' . $menu_level ], FILTER_VALIDATE_BOOLEAN )
-						: false,
+					'link'    => $attributes[ 'link' . $menu_level ] ?? false,
 					'style'   => $attributes[ 'style' . $menu_level ] ?? 'none',
 				];
 		}
@@ -296,9 +288,9 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 		/**
 		 * Create a std object representing a node/heading.
 		 *
-		 * @param string $text Heading/menu item text.
-		 * @param bool   $link True if this menu item should link to the heading.
-		 * @param string $style List style for menu item.
+		 * @param string      $text Heading/menu item text.
+		 * @param bool|string $link True if this menu item should link to the heading.
+		 * @param string      $style List style for menu item.
 		 *
 		 * @return \stdClass
 		 */
@@ -307,7 +299,7 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 			$menu_obj->text     = utf8_decode( $text );
 			$menu_obj->hash     = md5( $text );
 			$menu_obj->style    = $style;
-			$menu_obj->link     = $link;
+			$menu_obj->link     = filter_var( $link, FILTER_VALIDATE_BOOLEAN );
 			$menu_obj->id       = sanitize_title( iconv( 'UTF-8', 'ISO-8859-1//TRANSLIT', utf8_decode( $text ) ) );
 			$menu_obj->children = [];
 

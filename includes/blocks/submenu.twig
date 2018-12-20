@@ -2,6 +2,7 @@
 
 	{% if ( menu ) %}
 		<div class="submenu-block
+			{% if style == 1 %}submenu-long{% endif %}
 			{% if style == 2 %}submenu-short{% endif %}
 			{% if style == 3 %}submenu-sidebar{% endif %}">
 
@@ -20,11 +21,11 @@
 {% macro show_menu(items) %}
 	<ul>
 		{% for item in items %}
-			<li class="list-style-{{ item.style }}">
+			<li class="list-style-{{ item.style }} {% if item.link %}list-link{% else %}list-heading{% endif %}">
 				{% if ( item.link ) %}
 					<a href="#{{ item.id }}" class="icon-link submenu-link">{{ item.text }}</a>
 				{% else %}
-					{{ item.text }}
+					<span class="submenu-heading">{{ item.text }}</span>
 				{% endif %}
 				{% if ( item.children ) %}
 					{{ _self.show_menu(item.children) }}
