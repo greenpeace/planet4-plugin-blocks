@@ -148,12 +148,14 @@ if ( ! class_exists( 'HappyPoint_Controller' ) ) {
 			$p4_happy_point_bg_image       = $options['happy_point_bg_image_id'] ?? '';
 			$image_id                      = '' !== $fields['background'] ? $fields['background'] : $p4_happy_point_bg_image;
 			$img_meta                      = wp_get_attachment_metadata( $image_id );
+			$image_alt                     = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 			$fields['background_src']      = wp_get_attachment_image_src( $image_id, 'retina-large' );
 			$fields['background_srcset']   = wp_get_attachment_image_srcset( $image_id, 'retina-large', $img_meta );
 			$fields['background_sizes']    = wp_calculate_image_sizes( 'retina-large', null, null, $image_id );
 			$fields['engaging_network_id'] = $options['engaging_network_form_id'] ?? '';
 			$fields['opacity']             = $opacity;
 			$fields['default_image']       = get_bloginfo( 'template_directory' ) . '/images/happy-point-block-bg.jpg';
+			$fields['background_alt']      = empty( $image_alt ) ? __( 'Background image', 'planet4-blocks' ) : $image_alt;
 
 			$data = [
 				'fields' => $fields,
