@@ -178,7 +178,7 @@ jQuery(function ($) {
 });
 
 // Define a p4_blocks object that holds functions used during rendering backend blocks' views.
-p4_blocks = {
+var p4_blocks = {
 
   hooks_defined: false,
 
@@ -186,8 +186,10 @@ p4_blocks = {
     switch (block_name) {
       case 'articles':
         p4_blocks.articles.initialize_view_fields();
+        break;
       case 'newcovers':
         p4_blocks.newcovers.initialize_view_fields();
+        break;
     }
   },
 
@@ -453,6 +455,40 @@ p4_blocks = {
         }
       }
     }
+  },
+
+  social_media: {
+    initialize_fields: function () {
+      p4_blocks.social_media.set_default_embed_type();
+      p4_blocks.social_media.toggle_facebook_page_options();
+    },
+
+    embed_type_change_hook: function () {
+      p4_blocks.social_media.toggle_facebook_page_options();
+    },
+
+    /**
+     * If no value, default to oembed
+     */
+    set_default_embed_type: function() {
+      if (!$('input[name=embed_type]:checked').val()) {
+        $('input[name=embed_type][value=oembed]').prop('checked', true);
+      }
+    },
+
+    /**
+     * Show/hide Facebook page options according to embed_type
+     */
+    toggle_facebook_page_options: function() {
+      var $facebook_page_options = $('.shortcode-ui-attribute-facebook_page_tab');
+      var embed_type = $('input[name=embed_type]:checked').val();
+
+      if ('facebook_page' === embed_type) {
+        $facebook_page_options.show();
+      } else {
+        $facebook_page_options.hide();
+      }
+    }
   }
 };
 
@@ -460,7 +496,7 @@ p4_blocks = {
 if ('undefined' !== typeof (wp.shortcake)) {
 
   /**
-   * Attach shortcake hooks for articles block fields.
+   * Attach shortcake hooks for block fields.
    */
   function attach_hooks() {
 
@@ -475,7 +511,12 @@ if ('undefined' !== typeof (wp.shortcake)) {
       wp.shortcake.hooks.addAction('shortcake_articles.post_types', p4_blocks.articles.page_types_change_hook);
       wp.shortcake.hooks.addAction('shortcake_articles.tags', p4_blocks.articles.page_types_change_hook);
       wp.shortcake.hooks.addAction('shortcake_articles.read_more_link', p4_blocks.articles.read_more_change_hook);
+
+      wp.shortcake.hooks.addAction('shortcake_social_media.embed_type', p4_blocks.social_media.embed_type_change_hook);
     }
+
+    // There may be multiple social media embeds on a page; fields need initializing separately for each one.
+    p4_blocks.social_media.initialize_fields();
   }
 
   // Attach hooks when rendering a new p4 block.

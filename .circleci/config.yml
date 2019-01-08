@@ -25,6 +25,8 @@ job-references:
       sudo -E docker-php-ext-install mysqli
       sudo sh -c "printf '\ndeb http://ftp.us.debian.org/debian sid main\n' >> /etc/apt/sources.list"
       sudo apt-get update && sudo apt-get install mysql-client-5.7
+      sudo apt-get update && sudo apt-get install npm
+      sudo npm install -g stylelint eslint
 
   php_job: &php_job
     environment:
@@ -51,6 +53,14 @@ job-references:
             bash bin/install-wp-tests.sh wordpress_test root '' 127.0.0.1 latest
             phpunit --log-junit /tmp/test-results/phpunit/$CIRCLE_STAGE.xml
             WP_MULTISITE=1 phpunit --log-junit /tmp/test-results/phpunit-multisite/$CIRCLE_STAGE.xml
+      - run:
+          name: "styelint"
+          when: always
+          command: stylelint $HOME/project/assets/scss/**/*.scss $HOME/project/assets/css/*.css
+      - run:
+          name: "eslint"
+          when: always
+          command: eslint $HOME/project/assets/js/**/*.js
       - store_test_results:
           path: /tmp/test-results
 

@@ -1,0 +1,56 @@
+.counter-block {
+  text-align: center;
+  font-family: $sans-serif;
+  margin-bottom: 40px;
+
+  @include large-and-up {
+    margin-bottom: 60px;
+  }
+
+  @include x-large-and-up {
+    margin-bottom: 80px;
+  }
+
+  .counter-target {
+    display: block;
+
+    line-height: 1;
+    font-size: 30px;
+    letter-spacing: 0.05em;
+    margin-bottom: 15px;
+  }
+
+  &.counter-style-plain {
+    .counter-target {
+      font-size: 50px;
+      margin-bottom: 20px;
+    }
+  }
+
+  .progress-container {
+    background-color: $grey-20;
+    height: 30px;
+    margin-bottom: 15px;
+  }
+
+  .progress-bar {
+    background-color: $dark-blue;
+    height: 100%;
+  }
+
+  .progress-arc {
+    max-width: 225px;
+    margin-bottom: -20px;
+
+    fill: none;
+    stroke-width: 3;
+
+    .background {
+      stroke: $grey-20;
+    }
+
+    .foreground {
+      stroke: $dark-blue;
+    }
+  }
+}
