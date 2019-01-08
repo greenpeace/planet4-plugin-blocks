@@ -22,15 +22,17 @@
 				<div class="row limit-visibility">
 					{% for cover in covers %}
 						<div class="col-lg-4 col-md-6 cover-card-column">
-							<div class="cover-card card-one" style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)), url({{ cover.image }});">
-								{% if ( cover.tags ) %}
-									{% for tag in cover.tags %}
-										<a class="cover-card-tag"
-											 href="{{ tag.href|e('esc_url') }}">#{{ tag.name|e('wp_kses_post')|raw }}</a>
-									{% endfor %}
-								{% endif %}
-								<h2 class="cover-card-heading">{{ cover.title|e('wp_kses_post')|raw }}</h2>
-								<p>{{ cover.excerpt|truncate(20)|e('wp_kses_post')|raw }}</p>
+							<div class="cover-card card-one" style="background-image: url({{ cover.image }});">
+								<div class="cover-card-content">
+									{% if ( cover.tags ) %}
+										{% for tag in cover.tags %}
+											<a class="cover-card-tag"
+											   href="{{ tag.href|e('esc_url') }}">#{{ tag.name|e('wp_kses_post')|raw }}</a>
+										{% endfor %}
+									{% endif %}
+									<h2 class="cover-card-heading">{{ cover.title|e('wp_kses_post')|raw }}</h2>
+									<p>{{ cover.excerpt|truncate(20)|e('wp_kses_post')|raw }}</p>
+								</div>
 								<a class="btn btn-action btn-block cover-card-btn"
 									 href="{{ cover.button_link|e('esc_url') }}">{{ cover.button_text }}</a>
 							</div>

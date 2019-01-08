@@ -1,6 +1,6 @@
 <?php
 /**
- * MediaVideo block class
+ * Media block class
  *
  * @package P4BKS
  * @since 0.1.13
@@ -8,21 +8,21 @@
 
 namespace P4BKS\Controllers\Blocks;
 
-if ( ! class_exists( 'MediaVideo_Controller' ) ) {
+if ( ! class_exists( 'Media_Controller' ) ) {
 
 	/**
-	 * Class MediaVideo_Controller
+	 * Class Media_Controller
 	 *
 	 * @package P4BKS\Controllers\Blocks
 	 * @since 0.1.13
 	 */
-	class MediaVideo_Controller extends Controller {
+	class Media_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
 		const BLOCK_NAME = 'media_video';
 
 		/**
-		 * Shortcode UI setup for the Mediavideo shortcode.
+		 * Shortcode UI setup for the Media shortcode.
 		 *
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
 		 *
@@ -31,7 +31,7 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 		public function prepare_fields() {
 			$fields = [
 				[
-					'label' => __( 'Video Title', 'planet4-blocks-backend' ),
+					'label' => __( 'Media Title', 'planet4-blocks-backend' ),
 					'attr'  => 'video_title',
 					'type'  => 'text',
 					'meta'  => [
@@ -39,12 +39,12 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 					],
 				],
 				[
-					'label'       => __( 'Video URL/Youtube ID', 'planet4-blocks-backend' ),
+					'label'       => __( 'Media URL/ID', 'planet4-blocks-backend' ),
 					'attr'        => 'youtube_id',
 					'type'        => 'text',
-					'description' => __( 'Allowed media type in Video URL - video/mp4.', 'planet4-blocks-backend' ),
+					'description' => __( 'Can be a YouTube, Vimeo or Soundcloud URL or an mp4, mp3 or wav file URL.', 'planet4-blocks-backend' ),
 					'meta'        => [
-						'placeholder' => __( 'Enter Video URL or Youtube video id', 'planet4-blocks-backend' ),
+						'placeholder' => __( 'Enter URL', 'planet4-blocks-backend' ),
 					],
 				],
 				[
@@ -54,13 +54,13 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 					'libraryType' => [ 'image' ],
 					'addButton'   => __( 'Select Video Poster Image', 'planet4-blocks-backend' ),
 					'frameTitle'  => __( 'Select Video Poster Image', 'planet4-blocks-backend' ),
-					'description' => __( 'Applicable for non youtube video only.', 'planet4-blocks-backend' ),
+					'description' => __( 'Applicable for .mp4 video URLs only.', 'planet4-blocks-backend' ),
 				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Video block', 'planet4-blocks-backend' ),
+				'label'         => __( 'Media block', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/media_video.jpg' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
@@ -79,32 +79,45 @@ if ( ! class_exists( 'MediaVideo_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $fields, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
+			$media_url        = $fields['youtube_id'];
+			$url_path_segment = wp_parse_url( $media_url, PHP_URL_PATH );
 
-			// Check video url.
-			if ( false === strstr( $fields['youtube_id'], '/' ) ) {
-				// Case 1 : Youtube video id.
-				$fields['is_youtube_video'] = true;
+			// Assume that a non-URL is a YouTube video ID, for back compat.
+			if ( false === strstr( $media_url, '/' ) ) {
+				$media_url = "https://www.youtube.com/watch?v={$media_url}";
+			}
+
+			if ( preg_match( '/^(https?)?:\/\/soundcloud.com\//i', $media_url ) ) {
+				// Soundcloud track URL (differentiated for styling purposes).
+				$type       = 'audio';
+				$embed_html = wp_oembed_get( $media_url );
+			} elseif ( preg_match( '/\.mp4$/', $url_path_segment ) ) {
+				// Bare video URL.
+				$type   = 'video';
+				$poster = empty( $fields['video_poster_img'] )
+					? '' : wp_get_attachment_image_src( $fields['video_poster_img'], 'large' );
+
+				$embed_html = wp_video_shortcode(
+					[
+						'src'    => $media_url,
+						'poster' => $poster[0],
+					]
+				);
+			} elseif ( preg_match( '/\.(mp3|wav|ogg)$/', $url_path_segment ) ) {
+				// Bare audio URL.
+				$type       = 'audio';
+				$embed_html = wp_audio_shortcode( [ 'src' => $media_url ] );
 			} else {
-				if ( preg_match( '/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/i', $fields['youtube_id'], $matches ) ) {
-					// Case 2 : Youtube video URL.
-					if ( isset( $matches[5] ) && $matches[5] ) {
-						// Extract youtube video ID and use with youtube embed url format.
-						$fields['youtube_id']       = $matches[5];
-						$fields['is_youtube_video'] = true;
-					}
-				} else {
-					// Case 3 : Video URL other than Youtube (GP media library video etc).
-					$fields['is_youtube_video'] = false;
-					if ( $fields['video_poster_img'] ) {
-						$fields['video_poster_img_src'] = wp_get_attachment_image_src( $fields['video_poster_img'], 'large' );
-					} else {
-						$fields['video_poster_img_src'] = '';
-					}
-				}
+				$type       = 'video';
+				$embed_html = wp_oembed_get( $media_url );
 			}
 
 			$data = [
-				'fields' => $fields,
+				'fields' => [
+					'title'      => $fields['video_title'],
+					'embed_html' => $embed_html,
+					'type'       => $type,
+				],
 			];
 			return $data;
 		}

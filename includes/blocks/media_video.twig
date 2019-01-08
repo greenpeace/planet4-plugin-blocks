@@ -1,23 +1,16 @@
 {% block media_video %}
 	{% if ( fields ) %}
-		<div class="video-block">
-			{% if ( fields.video_title ) %}
-				<h2 class="page-section-header">{{ fields.video_title }}</h2>
+		<div class="media-block">
+			{% if ( fields.title ) %}
+				<h2 class="page-section-header">{{ fields.title }}</h2>
 			{% endif %}
-			{% if ( fields.youtube_id ) %}
-				<div class="video-section">
-					{% if ( fields.is_youtube_video ) %}
-						<iframe id="ytplayer" type="text/html" width="100%" height="100%"
-						src="https://www.youtube.com/embed/{{ fields.youtube_id }}?autoplay=0&rel=0"
-						frameborder="0" allowfullscreen>
-						</iframe>
-					{% else %}
-						<video {% if ( fields.video_poster_img_src ) %}poster="{{ fields.video_poster_img_src.0 }}"{% endif %} controls="controls" width="100%" height="100%">
-							<source src="{{ fields.youtube_id }}" type="video/mp4" />
-						</video>
-					{% endif %}
-				</div>
-			{% endif %}
+			<div class="{{ fields.type }}-embed">
+				{% if fields.embed_html %}
+					{{ fields.embed_html | raw }}
+				{% else %}
+					<p>Failed to embed media.</p>
+				{% endif %}
+			</div>
 		</div>
 	{% endif %}
 {% endblock %}
