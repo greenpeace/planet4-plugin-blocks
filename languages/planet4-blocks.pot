@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Planet4 - Blocks\n"
-"POT-Creation-Date: 2018-06-07 11:24+0000\n"
+"POT-Creation-Date: 2018-12-20 10:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,45 +22,52 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Language: "
 
-#: classes/controller/blocks/class-covers-controllers.php:142
+#: classes/controller/blocks/class-covers-controller.php:153
+#: classes/controller/blocks/class-newcovers-controller.php:475
 msgid "Take Action"
 msgstr ""
 
-#: classes/controller/blocks/class-covers-controllers.php:165
-msgid "Load More ..."
+#: classes/controller/blocks/class-covers-controller.php:176
+#: classes/controller/blocks/class-newcovers-controller.php:499
+#: includes/blocks/campaign_thumbnail.twig:47
+#: includes/blocks/content_four_column.twig:64
+#: includes/blocks/content_four_column.twig:72
+msgid "Load More"
 msgstr ""
 
-#: classes/controller/blocks/class-splittwocolumns-controller.php:240
+#: classes/controller/blocks/class-splittwocolumns-controller.php:277
 msgid "Learn more about this issue"
 msgstr ""
 
-#: classes/controller/blocks/class-splittwocolumns-controller.php:261
+#: classes/controller/blocks/class-splittwocolumns-controller.php:298
 msgid "Get Involved"
 msgstr ""
 
-#: classes/controller/blocks/class-takeactionboxout-controller.php:123
+#: classes/controller/blocks/class-takeactionboxout-controller.php:129
 msgid "take action"
 msgstr ""
 
-#: classes/controller/blocks/class-contentfourcolumn-controller.php:222
+#: classes/controller/blocks/class-contentfourcolumn-controller.php:236
 msgid "Publications"
 msgstr ""
 
-#: classes/controller/blocks/class-articles-controller.php:154
+#: classes/controller/blocks/class-happypoint-controller.php:158
+msgid "Background image"
+msgstr ""
+
+#: classes/controller/blocks/class-articles-controller.php:75
+#: classes/controller/blocks/class-articles-controller.php:217
 msgid "Related Articles"
 msgstr ""
 
-#: classes/controller/blocks/class-articles-controller.php:155
+#: classes/controller/blocks/class-articles-controller.php:76
+#: classes/controller/blocks/class-articles-controller.php:218
 msgid "READ ALL THE NEWS"
 msgstr ""
 
-#: includes/blocks/articles.twig:61
+#: includes/teasers/tease-articles.twig:47
+#: includes/teasers/tease-articles.twig:55
 msgid "by"
-msgstr ""
-
-#: includes/blocks/content_four_column.twig:60
-#: includes/blocks/content_four_column.twig:68
-msgid "Load More"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
