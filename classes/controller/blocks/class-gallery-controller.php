@@ -156,8 +156,14 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 			$gallery_style       = $fields['gallery_block_style'] ?? static::LAYOUT_SLIDER;
 			$gallery_title       = $fields['gallery_block_title'] ?? '';
 			$gallery_description = $fields['gallery_block_description'] ?? '';
+			$images				 = [];
 
-			$exploded_images   = explode( ',', $fields['multiple_image'] );
+			if (isset($fields['multiple_image'])) {
+				$exploded_images = explode( ',', $fields['multiple_image'] );
+			} else {
+				$exploded_images = [];
+			}
+
 			$images_dimensions = [];
 			$image_sizes       = [
 				self::LAYOUT_SLIDER        => 'retina-large',
@@ -167,11 +173,10 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 
 			foreach ( $exploded_images as $image_id ) {
 				$image_size = $image_sizes[ $fields['gallery_block_style'] ];
-				$image_size = $image_sizes[ $fields['gallery_block_style'] ];
 				$image_data = [];
 
 				$image_data_array           = wp_get_attachment_image_src( $image_id, $image_size );
-				$image_data['image_src']    = $image_data_array[0];
+				$image_data['image_src']    = $image_data_array ? $image_data_array[0] : '';
 				$image_data['image_srcset'] = wp_get_attachment_image_srcset( $image_id, $image_size, wp_get_attachment_metadata( $image_id ) );
 				$image_data['image_sizes']  = wp_calculate_image_sizes( $image_size, null, null, $image_id );
 				$image_data['alt_text']     = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
