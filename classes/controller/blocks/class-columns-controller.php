@@ -26,6 +26,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 		const LAYOUT_NO_IMAGE = 'no_image';
 		const LAYOUT_TASKS    = 'tasks';
 		const LAYOUT_ICONS    = 'icons';
+		const MAX_COLUMNS     = 4;
 
 		/**
 		 * Shortcode UI setup for the tasks shortcode.
@@ -86,7 +87,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 			];
 
 			// This block will have 4 different columns with same fields.
-			for ( $i = 1; $i < 5; $i++ ) {
+			for ( $i = 1; $i <= static::MAX_COLUMNS; $i++ ) {
 
 				$fields[] =
 					[
@@ -187,7 +188,9 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 				'columns_description' => $attributes['columns_description'] ?? '',
 			];
 
-			for ( $i = 1; $i < 5; $i++ ) {
+			// Used to determine how many columns were set in the backend for this shortcode.
+			$columns_set = 0;
+			for ( $i = 1; $i <= static::MAX_COLUMNS; $i++ ) {
 				$column_atts     = [
 					"title_$i"       => $attributes[ "title_$i" ] ?? '',
 					"description_$i" => $attributes[ "description_$i" ] ?? '',
@@ -196,14 +199,33 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 					"link_$i"        => $attributes[ "link_$i" ] ?? '',
 				];
 				$attributes_temp = array_merge( $attributes_temp, $column_atts );
+
+				if (! empty($attributes[ "title_$i" ])) {
+					$columns_set = $i;
+				}
 			}
 			$attributes = shortcode_atts( $attributes_temp, $attributes, $shortcode_tag );
 
-			$image_size = static::LAYOUT_TASKS === $attributes['columns_block_style'] ? 'medium' : 'thumbnail';
-			for ( $i = 1; $i < 5; $i++ ) {
-				list( $src ) = wp_get_attachment_image_src( $attributes[ "attachment_$i" ], $image_size );
-				if ( $src ) {
-					$attributes[ "attachment_$i" ] = $src;
+			// Define the image size that will be used, based on layout chosen and number of columns.
+			$columns_block_style = $attributes['columns_block_style'];
+			if ( static::LAYOUT_NO_IMAGE !== $columns_block_style ) {
+
+				if ( static::LAYOUT_TASKS === $columns_block_style ) {
+					if ( $columns_set >= 3 ) {
+						$image_size = 'medium';
+					} else if ( $columns_set == 2 ) {
+						$image_size = 'articles-medium-large';
+					} else {
+						$image_size = 'large';
+					}
+				} else if ( static::LAYOUT_ICONS === $columns_block_style ) {
+					$image_size = 'thumbnail';
+				}
+				for ( $i = 1; $i <= static::MAX_COLUMNS; $i ++ ) {
+					list( $src ) = wp_get_attachment_image_src( $attributes["attachment_$i"], $image_size );
+					if ( $src ) {
+						$attributes["attachment_$i"] = $src;
+					}
 				}
 			}
 
