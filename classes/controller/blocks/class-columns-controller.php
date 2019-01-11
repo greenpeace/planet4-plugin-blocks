@@ -200,7 +200,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 				];
 				$attributes_temp = array_merge( $attributes_temp, $column_atts );
 
-				if (! empty($attributes[ "title_$i" ])) {
+				if ( ! empty( $attributes[ "title_$i" ] ) ) {
 					$columns_set = $i;
 				}
 			}
@@ -213,18 +213,18 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 				if ( static::LAYOUT_TASKS === $columns_block_style ) {
 					if ( $columns_set >= 3 ) {
 						$image_size = 'medium';
-					} else if ( $columns_set == 2 ) {
+					} elseif ( 2 === $columns_set ) {
 						$image_size = 'articles-medium-large';
 					} else {
 						$image_size = 'large';
 					}
-				} else if ( static::LAYOUT_ICONS === $columns_block_style ) {
+				} elseif ( static::LAYOUT_ICONS === $columns_block_style ) {
 					$image_size = 'thumbnail';
 				}
 				for ( $i = 1; $i <= static::MAX_COLUMNS; $i ++ ) {
-					list( $src ) = wp_get_attachment_image_src( $attributes["attachment_$i"], $image_size );
+					list( $src ) = wp_get_attachment_image_src( $attributes[ "attachment_$i" ], $image_size );
 					if ( $src ) {
-						$attributes["attachment_$i"] = $src;
+						$attributes[ "attachment_$i" ] = $src;
 					}
 				}
 			}
