@@ -44,12 +44,10 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 
 			// Add a Credit field.
 			$form_fields['credit_text'] = [
-				// phpcs:ignore WordPress.WP.I18n.MissingArgDomain
-				'label' => __( 'Credit' ),
+				'label' => __( 'Credit', 'planet4-blocks-backend' ),
 				'input' => 'text', // this is default if "input" is omitted.
 				'value' => get_post_meta( $post->ID, '_credit_text', true ),
-				// phpcs:ignore WordPress.WP.I18n.MissingArgDomain
-				'helps' => __( 'The owner of the image.' ),
+				'helps' => __( 'The owner of the image.', 'planet4-blocks-backend' ),
 			];
 
 			return $form_fields;
@@ -156,9 +154,9 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 			$gallery_style       = $fields['gallery_block_style'] ?? static::LAYOUT_SLIDER;
 			$gallery_title       = $fields['gallery_block_title'] ?? '';
 			$gallery_description = $fields['gallery_block_description'] ?? '';
-			$images				 = [];
+			$images              = [];
 
-			if (isset($fields['multiple_image'])) {
+			if ( isset( $fields['multiple_image'] ) ) {
 				$exploded_images = explode( ',', $fields['multiple_image'] );
 			} else {
 				$exploded_images = [];
