@@ -470,7 +470,7 @@ var p4_blocks = {
     /**
      * If no value, default to oembed
      */
-    set_default_embed_type: function() {
+    set_default_embed_type: function () {
       if (!$('input[name=embed_type]:checked').val()) {
         $('input[name=embed_type][value=oembed]').prop('checked', true);
       }
@@ -479,7 +479,7 @@ var p4_blocks = {
     /**
      * Show/hide Facebook page options according to embed_type
      */
-    toggle_facebook_page_options: function() {
+    toggle_facebook_page_options: function () {
       var $facebook_page_options = $('.shortcode-ui-attribute-facebook_page_tab');
       var embed_type = $('input[name=embed_type]:checked').val();
 
@@ -488,6 +488,141 @@ var p4_blocks = {
       } else {
         $facebook_page_options.hide();
       }
+    }
+  },
+
+  columns: {
+
+    /**
+     * Called when a new columns block is rendered in the backend.
+
+     * @param shortcode Shortcake backbone model.
+     */
+    render_new: function (shortcode) {
+
+      var $shortcode_div = $('.shortcode-ui-edit-shortcake_columns');
+      $shortcode_div.append('<div data-row="0"><button class="button button-small shortcake-columns-add-column">Add Column</button>'
+        + '<button class="button button-small shortcake-columns-remove-column" disabled="disabled">Remove Column</button></div>');
+      this.hide_all_columns();
+
+      this.add_click_event_handlers();
+    },
+
+    /**
+     * Called when en existing columns block is rendered in the backend.
+
+     * @param shortcode Shortcake backbone model.
+     */
+    render_edit: function (shortcode) {
+
+      var $shortcode_div = $('.shortcode-ui-edit-shortcake_columns');
+      $shortcode_div.append('<div data-row="0"><button class="button button-small shortcake-columns-add-column" data-row="1 data-action="add">Add Column</button>'
+        + '<button class="button button-small shortcake-columns-remove-column">Remove Column</button></div>');
+      var row = 0;
+
+      [1, 2, 3, 4].forEach(function (index) {
+        var input_values = $('.field-block').filter($('div[class$=\'_' + index + '\']')).children().filter($('input, textarea')).map(function (idx, elem) {
+          return $(elem).val();
+        }).get().join('');
+
+        if ('' !== input_values) {
+          row = index;
+        }
+      });
+
+      $('.shortcake-columns-add-column').parent().data('row', row);
+      for (var i = row+1; i <= 4; i++) {
+        $('.field-block').filter($('div[class$=\'_' + i + '\']')).hide();
+      }
+      if (row === 4) {
+        $('.shortcake-columns-add-column').attr('disabled', 'disabled');
+      }
+
+      this.add_click_event_handlers();
+    },
+
+    /**
+     * Add click event handlers for add/remove buttons in columns block.
+     */
+    add_click_event_handlers: function () {
+
+      var columns = this;
+      // Add click event handlers for the elements.
+      $('.shortcake-columns-add-column').on('click', function (event) {
+        event.preventDefault();
+        var $element = $(event.currentTarget);
+        var row = $element.parent().data('row');
+
+        if (row < 5) {
+          columns.show_column(++row);
+          $element.parent().data('row', row);
+          $('.shortcake-columns-remove-column').removeAttr('disabled');
+          if (row === 4) {
+            $element.attr('disabled', 'disabled');
+          }
+        }
+      });
+
+      $('.shortcake-columns-remove-column').on('click', function (event) {
+        event.preventDefault();
+        var $element = $(event.currentTarget);
+        var row = $element.parent().data('row');
+
+        if (row >= 0) {
+          columns.hide_column(row--);
+          $element.parent().data('row', row);
+          $('.shortcake-columns-add-column').removeAttr('disabled');
+          if (row === 0) {
+            $element.attr('disabled', 'disabled');
+          }
+        }
+      });
+    },
+
+    /**
+     * Hide a columns block row and reset the values of it's fields.
+     *
+     * @param row
+     */
+    hide_column: function (row) {
+      var $column = $('.field-block').filter($('div[class$=\'_' + row + '\']'));
+      // Clear all text, textarea fields for this row/column.
+      $column.
+        children().
+        filter($('input, textarea')).each(function (index, element) {
+          $(element).val('').trigger('input');
+        });
+      // Clear image attachment if set in this row/column.
+      $column.
+        find($('.attachment-previews .remove')).each(function (index, element) {
+          $(element).click();
+        });
+      // Hide column's fields.
+      $column.hide(300);
+    },
+
+    /**
+     * Hide all columns block rows.
+     *
+     * @param row
+     */
+    hide_all_columns: function () {
+      [1,2,3,4].forEach(function (row) {
+        $( '.field-block' ).filter( $( 'div[class$=\'_'+row+'\']' ) ).hide();
+      });
+    },
+
+    /**
+     * Show a columns block row and scroll to bottom.
+     *
+     * @param row
+     */
+    show_column: function (row) {
+      $('.field-block').filter($('div[class$=\'_' + row + '\']')).show(300, function () {
+        $('.media-frame-content').animate({
+          scrollTop: $('.shortcode-ui-content').prop('scrollHeight'),
+        }, 300);
+      });
     }
   }
 };
@@ -520,7 +655,14 @@ if ('undefined' !== typeof (wp.shortcake)) {
   }
 
   // Attach hooks when rendering a new p4 block.
-  wp.shortcake.hooks.addAction('shortcode-ui.render_new', attach_hooks);
+  wp.shortcake.hooks.addAction('shortcode-ui.render_new', function (shortcode) {
+    attach_hooks();
+
+    var shortcode_tag = shortcode.get('shortcode_tag');
+    if ('shortcake_columns' === shortcode_tag) {
+      p4_blocks.columns.render_new(shortcode);
+    }
+  });
 
   // Trigger hooks when shortcode renders an existing p4 block.
   wp.shortcake.hooks.addAction('shortcode-ui.render_edit', function (shortcode) {
@@ -551,6 +693,10 @@ if ('undefined' !== typeof (wp.shortcake)) {
           p4_blocks.initialize_view_fields(block_name);
         });
       }
+    }
+
+    if ('shortcake_columns' === shortcode_tag) {
+      p4_blocks.columns.render_edit(shortcode);
     }
   });
 }
