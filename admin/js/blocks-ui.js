@@ -503,7 +503,7 @@ var p4_blocks = {
       var $shortcode_div = $('.shortcode-ui-edit-shortcake_columns');
       $shortcode_div.append('<div data-row="0"><button class="button button-small shortcake-columns-add-column">Add Column</button>'
         + '<button class="button button-small shortcake-columns-remove-column" disabled="disabled">Remove Column</button></div>');
-      this.hide_all_rows();
+      this.hide_all_columns();
 
       this.add_click_event_handlers();
     },
@@ -554,7 +554,7 @@ var p4_blocks = {
         var row = $element.parent().data('row');
 
         if (row < 5) {
-          columns.show_row(++row);
+          columns.show_column(++row);
           $element.parent().data('row', row);
           $('.shortcake-columns-remove-column').removeAttr('disabled');
           if (row === 4) {
@@ -569,7 +569,7 @@ var p4_blocks = {
         var row = $element.parent().data('row');
 
         if (row >= 0) {
-          columns.hide_row(row--);
+          columns.hide_column(row--);
           $element.parent().data('row', row);
           $('.shortcake-columns-add-column').removeAttr('disabled');
           if (row === 0) {
@@ -584,13 +584,21 @@ var p4_blocks = {
      *
      * @param row
      */
-    hide_row: function (row) {
-      $('.field-block').filter($('div[class$=\'_' + row + '\']')).
-        hide(300).
+    hide_column: function (row) {
+      var $column = $('.field-block').filter($('div[class$=\'_' + row + '\']'));
+      // Clear all text, textarea fields for this row/column.
+      $column.
         children().
         filter($('input, textarea')).each(function (index, element) {
-          $(element).val('');
+          $(element).val('').trigger('input');
         });
+      // Clear image attachment if set in this row/column.
+      $column.
+        find($('.attachment-previews .remove')).each(function (index, element) {
+          $(element).click();
+        });
+      // Hide column's fields.
+      $column.hide(300);
     },
 
     /**
@@ -598,7 +606,7 @@ var p4_blocks = {
      *
      * @param row
      */
-    hide_all_rows: function () {
+    hide_all_columns: function () {
       [1,2,3,4].forEach(function (row) {
         $( '.field-block' ).filter( $( 'div[class$=\'_'+row+'\']' ) ).hide();
       });
@@ -609,7 +617,7 @@ var p4_blocks = {
      *
      * @param row
      */
-    show_row: function (row) {
+    show_column: function (row) {
       $('.field-block').filter($('div[class$=\'_' + row + '\']')).show(300, function () {
         $('.media-frame-content').animate({
           scrollTop: $('.shortcode-ui-content').prop('scrollHeight'),
