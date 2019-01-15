@@ -153,6 +153,11 @@
     margin-bottom: 16px;
     width: 100%;
     padding: 10px;
+    border: 1px solid transparent;
+
+    &:hover {
+      background-color: $orange-hover;
+    }
 
     @include medium-and-up {
       margin-top: 16px;
