@@ -251,9 +251,9 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 		/**
 		 * Process flat array of DOM nodes to build up menu tree structure.
 		 *
-		 * @param int   $current_level Current menu nesting level.
-		 * @param array $nodes Array of heading DOM nodes, passed by reference.
-		 * @param array $heading_meta Metadata about each heading tag.
+		 * @param int        $current_level Current menu nesting level.
+		 * @param \DOMNode[] $nodes Array of heading DOM nodes, passed by reference.
+		 * @param array      $heading_meta Metadata about each heading tag.
 		 *
 		 * @return array menu tree structure
 		 */
@@ -275,7 +275,7 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 				} elseif ( $heading['level'] < $current_level ) {
 					return $menu;
 				} else {
-					$menu[] = $this->create_menu_item( $node->nodeValue, $heading['link'], $heading['style'] );
+					$menu[] = $this->create_menu_item( $node->nodeValue, $heading['tag'], $heading['link'], $heading['style'] );
 
 					// remove node from list only once it has been added to the menu.
 					array_shift( $nodes );
@@ -289,15 +289,17 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 		 * Create a std object representing a node/heading.
 		 *
 		 * @param string      $text Heading/menu item text.
+		 * @param string      $type  Type/name of the tag.
 		 * @param bool|string $link True if this menu item should link to the heading.
 		 * @param string      $style List style for menu item.
 		 *
 		 * @return \stdClass
 		 */
-		private function create_menu_item( $text, $link, $style ) {
+		private function create_menu_item( $text, $type, $link, $style ) {
 			$menu_obj           = new \stdClass();
 			$menu_obj->text     = utf8_decode( $text );
 			$menu_obj->hash     = md5( $text );
+			$menu_obj->type     = $type;
 			$menu_obj->style    = $style;
 			$menu_obj->link     = filter_var( $link, FILTER_VALIDATE_BOOLEAN );
 			$menu_obj->id       = sanitize_title( iconv( 'UTF-8', 'ISO-8859-1//TRANSLIT', utf8_decode( $text ) ) );
