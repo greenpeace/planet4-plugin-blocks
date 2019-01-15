@@ -41,6 +41,7 @@ class ComposerStaticInit356100170ff2882375cd04c4c76f9df3
         'P4BKS\\Controllers\\Blocks\\CarouselHeader_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-carouselheader-controller.php',
         'P4BKS\\Controllers\\Blocks\\CarouselSplit_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-carouselsplit-controller.php',
         'P4BKS\\Controllers\\Blocks\\Carousel_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-carousel-controller.php',
+        'P4BKS\\Controllers\\Blocks\\Columns_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-columns-controller.php',
         'P4BKS\\Controllers\\Blocks\\ContentFourColumn_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-contentfourcolumn-controller.php',
         'P4BKS\\Controllers\\Blocks\\ContentThreeColumn_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-contentthreecolumn-controller.php',
         'P4BKS\\Controllers\\Blocks\\Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-controller.php',
