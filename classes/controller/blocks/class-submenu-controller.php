@@ -184,7 +184,7 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 			$content = $post->post_content;
 			$menu    = $this->parse_post_content( $content, $attributes );
 
-			wp_enqueue_script( 'submenu', P4BKS_ADMIN_DIR . 'js/submenu.js', [ 'jquery' ], '0.1', true );
+			wp_enqueue_script( 'submenu', P4BKS_ADMIN_DIR . 'js/submenu.js', [ 'jquery' ], '0.2', true );
 			wp_localize_script( 'submenu', 'submenu', $menu );
 
 			$block_data = [
