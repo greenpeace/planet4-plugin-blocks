@@ -167,13 +167,13 @@ jQuery(function ($) {
       view: "editAttributeHeading"
     };
 
-    wp.shortcake.hooks.addAction('shortcode-ui.render_edit', function (shortcodeModel) {
+    // break submenu attribute groups into rows
+    var addTags = function () {
       $(".shortcode-ui-attribute-heading2").parent().before('<p></p>');
-    });
-
-    wp.shortcake.hooks.addAction('shortcode-ui.render_new', function (shortcodeModel) {
-      $(".shortcode-ui-attribute-heading2").parent().before('<p></p>');
-    });
+      $(".shortcode-ui-attribute-heading3").parent().before('<p></p>');
+    }
+    wp.shortcake.hooks.addAction('shortcode-ui.render_edit', addTags);
+    wp.shortcake.hooks.addAction('shortcode-ui.render_new', addTags);
   }
 });
 

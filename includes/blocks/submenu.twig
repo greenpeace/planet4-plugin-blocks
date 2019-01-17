@@ -2,6 +2,7 @@
 
 	{% if ( menu ) %}
 		<div class="submenu-block
+			{% if style == 1 %}submenu-long{% endif %}
 			{% if style == 2 %}submenu-short{% endif %}
 			{% if style == 3 %}submenu-sidebar{% endif %}">
 
@@ -9,32 +10,27 @@
 				<h2>{{ title }}</h2>
 			{% endif %}
 
-			<div class="submenu-menu">
-				{% for m in menu %}
-					<ul class="submenu-item">
-						{% if ( m.link ) %}
-							<li><a href="#{{ m.id }}" class="icon-link submenu-link">{{ m.text }}</a></li>
-						{% else %}
-							<li>{{ m.text }}</li>
-						{% endif %}
-						{% if ( m.children ) %}
-							<ul>
-								{% for child in m.children %}
-									{% if ( child.link ) %}
-										<li><a href="#{{ child.id }}" class="submenu-link">{{ child.text }}</a></li>
-									{% else %}
-										<li>{{ child.text }}</li>
-									{% endif %}
-								{% endfor %}
-							</ul>
-						{% endif %}
-					</ul>
-				{% endfor %}
-			</div>
-
+			{{ _self.show_menu(menu) }}
 		</div>
 
 		<a href="#" class="back-top">&nbsp;</a>
 	{% endif %}
 
 {% endblock %}
+
+{% macro show_menu(items) %}
+	<ul>
+		{% for item in items %}
+			<li class="list-style-{{ item.style }} {% if item.link %}list-link{% else %}list-heading{% endif %}">
+				{% if ( item.link ) %}
+					<a href="#{{ item.id }}" class="icon-link submenu-link">{{ item.text }}</a>
+				{% else %}
+					<span class="submenu-heading">{{ item.text }}</span>
+				{% endif %}
+				{% if ( item.children ) %}
+					{{ _self.show_menu(item.children) }}
+				{% endif %}
+			</li>
+		{% endfor %}
+	</ul>
+{% endmacro %}
