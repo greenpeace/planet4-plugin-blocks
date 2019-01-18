@@ -2,15 +2,15 @@
 
 	{% if ( fields ) %}
 
-		<div id="p4bks_tasks_container" class="what-you-can-do-wrapper">
+		<div class="columns-block block-style-{{ fields.columns_block_style }}">
 			<div class="container">
 				{% if ( fields['columns_title'] ) %}
 					<h3>{{ fields['columns_title'] }}</h3>
 				{% endif %}
 				<div class="row">
 					{% if ( fields['columns_description']) %}
-						<div class="col-md-12">
-							{{ fields['columns_description']|e('wp_kses_post')|raw }}
+						<div class="col-md-12 col">
+							<p>{{ fields['columns_description']|e('wp_kses_post')|raw }}</p>
 						</div>
 					{% endif %}
 				</div>
@@ -109,7 +109,16 @@
 										{% endif %}
 									</a>
 
-									<div id="collapse-{{ number_to_word }}" class="{{ i == 1 ? 'collapse show' : 'collapse' }}"
+									{% if fields.no_of_columns <= 2 %}
+										{% set collapse_class = 'collapse show' %}
+									{% else %}
+										{% if i == 1 %}
+											{% set collapse_class = 'collapse show' %}
+										{% else %}
+											{% set collapse_class = 'collapse' %}
+										{% endif %}
+									{% endif %}
+									<div id="collapse-{{ number_to_word }}" class="{{ collapse_class }}"
 											 data-parent="#accordion" role="tabpanel"
 									     aria-labelledby="heading-{{ number_to_word }}">
 										<div class="card-block info-with-image-wrap clearfix">
