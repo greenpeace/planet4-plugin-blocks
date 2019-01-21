@@ -275,25 +275,42 @@
       margin-bottom: 20px;
     }
 
-    &:after {
-      font-family: greenpeace-icon;
-      content: "\e901";
-      color: $yellow;
-      position: absolute;
-      top: 50%;
-      transform: translate(0, -50%);
-      right: 15px;
-      pointer-events: none;
-
-      html[dir="rtl"] & {
-        right: auto;
-        left: 15px;
-      }
-    }
-
     a {
       display: block;
       padding: 45px 15px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 40%;
+        right: 15px;
+        pointer-events: none;
+        background-image: url("images/icons/angle-right.svg");
+        background-position: 50% 50%;
+        background-size: 1rem 1rem;
+        background-repeat: no-repeat;
+        margin-right: 2px;
+        height: 2.2rem;
+        width: 2.2rem;
+        margin-bottom: -2px;
+        display: inline-block;
+        @supports (mask-repeat: no-repeat) or (-webkit-mask-repeat: no-repeat) {
+          & {
+            background-image: none;
+            background-color: $yellow;
+            -webkit-mask-image: url("images/icons/angle-right.svg");
+            mask-image: url("images/icons/angle-right.svg");
+            mask-repeat: no-repeat;
+            -webkit-mask-repeat: no-repeat;
+            margin-right: 0;
+          }
+        }
+
+        html[dir="rtl"] & {
+          right: auto;
+          left: 15px;
+        }
+      }
     }
   }
 
