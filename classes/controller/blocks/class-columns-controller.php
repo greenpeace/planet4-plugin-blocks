@@ -204,7 +204,8 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 					$columns_set = $i;
 				}
 			}
-			$attributes = shortcode_atts( $attributes_temp, $attributes, $shortcode_tag );
+			$attributes                  = shortcode_atts( $attributes_temp, $attributes, $shortcode_tag );
+			$attributes['no_of_columns'] = $columns_set;
 
 			// Define the image size that will be used, based on layout chosen and number of columns.
 			$columns_block_style = $attributes['columns_block_style'];
