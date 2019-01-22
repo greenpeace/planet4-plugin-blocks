@@ -52,8 +52,11 @@ $(document).ready(function () {
         var link = $.attr(this, 'href');
         $('html, body').animate({
             scrollTop: $(link).offset().top - 100
-        }, 2000);
-        window.location.hash = link;
+        }, 2000, function () {
+			var position = $(window).scrollTop();
+			window.location.hash = link;
+			$(window).scrollTop(position);
+		});
 
         return false;
     });
