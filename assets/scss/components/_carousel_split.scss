@@ -42,12 +42,12 @@
         right: 0;
         top: 0;
         font-size: 0.6875rem;
-        margin: -20px 5px 15px 15px;
+        margin: -20px $n5 $n15 $n15;
         font-weight: normal;
         color: $credit-color;
 
         @include small-and-up {
-          margin: 16px 15px;
+          margin: 16px $n15;
           color: $white;
           font-size: 0.75rem;
         }
@@ -78,13 +78,13 @@
       bottom: 0;
       right: 0;
       width: 100%;
-      padding: 30px 200px 30px 50px;
+      padding: $n30 200px $n30 $n50;
       background: linear-gradient(210deg, rgba(10, 51, 81, 0.2) 0%, rgba(10, 51, 81, 1) 100%);
 
       @include small-and-up {
         bottom: 0;
         width: 100%;
-        padding: 20px 35px;
+        padding: $n20 $n35;
       }
 
       @include large-and-up {
@@ -150,7 +150,7 @@
         height: 8px;
         border-radius: 50%;
         background: $white;
-        margin: 0 15px;
+        margin: 0 $n15;
         cursor: pointer;
 
         &.active {
@@ -225,7 +225,7 @@
 
       .carousel-caption {
         bottom: -115px;
-        padding: 18px 15px;
+        padding: 18px $n15;
 
         h3 {
           font-size: 1.0625rem;

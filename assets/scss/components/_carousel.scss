@@ -44,7 +44,7 @@
       top: 0;
       color: $white;
       font-size: 0.875rem;
-      margin: 15px;
+      margin: $n15;
       font-weight: normal;
     }
 
@@ -85,7 +85,7 @@
     right: 0;
     width: 100%;
     font-family: $roboto;
-    padding: 30px 200px 30px 50px;
+    padding: $n30 200px $n30 $n50;
     background: linear-gradient(210deg, rgba(10, 51, 81, 0.2) 0%, rgba(10, 51, 81, 1) 100%);
     filter: progid:dximagetransform.microsoft.gradient(startColorstr="#0a3351", endColorstr="#0a3351", GradientType=1);
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#0A3351', endColorstr='#0A3351' ,GradientType=0)";
@@ -97,12 +97,12 @@
     @include mobile-only {
       position: relative;
       z-index: 10;
-      padding: 20px 15px 20px;
+      padding: $n20 $n15 $n20;
       color: $white;
     }
 
     @include medium-and-up {
-      padding: 30px;
+      padding: $n30;
     }
 
     h3 {
@@ -171,7 +171,7 @@
       @include small-and-up {
         width: 12px;
         height: 12px;
-        margin: 0 15px;
+        margin: 0 $n15;
       }
 
       &.active {
