@@ -101,7 +101,7 @@ div.shortcode-ui-edit-shortcake_newcovers > div:last-child {
 .shortcake-p4-radio-div {
   display: inline-block;
   margin: 10px;
-  padding: 20px;
+  padding: $n20;
   max-width: 25%;
   vertical-align: top;
 }

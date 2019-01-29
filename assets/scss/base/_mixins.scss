@@ -179,7 +179,7 @@ level-2 is the first level comment with a margin of 100px
 and so on...
 */
 $comment-nest-level: 6;
-$nested-comment-left-margin: 50px;
+$nested-comment-left-margin: $n50;
 @mixin comment-level {
   @for $i from 1 through $comment-nest-level {
     .comment-level-#{$i} {
