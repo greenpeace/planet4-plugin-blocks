@@ -2,7 +2,7 @@
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 5px 5px 5px 0 rgba(128, 128, 128, 0.5);
   margin-bottom: 40px;
-  padding: 20px 40px;
+  padding: $n20 $n40;
 
   h1,
   h2 {
@@ -102,7 +102,7 @@
     @include medium-and-up {
       float: right;
       max-width: 350px;
-      margin: 0 0 15px 15px;
+      margin: 0 0 $n15 $n15;
     }
   }
 }
