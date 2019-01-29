@@ -81,7 +81,7 @@
 }
 
 .article-list-item-body {
-  padding: 15px;
+  padding: $n15;
 
   @include medium-and-up {
     flex-basis: 68%;
@@ -98,7 +98,7 @@
   line-height: 1.3;
   font-weight: 500;
   color: $black;
-  margin: 5px 0;
+  margin: $n5 0;
 
   @include large-and-up {
     font-size: 1.375rem;
@@ -127,7 +127,7 @@
   &:after {
     content: "\2022";
     display: inline-block;
-    padding: 0 3px 0 5px;
+    padding: 0 3px 0 $n5;
   }
 }
 

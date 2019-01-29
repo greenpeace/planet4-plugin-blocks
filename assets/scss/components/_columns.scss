@@ -269,11 +269,11 @@
 
     .add-action-list-wrap {
       @include small-and-up {
-        margin: 20px 0 0;
+        margin: $n20 0 0;
       }
 
       @include medium-and-up {
-        margin: 20px 0 0;
+        margin: $n20 0 0;
       }
 
       .btn-primary {
@@ -320,12 +320,12 @@
       }
 
       @include large-and-up {
-        margin: 35px 0 0 0;
+        margin: $n35 0 0 0;
       }
 
       @include x-large-and-up {
         @include clearfix;
-        margin: 35px 0 80px;
+        margin: $n35 0 $n80;
       }
 
       .step-number {
@@ -467,7 +467,7 @@
     }
 
     .can-do-steps-mobile {
-      margin: 6px 15px 0 0;
+      margin: 6px $n15 0 0;
       width: 100%;
 
       .card {
@@ -480,7 +480,7 @@
           font-size: 0.9375rem;
           font-family: $roboto;
           text-decoration: none;
-          padding: 10px 10px 5px 10px;
+          padding: $n10 $n10 $n5 $n10;
           margin-bottom: 10px;
           background: $dark-blue;
           border: none;

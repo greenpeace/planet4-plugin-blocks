@@ -1,13 +1,13 @@
 .four-column-content {
   color: $black;
-  padding: 0 0 40px 0;
+  padding: 0 0 $n40 0;
 
   @include medium-and-up {
-    padding: 0 0 40px 0;
+    padding: 0 0 $n40 0;
   }
 
   @include medium-and-up {
-    padding: 0 0 60px 0;
+    padding: 0 0 $n60 0;
   }
 
   .col-md-4 {
@@ -24,17 +24,17 @@
       height: 180px;
 
       @include small-and-up {
-        margin: 20px 0;
+        margin: $n20 0;
       }
 
       @include medium-and-up {
-        margin: 0 0 20px 0;
+        margin: 0 0 $n20 0;
         max-width: 210px;
         height: 300px;
       }
 
       @include large-and-up {
-        margin: 0 0 20px 0;
+        margin: 0 0 $n20 0;
       }
 
       @include x-large-and-up {
