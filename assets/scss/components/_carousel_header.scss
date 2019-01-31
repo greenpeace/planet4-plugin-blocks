@@ -93,6 +93,16 @@ $slide-transition-speed: 1s;
       background: linear-gradient(210deg, rgba(136, 196, 213, 0.2) 0%, rgba(184, 216, 232, 1) 100%);
     }
 
+    .carousel-caption {
+      @include fill-container;
+      z-index: 2;
+      text-align: left;
+      transition: opacity $slide-transition-speed;
+      padding-bottom: 0;
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+
     .carousel-preview-wrap {
       position: absolute;
       z-index: 1;
@@ -137,16 +147,6 @@ $slide-transition-speed: 1s;
         opacity: 0;
         background: linear-gradient(210deg, rgba(136, 196, 213, 0.2) 0%, rgba(184, 216, 232, 1) 100%);
       }
-    }
-
-    .carousel-caption {
-      @include fill-container;
-      z-index: 2;
-      text-align: left;
-      transition: opacity $slide-transition-speed;
-      padding-bottom: 0;
-      padding-right: 15px;
-      padding-left: 15px;
     }
 
     &.slide-over {
