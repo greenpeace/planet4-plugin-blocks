@@ -161,7 +161,11 @@ $(document).ready(function() {
   }
 
   // Bind mouse interaction events
-  $headerCarousel.on('click', '.carousel-control-next', function(evt) {
+  var clickTargets = '.carousel-control-next';
+  if ($('html').attr('dir') == 'rtl') {
+    clickTargets += ', .carousel-control-prev';
+  }
+  $headerCarousel.on('click', clickTargets, function(evt) {
     evt.preventDefault();
     advanceCarousel();
   }).on('click', '.carousel-indicators li', function (evt) {
