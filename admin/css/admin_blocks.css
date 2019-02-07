@@ -117,3 +117,22 @@ div.shortcode-ui-edit-shortcake_newcovers > div:last-child {
 #bl_loading_span {
   margin-left: 10px;
 }
+
+/* Carousel header */
+.shortcode-ui-edit-shortcake_carousel_header .shortcake-p4-radio-div img {
+  max-width: 100%;
+}
+
+/* CSS trick to make the images and description click the radio too. */
+.shortcode-ui-edit-shortcake_carousel_header .shortcake-p4-radio-div {
+  position: relative;
+}
+
+.shortcode-ui-edit-shortcake_carousel_header .shortcake-p4-radio-div label::before {
+  display: block;
+  content: " ";
+  opacity: 0;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+}
