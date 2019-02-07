@@ -8,7 +8,7 @@
 					<h3>{{ fields['columns_title'] }}</h3>
 				{% endif %}
 				<div class="row">
-					{% if ( fields['columns_description']) %}
+					{% if ( fields['columns_description'] ) %}
 						<div class="col-md-12 col">
 							<p>{{ fields['columns_description']|e('wp_kses_post')|raw }}</p>
 						</div>
