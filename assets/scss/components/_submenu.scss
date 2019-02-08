@@ -84,15 +84,25 @@
     }
   }
 
-  &.submenu-long > ul > li {
-    @include large-and-up {
-      flex-basis: 50%;
-    }
-  }
+  @include large-and-up {
+    &.submenu-long,
+    &.submenu-short {
+      > ul {
+        display: block;
 
-  &.submenu-short > ul > li {
-    @include large-and-up {
-      flex-basis: 33%;
+        li {
+          margin: 0;
+          padding: 6px 0 0;
+        }
+      }
+    }
+
+    &.submenu-long {
+      columns: 2;
+    }
+
+    &.submenu-short {
+      columns: 3;
     }
   }
 
