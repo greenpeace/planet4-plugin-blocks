@@ -52,7 +52,7 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 						[
 							'value' => static::LAYOUT_FULL_WIDTH_CLASSIC,
 							'label' => __( 'Full width classic', 'planet4-blocks-backend' ),
-							'desc'  => 'This is a full width slider with a classic look: big slides, fade transition.',
+							'desc'  => 'This is a full width slider with a classic look: big slides, fade transition, and no subheaders.',
 							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/carousel-classic.png' ),
 						],
 					],
@@ -136,8 +136,9 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter subheader of %s image', 'planet4-blocks-backend' ), $i ),
-							'data-plugin' => 'planet4-blocks',
+							'placeholder'    => sprintf( __( 'Enter subheader of %s image', 'planet4-blocks-backend' ), $i ),
+							'data-plugin'    => 'planet4-blocks',
+							'data-subheader' => 'true',
 						],
 					],
 					[

@@ -624,6 +624,21 @@ var p4_blocks = {
         }, 300);
       });
     }
+  },
+
+  carousel_header: {
+    render_edit: function () {
+      p4_blocks.carousel_header.toggle_subheaders();
+
+      $('input[name=block_style]').off('click').on('click', function() {
+        p4_blocks.carousel_header.toggle_subheaders();
+      });
+    },
+
+    toggle_subheaders: function() {
+      var selected_block_style = $('input[name=block_style]:checked').val();
+      $('input[data-subheader=true]').closest('.field-block').toggle('full-width-classic' != selected_block_style);
+    }
   }
 };
 
@@ -697,6 +712,10 @@ if ('undefined' !== typeof (wp.shortcake)) {
 
     if ('shortcake_columns' === shortcode_tag) {
       p4_blocks.columns.render_edit(shortcode);
+    }
+
+    if ('shortcake_carousel_header' === shortcode_tag) {
+      p4_blocks.carousel_header.render_edit();
     }
   });
 }
