@@ -263,13 +263,13 @@ $(document).ready(function() {
           $indicators.css('right', indicatorsRight + 'px')
             .css('left', '')
             .css('margin-left', '0')
-            .css('margin-right', '-3px');
+            .css('margin-right', '4px');
         } else {
           var leftOffset = $header.offset().left;
           $indicators.css('left', leftOffset + 'px')
             .css('right', '')
             .css('margin-right', '0')
-            .css('margin-left', '-3px');
+            .css('margin-left', '4px');
         }
       } else {
         $indicators.css('right', '');
