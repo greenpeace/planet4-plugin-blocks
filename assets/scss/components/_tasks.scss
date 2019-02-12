@@ -271,8 +271,6 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
 
     .info-with-image-wrap {
       .mobile-accordion-info {
-        width: 90%;
-        margin: 0 10px;
         color: $percentage-text;
         font-size: 0.875rem;
       }
@@ -281,7 +279,7 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
         padding-bottom: 35px;
 
         img {
-          width: 90%;
+          width: 100%;
           height: 190px;
           object-fit: cover;
           object-position: 10% 10%;
@@ -303,7 +301,7 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
     }
 
     .card-block {
-      padding: 8px 0 8px 28px;
+      padding: 8px 28px;
       border-bottom: none;
       margin-bottom: 10px;
 
@@ -311,8 +309,6 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
         color: $dark-shade-black;
         font-size: 0.875rem;
         line-height: 22px;
-        margin-left: -10px;
-        padding-right: 20px;
       }
     }
 

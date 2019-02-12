@@ -2,10 +2,10 @@
 
 	{% if ( fields ) %}
 
-		<div class="carousel-header block-wide">
-			<div id="carousel-wrapper-header">
+		<div class="carousel-header block-wide {{ fields.block_style }}">
+			<div id="carousel-wrapper-header" data-block-style="{{ fields.block_style }}">
 				{% if fields.total_images > 1 %}
-					<ol class="carousel-indicators"></ol>
+          <ol class="carousel-indicators "></ol>
 				{% endif %}
 				<div class="carousel-inner" role="listbox">
 
@@ -30,7 +30,7 @@
 										{% if ( attribute( fields, 'header_'~i ) ) %}
 											<h2>{{ attribute( fields, 'header_'~i ) }}</h2>
 										{% endif %}
-										{% if ( attribute( fields, 'subheader_'~i ) ) %}
+										{% if ( attribute( fields, 'subheader_'~i ) and fields.block_style == 'zoom-and-slide-to-gray' ) %}
 											<h3>{{ attribute( fields, 'subheader_'~i ) }}</h3>
 										{% endif %}
 										{% if ( attribute( fields, 'description_'~i )  ) %}
@@ -51,6 +51,10 @@
 
 				</div>
 				{% if fields.total_images > 1 %}
+					<a class="carousel-control-prev" href="#carousel-wrapper-header" role="button" data-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"><i></i></span>
+						<span class="sr-only">Prev</span>
+					</a>
 					<a class="carousel-control-next" href="#carousel-wrapper-header" role="button" data-slide="next">
 						<span class="carousel-control-next-icon" aria-hidden="true"><i></i></span>
 						<span class="sr-only">Next</span>

@@ -21,6 +21,9 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 		/** @const string BLOCK_NAME */
 		const BLOCK_NAME = 'carousel_header';
 
+		const LAYOUT_ZOOM_AND_SLIDE_TO_GRAY = 'zoom-and-slide-to-gray';
+		const LAYOUT_FULL_WIDTH_CLASSIC     = 'full-width-classic';
+
 		/**
 		 * Shortcode UI setup for carousel header shortcode.
 		 *
@@ -33,7 +36,28 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 		public function prepare_fields() {
 
 			// This block will have 4 different images/content with same fields.
-			$fields = [];
+			$fields = [
+				[
+					'attr'        => 'block_style',
+					'label'       => __( 'What style of carousel do you need?', 'planet4-blocks-backend' ),
+					'description' => __( 'Change the style of carousel that you wish to display your images in.', 'planet4-blocks-backend' ),
+					'type'        => 'p4_radio',
+					'options'     => [
+						[
+							'value' => static::LAYOUT_ZOOM_AND_SLIDE_TO_GRAY,
+							'label' => __( 'Zoom and slide to gray', 'planet4-blocks-backend' ),
+							'desc'  => 'This carousel provides a fancy transition, and a preview for the next slide in an oblique shape.',
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/carousel-with-preview.png' ),
+						],
+						[
+							'value' => static::LAYOUT_FULL_WIDTH_CLASSIC,
+							'label' => __( 'Full width classic', 'planet4-blocks-backend' ),
+							'desc'  => 'This is a full width slider with a classic look: big slides, fade transition, and no subheaders.',
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/carousel-classic.png' ),
+						],
+					],
+				],
+			];
 
 			for ( $i = 1; $i < 5; $i++ ) {
 				$field  = [
@@ -112,8 +136,9 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter subheader of %s image', 'planet4-blocks-backend' ), $i ),
-							'data-plugin' => 'planet4-blocks',
+							'placeholder'    => sprintf( __( 'Enter subheader of %s image', 'planet4-blocks-backend' ), $i ),
+							'data-plugin'    => 'planet4-blocks',
+							'data-subheader' => 'true',
 						],
 					],
 					[
@@ -208,6 +233,7 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 			$block_data = [
 				'fields' => $attributes,
 			];
+
 			return $block_data;
 		}
 	}
