@@ -9,6 +9,13 @@
 						<h2>{{ fields.columns_title|e('wp_kses_post')|raw }}</h2>
 					{% endif %}
 					<div class="row">
+						{% if ( fields.columns_description ) %}
+							<div class="col-md-12 col">
+								<p>{{ fields.columns_description|e('wp_kses_post')|raw }}</p>
+							</div>
+						{% endif %}
+					</div>
+					<div class="row">
 						{% for i in 1..4 %}
 							{% if fields['title_'~i] %}
 								<div class="col-md-6 col-lg column-wrap">

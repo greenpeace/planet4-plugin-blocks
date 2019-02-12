@@ -67,20 +67,20 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Columns Title', 'planet4-blocks-backend' ),
+					'label' => __( 'Title', 'planet4-blocks-backend' ),
 					'attr'  => 'columns_title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Enter columns title', 'planet4-blocks-backend' ),
+						'placeholder' => __( 'Enter block title', 'planet4-blocks-backend' ),
 						'data-plugin' => 'planet4-blocks',
 					],
 				],
 				[
-					'label' => __( 'Columns Description', 'planet4-blocks-backend' ),
+					'label' => __( 'Description', 'planet4-blocks-backend' ),
 					'attr'  => 'columns_description',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Enter columns description', 'planet4-blocks-backend' ),
+						'placeholder' => __( 'Enter block description', 'planet4-blocks-backend' ),
 						'data-plugin' => 'planet4-blocks',
 					],
 				],
