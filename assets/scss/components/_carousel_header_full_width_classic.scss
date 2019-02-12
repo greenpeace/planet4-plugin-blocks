@@ -87,7 +87,7 @@ $slide-transition-speed: 1s;
 
     &::after {
       content: "";
-      background: none;
+      background: rgba(91, 91, 91, 0.25);
     }
 
     .carousel-caption {
