@@ -30,7 +30,7 @@
 										{% if ( attribute( fields, 'header_'~i ) ) %}
 											<h2>{{ attribute( fields, 'header_'~i ) }}</h2>
 										{% endif %}
-										{% if ( attribute( fields, 'subheader_'~i ) and fields.block_style == 'zoom-and-slide-to-gray' ) %}
+										{% if ( attribute( fields, 'subheader_'~i ) and fields.block_style != 'full-width-classic' ) %}
 											<h3>{{ attribute( fields, 'subheader_'~i ) }}</h3>
 										{% endif %}
 										{% if ( attribute( fields, 'description_'~i )  ) %}
