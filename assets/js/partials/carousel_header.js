@@ -94,8 +94,8 @@ $(document).ready(function() {
       });
 
       /* Carousel header swipe on mobile */
-      if($('.carousel-header').length > 0) {
-        var carousel_element = $('.carousel-header')[0];
+      if($('.carousel-header_full-width-classic').length > 0) {
+        var carousel_element = $('.carousel-header_full-width-classic')[0];
         var carousel_head_hammer = new Hammer(carousel_element, { recognizers: [] });
         var hammer = new Hammer.Manager(carousel_head_hammer.element);
         var swipe = new Hammer.Swipe();

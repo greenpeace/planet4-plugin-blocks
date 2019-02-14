@@ -1,16 +1,11 @@
 // $slide-transition-speed should match SLIDE_TRANSITION_SPEED in carousel-header.js
 $slide-transition-speed: 1s;
 
-@mixin preview-wrap-width($size) {
-  width: $size;
-  margin-left: 100% - $size;
-}
+// $slide-transition-speed should match SLIDE_TRANSITION_SPEED in carousel-header.js
+$slide-transition-speed: 1s;
 
-@mixin preview-width($size) {
-  width: $size * (100% / $size);
-}
-
-.carousel-header.full-width-classic {
+.carousel-header_full-width-classic {
+  position: relative;
   width: 100vw;
 
   &::after {
@@ -86,11 +81,14 @@ $slide-transition-speed: 1s;
     }
 
     &::after {
+      @include fill-container;
       content: "";
+      z-index: 0;
       background: rgba(91, 91, 91, 0.25);
     }
 
     .carousel-caption {
+      @include fill-container;
       z-index: 2;
       text-align: left;
       transition: opacity $slide-transition-speed;
