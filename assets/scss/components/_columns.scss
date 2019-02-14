@@ -13,7 +13,7 @@
 
   a {
     text-decoration: none;
-    font-weight: bold;
+    font-weight: inherit;
     color: $dark-blue;
   }
 
@@ -62,7 +62,11 @@
 
   // Columns block, layout no-image.
   &.block-style-no_image {
-    margin-bottom: 60px;
+    margin-bottom: $n60;
+
+    .column-wrap {
+      padding-bottom: $n60;
+    }
 
     h3 {
       font-size: 1.375rem;
@@ -105,6 +109,8 @@
     }
 
     .btn {
+      position: absolute;
+      bottom: 0;
       margin-bottom: 0;
     }
   }

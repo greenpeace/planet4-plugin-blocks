@@ -25,7 +25,7 @@
 									{% set link = fields['link_'~i] %}
 									{% set cta_text = fields['cta_text_'~i] %}
 
-									{% if attachment %}
+									{% if attachment and fields.columns_block_style != 'no_image' %}
 										<div class="attachment-container">
 											{% if link %}<a href="{{ link|e('esc_url') }}">{% endif %}
 												<img src="{{ attachment }}" alt="{{ title }}">

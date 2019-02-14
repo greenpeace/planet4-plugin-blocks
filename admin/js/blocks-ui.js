@@ -538,6 +538,7 @@ var p4_blocks = {
         $('.shortcake-columns-add-column').attr('disabled', 'disabled');
       }
 
+      this.toggle_images();
       this.add_click_event_handlers();
     },
 
@@ -576,6 +577,10 @@ var p4_blocks = {
             $element.attr('disabled', 'disabled');
           }
         }
+      });
+
+      $('input[name=columns_block_style]').off('click').on('click', function() {
+        p4_blocks.columns.toggle_images();
       });
     },
 
@@ -619,9 +624,21 @@ var p4_blocks = {
      */
     show_column: function (row) {
       $('.field-block').filter($('div[class$=\'_' + row + '\']')).show(300, function () {
+        p4_blocks.columns.toggle_images();
         $('.media-frame-content').animate({
           scrollTop: $('.shortcode-ui-content').prop('scrollHeight'),
         }, 300);
+      });
+    },
+
+    /**
+     * Show/hide images inputs depending on column block style.
+     */
+    toggle_images: function() {
+      [1, 2, 3, 4].forEach(function(row) {
+        var column_is_visible = $('.field-block').filter($('div[class$=\'title_' + row + '\']')).is(':visible');
+        var block_style_allows_images = 'no_image' != $('input[name=columns_block_style]:checked').val();
+        $('.shortcode-ui-attribute-attachment_'+ row).toggle(column_is_visible && block_style_allows_images);
       });
     }
   },
