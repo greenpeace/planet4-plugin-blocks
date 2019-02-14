@@ -65,7 +65,7 @@
     margin-bottom: $n60;
 
     .column-wrap {
-      padding-bottom: $n60;
+      padding-bottom: $n60;  // Leave enough room for the CTA button
     }
 
     h3 {
@@ -117,6 +117,10 @@
 
   // Columns block, layout icons.
   &.block-style-icons {
+    .column-wrap {
+      padding-bottom: 1em;  // Leave enough room for the CTA link
+    }
+
     h2 {
       font-weight: 700;
       font-size: 1.875rem;
@@ -201,6 +205,11 @@
 
       &:hover {
         text-decoration: underline;
+      }
+
+      &.call-to-action-link {
+        position: absolute;
+        bottom: 0;
       }
     }
 
