@@ -25,18 +25,14 @@ $slide-transition-speed: 1s;
   .carousel-inner {
     position: relative;
     overflow: visible;
-    height: 680px;
+    height: 580px;
 
     @include medium-and-up {
-      height: 560px;
+      height: 960px;
     }
 
     @include large-and-up {
-      height: 560px;
-    }
-
-    @include x-large-and-up {
-      height: 560px;
+      height: 680px;
     }
   }
 
@@ -110,6 +106,12 @@ $slide-transition-speed: 1s;
       padding-right: 24px;
       background: $white;
       height: auto;
+
+      @include medium-and-up {
+        padding-top: $n40;
+        padding-left: $n40;
+        padding-right: $n40;
+      }
 
       @include large-and-up {
         @include fill-container;
@@ -298,6 +300,9 @@ $slide-transition-speed: 1s;
             height: 60px;
             letter-spacing: 1px;
             font-weight: 900;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
             html[dir="rtl"] & {
               font-size: 1.175rem;
