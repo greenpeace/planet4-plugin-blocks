@@ -160,20 +160,22 @@ function plugin_blocks_report() {
 
 	// Array filtering on shortcake shortcodes.
 	$blocks = array_filter( array_keys( $shortcode_tags ), 'is_shortcake' );
+	sort( $blocks );
 
 	// phpcs:disable
 	foreach ( $blocks as $block ) {
-		$block = substr($block, 10);
+		$block = substr( $block, 10 );
 		$sql = 'SELECT ID, post_title
 				FROM `wp_posts` 
 				WHERE post_status = \'publish\' 
 				AND `post_content` LIKE \'%[shortcake_' . $block . '%\'
+				ORDER BY post_title
 				';
 
 		$results = $wpdb->get_results( $sql );
 
 		// Confusion between old and new covers.
-		if ( 'covers' == $block ) {
+		if ( 'covers' === $block ) {
 			$block = 'Take Action Covers - Old block';
 		}
 
