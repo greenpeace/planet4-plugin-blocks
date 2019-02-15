@@ -118,6 +118,19 @@ $slide-transition-speed: 1s;
         background: none;
       }
 
+      .caption-overlay {
+        background-color: rgba(0, 0, 0, 0.2);
+        filter: blur(50px);
+        height: 100%;
+        width: 40%;
+        position: absolute;
+        opacity: 0;
+
+        @include large-and-up {
+          opacity: 1;
+        }
+      }
+
       .main-header {
         color: $article-heading-color;
         padding-top: 0;
@@ -129,10 +142,16 @@ $slide-transition-speed: 1s;
           padding-right: 0;
           padding-top: 140px;
           padding-bottom: 32px;
+
+          html[dir="rtl"] & {
+            text-align: right;
+            padding-right: $n30;
+          }
         }
 
         @include x-large-and-up {
           padding-left: 0;
+          padding-right: 0;
           padding-top: 140px;
           padding-bottom: 54px;
         }
@@ -373,16 +392,13 @@ $slide-transition-speed: 1s;
     right: auto;
     left: auto;
     padding-left: 0;
+    padding-right: 0;
     width: 100%;
     margin-bottom: 40px;
     margin-left: 5px;
 
     @include medium-and-up {
       width: auto;
-    }
-
-    @include large-and-up {
-      padding-left: 30px;
     }
 
     @include x-large-and-up {

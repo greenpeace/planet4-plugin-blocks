@@ -384,20 +384,22 @@ $(document).ready(function() {
 
     positionIndicators: function() {
       var $indicators = $('.carousel-indicators');
-      var $header = $('.main-header');
-      var rightSide = (window.matchMedia('(min-width: 991px)').matches && $('html').attr('dir') == 'rtl')
-                      || (window.matchMedia('(min-width: 768px) and (max-width: 991px)').matches && $('html').attr('dir') != 'rtl');
+      var $header = $('.main-header h2');
+      var isRTL = $('html').attr('dir') == 'rtl';
+      var rightSide = (window.matchMedia('(min-width: 991px)').matches && isRTL)
+                      || (window.matchMedia('(min-width: 768px) and (max-width: 991px)').matches && !isRTL);
 
       if (window.matchMedia('(min-width: 768px)').matches) {
+        var leftOffset = $header.offset().left;
         if (rightSide) {
-          var rightOffset = $header.offset().left + $header.width();
+          var rightOffset = leftOffset + (isRTL ? $header.width() : $header.parent().width());
           var indicatorsRight = $(window).width() - rightOffset;
           $indicators.css('right', indicatorsRight + 'px')
             .css('left', '')
             .css('margin-left', '0')
             .css('margin-right', '4px');
         } else {
-          var leftOffset = $header.offset().left;
+          leftOffset = isRTL ? $header.parent().offset().left : $header.offset().left;
           $indicators.css('left', leftOffset + 'px')
             .css('right', '')
             .css('margin-right', '0')
