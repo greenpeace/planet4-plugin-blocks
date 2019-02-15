@@ -94,8 +94,8 @@ $(document).ready(function() {
       });
 
       /* Carousel header swipe on mobile */
-      if($('.carousel-header_full-width-classic').length > 0) {
-        var carousel_element = $('.carousel-header_full-width-classic')[0];
+      if($('.carousel-header').length > 0) {
+        var carousel_element = $('.carousel-header')[0];
         var carousel_head_hammer = new Hammer(carousel_element, { recognizers: [] });
         var hammer = new Hammer.Manager(carousel_head_hammer.element);
         var swipe = new Hammer.Swipe();
@@ -312,8 +312,8 @@ $(document).ready(function() {
       });
 
       /* Carousel header swipe on mobile */
-      if($('.carousel-header').length > 0) {
-        var carousel_element = $('.carousel-header')[0];
+      if($('.carousel-header_full-width-classic').length > 0) {
+        var carousel_element = $('.carousel-header_full-width-classic')[0];
         var carousel_head_hammer = new Hammer(carousel_element, { recognizers: [] });
         var hammer = new Hammer.Manager(carousel_head_hammer.element);
         var swipe = new Hammer.Swipe();
@@ -413,17 +413,17 @@ $(document).ready(function() {
       const me = this;
 
       var $active = me.$Slides.filter('.active');
-      me.$Slides.removeClass('next');
-      var $prev = me.previousSlide($active).addClass('next');
+      var $prev = me.previousSlide($active);
 
       if (me.activeTransition) {
         // A transition is in progress, so proceed to the next pair of slides
         clearTimeout(me.activeTransition);
+        clearTimeout(me.completedTransition);
         me.activeTransition = null;
-        me.$Slides.removeClass('fade-out slide-over active');
+        me.completedTransition = null;
+        me.$Slides.removeClass('fade-out fade-in active');
         $prev.addClass('active');
-        me.previousSlide($prev).addClass('next');
-        me.advanceCarousel();
+        me.backwardsCarousel();
         return;
       }
 
@@ -432,15 +432,14 @@ $(document).ready(function() {
       // When transition is done, swap out the slides
       me.activeTransition = setTimeout(function beginTransition() {
         $active.addClass('fade-out');
-        me.activeTransition = setTimeout(function completeTransition() {
-          $active.removeClass('active');
-          me.$Slides.removeClass('fade-out');
-          $prev.removeClass('next').addClass('active');
-          // Ensure the new upcoming slide has .next
-          me.nextSlide($prev).addClass('next');
+        $prev.addClass('fade-in');
+        me.completedTransition = setTimeout(function completeTransition() {
+          $active.removeClass('active fade-out');
+          $prev.removeClass('fade-in').addClass('active');
           me.activeTransition = null;
-        }, me.SLIDE_TRANSITION_SPEED / 2);
-      }, me.SLIDE_TRANSITION_SPEED);
+          me.completedTransition = null;
+        }, me.SLIDE_TRANSITION_SPEED);
+      }, 0);
     },
 
     /**
@@ -449,37 +448,33 @@ $(document).ready(function() {
     advanceCarousel: function() {
       const me = this;
       var $active = me.$Slides.filter('.active');
-      me.$Slides.removeClass('next');
-      var $next = me.nextSlide($active).addClass('next');
+      var $next = me.nextSlide($active);
 
-      if (me.activeTransition) {
+      if (me.activeTransition || me.completedTransition) {
         // A transition is in progress, so proceed to the next pair of slides
         clearTimeout(me.activeTransition);
+        clearTimeout(me.completedTransition);
         me.activeTransition = null;
-        me.$Slides.removeClass('fade-out slide-over active');
+        me.completedTransition = null;
+        me.$Slides.removeClass('fade-out fade-in active');
         $next.addClass('active');
-        me.nextSlide($next).addClass('next');
         me.advanceCarousel();
         return;
       }
-
-      // Transition out the active slide
-      $active.addClass('slide-over');
 
       me.switchIndicator(me.$Slides.index($next));
 
       // When transition is done, swap out the slides
       me.activeTransition = setTimeout(function beginTransition() {
         $active.addClass('fade-out');
-        me.activeTransition = setTimeout(function completeTransition() {
-          $active.removeClass('active');
-          me.$Slides.removeClass('slide-over fade-out');
-          $next.removeClass('next').addClass('active');
-          // Ensure the new upcoming slide has .next
-          me.nextSlide($next).addClass('next');
+        $next.addClass('fade-in');
+        me.completedTransition = setTimeout(function completeTransition() {
+          $active.removeClass('fade-out active');
+          $next.removeClass('fade-in').addClass('active');
           me.activeTransition = null;
-        }, me.SLIDE_TRANSITION_SPEED / 2);
-      }, me.SLIDE_TRANSITION_SPEED);
+          me.completedTransition = null;
+        }, me.SLIDE_TRANSITION_SPEED);
+      }, 0);
     },
   };
 

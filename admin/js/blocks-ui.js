@@ -646,15 +646,28 @@ var p4_blocks = {
   carousel_header: {
     render_edit: function () {
       p4_blocks.carousel_header.toggle_subheaders();
+      p4_blocks.carousel_header.set_maxlength();
 
       $('input[name=block_style]').off('click').on('click', function() {
         p4_blocks.carousel_header.toggle_subheaders();
+        p4_blocks.carousel_header.set_maxlength();
       });
     },
 
     toggle_subheaders: function() {
       var selected_block_style = $('input[name=block_style]:checked').val();
       $('input[data-subheader=true]').closest('.field-block').toggle('full-width-classic' != selected_block_style);
+    },
+
+    set_maxlength: function() {
+      var selected_block_style = $('input[name=block_style]:checked').val();
+      if (selected_block_style == 'full-width-classic') {
+        $('input[name^=\'header_\']').attr('maxlength', 32);
+        $('textarea[name^=\'description_\']').attr('maxlength', 200);
+      } else {
+        $('input[name^=\'header_\']').attr('maxlength', 40);
+        $('textarea[name^=\'description_\']').removeAttr('maxlength');
+      }
     }
   }
 };

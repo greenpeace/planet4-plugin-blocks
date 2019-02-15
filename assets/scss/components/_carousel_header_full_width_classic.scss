@@ -25,7 +25,7 @@ $slide-transition-speed: 1s;
   .carousel-inner {
     position: relative;
     overflow: visible;
-    height: 700px;
+    height: 680px;
 
     @include medium-and-up {
       height: 560px;
@@ -72,6 +72,11 @@ $slide-transition-speed: 1s;
       transition: opacity #{ $slide-transition-speed / 2 };
     }
 
+    &.fade-in {
+      opacity: 1;
+      transition: opacity #{ $slide-transition-speed / 2 };
+    }
+
     &::before {
       @include fill-container;
       content: "";
@@ -84,7 +89,11 @@ $slide-transition-speed: 1s;
       @include fill-container;
       content: "";
       z-index: 0;
-      background: rgba(91, 91, 91, 0.25);
+      background: none;
+
+      @include large-and-up {
+        background: rgba(91, 91, 91, 0.25);
+      }
     }
 
     .carousel-caption {
@@ -96,7 +105,7 @@ $slide-transition-speed: 1s;
       top: auto;
       bottom: 0;
       padding-top: $n20;
-      padding-bottom: $n80;
+      padding-bottom: $n70;
       padding-left: 24px;
       padding-right: 24px;
       background: $white;
@@ -116,7 +125,7 @@ $slide-transition-speed: 1s;
         height: 100%;
 
         @include large-and-up {
-          padding-left: 0;
+          padding-left: $n30;
           padding-right: 0;
           padding-top: 140px;
           padding-bottom: 32px;
@@ -212,19 +221,19 @@ $slide-transition-speed: 1s;
           @include medium-and-up {
             line-height: 1.6;
             margin-bottom: 24px;
-            width: 60%;
+            max-width: 320px;
             display: block;
           }
 
           @include large-and-up {
             margin-bottom: 36px;
-            width: 50%;
             color: $white;
           }
 
           @include x-large-and-up {
             font-size: 1.125rem;
             line-height: 1.6;
+            max-width: 380px;
           }
         }
 
@@ -265,18 +274,25 @@ $slide-transition-speed: 1s;
 
           .btn {
             font-size: 0.875rem;
-            line-height: 2.8;
+            line-height: 58px;
             width: 80%;
+            height: 60px;
+            letter-spacing: 1px;
+            font-weight: 900;
 
             html[dir="rtl"] & {
               font-size: 1.175rem;
               line-height: 2.5;
             }
 
+            @include small-and-up {
+              height: 54px;
+              line-height: 51px;
+            }
+
             @include medium-and-up {
               font-size: 1rem;
-              line-height: 3;
-              width: auto;
+              width: 280px;
 
               html[dir="rtl"] & {
                 font-size: 1.3rem;
@@ -284,14 +300,6 @@ $slide-transition-speed: 1s;
               }
             }
           }
-        }
-      }
-    }
-
-    &.slide-over {
-      @include small-and-up {
-        .carousel-caption {
-          opacity: 0;
         }
       }
     }
@@ -373,8 +381,13 @@ $slide-transition-speed: 1s;
       width: auto;
     }
 
+    @include large-and-up {
+      padding-left: 30px;
+    }
+
     @include x-large-and-up {
-      margin-bottom: 50px;
+      padding-left: 0;
+      margin-bottom: 40px;
     }
 
     li {
