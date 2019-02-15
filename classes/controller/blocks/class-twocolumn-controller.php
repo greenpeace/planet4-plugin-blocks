@@ -140,7 +140,7 @@ if ( ! class_exists( 'TwoColumn_Controller' ) ) {
 				 * See above, to where the the assignment to the $fields variable was made.
 				 */
 				'attrs'         => $fields,
-				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
+				'post_type'     => [ 'do_not_show_replaced_by_columns' ],
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
