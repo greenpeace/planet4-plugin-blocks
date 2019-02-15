@@ -707,6 +707,10 @@ if ('undefined' !== typeof (wp.shortcake)) {
     if ('shortcake_columns' === shortcode_tag) {
       p4_blocks.columns.render_new(shortcode);
     }
+
+    if ('shortcake_carousel_header' === shortcode_tag) {
+      p4_blocks.carousel_header.render_edit();
+    }
   });
 
   // Trigger hooks when shortcode renders an existing p4 block.
