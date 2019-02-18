@@ -165,12 +165,14 @@ function plugin_blocks_report() {
 	// phpcs:disable
 	foreach ( $blocks as $block ) {
 		$block = substr( $block, 10 );
-		$sql = 'SELECT ID, post_title
-				FROM `wp_posts` 
-				WHERE post_status = \'publish\' 
-				AND `post_content` LIKE \'%[shortcake_' . $block . '%\'
-				ORDER BY post_title
-				';
+		$shortcode = '%[shortcake_' . $wpdb->esc_like( $block ) . '%';
+		$sql       = $wpdb->prepare(
+			"SELECT ID, post_title
+			FROM `wp_posts` 
+			WHERE post_status = 'publish' 
+			AND `post_content` LIKE %s
+			ORDER BY post_title",
+			$shortcode );
 
 		$results = $wpdb->get_results( $sql );
 
@@ -180,7 +182,7 @@ function plugin_blocks_report() {
 		}
 
 		echo '<hr>';
-		echo '<h2>' . $block . '</h2>';
+		echo '<h2>' . ucfirst( str_replace( '_', ' ', $block ) ) . '</h2>';
 
 		foreach ( $results as $result ) {
 			echo '<a href="post.php?post=' . $result->ID . '&action=edit" >' . $result->post_title . '</a>';
