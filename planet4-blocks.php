@@ -187,3 +187,44 @@ function plugin_blocks_report() {
 	}
 	// phpcs:enable
 }
+
+
+/**
+ * Exports the blocks usage report.
+ */
+function plugin_blocks_report_json() {
+	global $wpdb, $shortcode_tags;
+
+	// Array filtering on shortcake shortcodes.
+	$blocks = array_filter( array_keys( $shortcode_tags ), 'is_shortcake' );
+
+	$report = [];
+
+	// phpcs:disable
+	foreach ( $blocks as $block ) {
+
+		$block = substr( $block, 10 );
+		$shortcode = '%[shortcake_' . $wpdb->esc_like( $block ) . '%';
+		$sql       = $wpdb->prepare(
+			"SELECT count(ID) AS cnt
+			FROM `wp_posts` 
+			WHERE post_status = 'publish' 
+			AND `post_content` LIKE %s", $shortcode );
+
+		$results = $wpdb->get_var( $sql );
+
+		$report[ ucfirst( str_replace( '_', ' ', $block ) ) ] = $results;
+
+	}
+	return $report;
+
+	// phpcs:enable
+}
+
+
+add_action( 'rest_api_init', function () {
+	register_rest_route( 'plugin_blocks/v1', '/plugin_blocks_report/', array(
+		'methods' => 'GET',
+		'callback' => 'plugin_blocks_report_json',
+	) );
+} );
