@@ -191,3 +191,60 @@ function plugin_blocks_report() {
 	}
 	// phpcs:enable
 }
+
+/**
+ * Finds blocks usage in pages/posts.
+ */
+function plugin_blocks_report_json() {
+	global $wpdb, $shortcode_tags;
+
+	$cache_key = 'plugin-blocks-report';
+	$report    = wp_cache_get( $cache_key );
+
+	if ( ! $report ) {
+		// Array filtering on shortcake shortcodes.
+		$blocks = array_filter( array_keys( $shortcode_tags ), 'is_shortcake' );
+
+		$report = [];
+
+		// phpcs:disable
+		foreach ( $blocks as $block ) {
+
+			$block     = substr( $block, 10 );
+			$shortcode = '%[shortcake_' . $wpdb->esc_like( $block ) . '%';
+			$sql       = $wpdb->prepare(
+				"SELECT count(ID) AS cnt
+				FROM `wp_posts` 
+				WHERE post_status = 'publish' 
+				AND `post_content` LIKE %s", $shortcode );
+
+			$results = $wpdb->get_var( $sql );
+
+			$report[ ucfirst( str_replace( '_', ' ', $block ) ) ] = $results;
+
+		}
+		wp_cache_add( $cache_key, $report, '', 3600 );
+
+	}
+	return $report;
+
+	// phpcs:enable
+}
+
+
+/**
+ * Register API route for report of blocks usage in pages/posts.
+ */
+function plugin_blocks_report_register_rest_route() {
+	register_rest_route(
+		'plugin_blocks/v1',
+		'/plugin_blocks_report/',
+		[
+			'methods'  => 'GET',
+			'callback' => 'plugin_blocks_report_json',
+		]
+	);
+}
+
+
+add_action( 'rest_api_init', 'plugin_blocks_report_register_rest_route' );
