@@ -56,9 +56,13 @@
 									{% if ( fields['title_'~i] ) %}
 										<div class="col" data-id="{{ i }}">
 											{% if ( fields['attachment_'~i] ) %}
-													<a href="{{ fields['link_'~i] }}">
-														<img src="{{ fields['attachment_'~i] }}" alt=""/>
-													</a>
+													{% if ( fields['link_'~i] ) %}
+														<a href="{{ fields['link_'~i] }}">
+													{% endif %}
+															<img src="{{ fields['attachment_'~i] }}" alt=""/>
+													{% if ( fields['link_'~i] ) %}
+														</a>
+													{% endif %}
 											{% endif %}
 										</div>
 									{% endif %}
@@ -134,7 +138,7 @@
 												{% endif %}
 											</div>
 
-											{% if ( fields['cta_text_'~i] and fields['cta_text_'~i] ) %}
+											{% if ( fields['cta_text_'~i] and fields['link_'~i] ) %}
 												<a class="btn btn-small btn-secondary"
 												   href="{{ fields['link_'~i] }}">{{ fields['cta_text_'~i] }}
 												</a>

@@ -13,7 +13,7 @@
 
   a {
     text-decoration: none;
-    font-weight: bold;
+    font-weight: inherit;
     color: $dark-blue;
   }
 
@@ -62,7 +62,13 @@
 
   // Columns block, layout no-image.
   &.block-style-no_image {
-    margin-bottom: 60px;
+    margin-bottom: $n60;
+
+    .column-wrap {
+      @include medium-and-up {
+        padding-bottom: $n60;  // Leave enough room for the CTA button
+      }
+    }
 
     h3 {
       font-size: 1.375rem;
@@ -105,12 +111,24 @@
     }
 
     .btn {
+      position: relative;
       margin-bottom: 0;
+
+      @include medium-and-up {
+        position: absolute;
+        bottom: 0;
+      }
     }
   }
 
   // Columns block, layout icons.
   &.block-style-icons {
+    .column-wrap {
+      @include medium-and-up {
+        padding-bottom: 1em;  // Leave enough room for the CTA link
+      }
+    }
+
     h2 {
       font-weight: 700;
       font-size: 1.875rem;
@@ -146,7 +164,6 @@
 
       a {
         font-weight: 700;
-        font-family: $roboto;
 
         @include medium-and-up {
           font-size: 1.125rem;
@@ -176,6 +193,10 @@
         font-size: 0.9375rem;
         margin-bottom: 24px;
       }
+
+      a {
+        font-family: $lora;
+      }
     }
 
     a {
@@ -195,6 +216,15 @@
 
       &:hover {
         text-decoration: underline;
+      }
+
+      &.call-to-action-link {
+        position: relative;
+
+        @include medium-and-up {
+          position: absolute;
+          bottom: 0;
+        }
       }
     }
 
@@ -521,6 +551,7 @@
 
           .btn-secondary {
             margin-bottom: 20px;
+            width: 100%;
           }
         }
 
