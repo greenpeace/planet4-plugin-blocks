@@ -65,7 +65,9 @@
     margin-bottom: $n60;
 
     .column-wrap {
-      padding-bottom: $n60;  // Leave enough room for the CTA button
+      @include medium-and-up {
+        padding-bottom: $n60;  // Leave enough room for the CTA button
+      }
     }
 
     h3 {
@@ -109,16 +111,22 @@
     }
 
     .btn {
-      position: absolute;
-      bottom: 0;
+      position: relative;
       margin-bottom: 0;
+
+      @include medium-and-up {
+        position: absolute;
+        bottom: 0;
+      }
     }
   }
 
   // Columns block, layout icons.
   &.block-style-icons {
     .column-wrap {
-      padding-bottom: 1em;  // Leave enough room for the CTA link
+      @include medium-and-up {
+        padding-bottom: 1em;  // Leave enough room for the CTA link
+      }
     }
 
     h2 {
@@ -156,7 +164,7 @@
 
       a {
         font-weight: 700;
-        font-family: $roboto;
+        font-family: $lora;
 
         @include medium-and-up {
           font-size: 1.125rem;
@@ -208,8 +216,12 @@
       }
 
       &.call-to-action-link {
-        position: absolute;
-        bottom: 0;
+        position: relative;
+
+        @include medium-and-up {
+          position: absolute;
+          bottom: 0;
+        }
       }
     }
 
@@ -536,6 +548,7 @@
 
           .btn-secondary {
             margin-bottom: 20px;
+            width: 100%;
           }
         }
 
