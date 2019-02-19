@@ -164,7 +164,6 @@
 
       a {
         font-weight: 700;
-        font-family: $lora;
 
         @include medium-and-up {
           font-size: 1.125rem;
@@ -193,6 +192,10 @@
       @include x-large-and-up {
         font-size: 0.9375rem;
         margin-bottom: 24px;
+      }
+
+      a {
+        font-family: $lora;
       }
     }
 
