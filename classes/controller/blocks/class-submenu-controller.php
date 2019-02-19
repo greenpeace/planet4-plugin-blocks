@@ -205,6 +205,11 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 		 */
 		private function parse_post_content( $content, $attributes ) {
 
+			// Validate, if $content is empty.
+			if ( ! $content ) {
+				return [];
+			}
+
 			// make array of heading level metadata keyed by tag name.
 			$heading_meta = [];
 			foreach ( range( 1, 3 ) as $heading_num ) {

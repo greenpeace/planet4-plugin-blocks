@@ -83,6 +83,7 @@ $slide-transition-speed: 1s;
       content: "";
       background-image: inherit;
       background-size: cover;
+      background-position: inherit;
       filter: grayscale(100%);
     }
 

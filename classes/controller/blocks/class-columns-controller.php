@@ -94,7 +94,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 						'label' => sprintf(
 							// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
 							__(
-								'Column %s: Title <br><i>Title is mandatory. In order for the task to be appeared title has to be filled.</i>',
+								'Column %s: Header <br><i>Header is mandatory. In order for the task to be appeared title has to be filled.</i>',
 								'planet4-blocks-backend'
 							),
 							$i
@@ -103,7 +103,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter title of %s column', 'planet4-blocks-backend' ), $i ),
+							'placeholder' => sprintf( __( 'Enter header of %s column', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
 						],
 					];
@@ -111,12 +111,12 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
-						'label' => sprintf( __( 'Column %s: Description', 'planet4-blocks-backend' ), $i ),
+						'label' => sprintf( __( 'Column %s: Body', 'planet4-blocks-backend' ), $i ),
 						'attr'  => 'description_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
 							// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
-							'placeholder' => sprintf( __( 'Enter description of %s column', 'planet4-blocks-backend' ), $i ),
+							'placeholder' => sprintf( __( 'Enter body of %s column', 'planet4-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-blocks',
 						],
 					];
@@ -135,7 +135,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
-						'label' => sprintf( __( 'Column %s: Link', 'planet4-blocks-backend' ), $i ),
+						'label' => sprintf( __( 'Column %s: Button/CtA Link', 'planet4-blocks-backend' ), $i ),
 						'attr'  => 'link_' . $i,
 						'type'  => 'url',
 						'meta'  => [
@@ -148,7 +148,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
-						'label' => sprintf( __( 'Column %s: Call to Action', 'planet4-blocks-backend' ), $i ),
+						'label' => sprintf( __( 'Column %s: Button/CtA Text', 'planet4-blocks-backend' ), $i ),
 						'attr'  => 'cta_text_' . $i,
 						'type'  => 'text',
 						'meta'  => [
