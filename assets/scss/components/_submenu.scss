@@ -2,107 +2,67 @@
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 5px 5px 5px 0 rgba(128, 128, 128, 0.5);
   margin-bottom: 40px;
-  padding: $n20 $n40;
+  padding: 20px;
 
   h1,
   h2 {
+    padding-left: 16px;
     color: $grey-60;
     font-family: $roboto;
-    margin-bottom: 16px;
   }
 
-  > ul {
+  .submenu-menu {
     display: flex;
     flex-wrap: wrap;
 
-    > li {
+    ul.submenu-item {
       flex-basis: 100%;
       padding: 0;
+
+      @include large-and-up {
+        flex-basis: 50%;
+      }
     }
-  }
 
-  a {
-    color: $menu-blue;
-    text-decoration: none;
-  }
-
-  .submenu-heading {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: $grey-60;
-    margin-top: 18px;
-  }
-
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    a {
+      color: $menu-blue;
+      text-decoration: none;
+    }
 
     ul {
-      margin: 16px;
-    }
-  }
-
-  li {
-    margin: 6px 0 0;
-
-    &.list-heading > ul {
-      margin-left: 0;
-    }
-
-    &.list-style-none {
+      margin: 0.75em 0;
       list-style: none;
+      padding: 0 16px;
     }
 
-    &.list-style-bullet::before {
-      content: "";
-      background-image: url("images/icons/angle-right.svg");
-      background-position: 50% 50%;
-      background-size: 1rem 1rem;
-      background-repeat: no-repeat;
-      margin-right: 2px;
-      height: 1rem;
-      width: 1rem;
-      margin-bottom: -2px;
-      display: inline-block;
-      @supports (mask-repeat: no-repeat) or (-webkit-mask-repeat: no-repeat) {
-        & {
-          background-image: none;
-          background-color: $menu-blue;
-          -webkit-mask-image: url("images/icons/angle-right.svg");
-          mask-image: url("images/icons/angle-right.svg");
-          mask-repeat: no-repeat;
-          -webkit-mask-repeat: no-repeat;
-          margin-right: 0;
-        }
+    li {
+      padding-left: 16px;
+
+      &:before {
+        display: inline-block;
+        font: normal normal normal 14px/1 ForkAwesome;
+        font-weight: 900;
+        content: "\f105";
+        color: $menu-blue;
+        margin-right: 5px;
+        font-size: 0.8em;
       }
-    }
-
-    &.list-style-number {
-      list-style: decimal;
-      margin-left: 20px;
     }
   }
 
-  @include large-and-up {
-    &.submenu-long,
-    &.submenu-short {
-      > ul {
-        display: block;
+  &.submenu-short {
+    .submenu-menu {
+      ul.submenu-item {
+        flex-basis: 100%;
 
-        li {
-          margin: 0;
-          padding: 6px 0 0;
+        @include large-and-up {
+          flex-basis: 33%;
+        }
+
+        li:before {
+          content: "";
         }
       }
-    }
-
-    &.submenu-long {
-      columns: 2;
-    }
-
-    &.submenu-short {
-      columns: 3;
     }
   }
 
@@ -112,7 +72,17 @@
     @include medium-and-up {
       float: right;
       max-width: 350px;
-      margin: 0 0 $n15 $n15;
+      margin: 0 0 15px 15px;
+    }
+
+    .submenu-menu {
+      ul.submenu-item {
+        flex-basis: 100%;
+
+        @include large-and-up {
+          flex-basis: 100%;
+        }
+      }
     }
   }
 }
