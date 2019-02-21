@@ -25,10 +25,10 @@
 									<div class="caption-overlay"></div>
 									<div class="container main-header">
 										{% if ( attribute( fields, 'header_'~i ) ) %}
-											<h2>{{ attribute( fields, 'header_'~i ) }}</h2>
+											<h1>{{ attribute( fields, 'header_'~i ) }}</h1>
 										{% endif %}
 										{% if ( attribute( fields, 'subheader_'~i ) and fields.block_style != 'full-width-classic' ) %}
-											<h3>{{ attribute( fields, 'subheader_'~i ) }}</h3>
+											<h2>{{ attribute( fields, 'subheader_'~i ) }}</h2>
 										{% endif %}
 										{% if ( attribute( fields, 'description_'~i )  ) %}
 											<p>{{ attribute( fields, 'description_'~i ) }}</p>
