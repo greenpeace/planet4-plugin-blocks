@@ -11,7 +11,7 @@ $(document).ready(function() {
     */
 
     // SLIDE_TRANSITION_SPEED should match $slide-transition-speed in _carousel_header.scss.
-    SLIDE_TRANSITION_SPEED: 1000,
+    SLIDE_TRANSITION_SPEED: 500,
     activeTransition: null,
 
 
@@ -224,16 +224,6 @@ $(document).ready(function() {
 
   const FullWidthClassicCarouselHeader = {
     /**
-    * This module provides a custom slideshow mechanism for use with the header carousel.
-    * The transition behavior in this block is too complex to be easily layered upon the
-    * default bootstrap carousel.
-    */
-
-    // SLIDE_TRANSITION_SPEED should match $slide-transition-speed in _carousel_header.scss.
-    SLIDE_TRANSITION_SPEED: 1000,
-    activeTransition: null,
-
-    /**
     * Given an active slide return the next slide, wrapping around the end of the carousel.
     *
     * @param {HTMLElement|jQuery} slide A slide in the carousel.
@@ -263,8 +253,6 @@ $(document).ready(function() {
       const me = this;
 
       me.$CarouselHeaderWrapper = $('#carousel-wrapper-header');
-
-      me.$CarouselIndicators = me.$CarouselHeaderWrapper.find('.carousel-indicators');
       me.$Slides = me.$CarouselHeaderWrapper.find('.carousel-item');
 
       me.$CarouselHeaderWrapper.find('img').on('load', function () {
@@ -274,6 +262,8 @@ $(document).ready(function() {
           $(this).parent().css('background-image', 'url(' + $(this).get(0).currentSrc + ')');
         }
       });
+
+      me.$CarouselIndicators = me.$CarouselHeaderWrapper.find('.carousel-indicators');
 
       me.$Slides.each(function (i, el) {
         var $slide = $(el);
@@ -431,38 +421,25 @@ $(document).ready(function() {
 
     backwardsCarousel: function() {
       const me = this;
+      var $activeSlide = me.$Slides.filter('.active');
+      var $previousSlide = me.previousSlide($activeSlide);
 
-      var $active = me.$Slides.filter('.active');
-      var $prev = me.previousSlide($active);
+      $activeSlide.addClass('slide-right');
+      $previousSlide.addClass('prev');
 
-      if (me.activeTransition) {
-        // A transition is in progress, so proceed to the next pair of slides
-        clearTimeout(me.activeTransition);
-        clearTimeout(me.completedTransition);
-        me.activeTransition = null;
-        me.completedTransition = null;
-        me.$Slides.removeClass('fade-out fade-in active');
-        $prev.addClass('active');
-        me.backwardsCarousel();
-        return;
+      function unsetTransitionClasses() {
+        $activeSlide.removeClass('slide-right active');
+        $previousSlide.addClass('active').removeClass('prev');
+        $activeSlide.off('transitionend');
       }
 
-      me.switchIndicator(me.$Slides.index($prev));
+      if (window.matchMedia('(min-width: 992px)').matches) {
+        $activeSlide.on('transitionend', unsetTransitionClasses);
+      } else {
+        unsetTransitionClasses();
+      }
 
-      // When transition is done, swap out the slides
-      me.activeTransition = setTimeout(function beginTransition() {
-        $active.addClass('fade-out');
-        $prev.addClass('fade-in');
-
-        me.setCarouselHeight($prev);
-
-        me.completedTransition = setTimeout(function completeTransition() {
-          $active.removeClass('active fade-out');
-          $prev.removeClass('fade-in').addClass('active');
-          me.activeTransition = null;
-          me.completedTransition = null;
-        }, me.SLIDE_TRANSITION_SPEED);
-      }, 0);
+      me.switchIndicator(me.$Slides.index($previousSlide));
     },
 
     /**
@@ -470,38 +447,27 @@ $(document).ready(function() {
     */
     advanceCarousel: function() {
       const me = this;
-      var $active = me.$Slides.filter('.active');
-      var $next = me.nextSlide($active);
+      var $activeSlide = me.$Slides.filter('.active');
+      var $nextSlide = me.nextSlide($activeSlide);
 
-      if (me.activeTransition || me.completedTransition) {
-        // A transition is in progress, so proceed to the next pair of slides
-        clearTimeout(me.activeTransition);
-        clearTimeout(me.completedTransition);
-        me.activeTransition = null;
-        me.completedTransition = null;
-        me.$Slides.removeClass('fade-out fade-in active');
-        $next.addClass('active');
-        me.advanceCarousel();
-        return;
+      $activeSlide.addClass('slide-left');
+      $nextSlide.addClass('next');
+
+      function unsetTransitionClasses() {
+        $activeSlide.removeClass('slide-left active');
+        $nextSlide.addClass('active').removeClass('next');
+        $activeSlide.off('transitionend');
       }
 
-      me.switchIndicator(me.$Slides.index($next));
+      if (window.matchMedia('(min-width: 992px)').matches) {
+        $activeSlide.on('transitionend', unsetTransitionClasses);
+        $activeSlide.find('.btn').fadeIn();
+      } else {
+        unsetTransitionClasses();
+      }
 
-      // When transition is done, swap out the slides
-      me.activeTransition = setTimeout(function beginTransition() {
-        $active.addClass('fade-out');
-        $next.addClass('fade-in');
-
-        me.setCarouselHeight($next);
-
-        me.completedTransition = setTimeout(function completeTransition() {
-          $active.removeClass('fade-out active');
-          $next.removeClass('fade-in').addClass('active');
-
-          me.activeTransition = null;
-          me.completedTransition = null;
-        }, me.SLIDE_TRANSITION_SPEED);
-      }, 0);
+      me.setCarouselHeight($activeSlide);
+      me.switchIndicator(me.$Slides.index($nextSlide));
     },
   };
 

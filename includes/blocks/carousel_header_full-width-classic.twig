@@ -7,36 +7,42 @@
 
 					{% for i in 1..4 %}
 
-						{% if ( attribute( fields, 'header_'~i ) and attribute( fields, 'image_'~i ) ) %}
+						{% if ( attribute( fields, 'header_' ~ i ) and attribute( fields, 'image_' ~ i ) ) %}
 							{% if ( loop.first ) %}
 								{% set css_class = 'carousel-item active' %}
 							{% else %}
 								{% set css_class = 'carousel-item' %}
 							{% endif %}
 							<div class="{{ css_class }}">
-								{% if ( attribute( fields, 'image_'~i ) ) %}
-									<img src="{{ fields['image_'~i] }}"
-										 data-background-position="{{ fields['focus_image_'~i] }}"
-										 srcset="{{ fields['image_'~i~'_srcset'] }}"
-										 sizes="{{ fields['image_'~i~'_sizes'] }}"
-										 alt="{{ attribute( fields, 'image_'~i~'_alt' ) }}">
-								{% endif %}
+
+								<div class="background-holder" style="display: none">
+									{% if ( attribute( fields, 'image_' ~ i ) ) %}
+										<img src="{{ fields['image_' ~ i] }}"
+											data-background-position="{{ fields['focus_image_' ~ i] }}"
+											srcset="{{ fields['image_' ~ i ~ '_srcset'] }}"
+											sizes="{{ fields['image_' ~ i ~ '_sizes'] }}"
+											alt="{{ attribute( fields, 'image_' ~ i ~ '_alt' ) }}">
+									{% endif %}
+								</div>
+
 								<div class="carousel-caption">
 									<div class="caption-overlay"></div>
 									<div class="container main-header">
-										{% if ( attribute( fields, 'header_'~i ) ) %}
-											<h1>{{ attribute( fields, 'header_'~i ) }}</h1>
-										{% endif %}
-										{% if ( attribute( fields, 'subheader_'~i ) and fields.block_style != 'full-width-classic' ) %}
-											<h2>{{ attribute( fields, 'subheader_'~i ) }}</h2>
-										{% endif %}
-										{% if ( attribute( fields, 'description_'~i )  ) %}
-											<p>{{ attribute( fields, 'description_'~i ) }}</p>
-										{% endif %}
+										<div class="carousel-captions-wrapper">
+											{% if ( attribute( fields, 'header_' ~ i ) ) %}
+												<h1>{{ attribute( fields, 'header_' ~ i ) }}</h1>
+											{% endif %}
+											{% if ( attribute( fields, 'subheader_' ~ i ) and fields.block_style != 'full-width-classic' ) %}
+												<h2>{{ attribute( fields, 'subheader_' ~ i ) }}</h2>
+											{% endif %}
+											{% if ( attribute( fields, 'description_' ~ i )  ) %}
+												<p>{{ attribute( fields, 'description_' ~ i ) }}</p>
+											{% endif %}
+										</div>
 
-										{% if ( attribute( fields, 'link_text_'~i ) ) %}
+										{% if ( attribute( fields, 'link_text_' ~ i ) ) %}
 											<div class="col-xs-12 col-sm-8 col-md-4 action-button">
-												<a href="{{ attribute( fields, 'link_url_'~i) }}"
+												<a href="{{ attribute( fields, 'link_url_' ~ i) }}"
 												   class="btn btn-small btn-medium btn-primary btn-block">{{ attribute( fields, 'link_text_'~i ) }}</a>
 											</div>
 										{% endif %}
