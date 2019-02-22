@@ -89,7 +89,7 @@ $slide-transition-speed: 1s;
       background: none;
 
       @include large-and-up {
-        background: rgba(91, 91, 91, 0.25);
+        background: rgba(30, 30, 30, 0.45);
       }
     }
 
@@ -131,6 +131,10 @@ $slide-transition-speed: 1s;
 
         @include large-and-up {
           opacity: 1;
+        }
+
+        @include x-large-and-up {
+          width: 580px;
         }
       }
 
