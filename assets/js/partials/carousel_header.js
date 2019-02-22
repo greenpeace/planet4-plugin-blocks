@@ -346,7 +346,12 @@ $(document).ready(function() {
       });
 
       me.positionIndicators();
-      $(window).on('resize', me.positionIndicators);
+      me.setCarouselHeight(me.$Slides.first());
+      $(window).on('resize', function() {
+        var $currentSlide = $('.carousel-item.active');
+        me.setCarouselHeight($currentSlide);
+        me.positionIndicators();
+      });
     },
 
     /**
@@ -383,11 +388,11 @@ $(document).ready(function() {
     },
 
     positionIndicators: function() {
-      var $indicators = $('.carousel-indicators');
+      var $indicators = $('.carousel-indicators.carousel-indicators-large');
       var $header = $('.main-header h2');
       var isRTL = $('html').attr('dir') == 'rtl';
-      var rightSide = (window.matchMedia('(min-width: 991px)').matches && isRTL)
-                      || (window.matchMedia('(min-width: 768px) and (max-width: 991px)').matches && !isRTL);
+      var rightSide = (window.matchMedia('(min-width: 992px)').matches && isRTL)
+                      || (window.matchMedia('(min-width: 768px) and (max-width: 992px)').matches && !isRTL);
 
       if (window.matchMedia('(min-width: 768px)').matches) {
         var leftOffset = $header.offset().left;
@@ -408,6 +413,18 @@ $(document).ready(function() {
       } else {
         $indicators.css('right', '');
         $indicators.css('left', '');
+      }
+    },
+
+    getSlideHeight: function($slide) {
+      return $slide.height() + $slide.find('.carousel-caption').height() + 'px';
+    },
+
+    setCarouselHeight: function($currentSlide) {
+      if (window.matchMedia('(max-width: 992px)').matches) {
+        $('.carousel-inner').css('height', this.getSlideHeight($currentSlide));
+      } else {
+        $('.carousel-inner').css('height', '');
       }
     },
 
@@ -435,6 +452,9 @@ $(document).ready(function() {
       me.activeTransition = setTimeout(function beginTransition() {
         $active.addClass('fade-out');
         $prev.addClass('fade-in');
+
+        me.setCarouselHeight($prev);
+
         me.completedTransition = setTimeout(function completeTransition() {
           $active.removeClass('active fade-out');
           $prev.removeClass('fade-in').addClass('active');
@@ -470,9 +490,13 @@ $(document).ready(function() {
       me.activeTransition = setTimeout(function beginTransition() {
         $active.addClass('fade-out');
         $next.addClass('fade-in');
+
+        me.setCarouselHeight($next);
+
         me.completedTransition = setTimeout(function completeTransition() {
           $active.removeClass('fade-out active');
           $next.removeClass('fade-in').addClass('active');
+
           me.activeTransition = null;
           me.completedTransition = null;
         }, me.SLIDE_TRANSITION_SPEED);

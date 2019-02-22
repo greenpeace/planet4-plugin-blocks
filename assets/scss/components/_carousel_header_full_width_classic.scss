@@ -4,6 +4,9 @@ $slide-transition-speed: 1s;
 // $slide-transition-speed should match SLIDE_TRANSITION_SPEED in carousel-header.js
 $slide-transition-speed: 1s;
 
+$small-image-height: 232px;
+$medium-image-height: 600px;
+
 .carousel-header_full-width-classic {
   position: relative;
   width: 100vw;
@@ -26,6 +29,7 @@ $slide-transition-speed: 1s;
     position: relative;
     overflow: visible;
     height: 580px;
+    padding-bottom: $n60;
 
     @include medium-and-up {
       height: 960px;
@@ -38,7 +42,7 @@ $slide-transition-speed: 1s;
 
   .carousel-item {
     display: block;
-    height: 100%;
+    height: $small-image-height;
     position: absolute;
     top: 0;
     background-size: 0;
@@ -46,6 +50,14 @@ $slide-transition-speed: 1s;
     z-index: 1;
     transform: rotate(0);
     transition: opacity $slide-transition-speed;
+
+    @include medium-and-up {
+      height: $medium-image-height;
+    }
+
+    @include large-and-up {
+      height: 100%;
+    }
 
     img {
       display: none;
@@ -94,13 +106,12 @@ $slide-transition-speed: 1s;
     }
 
     .carousel-caption {
-      @include fill-container;
+      position: relative;
       z-index: 2;
       text-align: left;
       transition: opacity $slide-transition-speed;
-      position: absolute;
-      top: auto;
-      bottom: 0;
+      top: $small-image-height;
+      left: 0;
       padding-top: $n20;
       padding-bottom: $n70;
       padding-left: 24px;
@@ -109,6 +120,7 @@ $slide-transition-speed: 1s;
       height: auto;
 
       @include medium-and-up {
+        top: $medium-image-height;
         padding-top: $n40;
         padding-left: $n40;
         padding-right: $n40;
@@ -406,6 +418,26 @@ $slide-transition-speed: 1s;
     width: 100%;
     margin-bottom: 40px;
     margin-left: 5px;
+
+    &.carousel-indicators-large {
+      display: none;
+
+      @include large-and-up {
+        display: block;
+      }
+    }
+
+    &.carousel-indicators-mobile {
+      display: block;
+      position: relative;
+      width: 100%;
+      text-align: center;
+      padding-top: $n15;
+
+      @include medium-and-up {
+        text-align: right;
+      }
+    }
 
     @include medium-and-up {
       width: auto;
