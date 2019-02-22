@@ -1,7 +1,7 @@
 		<div class="carousel-header_{{ fields.block_style }} block-wide">
 			<div id="carousel-wrapper-header" data-block-style="{{ fields.block_style }}">
 				{% if fields.total_images > 1 %}
-          <ol class="carousel-indicators "></ol>
+          <ol class="carousel-indicators carousel-indicators-large"></ol>
 				{% endif %}
 				<div class="carousel-inner" role="listbox">
 
@@ -41,6 +41,10 @@
 											</div>
 										{% endif %}
 									</div>
+
+									{% if fields.total_images > 1 %}
+										<ol class="carousel-indicators carousel-indicators-mobile"></ol>
+									{% endif %}
 								</div>
 							</div>
 						{% endif %}
