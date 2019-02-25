@@ -389,7 +389,7 @@ $(document).ready(function() {
 
     positionIndicators: function() {
       var $indicators = $('.carousel-indicators.carousel-indicators-large');
-      var $header = $('.main-header h2');
+      var $header = $('.main-header h1');
       var isRTL = $('html').attr('dir') == 'rtl';
       var rightSide = (window.matchMedia('(min-width: 992px)').matches && isRTL)
                       || (window.matchMedia('(min-width: 768px) and (max-width: 992px)').matches && !isRTL);
