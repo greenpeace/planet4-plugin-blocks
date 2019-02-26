@@ -417,7 +417,7 @@ $(document).ready(function() {
     },
 
     getSlideHeight: function($slide) {
-      return $slide.height() + $slide.find('.carousel-caption').height() + 'px';
+      return $slide.outerHeight() + $slide.find('.carousel-caption').outerHeight() + 'px';
     },
 
     setCarouselHeight: function($currentSlide) {
