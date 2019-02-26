@@ -421,10 +421,11 @@ $(document).ready(function() {
     },
 
     setCarouselHeight: function($currentSlide) {
+      const me = this;
       if (window.matchMedia('(max-width: 992px)').matches) {
-        $('.carousel-inner').css('height', this.getSlideHeight($currentSlide));
+        me.$CarouselHeaderWrapper.find('.carousel-inner').css('height', this.getSlideHeight($currentSlide));
       } else {
-        $('.carousel-inner').css('height', '');
+        me.$CarouselHeaderWrapper.find('.carousel-inner').css('height', '');
       }
     },
 
