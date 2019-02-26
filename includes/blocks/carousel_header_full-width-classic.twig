@@ -9,11 +9,11 @@
 
 						{% if ( attribute( fields, 'header_' ~ i ) and attribute( fields, 'image_' ~ i ) ) %}
 							{% if ( loop.first ) %}
-								{% set css_class = 'carousel-item active' %}
+								{% set css_class = 'carousel-item active initial' %}
 							{% else %}
 								{% set css_class = 'carousel-item' %}
 							{% endif %}
-							<div class="{{ css_class }}">
+							<div class="{{ css_class }}" data-slide="{{ i }}">
 
 								<div class="background-holder" style="display: none">
 									{% if ( attribute( fields, 'image_' ~ i ) ) %}

@@ -5,6 +5,51 @@ $text-slide-offset: 50px;
 $small-image-height: 260px;
 $medium-image-height: 600px;
 
+// 0% and 20% are equal to simulate a delay without using animation-delay
+@keyframes initial-header-animation {
+  0% {
+    transform: translateX(550px);
+  }
+
+  20% {
+    transform: translateX(550px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+// 0% and 40% are equal to simulate a delay without using animation-delay
+@keyframes initial-paragraph-animation {
+  0% {
+    transform: translateX(550px);
+  }
+
+  40% {
+    transform: translateX(550px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+// 0% and 50% are equal to simulate a delay without using animation-delay
+@keyframes initial-cta-animation {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .carousel-header_full-width-classic {
   position: relative;
   width: 100vw;
@@ -80,6 +125,41 @@ $medium-image-height: 600px;
       }
     }
 
+    &.initial {
+      display: block;
+      left: 0;
+      z-index: 2000;
+      opacity: 1;
+      transition: unset;
+
+      @include large-and-up {
+        clip-path: inset(0 0 0 0);
+
+        .carousel-caption .main-header {
+          h1 {
+            animation-name: initial-header-animation;
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: 1;
+          }
+
+          p {
+            animation-name: initial-paragraph-animation;
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: 1;
+          }
+
+          .action-button {
+            animation-name: initial-cta-animation;
+            animation-duration: 2s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: 1;
+          }
+        }
+      }
+    }
+
     &.active {
       display: block;
       left: 0;
@@ -91,10 +171,14 @@ $medium-image-height: 600px;
         clip-path: inset(0 0 0 0);
       }
 
-      .carousel-caption .main-header .carousel-captions-wrapper {
+      .carousel-caption .main-header {
         h1, p {
           transform: translateX(0);
           transition: unset;
+        }
+
+        .action-button {
+          opacity: 1;
         }
       }
     }
@@ -178,7 +262,7 @@ $medium-image-height: 600px;
 
       .carousel-captions-wrapper {
         @include large-and-up {
-          width: 440px;
+          width: 540px;
         }
         overflow: hidden;
         margin-left: -$text-slide-offset;
@@ -383,6 +467,7 @@ $medium-image-height: 600px;
     @include large-and-up {
       display: flex;
       top: 50%;
+      margin-top: -46px;
       height: 92px;
       width: 78px;
       transition: transform .2s, background-color .2s;
@@ -416,6 +501,7 @@ $medium-image-height: 600px;
     @include large-and-up {
       top: 50%;
       display: flex;
+      margin-top: -46px;
       height: 92px;
       width: 78px;
       transition: transform .2s, background-color .2s;
