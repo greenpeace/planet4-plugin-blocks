@@ -437,6 +437,10 @@ $medium-image-height: 600px;
       @include medium-and-up {
         text-align: right;
       }
+
+      @include large-and-up {
+        display: none;
+      }
     }
 
     @include medium-and-up {
