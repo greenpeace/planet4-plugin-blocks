@@ -1,7 +1,7 @@
 		<div class="carousel-header_{{ fields.block_style }} block-wide">
 			<div id="carousel-wrapper-header" data-block-style="{{ fields.block_style }}">
 				{% if fields.total_images > 1 %}
-          <ol class="carousel-indicators "></ol>
+          <ol class="carousel-indicators carousel-indicators-large"></ol>
 				{% endif %}
 				<div class="carousel-inner" role="listbox">
 
@@ -25,10 +25,10 @@
 									<div class="caption-overlay"></div>
 									<div class="container main-header">
 										{% if ( attribute( fields, 'header_'~i ) ) %}
-											<h2>{{ attribute( fields, 'header_'~i ) }}</h2>
+											<h1>{{ attribute( fields, 'header_'~i ) }}</h1>
 										{% endif %}
 										{% if ( attribute( fields, 'subheader_'~i ) and fields.block_style != 'full-width-classic' ) %}
-											<h3>{{ attribute( fields, 'subheader_'~i ) }}</h3>
+											<h2>{{ attribute( fields, 'subheader_'~i ) }}</h2>
 										{% endif %}
 										{% if ( attribute( fields, 'description_'~i )  ) %}
 											<p>{{ attribute( fields, 'description_'~i ) }}</p>
@@ -41,6 +41,10 @@
 											</div>
 										{% endif %}
 									</div>
+
+									{% if fields.total_images > 1 %}
+										<ol class="carousel-indicators carousel-indicators-mobile"></ol>
+									{% endif %}
 								</div>
 							</div>
 						{% endif %}
