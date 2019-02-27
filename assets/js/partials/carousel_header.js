@@ -249,6 +249,10 @@ $(document).ready(function() {
       });
     },
 
+    getCurrentSlideIndex: function() {
+      return this.$CarouselHeaderWrapper.find('.carousel-item.active').index();
+    },
+
     setup: function() {
       const me = this;
 
@@ -278,7 +282,7 @@ $(document).ready(function() {
         // Convert the provided image tag into background image styles.
         var $img = $slide.find('img');
         var img_src = $img.get(0).currentSrc || $img.attr('src');
-        $slide
+        $slide.find('.background-holder')
           .css('background-image', 'url(' + img_src + ')')
           .css('background-position', $img.data('background-position'));
 
@@ -357,13 +361,22 @@ $(document).ready(function() {
     activate: function(slideIndex) {
       const me = this;
       var $slide = me.$Slides.eq(slideIndex);
+      var currentIndex = me.getCurrentSlideIndex();
 
-      me.advanceCarousel($slide);
+      if (slideIndex == currentIndex) {
+        return;
+      }
+
+      if (slideIndex > currentIndex) {
+        me.advanceCarousel($slide);
+      } else {
+        me.backwardsCarousel($slide);
+      }
     },
 
     positionIndicators: function() {
-      var $indicators = $('.carousel-indicators.carousel-indicators-large');
-      var $header = $('.carousel-item.active .main-header');
+      var $indicators = $('.carousel-indicators');
+      var $header = $('.carousel-item.active .action-button');
       var isRTL = $('html').attr('dir') == 'rtl';
       var rightSide = (window.matchMedia('(min-width: 992px)').matches && isRTL)
                       || (window.matchMedia('(min-width: 768px) and (max-width: 992px)').matches && !isRTL);
@@ -376,13 +389,13 @@ $(document).ready(function() {
           $indicators.css('right', indicatorsRight + 'px')
             .css('left', '')
             .css('margin-left', '0')
-            .css('margin-right', '4px');
+            .css('margin-right', '5px');
         } else {
           leftOffset = isRTL ? $header.parent().offset().left : $header.offset().left;
           $indicators.css('left', leftOffset + 'px')
             .css('right', '')
             .css('margin-right', '0')
-            .css('margin-left', '4px');
+            .css('margin-left', '5px');
         }
       } else {
         $indicators.css('right', '');
@@ -391,22 +404,27 @@ $(document).ready(function() {
     },
 
     getSlideHeight: function($slide) {
-      return $slide.outerHeight() + $slide.find('.carousel-caption').outerHeight() + 'px';
+      return $slide.find('.carousel-item-mask .background-holder').outerHeight() + $slide.find('.carousel-caption').outerHeight() + 'px';
     },
 
     setCarouselHeight: function($currentSlide) {
       const me = this;
       if (window.matchMedia('(max-width: 992px)').matches) {
-        me.$CarouselHeaderWrapper.find('.carousel-inner').css('height', this.getSlideHeight($currentSlide));
+        me.$CarouselHeaderWrapper.find('.carousel-inner, .carousel-item-mask').css('height', this.getSlideHeight($currentSlide));
       } else {
-        me.$CarouselHeaderWrapper.find('.carousel-inner').css('height', '');
+        me.$CarouselHeaderWrapper.find('.carousel-inner, .carousel-item-mask').css('height', '');
       }
     },
 
-    backwardsCarousel: function() {
+    backwardsCarousel: function($slide) {
       const me = this;
       var $activeSlide = me.$Slides.filter('.active');
-      var $previousSlide = me.previousSlide($activeSlide);
+      var $previousSlide = null;
+      if ($slide) {
+        $previousSlide = $slide;
+      } else {
+        $previousSlide = me.previousSlide($activeSlide);
+      }
 
       $activeSlide.addClass('slide-right');
       $previousSlide.addClass('prev');
@@ -417,12 +435,8 @@ $(document).ready(function() {
         $activeSlide.off('transitionend');
       }
 
-      if (window.matchMedia('(min-width: 992px)').matches) {
-        $activeSlide.on('transitionend', unsetTransitionClasses);
-      } else {
-        unsetTransitionClasses();
-      }
-
+      me.setCarouselHeight($previousSlide);
+      $activeSlide.on('transitionend', unsetTransitionClasses);
       me.switchIndicator(me.$Slides.index($previousSlide));
     },
 
@@ -448,14 +462,10 @@ $(document).ready(function() {
         $activeSlide.off('transitionend');
       }
 
-      if (window.matchMedia('(min-width: 992px)').matches) {
-        $activeSlide.on('transitionend', unsetTransitionClasses);
-        $activeSlide.find('.btn').fadeIn();
-      } else {
-        unsetTransitionClasses();
-      }
+      $activeSlide.on('transitionend', unsetTransitionClasses);
+      $activeSlide.find('.btn').fadeIn();
 
-      me.setCarouselHeight($activeSlide);
+      me.setCarouselHeight($nextSlide);
       me.switchIndicator(me.$Slides.index($nextSlide));
     },
   };
