@@ -333,6 +333,7 @@ $medium-image-height: 600px;
         padding: 0 0 $n60 0;
         padding-bottom: 0;
         background: none;
+        height: 100%;
       }
 
       .carousel-captions-wrapper {
@@ -358,7 +359,7 @@ $medium-image-height: 600px;
         background-position: bottom right;
         background-size: cover;
         height: 100%;
-        width: 40%;
+        width: 50%;
         position: absolute;
         opacity: 0;
 
