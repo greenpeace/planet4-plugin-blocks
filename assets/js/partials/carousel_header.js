@@ -383,6 +383,7 @@ $(document).ready(function() {
 
       if (window.matchMedia('(min-width: 768px)').matches) {
         var leftOffset = $header.offset().left;
+
         if (rightSide) {
           var rightOffset = leftOffset + (isRTL ? $header.width() : $header.parent().width());
           var indicatorsRight = $(window).width() - rightOffset;

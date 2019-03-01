@@ -146,7 +146,6 @@ $medium-image-height: 600px;
         width: 100%;
       }
 
-      .carousel-caption.carousel-caption-mobile .main-header,
       .carousel-caption .main-header {
         h1 {
           animation-name: initial-header-animation;
@@ -238,10 +237,26 @@ $medium-image-height: 600px;
 
     &.slide-right {
       .carousel-item-mask {
-        margin-left: auto;
         width: 0;
+        margin-left: auto;
         right: 0;
+
+        html[dir="rtl"] & {
+          right: auto;
+          margin-left: 0;
+          margin-right: auto;
+          left: 0;
+        }
+
         transition: width $slide-transition-speed;
+
+        // This "width + overflow: hidden" reveal trick depends on
+        // the direction property to allow masking content from the left, see:
+        // https://stackoverflow.com/questions/22126759/how-to-cut-off-overflow-on-the-left-side?rq=1
+        //
+        // It exists as a workaround for `clip-path` which is not yet well supported on Safari & Firefox.
+        // TODO: Remove in favor of `clip-path` when supported in all major browsers
+        // Check for compatibility: https://caniuse.com/#feat=css-clip-path
         direction: rtl;
       }
 
@@ -261,6 +276,10 @@ $medium-image-height: 600px;
           animation-duration: $slide-transition-speed;
           animation-timing-function: ease-in-out;
           animation-iteration-count: 1;
+
+          html[dir="rtl"] & {
+            animation-name: texts-from-right-animation;
+          }
         }
       }
     }
@@ -276,6 +295,10 @@ $medium-image-height: 600px;
           animation-duration: $slide-transition-speed;
           animation-timing-function: ease-in-out;
           animation-iteration-count: 1;
+
+          html[dir="rtl"] & {
+            animation-name: texts-from-left-animation;
+          }
         }
       }
     }
@@ -286,6 +309,7 @@ $medium-image-height: 600px;
       z-index: 2500;
       text-align: left;
       left: 0;
+      right: 0;
       top: $mobile-image-height;
       padding-top: $n20;
       padding-bottom: $n90;
@@ -331,6 +355,10 @@ $medium-image-height: 600px;
         width: 40%;
         position: absolute;
         opacity: 0;
+
+        html[dir="rtl"] & {
+          background-position: bottom left;
+        }
 
         @include large-and-up {
           display: block;
@@ -590,6 +618,10 @@ $medium-image-height: 600px;
     @include medium-and-up {
       text-align: right;
       width: auto;
+
+      html[dir="rtl"] & {
+        right: auto;
+      }
     }
 
     @include large-and-up {
