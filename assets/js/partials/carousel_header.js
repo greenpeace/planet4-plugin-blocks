@@ -390,13 +390,13 @@ $(document).ready(function() {
           $indicators.css('right', indicatorsRight + 'px')
             .css('left', '')
             .css('margin-left', '0')
-            .css('margin-right', '5px');
+            .css('margin-right', '-5px');
         } else {
           leftOffset = isRTL ? $header.parent().offset().left : $header.offset().left;
           $indicators.css('left', leftOffset + 'px')
             .css('right', '')
             .css('margin-right', '0')
-            .css('margin-left', '5px');
+            .css('margin-left', '-5px');
         }
       } else {
         $indicators.css('right', '');

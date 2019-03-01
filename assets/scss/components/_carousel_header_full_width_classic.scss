@@ -635,7 +635,7 @@ $medium-image-height: 600px;
 
     @include large-and-up {
       position: absolute;
-      bottom: 0;
+      bottom: $n30;
       left: auto;
       text-align: left;
       padding-left: 0;
