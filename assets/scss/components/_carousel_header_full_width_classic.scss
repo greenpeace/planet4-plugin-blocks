@@ -336,8 +336,14 @@ $medium-image-height: 600px;
       }
 
       .carousel-captions-wrapper {
+        @include medium-and-up {
+          width: #{460 + ($text-slide-offset * 2)};
+        }
         @include large-and-up {
-          width: 540px;
+          width: #{320 + ($text-slide-offset * 2)};
+        }
+        @include x-large-and-up {
+          width: #{480 + ($text-slide-offset * 2)};
         }
         overflow: hidden;
         margin-left: -$text-slide-offset;
@@ -398,7 +404,7 @@ $medium-image-height: 600px;
         h1 {
           font-size: 1.75rem;
           margin-bottom: 10px;
-          width: 70%;
+          width: 100%;
           line-height: 1.2;
           font-weight: bold;
           color: $black;
@@ -416,16 +422,18 @@ $medium-image-height: 600px;
           }
 
           @include large-and-up {
+            max-width: 100%;
+            width: 100%;
             color: $white;
             margin-bottom: 20px;
             line-height: 1.2;
-            width: 50%;
           }
 
           @include x-large-and-up {
             font-size: 3.5rem;
             line-height: 1.1;
-            width: 60%;
+            max-width: 100%;
+            width: 100%;
           }
         }
 
@@ -439,6 +447,7 @@ $medium-image-height: 600px;
           width: 100%;
           text-align: left;
           padding-left: 0;
+          max-width: 100%;
 
           html[dir="rtl"] & {
             text-align: right;
@@ -450,7 +459,6 @@ $medium-image-height: 600px;
           @include medium-and-up {
             line-height: 1.6;
             margin-bottom: 24px;
-            max-width: 320px;
             display: block;
           }
 
@@ -462,7 +470,6 @@ $medium-image-height: 600px;
           @include x-large-and-up {
             font-size: 1.125rem;
             line-height: 1.6;
-            max-width: 380px;
           }
         }
 
@@ -632,13 +639,11 @@ $medium-image-height: 600px;
       padding-left: 0;
       padding-right: 0;
       width: auto;
-      margin-bottom: 40px;
       display: block;
     }
 
     @include x-large-and-up {
       padding-left: 0;
-      margin-bottom: 40px;
     }
 
     li {
