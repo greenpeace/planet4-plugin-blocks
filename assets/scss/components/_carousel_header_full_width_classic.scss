@@ -2,7 +2,7 @@
 $slide-transition-speed: .3s;
 $text-slide-offset: 50px;
 
-$mobile-image-height: 260px;
+$mobile-image-height: 280px;
 $medium-image-height: 600px;
 
 // 0% and 20% are equal to simulate a delay without using animation-delay
@@ -92,7 +92,7 @@ $medium-image-height: 600px;
     position: relative;
     overflow: visible;
     height: 580px;
-    padding-bottom: $n60;
+    padding-bottom: 0;
 
     @include medium-and-up {
       height: 960px;
@@ -312,7 +312,7 @@ $medium-image-height: 600px;
       right: 0;
       top: $mobile-image-height;
       padding-top: $n20;
-      padding-bottom: $n90;
+      padding-bottom: $n70;
       padding-left: 24px;
       padding-right: 24px;
       background: $white;
@@ -620,8 +620,9 @@ $medium-image-height: 600px;
     position: absolute;
     width: 100%;
     text-align: center;
-    padding: $n30 0;
+    padding: 0;
     margin: 0;
+    bottom: $n30;
 
     @include medium-and-up {
       text-align: right;
