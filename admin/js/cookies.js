@@ -1,4 +1,15 @@
 /* global createCookie, readCookie */
+function setNoTrackCookie()
+{
+  if ($('#necessary_cookies').is(':checked') || $('#all_cookies').is(':checked')) {
+    // Remove the 'no_track' cookie, if user accept the cookies consent.
+    createCookie('no_track', 'true', -1);
+  } else {
+    // If user manually disables all trackings, set a 'no_track' cookie.
+    createCookie('no_track', 'true', 20*365);
+  }
+}
+
 jQuery(document).ready(function () {
 
   var cookie = readCookie('greenpeace');
@@ -21,6 +32,7 @@ jQuery(document).ready(function () {
       createCookie('greenpeace', '0', -1);
       $('.cookie-notice').show();
     }
+    setNoTrackCookie();
   });
 
   // Add change event for all cookies checkbox.
@@ -37,5 +49,6 @@ jQuery(document).ready(function () {
         $('.cookie-notice').show();
       }
     }
+    setNoTrackCookie();
   });
 });
