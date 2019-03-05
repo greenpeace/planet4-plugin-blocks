@@ -129,6 +129,7 @@ jobs:
 
             pushd planet4-docker-compose
             make ci
+            make test
             popd
 
       - run:
