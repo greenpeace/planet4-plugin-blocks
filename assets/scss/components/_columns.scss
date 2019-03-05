@@ -44,10 +44,6 @@
       }
     }
 
-    a {
-      font-size: 1.125rem;
-    }
-
     p {
       font-size: 1rem;
       color: $dark-shade-black;
@@ -62,8 +58,6 @@
 
   // Columns block, layout no-image.
   &.block-style-no_image {
-    margin-bottom: $n60;
-
     .column-wrap {
       @include medium-and-up {
         padding-bottom: $n60;  // Leave enough room for the CTA button

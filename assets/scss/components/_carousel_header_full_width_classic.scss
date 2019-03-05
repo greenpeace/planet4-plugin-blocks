@@ -1,8 +1,74 @@
 // $slide-transition-speed should match SLIDE_TRANSITION_SPEED in carousel-header.js
-$slide-transition-speed: 1s;
+$slide-transition-speed: .3s;
+$text-slide-offset: 50px;
 
-// $slide-transition-speed should match SLIDE_TRANSITION_SPEED in carousel-header.js
-$slide-transition-speed: 1s;
+$mobile-image-height: 280px;
+$medium-image-height: 600px;
+
+// 0% and 20% are equal to simulate a delay without using animation-delay
+@keyframes initial-header-animation {
+  0% {
+    transform: translateX(550px);
+  }
+
+  20% {
+    transform: translateX(550px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+// 0% and 40% are equal to simulate a delay without using animation-delay
+@keyframes initial-paragraph-animation {
+  0% {
+    transform: translateX(550px);
+  }
+
+  40% {
+    transform: translateX(550px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+// 0% and 50% are equal to simulate a delay without using animation-delay
+@keyframes initial-cta-animation {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes texts-from-right-animation {
+  from {
+    transform: translateX($text-slide-offset);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes texts-from-left-animation {
+  from {
+    transform: translateX(-$text-slide-offset);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
 
 .carousel-header_full-width-classic {
   position: relative;
@@ -26,6 +92,7 @@ $slide-transition-speed: 1s;
     position: relative;
     overflow: visible;
     height: 580px;
+    padding-bottom: 0;
 
     @include medium-and-up {
       height: 960px;
@@ -34,72 +101,216 @@ $slide-transition-speed: 1s;
     @include large-and-up {
       height: 620px;
     }
+
+    .backgrounds-holder {
+      @include fill-container;
+
+      div {
+        @include fill-container;
+        z-index: 500;
+        display: none;
+      }
+    }
   }
 
   .carousel-item {
     display: block;
-    height: 100%;
+    pointer-events: none;
+    height: $mobile-image-height;
     position: absolute;
     top: 0;
-    background-size: 0;
+    background-size: cover;
     opacity: 0;
-    z-index: 1;
-    transform: rotate(0);
-    transition: opacity $slide-transition-speed;
+    z-index: 3500;
+
+    @include medium-and-up {
+      height: $medium-image-height;
+    }
+
+    @include large-and-up {
+      height: 100%;
+    }
 
     img {
       display: none;
     }
 
-    &.active {
-      z-index: 2;
+    &.initial {
+      display: block;
+      left: 0;
+      z-index: 2000;
       opacity: 1;
       transition: unset;
+
+      .carousel-item-mask {
+        width: 100%;
+      }
+
+      .carousel-caption .main-header {
+        h1 {
+          animation-name: initial-header-animation;
+          animation-duration: 1s;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: 1;
+        }
+
+        p {
+          animation-name: initial-paragraph-animation;
+          animation-duration: 1s;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: 1;
+        }
+
+        .action-button {
+          animation-name: initial-cta-animation;
+          animation-duration: 2s;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: 1;
+        }
+      }
+    }
+
+    .carousel-item-mask {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .background-holder {
+      width: 100vw;
+      height: $mobile-image-height;
+      background-size: cover;
+
+      @include medium-and-up {
+        height: $medium-image-height;
+      }
+
+      @include large-and-up {
+        height: 100%;
+      }
+
+      // Darken background
+      &::after {
+        @include fill-container;
+        content: "";
+        background: none;
+
+        @include large-and-up {
+          background: rgba(30, 30, 30, 0.45);
+        }
+      }
+    }
+
+    &.active {
+      display: block;
+      left: 0;
+      z-index: 2000;
+      opacity: 1;
+      transition: unset;
+      pointer-events: all;
+
+      .carousel-item-mask {
+        width: 100%;
+      }
+
+      .carousel-caption .main-header {
+        h1, p {
+          transform: translateX(0);
+          transition: unset;
+        }
+
+        .action-button {
+          opacity: 1;
+        }
+      }
+    }
+
+    &.slide-left {
+      .carousel-item-mask {
+        width: 0;
+        transition: width $slide-transition-speed;
+      }
+    }
+
+    &.slide-right {
+      .carousel-item-mask {
+        width: 0;
+        margin-left: auto;
+        right: 0;
+
+        html[dir="rtl"] & {
+          right: auto;
+          margin-left: 0;
+          margin-right: auto;
+          left: 0;
+        }
+
+        transition: width $slide-transition-speed;
+
+        // This "width + overflow: hidden" reveal trick depends on
+        // the direction property to allow masking content from the left, see:
+        // https://stackoverflow.com/questions/22126759/how-to-cut-off-overflow-on-the-left-side?rq=1
+        //
+        // It exists as a workaround for `clip-path` which is not yet well supported on Safari & Firefox.
+        // TODO: Remove in favor of `clip-path` when supported in all major browsers
+        // Check for compatibility: https://caniuse.com/#feat=css-clip-path
+        direction: rtl;
+      }
+
+      .carousel-item-mask * {
+        direction: ltr;
+      }
+    }
+
+    &.prev {
+      z-index: 1000;
+      display: block;
+      opacity: 1;
+
+      .carousel-caption .main-header .carousel-captions-wrapper {
+        h1, p {
+          animation-name: texts-from-left-animation;
+          animation-duration: $slide-transition-speed;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: 1;
+
+          html[dir="rtl"] & {
+            animation-name: texts-from-right-animation;
+          }
+        }
+      }
     }
 
     &.next {
-      z-index: 1;
+      z-index: 1000;
+      display: block;
       opacity: 1;
-      transition: unset;
-    }
 
-    &.fade-out {
-      opacity: 0;
-      transition: opacity #{ $slide-transition-speed / 2 };
-    }
+      .carousel-caption .main-header .carousel-captions-wrapper {
+        h1, p {
+          animation-name: texts-from-right-animation;
+          animation-duration: $slide-transition-speed;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: 1;
 
-    &.fade-in {
-      opacity: 1;
-      transition: opacity #{ $slide-transition-speed / 2 };
-    }
-
-    &::before {
-      @include fill-container;
-      content: "";
-      background-image: inherit;
-      background-size: cover;
-      filter: none;
-    }
-
-    &::after {
-      @include fill-container;
-      content: "";
-      z-index: 0;
-      background: none;
-
-      @include large-and-up {
-        background: rgba(91, 91, 91, 0.25);
+          html[dir="rtl"] & {
+            animation-name: texts-from-left-animation;
+          }
+        }
       }
     }
 
     .carousel-caption {
-      @include fill-container;
-      z-index: 2;
+      display: block;
+      position: relative;
+      z-index: 2500;
       text-align: left;
-      transition: opacity $slide-transition-speed;
-      position: absolute;
-      top: auto;
-      bottom: 0;
+      left: 0;
+      right: 0;
+      top: $mobile-image-height;
       padding-top: $n20;
       padding-bottom: $n70;
       padding-left: 24px;
@@ -108,28 +319,61 @@ $slide-transition-speed: 1s;
       height: auto;
 
       @include medium-and-up {
+        top: $medium-image-height;
         padding-top: $n40;
         padding-left: $n40;
         padding-right: $n40;
       }
 
       @include large-and-up {
-        @include fill-container;
+        display: block;
+        position: relative;
+        top: 0;
+        left: 0;
         padding: 0 0 $n60 0;
         padding-bottom: 0;
         background: none;
+        height: 100%;
+      }
+
+      .carousel-captions-wrapper {
+        @include medium-and-up {
+          width: #{460 + ($text-slide-offset * 2)};
+        }
+        @include large-and-up {
+          width: #{320 + ($text-slide-offset * 2)};
+        }
+        @include x-large-and-up {
+          width: #{480 + ($text-slide-offset * 2)};
+        }
+        overflow: hidden;
+        margin-left: -$text-slide-offset;
+        padding-left: $text-slide-offset;
+        margin-right: -$text-slide-offset;
+        padding-right: $text-slide-offset;
       }
 
       .caption-overlay {
-        background-color: rgba(0, 0, 0, 0.2);
-        filter: blur(50px);
+        display: none;
+        background: url("images/carousel-blurred-overlay.png");
+        background-position: bottom right;
+        background-size: cover;
         height: 100%;
-        width: 40%;
+        width: 50%;
         position: absolute;
         opacity: 0;
 
+        html[dir="rtl"] & {
+          background-position: bottom left;
+        }
+
         @include large-and-up {
+          display: block;
           opacity: 1;
+        }
+
+        @include x-large-and-up {
+          width: 580px;
         }
       }
 
@@ -158,14 +402,16 @@ $slide-transition-speed: 1s;
           padding-bottom: 54px;
         }
 
-        h2 {
+        h1 {
           font-size: 1.75rem;
           margin-bottom: 10px;
-          width: 70%;
+          width: 100%;
           line-height: 1.2;
           font-weight: bold;
           color: $black;
           padding-left: 0;
+          transition: unset;
+          transform: translateX($text-slide-offset);
 
           html[dir="rtl"] & {
             text-align: right;
@@ -177,49 +423,18 @@ $slide-transition-speed: 1s;
           }
 
           @include large-and-up {
+            max-width: 100%;
+            width: 100%;
             color: $white;
             margin-bottom: 20px;
             line-height: 1.2;
-            width: 50%;
           }
 
           @include x-large-and-up {
             font-size: 3.5rem;
             line-height: 1.1;
-            width: 60%;
-          }
-        }
-
-        h3 {
-          font-size: 1.25rem;
-          line-height: 1.3;
-          font-weight: 400;
-          width: 55%;
-          color: $black;
-          margin-bottom: 0;
-          padding-left: 0;
-
-          html[dir="rtl"] & {
-            text-align: right;
-            padding-right: 0;
-          }
-
-          @include medium-and-up {
-            font-size: 1.5rem;
-            margin-bottom: 34px;
-            font-weight: 300;
-          }
-
-          @include large-and-up {
-            line-height: 1.2;
-            color: $white;
-            width: 50%;
-          }
-
-          @include x-large-and-up {
-            font-size: 2.25rem;
-            margin-bottom: 30px;
-            font-weight: 300;
+            max-width: 100%;
+            width: 100%;
           }
         }
 
@@ -233,16 +448,18 @@ $slide-transition-speed: 1s;
           width: 100%;
           text-align: left;
           padding-left: 0;
+          max-width: 100%;
 
           html[dir="rtl"] & {
             text-align: right;
             padding-right: 0;
           }
 
+          transform: translateX($text-slide-offset);
+
           @include medium-and-up {
             line-height: 1.6;
             margin-bottom: 24px;
-            max-width: 320px;
             display: block;
           }
 
@@ -254,7 +471,6 @@ $slide-transition-speed: 1s;
           @include x-large-and-up {
             font-size: 1.125rem;
             line-height: 1.6;
-            max-width: 380px;
           }
         }
 
@@ -330,16 +546,22 @@ $slide-transition-speed: 1s;
   }
 
   .carousel-control-prev {
-    display: flex;
-    height: 100%;
-    top: 0;
-    width: 5%;
-    z-index: 3;
+    display: none;
+    z-index: 4000;
     margin-left: 0;
 
-    @include small-and-up {
-      width: 5%;
-      margin-left: 0;
+    @include large-and-up {
+      display: flex;
+      top: 50%;
+      margin-top: -46px;
+      height: 92px;
+      width: 78px;
+      transition: transform .2s, background-color .2s;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .15);
+        transform: translateX(-5px);
+      }
     }
 
     .carousel-control-prev-icon {
@@ -352,21 +574,29 @@ $slide-transition-speed: 1s;
 
       @include large-and-up {
         display: block;
-        margin-left: 0;
-      }
-
-      @include x-large-and-up {
-        margin-left: 25%;
+        margin: auto;
       }
     }
   }
 
   .carousel-control-next {
-    height: 100%;
-    top: 0;
-    width: 5%;
+    display: none;
     margin-right: 0;
-    z-index: 3;
+    z-index: 4000;
+
+    @include large-and-up {
+      top: 50%;
+      display: flex;
+      margin-top: -46px;
+      height: 92px;
+      width: 78px;
+      transition: transform .2s, background-color .2s;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .15);
+        transform: translateX(5px);
+      }
+    }
 
     .carousel-control-next-icon {
       text-align: center;
@@ -379,36 +609,43 @@ $slide-transition-speed: 1s;
 
       @include large-and-up {
         display: block;
-        margin-right: 25%;
-      }
-
-      @include x-large-and-up {
-        margin-right: 25%;
+        margin: auto;
       }
     }
   }
 
   .carousel-indicators {
-    z-index: 4;
+    z-index: 4000;
+    display: block;
     position: absolute;
-    transform: none;
-    bottom: 0;
-    margin: 0;
-    right: auto;
-    left: auto;
-    padding-left: 0;
-    padding-right: 0;
     width: 100%;
-    margin-bottom: 40px;
-    margin-left: 5px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    bottom: $n30;
 
     @include medium-and-up {
+      text-align: right;
       width: auto;
+
+      html[dir="rtl"] & {
+        right: auto;
+      }
+    }
+
+    @include large-and-up {
+      position: absolute;
+      bottom: $n30;
+      left: auto;
+      text-align: left;
+      padding-left: 0;
+      padding-right: 0;
+      width: auto;
+      display: block;
     }
 
     @include x-large-and-up {
       padding-left: 0;
-      margin-bottom: 40px;
     }
 
     li {
