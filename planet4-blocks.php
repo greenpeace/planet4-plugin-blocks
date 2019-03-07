@@ -80,7 +80,7 @@ if ( ! defined( 'P4BKS_COVERS_NUM' ) ) {
 	define( 'P4BKS_COVERS_NUM', 30 );
 }
 if ( ! defined( 'P4BKS_ALLOWED_PAGETYPE' ) ) {
-	define( 'P4BKS_ALLOWED_PAGETYPE', [ 'page' ] );
+	define( 'P4BKS_ALLOWED_PAGETYPE', [ 'page', 'campaign' ] );
 }
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	define( 'WP_UNINSTALL_PLUGIN', P4BKS_PLUGIN_BASENAME );
