@@ -359,7 +359,7 @@ $(document).ready(function() {
 
       me.autoplayInterval = window.setInterval(function() {
         me.advanceCarousel();
-      }, 3000);
+      }, 6000);
 
       $(window).on('scroll', function() {
         me.cancelAutoplayInterval();
