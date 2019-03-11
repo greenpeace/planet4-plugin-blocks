@@ -136,3 +136,15 @@ div.shortcode-ui-edit-shortcake_newcovers > div:last-child {
   position: absolute;
   height: 100%;
 }
+
+.shortcode-ui-edit-shortcake_carousel_header .field-block.shortcode-ui-field-text,
+.shortcode-ui-edit-shortcake_carousel_header .field-block.shortcode-ui-field-url,
+.shortcode-ui-edit-shortcake_carousel_header .field-block.shortcode-ui-field-url input,
+.shortcode-ui-edit-shortcake_carousel_header .field-block.shortcode-ui-field-text input {
+  width: 400px;
+}
+
+.max-length-counter {
+  color: #AAAAAA;
+  text-align: right;
+}
