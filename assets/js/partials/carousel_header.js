@@ -297,16 +297,19 @@ $(document).ready(function() {
       }
       me.$CarouselHeaderWrapper.on('click', clickTargets[0], function(evt) {
         evt.preventDefault();
+        me.cancelAutoplayInterval();
         me.advanceCarousel();
       });
 
       me.$CarouselHeaderWrapper.on('click', clickTargets[1], function(evt) {
         evt.preventDefault();
+        me.cancelAutoplayInterval();
         me.backwardsCarousel();
       });
 
       me.$CarouselHeaderWrapper.on('click', '.carousel-indicators li', function (evt) {
         evt.preventDefault();
+        me.cancelAutoplayInterval();
         me.activate($(evt.target).data('slide-to'));
       });
 
@@ -319,10 +322,12 @@ $(document).ready(function() {
         hammer.add(swipe);
 
         hammer.on('swipeleft', function(){
+          me.cancelAutoplayInterval();
           me.advanceCarousel();
         });
 
         hammer.on('swiperight', function(){
+          me.cancelAutoplayInterval();
           me.backwardsCarousel();
         });
 
@@ -351,6 +356,19 @@ $(document).ready(function() {
         me.setCarouselHeight($currentSlide);
         me.positionIndicators();
       });
+
+      me.autoplayInterval = window.setInterval(function() {
+        me.advanceCarousel();
+      }, 6000);
+
+      $(window).on('scroll', function() {
+        me.cancelAutoplayInterval();
+        $(window).off('scroll');
+      });
+    },
+
+    cancelAutoplayInterval: function() {
+      window.clearInterval(this.autoplayInterval);
     },
 
     /**
@@ -375,8 +393,8 @@ $(document).ready(function() {
     },
 
     positionIndicators: function() {
-      var $indicators = $('.carousel-indicators');
-      var $header = $('.carousel-item.active .action-button');
+      var $indicators = this.$CarouselHeaderWrapper.find('.carousel-indicators');
+      var $header = this.$CarouselHeaderWrapper.find('.carousel-item.active .action-button');
       var isRTL = $('html').attr('dir') == 'rtl';
       var rightSide = (window.matchMedia('(min-width: 992px)').matches && isRTL)
                       || (window.matchMedia('(min-width: 768px) and (max-width: 992px)').matches && !isRTL);

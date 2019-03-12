@@ -311,8 +311,8 @@ $medium-image-height: 600px;
       left: 0;
       right: 0;
       top: $mobile-image-height;
-      padding-top: $n20;
-      padding-bottom: $n70;
+      padding-top: 24px;
+      padding-bottom: 24px;
       padding-left: 24px;
       padding-right: 24px;
       background: $white;
@@ -403,7 +403,7 @@ $medium-image-height: 600px;
         }
 
         h1 {
-          font-size: 1.75rem;
+          font-size: 1.62rem;
           margin-bottom: 10px;
           width: 100%;
           line-height: 1.2;
@@ -418,8 +418,12 @@ $medium-image-height: 600px;
             padding-right: 0;
           }
 
+          @include small-and-up {
+            font-size: 1.75rem;
+          }
+
           @include medium-and-up {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
           }
 
           @include large-and-up {
@@ -428,10 +432,11 @@ $medium-image-height: 600px;
             color: $white;
             margin-bottom: 20px;
             line-height: 1.2;
+            font-size: 2.5rem;
           }
 
           @include x-large-and-up {
-            font-size: 3.5rem;
+            font-size: 3rem;
             line-height: 1.1;
             max-width: 100%;
             width: 100%;
@@ -442,12 +447,13 @@ $medium-image-height: 600px;
           display: block;
           color: $black;
           font-family: $roboto;
-          font-size: 16px;
+          font-size: .875rem;
           font-weight: 500;
           line-height: 22px;
           width: 100%;
           text-align: left;
           padding-left: 0;
+          margin-bottom: 24px;
           max-width: 100%;
 
           html[dir="rtl"] & {
@@ -457,13 +463,19 @@ $medium-image-height: 600px;
 
           transform: translateX($text-slide-offset);
 
+          @include small-and-up {
+            font-size: 1rem;
+          }
+
           @include medium-and-up {
+            font-size: 1.125rem;
             line-height: 1.6;
             margin-bottom: 24px;
             display: block;
           }
 
           @include large-and-up {
+            font-size: 1.125rem;
             margin-bottom: 36px;
             color: $white;
           }
@@ -481,7 +493,7 @@ $medium-image-height: 600px;
           font-family: $roboto;
           width: 100%;
           bottom: inherit;
-          margin-top: 24px;
+          margin-bottom: 24px;
           text-align: center;
           max-width: 100%;
           padding-left: 0;
@@ -491,7 +503,6 @@ $medium-image-height: 600px;
             width: auto;
             bottom: inherit;
             position: relative;
-            margin-top: 24px;
           }
 
           @include medium-and-up {
@@ -620,9 +631,10 @@ $medium-image-height: 600px;
     position: absolute;
     width: 100%;
     text-align: center;
-    padding: 0;
+    padding: 0 0 24px 0;
     margin: 0;
-    bottom: $n30;
+    bottom: 0;
+    height: 44px;
 
     @include medium-and-up {
       text-align: right;
@@ -635,7 +647,6 @@ $medium-image-height: 600px;
 
     @include large-and-up {
       position: absolute;
-      bottom: $n30;
       left: auto;
       text-align: left;
       padding-left: 0;
