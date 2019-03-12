@@ -11,7 +11,7 @@ $(document).ready(function() {
     */
 
     // SLIDE_TRANSITION_SPEED should match $slide-transition-speed in _carousel_header.scss.
-    SLIDE_TRANSITION_SPEED: 1000,
+    SLIDE_TRANSITION_SPEED: 500,
     activeTransition: null,
 
 
@@ -224,16 +224,6 @@ $(document).ready(function() {
 
   const FullWidthClassicCarouselHeader = {
     /**
-    * This module provides a custom slideshow mechanism for use with the header carousel.
-    * The transition behavior in this block is too complex to be easily layered upon the
-    * default bootstrap carousel.
-    */
-
-    // SLIDE_TRANSITION_SPEED should match $slide-transition-speed in _carousel_header.scss.
-    SLIDE_TRANSITION_SPEED: 1000,
-    activeTransition: null,
-
-    /**
     * Given an active slide return the next slide, wrapping around the end of the carousel.
     *
     * @param {HTMLElement|jQuery} slide A slide in the carousel.
@@ -259,12 +249,14 @@ $(document).ready(function() {
       });
     },
 
+    getCurrentSlideIndex: function() {
+      return this.$CarouselHeaderWrapper.find('.carousel-item.active').index();
+    },
+
     setup: function() {
       const me = this;
 
       me.$CarouselHeaderWrapper = $('#carousel-wrapper-header');
-
-      me.$CarouselIndicators = me.$CarouselHeaderWrapper.find('.carousel-indicators');
       me.$Slides = me.$CarouselHeaderWrapper.find('.carousel-item');
 
       me.$CarouselHeaderWrapper.find('img').on('load', function () {
@@ -274,6 +266,8 @@ $(document).ready(function() {
           $(this).parent().css('background-image', 'url(' + $(this).get(0).currentSrc + ')');
         }
       });
+
+      me.$CarouselIndicators = me.$CarouselHeaderWrapper.find('.carousel-indicators');
 
       me.$Slides.each(function (i, el) {
         var $slide = $(el);
@@ -288,7 +282,7 @@ $(document).ready(function() {
         // Convert the provided image tag into background image styles.
         var $img = $slide.find('img');
         var img_src = $img.get(0).currentSrc || $img.attr('src');
-        $slide
+        $slide.find('.background-holder')
           .css('background-image', 'url(' + img_src + ')')
           .css('background-position', $img.data('background-position'));
 
@@ -297,17 +291,25 @@ $(document).ready(function() {
       });
 
       // Bind mouse interaction events
-      var clickTargets = '.carousel-control-next';
+      var clickTargets = ['.carousel-control-next', '.carousel-control-prev'];
       if ($('html').attr('dir') == 'rtl') {
-        clickTargets += ', .carousel-control-prev';
+        clickTargets.reverse();
       }
-      me.$CarouselHeaderWrapper.on('click', clickTargets, function(evt) {
+      me.$CarouselHeaderWrapper.on('click', clickTargets[0], function(evt) {
         evt.preventDefault();
+        me.cancelAutoplayInterval();
         me.advanceCarousel();
+      });
+
+      me.$CarouselHeaderWrapper.on('click', clickTargets[1], function(evt) {
+        evt.preventDefault();
+        me.cancelAutoplayInterval();
+        me.backwardsCarousel();
       });
 
       me.$CarouselHeaderWrapper.on('click', '.carousel-indicators li', function (evt) {
         evt.preventDefault();
+        me.cancelAutoplayInterval();
         me.activate($(evt.target).data('slide-to'));
       });
 
@@ -320,10 +322,12 @@ $(document).ready(function() {
         hammer.add(swipe);
 
         hammer.on('swipeleft', function(){
+          me.cancelAutoplayInterval();
           me.advanceCarousel();
         });
 
         hammer.on('swiperight', function(){
+          me.cancelAutoplayInterval();
           me.backwardsCarousel();
         });
 
@@ -340,18 +344,31 @@ $(document).ready(function() {
         });
       }
 
-      me.$CarouselHeaderWrapper.on('click', '.carousel-control-prev', function(evt) {
-        evt.preventDefault();
-        me.backwardsCarousel();
-      });
-
       me.positionIndicators();
       me.setCarouselHeight(me.$Slides.first());
+
+      me.$CarouselHeaderWrapper.find('.initial').on('transitionend', function() {
+        $(this).removeClass('initial');
+      });
+
       $(window).on('resize', function() {
         var $currentSlide = $('.carousel-item.active');
         me.setCarouselHeight($currentSlide);
         me.positionIndicators();
       });
+
+      me.autoplayInterval = window.setInterval(function() {
+        me.advanceCarousel();
+      }, 6000);
+
+      $(window).on('scroll', function() {
+        me.cancelAutoplayInterval();
+        $(window).off('scroll');
+      });
+    },
+
+    cancelAutoplayInterval: function() {
+      window.clearInterval(this.autoplayInterval);
     },
 
     /**
@@ -362,53 +379,42 @@ $(document).ready(function() {
     activate: function(slideIndex) {
       const me = this;
       var $slide = me.$Slides.eq(slideIndex);
+      var currentIndex = me.getCurrentSlideIndex();
 
-      if ($slide.hasClass('active') && !$slide.hasClass('slide-over')) {
-        // If the requested slide is active and not transitioning, do nothing.
+      if (slideIndex == currentIndex) {
         return;
       }
 
-      if (me.$CarouselHeaderWrapper.data('block-style') != 'full-width-classic') {
-        if ($slide.hasClass('next')) {
-          // If the slide being requested is next, transition normally.
-          me.advanceCarousel();
-          return;
-        }
+      if (slideIndex > currentIndex) {
+        me.advanceCarousel($slide);
+      } else {
+        me.backwardsCarousel($slide);
       }
-
-      if (me.activeTransition) {
-        clearTimeout(me.activeTransition);
-      }
-
-      me.switchIndicator(slideIndex);
-
-      me.$Slides.removeClass('active next slide-over fade-out');
-      $slide.addClass('active');
-      me.nextSlide($slide).addClass('next');
     },
 
     positionIndicators: function() {
-      var $indicators = $('.carousel-indicators.carousel-indicators-large');
-      var $header = $('.main-header h1');
+      var $indicators = this.$CarouselHeaderWrapper.find('.carousel-indicators');
+      var $header = this.$CarouselHeaderWrapper.find('.carousel-item.active .action-button');
       var isRTL = $('html').attr('dir') == 'rtl';
       var rightSide = (window.matchMedia('(min-width: 992px)').matches && isRTL)
                       || (window.matchMedia('(min-width: 768px) and (max-width: 992px)').matches && !isRTL);
 
       if (window.matchMedia('(min-width: 768px)').matches) {
         var leftOffset = $header.offset().left;
+
         if (rightSide) {
           var rightOffset = leftOffset + (isRTL ? $header.width() : $header.parent().width());
           var indicatorsRight = $(window).width() - rightOffset;
           $indicators.css('right', indicatorsRight + 'px')
             .css('left', '')
             .css('margin-left', '0')
-            .css('margin-right', '4px');
+            .css('margin-right', '3px'); // same as indicators x margin
         } else {
           leftOffset = isRTL ? $header.parent().offset().left : $header.offset().left;
           $indicators.css('left', leftOffset + 'px')
             .css('right', '')
             .css('margin-right', '0')
-            .css('margin-left', '4px');
+            .css('margin-left', '3px');
         }
       } else {
         $indicators.css('right', '');
@@ -417,90 +423,69 @@ $(document).ready(function() {
     },
 
     getSlideHeight: function($slide) {
-      return $slide.height() + $slide.find('.carousel-caption').height() + 'px';
+      return $slide.find('.carousel-item-mask .background-holder').outerHeight() + $slide.find('.carousel-caption').outerHeight() + 'px';
     },
 
     setCarouselHeight: function($currentSlide) {
+      const me = this;
       if (window.matchMedia('(max-width: 992px)').matches) {
-        $('.carousel-inner').css('height', this.getSlideHeight($currentSlide));
+        me.$CarouselHeaderWrapper.find('.carousel-inner, .carousel-item-mask').css('height', this.getSlideHeight($currentSlide));
       } else {
-        $('.carousel-inner').css('height', '');
+        me.$CarouselHeaderWrapper.find('.carousel-inner, .carousel-item-mask').css('height', '');
       }
     },
 
-    backwardsCarousel: function() {
+    backwardsCarousel: function($slide) {
       const me = this;
-
-      var $active = me.$Slides.filter('.active');
-      var $prev = me.previousSlide($active);
-
-      if (me.activeTransition) {
-        // A transition is in progress, so proceed to the next pair of slides
-        clearTimeout(me.activeTransition);
-        clearTimeout(me.completedTransition);
-        me.activeTransition = null;
-        me.completedTransition = null;
-        me.$Slides.removeClass('fade-out fade-in active');
-        $prev.addClass('active');
-        me.backwardsCarousel();
-        return;
+      var $activeSlide = me.$Slides.filter('.active');
+      var $previousSlide = null;
+      if ($slide) {
+        $previousSlide = $slide;
+      } else {
+        $previousSlide = me.previousSlide($activeSlide);
       }
 
-      me.switchIndicator(me.$Slides.index($prev));
+      $activeSlide.addClass('slide-right');
+      $previousSlide.addClass('prev');
 
-      // When transition is done, swap out the slides
-      me.activeTransition = setTimeout(function beginTransition() {
-        $active.addClass('fade-out');
-        $prev.addClass('fade-in');
+      function unsetTransitionClasses() {
+        $activeSlide.removeClass('slide-right active');
+        $previousSlide.addClass('active').removeClass('prev');
+        $activeSlide.off('transitionend');
+      }
 
-        me.setCarouselHeight($prev);
-
-        me.completedTransition = setTimeout(function completeTransition() {
-          $active.removeClass('active fade-out');
-          $prev.removeClass('fade-in').addClass('active');
-          me.activeTransition = null;
-          me.completedTransition = null;
-        }, me.SLIDE_TRANSITION_SPEED);
-      }, 0);
+      me.setCarouselHeight($previousSlide);
+      $activeSlide.on('transitionend', unsetTransitionClasses);
+      me.switchIndicator(me.$Slides.index($previousSlide));
     },
 
     /**
     * Advance to the next slide in the carousel.
     */
-    advanceCarousel: function() {
+    advanceCarousel: function($slide) {
       const me = this;
-      var $active = me.$Slides.filter('.active');
-      var $next = me.nextSlide($active);
-
-      if (me.activeTransition || me.completedTransition) {
-        // A transition is in progress, so proceed to the next pair of slides
-        clearTimeout(me.activeTransition);
-        clearTimeout(me.completedTransition);
-        me.activeTransition = null;
-        me.completedTransition = null;
-        me.$Slides.removeClass('fade-out fade-in active');
-        $next.addClass('active');
-        me.advanceCarousel();
-        return;
+      var $activeSlide = me.$Slides.filter('.active');
+      var $nextSlide = null;
+      if ($slide) {
+        $nextSlide = $slide;
+      } else {
+        $nextSlide = me.nextSlide($activeSlide);
       }
 
-      me.switchIndicator(me.$Slides.index($next));
+      $activeSlide.addClass('slide-left');
+      $nextSlide.addClass('next');
 
-      // When transition is done, swap out the slides
-      me.activeTransition = setTimeout(function beginTransition() {
-        $active.addClass('fade-out');
-        $next.addClass('fade-in');
+      function unsetTransitionClasses() {
+        $activeSlide.removeClass('slide-left active');
+        $nextSlide.addClass('active').removeClass('next');
+        $activeSlide.off('transitionend');
+      }
 
-        me.setCarouselHeight($next);
+      $activeSlide.on('transitionend', unsetTransitionClasses);
+      $activeSlide.find('.btn').fadeIn();
 
-        me.completedTransition = setTimeout(function completeTransition() {
-          $active.removeClass('fade-out active');
-          $next.removeClass('fade-in').addClass('active');
-
-          me.activeTransition = null;
-          me.completedTransition = null;
-        }, me.SLIDE_TRANSITION_SPEED);
-      }, 0);
+      me.setCarouselHeight($nextSlide);
+      me.switchIndicator(me.$Slides.index($nextSlide));
     },
   };
 
