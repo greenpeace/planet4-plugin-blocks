@@ -126,11 +126,7 @@ jobs:
             export BUILD_TAG="build-$(cat /tmp/workspace/var/circle-build-num)"
             export APP_IMAGE=gcr.io/planet-4-151612/planet4-base-app:${BUILD_TAG}
             export OPENRESTY_IMAGE=gcr.io/planet-4-151612/planet4-base-openresty:${BUILD_TAG}
-
-            pushd planet4-docker-compose
-            make ci
-            make test
-            popd
+            make -C planet4-docker-compose ci test
 
       - run:
           name: Test - Extract test artifacts
@@ -139,10 +135,7 @@ jobs:
             export BUILD_TAG="build-$(cat /tmp/workspace/var/circle-build-num)"
             export APP_IMAGE=gcr.io/planet-4-151612/planet4-base-app:${BUILD_TAG}
             export OPENRESTY_IMAGE=gcr.io/planet-4-151612/planet4-base-openresty:${BUILD_TAG}
-
-            pushd planet4-docker-compose
-            make ci-extract-artifacts
-            popd
+            make -C planet4-docker-compose ci-extract-artifacts
 
       - persist_to_workspace:
           root: /tmp/workspace
@@ -150,7 +143,7 @@ jobs:
             - var
 
       - store_test_results:
-          path: /tmp/artifacts
+          path: planet4-docker-compose/artifacts
 
       - store_artifacts:
-          path: /tmp/artifacts
+          path: planet4-docker-compose/artifacts
