@@ -517,8 +517,8 @@
 
         .info-with-image-wrap {
           .mobile-accordion-info {
-            width: 90%;
-            margin: 0 10px;
+            width: 100%;
+            margin: 0;
             color: $percentage-text;
             font-size: 0.875rem;
           }
@@ -527,18 +527,21 @@
             padding-bottom: 35px;
 
             img {
-              width: 90%;
+              width: 100%;
               height: 190px;
               object-fit: cover;
               object-position: 10% 10%;
 
               @include small-and-up {
-                width: 70%;
+                width: 100%;
               }
 
               @include medium-and-up {
-                width: 50%;
                 height: 220px;
+              }
+
+              @include large-and-up {
+                width: 50%;
               }
             }
           }
@@ -558,8 +561,8 @@
             color: $dark-shade-black;
             font-size: 0.875rem;
             line-height: 22px;
-            margin-left: -10px;
-            padding-right: 20px;
+            margin-left: 0;
+            padding-right: 0;
           }
         }
 
