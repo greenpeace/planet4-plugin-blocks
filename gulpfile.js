@@ -17,6 +17,18 @@ const path_scss = 'assets/scss/**/*.scss';
 const path_style = 'assets/scss/style.scss';
 const path_dest = './';
 
+const path_admin_dest = './admin/';
+const path_scss_admin = './admin/scss/**/*.scss';
+const path_style_admin = './admin/scss/blocks-admin.scss';
+
+const blocks_javascripts = [
+  'admin/js/Select2FieldsSetup.js',
+  'admin/js/P4FieldsSetup.js',
+  'admin/js/WPShortcakeHooksSetup.js',
+  'admin/js/blocks/*.js',
+  'admin/js/blocks-admin.js',
+];
+
 let error_handler = {
   errorHandler: notify.onError({
     title: 'Gulp',
@@ -25,7 +37,7 @@ let error_handler = {
 };
 
 function lint_css() {
-  return gulp.src(path_scss)
+  return gulp.src([ path_scss, path_scss_admin ])
     .pipe(plumber(error_handler))
     .pipe(stylelint({
       reporters: [{ formatter: 'string', console: true}]
@@ -34,7 +46,7 @@ function lint_css() {
 }
 
 function lint_js() {
-  return gulp.src(path_js)
+  return gulp.src([ path_js, ...blocks_javascripts ])
     .pipe(plumber(error_handler))
     .pipe(eslint())
     .pipe(eslint.format())
@@ -53,6 +65,17 @@ function sass() {
     .pipe(livereload());
 }
 
+function sass_admin() {
+  return gulp.src(path_style_admin)
+    .pipe(plumber(error_handler))
+    .pipe(sourcemaps.init())
+    .pipe(scss().on('error', scss.logError))
+    .pipe(cleancss({rebase: false}))
+    .pipe(sourcemaps.write(path_admin_dest))
+    .pipe(gulp.dest(path_admin_dest))
+    .pipe(livereload());
+}
+
 function uglify() {
   return gulp.src(path_js)
     .pipe(plumber(error_handler))
@@ -64,14 +87,28 @@ function uglify() {
     .pipe(livereload());
 }
 
+function uglify_admin() {
+  return gulp.src(blocks_javascripts)
+    .pipe(plumber(error_handler))
+    .pipe(sourcemaps.init())
+    .pipe(concat('blocks-admin.min.js'))
+    .pipe(js())
+    .pipe(sourcemaps.write(path_admin_dest))
+    .pipe(gulp.dest(path_admin_dest))
+    .pipe(livereload());
+}
+
 function watch() {
-  livereload.listen({'port': 35729});
+  livereload.listen({ 'port': 35729 });
   gulp.watch(path_scss, gulp.series(lint_css, sass));
+  gulp.watch(path_scss_admin, gulp.series(lint_css, sass_admin));
   gulp.watch(path_js, gulp.series(lint_js, uglify));
+  gulp.watch(blocks_javascripts, gulp.series(lint_js, uglify_admin));
 }
 
 exports.sass = sass;
 exports.uglify = uglify;
+exports.uglify_admin = uglify_admin;
 exports.watch = watch;
 exports.test = gulp.parallel(lint_css, lint_js);
-exports.default = gulp.series(lint_css, lint_js, sass, uglify);
+exports.default = gulp.series(lint_css, lint_js, sass, sass_admin, uglify, uglify_admin);

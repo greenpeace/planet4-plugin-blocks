@@ -36,30 +36,8 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 		 */
 		public function load() {
 			parent::load();
-			add_action( 'admin_enqueue_scripts', [ $this, 'load_admin_assets' ] );
 			add_action( 'wp_ajax_load_more', [ $this, 'load_more' ] );
 			add_action( 'wp_ajax_nopriv_load_more', [ $this, 'load_more' ] );
-		}
-
-
-		/**
-		 * Load assets only on the admin pages of the plugin.
-		 *
-		 * @param string $hook The slug name of the current admin page.
-		 */
-		public function load_admin_assets( $hook ) {
-
-			if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
-				return;
-			}
-
-			add_action(
-				'enqueue_shortcode_ui',
-				function () {
-					wp_enqueue_script( 'submenu-view', P4BKS_ADMIN_DIR . 'js/submenu_heading_view.js', [ 'shortcode-ui' ], '0.1', true );
-					wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'js/blocks-ui.js', [ 'shortcode-ui' ], '0.2', true );
-				}
-			);
 		}
 
 		/**

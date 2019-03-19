@@ -32,30 +32,7 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 		 */
 		public function load() {
 			parent::load();
-			add_action( 'admin_enqueue_scripts', [ $this, 'load_admin_assets' ] );
 			add_action( 'wp_ajax_planet4_blocks_post_field', [ $this, 'action_wp_ajax_shortcode_ui_post_field' ] );
-		}
-
-
-		/**
-		 * Load assets only on the admin pages of the plugin.
-		 *
-		 * @param string $hook The slug name of the current admin page.
-		 */
-		public function load_admin_assets( $hook ) {
-
-			if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
-				return;
-			}
-
-			wp_enqueue_style( 'p4bks_admin_style_blocks', P4BKS_ADMIN_DIR . 'css/admin_blocks.css', [], '0.1' );
-			add_action(
-				'enqueue_shortcode_ui',
-				function () {
-					wp_enqueue_script( 'submenu-view', P4BKS_ADMIN_DIR . 'js/submenu_heading_view.js', [ 'shortcode-ui' ], '0.1', true );
-					wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'js/blocks-ui.js', [ 'shortcode-ui' ], '0.1', true );
-				}
-			);
 		}
 
 		/**
