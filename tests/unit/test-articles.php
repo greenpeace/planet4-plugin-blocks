@@ -135,6 +135,39 @@ if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 		}
 
 		/**
+		 * Test that the block retrieves the default number of Posts with 'story' as p4 page type
+		 */
+		public function test_article_count_negative() {
+			$negative_article_count_default = 3;
+			$dummy_posts = $this->get_dummy_posts();
+			$story_ids   = $this->factory->post->create_many( self::STORY_COUNT, $dummy_posts['story'] );
+
+			if ( $story_ids ) {
+				foreach ( $story_ids as $id ) {
+					$res = $this->factory->term->add_post_terms( $id, 'story', 'p4-page-type' );
+					try {
+						$this->assertNotWPError( $res );
+						$this->assertNotFalse( $res );
+					} catch ( \Exception $e ) {
+						$this->fail( sprintf( '->Unable to add term to post with id %d.', $id ) );
+					}
+				}
+			}
+
+			$fields = [
+				'article_count'      => -2,
+				'p4_page_type_story' => true,
+			];
+			$data   = $this->block->prepare_data( $fields );
+
+			try {
+				$this->assertEquals((self::STORY_COUNT > $negative_article_count_default) ? $negative_article_count_default : self::STORY_COUNT, count( $data['recent_posts'] ) );
+			} catch ( \Exception $e ) {
+				$this->fail( '->Did not add the default amount of stories for a negative article count.' );
+			}
+		}
+
+		/**
 		 * Get data which will be used to create dummy posts for the test.
 		 *
 		 * @return array
