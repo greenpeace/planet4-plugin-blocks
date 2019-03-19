@@ -139,8 +139,8 @@ if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 		 */
 		public function test_article_count_negative() {
 			$negative_article_count_default = 3;
-			$dummy_posts = $this->get_dummy_posts();
-			$story_ids   = $this->factory->post->create_many( self::STORY_COUNT, $dummy_posts['story'] );
+			$dummy_posts                    = $this->get_dummy_posts();
+			$story_ids                      = $this->factory->post->create_many( self::STORY_COUNT, $dummy_posts['story'] );
 
 			if ( $story_ids ) {
 				foreach ( $story_ids as $id ) {
@@ -161,7 +161,7 @@ if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 			$data   = $this->block->prepare_data( $fields );
 
 			try {
-				$this->assertEquals((self::STORY_COUNT > $negative_article_count_default) ? $negative_article_count_default : self::STORY_COUNT, count( $data['recent_posts'] ) );
+				$this->assertEquals( ( self::STORY_COUNT > $negative_article_count_default ) ? $negative_article_count_default : self::STORY_COUNT, count( $data['recent_posts'] ) );
 			} catch ( \Exception $e ) {
 				$this->fail( '->Did not add the default amount of stories for a negative article count.' );
 			}
