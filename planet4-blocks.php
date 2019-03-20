@@ -264,7 +264,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 				$updated = $updater->replace_all( $post_id );
 
 				if ( $post_id ) {
-					if ($updated) {
+					if ( $updated ) {
 						WP_CLI::success( "Replaced shortcodes in post $post_id" );
 					} else {
 						WP_CLI::log( "No shortcodes replaced in post $post_id" );
