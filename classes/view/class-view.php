@@ -9,7 +9,6 @@
 namespace P4BKS\Views;
 
 use Timber\Timber;
-use Timber\Loader as TimberLoader;
 
 if ( ! class_exists( 'View' ) ) {
 
@@ -52,7 +51,6 @@ if ( ! class_exists( 'View' ) ) {
 		 */
 		private function view_template( $template_name, $data, $relevant_dir = '' ) {
 			Timber::$locations = $this->template_dir;
-			( new TimberLoader() )->clear_cache_timber();
 			Timber::render( [ $relevant_dir . $template_name . '.twig' ], $data );
 		}
 
@@ -77,7 +75,6 @@ if ( ! class_exists( 'View' ) ) {
 
 			if ( 'twig' === $template_ext ) {
 				Timber::$locations = $this->template_dir;
-				( new TimberLoader() )->clear_cache_timber();
 				Timber::render( [ $relevant_dir . $template_name . '.' . $template_ext ], $data );
 			} else {
 				include_once $this->template_dir . $relevant_dir . $template_name . '.' . $template_ext;
