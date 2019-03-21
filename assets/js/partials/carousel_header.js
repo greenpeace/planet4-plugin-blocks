@@ -357,9 +357,11 @@ $(document).ready(function() {
         me.positionIndicators();
       });
 
-      me.autoplayInterval = window.setInterval(function() {
-        me.advanceCarousel();
-      }, 6000);
+      if (me.$Slides.length > 1) {
+        me.autoplayInterval = window.setInterval(function() {
+          me.advanceCarousel();
+        }, 6000);
+      }
 
       $(window).on('scroll', function() {
         me.cancelAutoplayInterval();
