@@ -140,6 +140,7 @@ if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 		public function test_article_count_negative() {
 			$negative_article_count_default = 3;
 			$dummy_posts                    = $this->get_dummy_posts();
+			$story_term_id                  = $this->get_custom_term_id( 'story' );
 			$story_ids                      = $this->factory->post->create_many( self::STORY_COUNT, $dummy_posts['story'] );
 
 			if ( $story_ids ) {
@@ -155,8 +156,8 @@ if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 			}
 
 			$fields = [
-				'article_count'      => -2,
-				'p4_page_type_story' => true,
+				'article_count' => -2,
+				'post_types'    => "$story_term_id",
 			];
 			$data   = $this->block->prepare_data( $fields );
 
