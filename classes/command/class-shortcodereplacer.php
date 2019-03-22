@@ -202,10 +202,12 @@ class ShortcodeReplacer {
 	 *
 	 * Attributes to add:
 	 *   columns_block_style="no_image"
+	 *   title_1=" " - needs adding only if it doesn't exist. The new block won't render columns without titles.
+	 *   title_2=" " - needs adding only if it doesn't exist. The new block won't render columns without titles.
 	 *
 	 * Other attributes:
-	 *   title_1 - unchanged
-	 *   title_2 - unchanged
+	 *   title_1 - unchanged if already exists
+	 *   title_2 - unchanged if already exists
 	 *   description_1 - unchanged
 	 *   description_2 - unchanged
 	 *   columns_title - no equivalent in old block (& optional)
@@ -232,6 +234,8 @@ class ShortcodeReplacer {
 
 		$new_attrs = array_merge( $new_attrs, $this->map_attrs( $attrs, $map ) );
 
+		$new_attrs = $this->add_missing_titles_to_columns( $new_attrs );
+
 		return $this->make_shortcode( 'shortcake_columns', $new_attrs );
 	}
 
@@ -246,10 +250,12 @@ class ShortcodeReplacer {
 	 *
 	 * Attributes to add:
 	 *   columns_block_style="icons"
+	 *   title_1=" " - needs adding only if it doesn't exist. The new block won't render columns without titles.
+	 *   title_2=" " - needs adding only if it doesn't exist. The new block won't render columns without titles.
 	 *
 	 * Other attributes:
 	 *   columns_description - no equivalent in old block (& optional)
-	 *   title_1 ... _4 - unchanged
+	 *   title_1 ... _4 - unchanged if already exists
 	 *   description_1 ...  _4 - unchanged
 	 *   attachment_1 ... _4 - unchanged
 	 *
@@ -276,6 +282,8 @@ class ShortcodeReplacer {
 
 		$new_attrs = array_merge( $new_attrs, $this->map_attrs( $attrs, $map ) );
 
+		$new_attrs = $this->add_missing_titles_to_columns( $new_attrs );
+
 		return $this->make_shortcode( 'shortcake_columns', $new_attrs );
 	}
 
@@ -291,9 +299,11 @@ class ShortcodeReplacer {
 	 *
 	 * Attributes to add:
 	 *   columns_block_style="tasks"
+	 *   title_1=" " - needs adding only if it doesn't exist. The new block won't render columns without titles.
+	 *   title_2=" " - needs adding only if it doesn't exist. The new block won't render columns without titles.
 	 *
 	 * Other attributes:
-	 *   title_1 ... _4 - unchanged
+	 *   title_1 ... _4 - unchanged if already exists
 	 *   description_1 ...  _4 - unchanged
 	 *   attachment_1 ... _4 - unchanged
 	 *
@@ -320,6 +330,8 @@ class ShortcodeReplacer {
 		}
 
 		$new_attrs = array_merge( $new_attrs, $this->map_attrs( $attrs, $map ) );
+
+		$new_attrs = $this->add_missing_titles_to_columns( $new_attrs );
 
 		return $this->make_shortcode( 'shortcake_columns', $new_attrs );
 	}
@@ -360,5 +372,27 @@ class ShortcodeReplacer {
 		}
 
 		return $new_attrs;
+	}
+
+	/**
+	 * The new columns block won't render columns without titles
+	 *
+	 * @param array $attrs - shortcode attributes.
+	 *
+	 * @return mixed
+	 */
+	protected function add_missing_titles_to_columns( $attrs ) {
+		for ( $i = 1; $i <= 4; $i ++ ) {
+			if ( empty( $attrs [ 'title_' . $i ] ) ) {
+				if ( array_key_exists( 'description_' . $i, $attrs )
+					|| array_key_exists( 'attachment_' . $i, $attrs )
+					|| array_key_exists( 'cta_text_' . $i, $attrs )
+					|| array_key_exists( 'link_' . $i, $attrs ) ) {
+					$attrs [ 'title_' . $i ] = ' ';
+				}
+			}
+		}
+
+		return $attrs;
 	}
 }
