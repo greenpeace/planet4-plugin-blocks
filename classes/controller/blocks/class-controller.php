@@ -57,6 +57,28 @@ if ( ! class_exists( 'Controller' ) ) {
 
 			// Register an admin render callback for previewing in the wysiwyg.
 			add_action( 'wp_ajax_p4bks_preview_render_' . static::BLOCK_NAME, [ $this, 'prepare_admin_preview' ] );
+
+			add_action( 'admin_enqueue_scripts', [ $this, 'load_base_admin_assets' ] );
+		}
+
+		/**
+		 * Load assets only on the admin pages of the plugin.
+		 *
+		 * @param string $hook The slug name of the current admin page.
+		 */
+		public function load_base_admin_assets( $hook ) {
+			if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
+				return;
+			}
+
+			wp_enqueue_style( 'p4bks_admin_style_blocks', P4BKS_ADMIN_DIR . 'blocks-admin.css', [], '0.1' );
+
+			add_action(
+				'enqueue_shortcode_ui',
+				function () {
+					wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'blocks-admin.min.js', [ 'shortcode-ui' ], '0.2', true );
+				}
+			);
 		}
 
 		/**
