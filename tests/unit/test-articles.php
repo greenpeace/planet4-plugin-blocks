@@ -108,9 +108,9 @@ if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 		 * Test that the block retrieves all the available Posts with 'story' as p4 page type.
 		 */
 		public function test_story_count() {
-			$dummy_posts    = $this->get_dummy_posts();
-			$story_ids      = $this->factory->post->create_many( self::STORY_COUNT, $dummy_posts['story'] );
-			$story_term_id  = $this->get_custom_term_id( 'story' );
+			$dummy_posts   = $this->get_dummy_posts();
+			$story_ids     = $this->factory->post->create_many( self::STORY_COUNT, $dummy_posts['story'] );
+			$story_term_id = $this->get_custom_term_id( 'story' );
 
 			if ( $story_ids ) {
 				foreach ( $story_ids as $id ) {
