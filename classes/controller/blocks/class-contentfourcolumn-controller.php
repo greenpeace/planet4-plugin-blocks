@@ -226,8 +226,8 @@ if ( ! class_exists( 'ContentFourColumn_Controller' ) ) {
 							$post->alt_text  = get_post_meta( $img_id, '_wp_attachment_image_alt', true );
 						}
 
-						$post->permalink = get_permalink( $post );
-						$posts_array[]   = $post;
+						$post->link    = get_permalink( $post );
+						$posts_array[] = $post;
 					}
 				}
 			}

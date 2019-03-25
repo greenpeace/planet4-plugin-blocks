@@ -389,7 +389,7 @@ For good user experience, please include at least three articles so that spacing
 
 					$recent['page_type']    = $page_type;
 					$recent['page_type_id'] = $page_type_id;
-					$recent['permalink']    = get_permalink( $recent['ID'] );
+					$recent['link']         = get_permalink( $recent['ID'] );
 
 					$recent_posts[] = $recent;
 				}
