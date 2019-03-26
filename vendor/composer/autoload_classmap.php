@@ -6,19 +6,21 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'P4BKS\\Command\\ShortcodeReplacer' => $baseDir . '/classes/command/class-shortcodereplacer.php',
     'P4BKS\\Controllers\\Blocks\\Articles_Controller' => $baseDir . '/classes/controller/blocks/class-articles-controller.php',
     'P4BKS\\Controllers\\Blocks\\CampaignThumbnail_Controller' => $baseDir . '/classes/controller/blocks/class-campaignthumbnail-controller.php',
     'P4BKS\\Controllers\\Blocks\\CarouselHeader_Controller' => $baseDir . '/classes/controller/blocks/class-carouselheader-controller.php',
     'P4BKS\\Controllers\\Blocks\\CarouselSplit_Controller' => $baseDir . '/classes/controller/blocks/class-carouselsplit-controller.php',
     'P4BKS\\Controllers\\Blocks\\Carousel_Controller' => $baseDir . '/classes/controller/blocks/class-carousel-controller.php',
+    'P4BKS\\Controllers\\Blocks\\Columns_Controller' => $baseDir . '/classes/controller/blocks/class-columns-controller.php',
     'P4BKS\\Controllers\\Blocks\\ContentFourColumn_Controller' => $baseDir . '/classes/controller/blocks/class-contentfourcolumn-controller.php',
     'P4BKS\\Controllers\\Blocks\\ContentThreeColumn_Controller' => $baseDir . '/classes/controller/blocks/class-contentthreecolumn-controller.php',
     'P4BKS\\Controllers\\Blocks\\Controller' => $baseDir . '/classes/controller/blocks/class-controller.php',
     'P4BKS\\Controllers\\Blocks\\Cookies_Controller' => $baseDir . '/classes/controller/blocks/class-cookies-controller.php',
     'P4BKS\\Controllers\\Blocks\\Counter_Controller' => $baseDir . '/classes/controller/blocks/class-counter-controller.php',
     'P4BKS\\Controllers\\Blocks\\Covers_Controller' => $baseDir . '/classes/controller/blocks/class-covers-controller.php',
-    'P4BKS\\Controllers\\Blocks\\HappyPoint_Controller' => $baseDir . '/classes/controller/blocks/class-happypoint-controller.php',
     'P4BKS\\Controllers\\Blocks\\Gallery_Controller' => $baseDir . '/classes/controller/blocks/class-gallery-controller.php',
+    'P4BKS\\Controllers\\Blocks\\HappyPoint_Controller' => $baseDir . '/classes/controller/blocks/class-happypoint-controller.php',
     'P4BKS\\Controllers\\Blocks\\Media_Controller' => $baseDir . '/classes/controller/blocks/class-media-controller.php',
     'P4BKS\\Controllers\\Blocks\\NewCovers_Controller' => $baseDir . '/classes/controller/blocks/class-newcovers-controller.php',
     'P4BKS\\Controllers\\Blocks\\SocialMedia_Controller' => $baseDir . '/classes/controller/blocks/class-socialmedia-controller.php',

@@ -2,14 +2,14 @@
 	{% if recent_post.thumbnail_ratio < 1 %}
 		<div class="article-list-item-image">
 			<div class="article-image-holder">
-				<a href="{{ recent_post.permalink }}">
+				<a href="{{ recent_post.link }}">
 					<img class="d-flex topicwise-article-image" src="{{ fn('get_the_post_thumbnail_url', recent_post.ID, 'articles-medium-large' ) }}" alt="{{ recent_post.alt_text }}">
 				</a>
 			</div>
 		</div>
 	{% else %}
 		<div class="article-list-item-image article-list-item-image-max-width">
-			<a href="{{ recent_post.permalink }}">
+			<a href="{{ recent_post.link }}">
 				<img class="d-flex topicwise-article-image" src="{{ fn('get_the_post_thumbnail_url', recent_post.ID, 'articles-medium-large' )  }}" alt="{{ recent_post.alt_text }}">
 			</a>
 		</div>
@@ -39,7 +39,7 @@
 		<header>
 			{% if ( recent_post.post_title ) %}
 				<h4 class="article-list-item-headline">
-					<a href="{{ recent_post.permalink }}">{{ recent_post.post_title }}</a>
+					<a href="{{ recent_post.link }}">{{ recent_post.post_title }}</a>
 				</h4>
 			{% endif %}
 			<p class="article-list-item-meta">
