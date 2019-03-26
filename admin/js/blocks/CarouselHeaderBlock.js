@@ -1,6 +1,10 @@
 function CarouselHeaderBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
   var me = this;
 
+  me.render_new = function () {
+    me.setDefaults();
+  };
+
   me.render_edit = function () {
     me.toggle_subheaders();
     me.set_maxlength();
@@ -9,6 +13,10 @@ function CarouselHeaderBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
       me.toggle_subheaders();
       me.set_maxlength();
     });
+  };
+
+  me.setDefaults = function() {
+    $('input[name=carousel_autoplay]').attr('checked', 'checked');
   };
 
   me.toggle_subheaders = function() {
