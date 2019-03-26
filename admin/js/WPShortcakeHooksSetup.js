@@ -39,15 +39,13 @@ function WPShortcakeHooksSetup(p4BlocksUI) { // eslint-disable-line no-unused-va
       }
 
       if ('shortcake_carousel_header' === shortcode_tag) {
-        p4BlocksUI.blocks['CarouselHeaderBlock'].render_edit();
+        p4BlocksUI.blocks['CarouselHeaderBlock'].render_new();
       }
     });
 
     // Trigger hooks when shortcode renders an existing p4 block.
     wp.shortcake.hooks.addAction('shortcode-ui.render_edit', function (shortcode) {
       me.attach_hooks();
-
-      console.log("One action", shortcode) // eslint-disable-line
 
       var shortcode_tag = shortcode.get('shortcode_tag');
       var block_name = shortcode_tag.replace('shortcake_', '');

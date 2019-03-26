@@ -357,16 +357,34 @@ $(document).ready(function() {
         me.positionIndicators();
       });
 
-      if (me.$Slides.length > 1) {
-        me.autoplayInterval = window.setInterval(function() {
-          me.advanceCarousel();
-        }, 6000);
+      me.autoplayPaused = false;
+      me.autoplayEnabled = me.$CarouselHeaderWrapper.data('carousel-autoplay') == true;
+
+      if (me.$Slides.length > 1 && me.autoplayEnabled) {
+        me.startAutoplayInterval();
+
+        me.$CarouselHeaderWrapper.on('mouseenter', function() {
+          me.autoplayPaused = true;
+        });
+
+        me.$CarouselHeaderWrapper.on('mouseleave', function() {
+          me.autoplayPaused = false;
+        });
       }
 
       $(window).on('scroll', function() {
         me.cancelAutoplayInterval();
         $(window).off('scroll');
       });
+    },
+
+    startAutoplayInterval: function() {
+      var me = this;
+      me.autoplayInterval = window.setInterval(function() {
+        if (!me.autoplayPaused) {
+          me.advanceCarousel();
+        }
+      }, 6000);
     },
 
     cancelAutoplayInterval: function() {
