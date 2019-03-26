@@ -127,6 +127,8 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 					'type'  => 'number',
 					'meta'  => [
 						'placeholder' => __( 'Enter articles count', 'planet4-blocks-backend' ),
+						'min'         => 1,
+						'max'         => self::MAX_ARTICLES,
 					],
 				],
 				[
@@ -194,12 +196,11 @@ For good user experience, please include at least three articles so that spacing
 			$options              = get_option( 'planet4_options' );
 			$article_title        = $options['articles_block_title'] ?? __( 'Related Articles', 'planet4-blocks' );
 			$article_button_title = $options['articles_block_button_title'] ?? __( 'READ ALL THE NEWS', 'planet4-blocks' );
-			$article_count        = $options['articles_count'] ?? 3;
 			$exclude_post_id      = (int) ( $fields['exclude_post_id'] ?? '' );
 
 			$fields['article_heading']      = $fields['article_heading'] ?? $article_title;
 			$fields['read_more_text']       = $fields['read_more_text'] ?? $article_button_title;
-			$fields['article_count']        = $fields['article_count'] ?? $article_count;
+			$fields['article_count']        = ( empty( $fields['article_count'] ) || $fields['article_count'] < 0 ) ? 3 : $fields['article_count'];
 			$fields['articles_description'] = $fields['articles_description'] ?? '';
 
 			// Filter p4_page_type keys from fields attributes array.

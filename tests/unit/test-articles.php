@@ -42,8 +42,9 @@ if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 		 * Test that the block retrieves all the available Posts with 'press-release' as p4 page type.
 		 */
 		public function test_press_release_count() {
-			$dummy_posts       = $this->get_dummy_posts();
-			$press_release_ids = $this->factory->post->create_many( self::PRESS_RELEASE_COUNT, $dummy_posts['press-release'] );
+			$dummy_posts           = $this->get_dummy_posts();
+			$press_release_ids     = $this->factory->post->create_many( self::PRESS_RELEASE_COUNT, $dummy_posts['press-release'] );
+			$press_release_term_id = $this->get_custom_term_id( 'press-release' );
 
 			if ( $press_release_ids ) {
 				foreach ( $press_release_ids as $id ) {
@@ -58,8 +59,8 @@ if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 			}
 
 			$fields = [
-				'article_count'              => self::PRESS_RELEASE_COUNT,
-				'p4_page_type_press-release' => true,
+				'article_count' => self::PRESS_RELEASE_COUNT,
+				'post_types'    => "$press_release_term_id",
 			];
 			$data   = $this->block->prepare_data( $fields );
 
@@ -74,8 +75,9 @@ if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 		 * Test that the block retrieves all the available Posts with 'publication' as p4 page type.
 		 */
 		public function test_publication_count() {
-			$dummy_posts     = $this->get_dummy_posts();
-			$publication_ids = $this->factory->post->create_many( self::PUBLICATION_COUNT, $dummy_posts['publication'] );
+			$dummy_posts         = $this->get_dummy_posts();
+			$publication_ids     = $this->factory->post->create_many( self::PUBLICATION_COUNT, $dummy_posts['publication'] );
+			$publication_term_id = $this->get_custom_term_id( 'publication' );
 
 			if ( $publication_ids ) {
 				foreach ( $publication_ids as $id ) {
@@ -90,8 +92,8 @@ if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 			}
 
 			$fields = [
-				'article_count'            => self::PUBLICATION_COUNT,
-				'p4_page_type_publication' => true,
+				'article_count' => self::PUBLICATION_COUNT,
+				'post_types'    => "$publication_term_id",
 			];
 			$data   = $this->block->prepare_data( $fields );
 
@@ -106,8 +108,9 @@ if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 		 * Test that the block retrieves all the available Posts with 'story' as p4 page type.
 		 */
 		public function test_story_count() {
-			$dummy_posts = $this->get_dummy_posts();
-			$story_ids   = $this->factory->post->create_many( self::STORY_COUNT, $dummy_posts['story'] );
+			$dummy_posts   = $this->get_dummy_posts();
+			$story_ids     = $this->factory->post->create_many( self::STORY_COUNT, $dummy_posts['story'] );
+			$story_term_id = $this->get_custom_term_id( 'story' );
 
 			if ( $story_ids ) {
 				foreach ( $story_ids as $id ) {
@@ -122,8 +125,8 @@ if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 			}
 
 			$fields = [
-				'article_count'      => self::STORY_COUNT,
-				'p4_page_type_story' => true,
+				'article_count' => self::STORY_COUNT,
+				'post_types'    => "$story_term_id",
 			];
 			$data   = $this->block->prepare_data( $fields );
 
@@ -131,6 +134,40 @@ if ( ! class_exists( 'P4_ArticlesTest' ) ) {
 				$this->assertEquals( self::STORY_COUNT, count( $data['recent_posts'] ) );
 			} catch ( \Exception $e ) {
 				$this->fail( '->Did not find as many Story Posts as expected.' );
+			}
+		}
+
+		/**
+		 * Test that the block retrieves the default number of Posts with 'story' as p4 page type
+		 */
+		public function test_article_count_negative() {
+			$negative_article_count_default = 3;
+			$dummy_posts                    = $this->get_dummy_posts();
+			$story_term_id                  = $this->get_custom_term_id( 'story' );
+			$story_ids                      = $this->factory->post->create_many( self::STORY_COUNT, $dummy_posts['story'] );
+
+			if ( $story_ids ) {
+				foreach ( $story_ids as $id ) {
+					$res = $this->factory->term->add_post_terms( $id, 'story', 'p4-page-type' );
+					try {
+						$this->assertNotWPError( $res );
+						$this->assertNotFalse( $res );
+					} catch ( \Exception $e ) {
+						$this->fail( sprintf( '->Unable to add term to post with id %d.', $id ) );
+					}
+				}
+			}
+
+			$fields = [
+				'article_count' => -2,
+				'post_types'    => "$story_term_id",
+			];
+			$data   = $this->block->prepare_data( $fields );
+
+			try {
+				$this->assertEquals( ( self::STORY_COUNT > $negative_article_count_default ) ? $negative_article_count_default : self::STORY_COUNT, count( $data['recent_posts'] ) );
+			} catch ( \Exception $e ) {
+				$this->fail( '->Did not add the default amount of stories for a negative article count.' );
 			}
 		}
 
