@@ -45,12 +45,6 @@ if ( ! class_exists( 'SocialMedia_Controller' ) ) {
 				return;
 			}
 
-			add_action(
-				'enqueue_shortcode_ui',
-				function () {
-					wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'js/blocks-ui.js', [ 'shortcode-ui' ], '0.2', true );
-				}
-			);
 		}
 
 		/**

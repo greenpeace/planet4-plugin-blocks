@@ -57,6 +57,12 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 						],
 					],
 				],
+				[
+					'attr'        => 'carousel_autoplay',
+					'label'       => 'Carousel Autoplay',
+					'description' => __( 'If users don\'t click on the homepage or don\'t scroll after 3 seconds, then the next slide of the carousel is displayed automatically.', 'planet4-blocks-backend' ),
+					'type'        => 'checkbox',
+				],
 			];
 
 			for ( $i = 1; $i < 5; $i++ ) {

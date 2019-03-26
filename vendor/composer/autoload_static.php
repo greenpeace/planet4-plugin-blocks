@@ -36,6 +36,7 @@ class ComposerStaticInit356100170ff2882375cd04c4c76f9df3
     );
 
     public static $classMap = array (
+        'P4BKS\\Command\\ShortcodeReplacer' => __DIR__ . '/../..' . '/classes/command/class-shortcodereplacer.php',
         'P4BKS\\Controllers\\Blocks\\Articles_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-articles-controller.php',
         'P4BKS\\Controllers\\Blocks\\CampaignThumbnail_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-campaignthumbnail-controller.php',
         'P4BKS\\Controllers\\Blocks\\CarouselHeader_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-carouselheader-controller.php',
@@ -48,8 +49,8 @@ class ComposerStaticInit356100170ff2882375cd04c4c76f9df3
         'P4BKS\\Controllers\\Blocks\\Cookies_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-cookies-controller.php',
         'P4BKS\\Controllers\\Blocks\\Counter_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-counter-controller.php',
         'P4BKS\\Controllers\\Blocks\\Covers_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-covers-controller.php',
-        'P4BKS\\Controllers\\Blocks\\HappyPoint_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-happypoint-controller.php',
         'P4BKS\\Controllers\\Blocks\\Gallery_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-gallery-controller.php',
+        'P4BKS\\Controllers\\Blocks\\HappyPoint_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-happypoint-controller.php',
         'P4BKS\\Controllers\\Blocks\\Media_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-media-controller.php',
         'P4BKS\\Controllers\\Blocks\\NewCovers_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-newcovers-controller.php',
         'P4BKS\\Controllers\\Blocks\\SocialMedia_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-socialmedia-controller.php',

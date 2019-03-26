@@ -27,12 +27,6 @@ div.shortcode-ui-edit-shortcake_articles > div:last-child {
   border-bottom: 1px dashed #ddd;
 }
 
-.field-caption {
-  color: #aaa;
-  font-style: italic;
-  width: 60%;
-}
-
 select[id^="shortcode-ui-posts-"] + span li {
   display: block !important;
   float: none !important;
@@ -66,10 +60,6 @@ div.shortcode-ui-edit-shortcake_newcovers > div {
   }
 }
 
-div.shortcode-ui-edit-shortcake_articles > div:nth-child(8) {
-  align-self: flex-end;
-}
-
 div.shortcode-ui-edit-shortcake_newcovers > div:first-child {
   flex: 0 90%;
 }
@@ -81,11 +71,6 @@ div.shortcode-ui-edit-shortcake_newcovers > div:last-child {
 .shortcode-ui-edit-shortcake_columns div[class*=shortcode-ui-attribute-title_] {
   border-top: 2px dashed #ddd;
   padding-top: 20px;
-}
-
-.hr-dashed {
-  border-top: 1px dashed #ddd;
-  border-bottom: 1px dashed #ddd;
 }
 
 .field-caption {
@@ -101,7 +86,7 @@ div.shortcode-ui-edit-shortcake_newcovers > div:last-child {
 .shortcake-p4-radio-div {
   display: inline-block;
   margin: 10px;
-  padding: $n20;
+  padding: 20px;
   max-width: 25%;
   vertical-align: top;
 }
@@ -145,6 +130,6 @@ div.shortcode-ui-edit-shortcake_newcovers > div:last-child {
 }
 
 .max-length-counter {
-  color: #AAAAAA;
+  color: #aaaaaa;
   text-align: right;
 }
