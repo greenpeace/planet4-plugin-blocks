@@ -36,30 +36,8 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 		 */
 		public function load() {
 			parent::load();
-			add_action( 'admin_enqueue_scripts', [ $this, 'load_admin_assets' ] );
 			add_action( 'wp_ajax_load_more', [ $this, 'load_more' ] );
 			add_action( 'wp_ajax_nopriv_load_more', [ $this, 'load_more' ] );
-		}
-
-
-		/**
-		 * Load assets only on the admin pages of the plugin.
-		 *
-		 * @param string $hook The slug name of the current admin page.
-		 */
-		public function load_admin_assets( $hook ) {
-
-			if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
-				return;
-			}
-
-			add_action(
-				'enqueue_shortcode_ui',
-				function () {
-					wp_enqueue_script( 'submenu-view', P4BKS_ADMIN_DIR . 'js/submenu_heading_view.js', [ 'shortcode-ui' ], '0.1', true );
-					wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'js/blocks-ui.js', [ 'shortcode-ui' ], '0.2', true );
-				}
-			);
 		}
 
 		/**
@@ -149,6 +127,8 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 					'type'  => 'number',
 					'meta'  => [
 						'placeholder' => __( 'Enter articles count', 'planet4-blocks-backend' ),
+						'min'         => 1,
+						'max'         => self::MAX_ARTICLES,
 					],
 				],
 				[
@@ -216,12 +196,11 @@ For good user experience, please include at least three articles so that spacing
 			$options              = get_option( 'planet4_options' );
 			$article_title        = $options['articles_block_title'] ?? __( 'Related Articles', 'planet4-blocks' );
 			$article_button_title = $options['articles_block_button_title'] ?? __( 'READ ALL THE NEWS', 'planet4-blocks' );
-			$article_count        = $options['articles_count'] ?? 3;
 			$exclude_post_id      = (int) ( $fields['exclude_post_id'] ?? '' );
 
 			$fields['article_heading']      = $fields['article_heading'] ?? $article_title;
 			$fields['read_more_text']       = $fields['read_more_text'] ?? $article_button_title;
-			$fields['article_count']        = $fields['article_count'] ?? $article_count;
+			$fields['article_count']        = ( empty( $fields['article_count'] ) || $fields['article_count'] < 0 ) ? 3 : $fields['article_count'];
 			$fields['articles_description'] = $fields['articles_description'] ?? '';
 
 			// Filter p4_page_type keys from fields attributes array.
@@ -389,7 +368,7 @@ For good user experience, please include at least three articles so that spacing
 
 					$recent['page_type']    = $page_type;
 					$recent['page_type_id'] = $page_type_id;
-					$recent['permalink']    = get_permalink( $recent['ID'] );
+					$recent['link']         = get_permalink( $recent['ID'] );
 
 					$recent_posts[] = $recent;
 				}

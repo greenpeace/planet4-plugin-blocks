@@ -4,7 +4,10 @@
 {% endmacro %}
 
 		<div class="carousel-header_{{ fields.block_style }} block-wide">
-			<div id="carousel-wrapper-header" data-block-style="{{ fields.block_style }}">
+			<div id="carousel-wrapper-header"
+				data-block-style="{{ fields.block_style }}"
+				data-carousel-autoplay="{{ fields.carousel_autoplay }}">
+
 				{% if fields.total_images > 1 %}
           <ol class="carousel-indicators"></ol>
 				{% endif %}

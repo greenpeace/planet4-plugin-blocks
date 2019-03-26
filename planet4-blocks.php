@@ -3,7 +3,7 @@
  * Plugin Name: Planet4 - Blocks
  * Description: Creates all the blocks that will be available for usage by Shortcake.
  * Plugin URI: http://github.com/greenpeace/planet4-plugin-blocks
- * Version: 1.37.0
+ * Version: 1.38.0
  * Php Version: 7.0
  *
  * Author: Greenpeace International
@@ -121,7 +121,8 @@ P4BKS\Loader::get_instance(
 		'P4BKS\Controllers\Blocks\Gallery_Controller',
 		'P4BKS\Controllers\Blocks\Columns_Controller',
 	],
-	'P4BKS\Views\View'
+	'P4BKS\Views\View',
+	'P4BKS\Command\ShortcodeReplacer'
 );
 
 
@@ -246,5 +247,36 @@ function plugin_blocks_report_register_rest_route() {
 	);
 }
 
-
 add_action( 'rest_api_init', 'plugin_blocks_report_register_rest_route' );
+
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	WP_CLI::add_command(
+		'replace-shortcodes',
+		function ( $args ) {
+
+			// Supply a post ID as first argument to update a single, specific post.
+			$post_id = $args[0] ?? null;
+
+			try {
+				WP_CLI::log( 'Replacing shortcodes...' );
+
+				$updater = new P4BKS\Command\ShortcodeReplacer();
+				$updated = $updater->replace_all( $post_id );
+
+				if ( $post_id ) {
+					if ( $updated ) {
+						WP_CLI::success( "Replaced shortcodes in post $post_id" );
+					} else {
+						WP_CLI::log( "No shortcodes replaced in post $post_id" );
+					}
+				} else {
+					WP_CLI::success( "Replaced shortcodes in $updated posts" );
+				}
+			} catch ( \Error $e ) {
+				WP_CLI::error( $e->getMessage() );
+			} catch ( \Exception $e ) {
+				WP_CLI::log( 'Exception: ' . $e->getMessage() );
+			}
+		}
+	);
+}

@@ -27,7 +27,7 @@
 								<div class="four-column-content-info">
 									<div class="four-column-content-symbol">
 										{% if ( post.thumbnail ) %}
-											<a href="{{ post.permalink }}">
+											<a href="{{ post.link }}">
 												<img src="{{ post.thumbnail }}"
 													 alt="{{ post.alt_text }}"
 													 srcset="{{ post.srcset }}">
@@ -36,7 +36,7 @@
 									</div>
 									<div class="four-column-content-information">
 										{% if ( post.post_title ) %}
-											<a href="{{ post.permalink }}">
+											<a href="{{ post.link }}">
 												<h4>{{ post.post_title|e('wp_kses_post')|raw }}</h4>
 											</a>
 										{% endif %}
