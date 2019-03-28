@@ -1,0 +1,89 @@
+.timeline-block {
+  height: 600px;
+  max-height: 80vh;
+  margin-bottom: 40px;
+
+  @include medium-and-up {
+    height: 680px;
+  }
+
+  @include large-and-up {
+    height: 760px;
+  }
+
+  .tl-slidenav-icon {
+    opacity: 0.5;
+    margin-left: 0 !important;
+
+    &:before {
+      content: "";
+      display: block;
+      margin: auto;
+      width: 32px;
+      height: 32px;
+      background-size: cover;
+      background-position: right;
+
+      @include medium-and-up {
+        width: 45px;
+        height: 45px;
+      }
+
+      @include large-and-up {
+        width: 65px;
+        height: 65px;
+      }
+    }
+  }
+
+  .tl-slidenav-previous {
+    .tl-slidenav-icon:before {
+      background-image: url("images/carousel-marker-prev.png");
+
+      @include medium-and-up {
+        margin-left: 0;
+      }
+    }
+
+    &:hover {
+      .tl-slidenav-icon {
+        opacity: 1;
+        margin-left: 0 !important;
+      }
+    }
+  }
+
+  .tl-slidenav-next {
+    .tl-slidenav-icon:before {
+      background-image: url("images/carousel-marker-next.png");
+
+      @include medium-and-up {
+        margin-right: 0;
+      }
+    }
+
+    &:hover {
+      .tl-slidenav-icon {
+        opacity: 1;
+        margin-left: 0 !important;
+      }
+    }
+  }
+
+  .tl-timeline,
+  .tl-timeline blockquote cite,
+  .tl-timeline blockquote p cite,
+  .tl-timeline .vcard,
+  .tl-timeline .tl-note,
+  .tl-timenav .tl-attribution,
+  .tl-text .tl-headline-date,
+  .tl-text h3.tl-headline-date,
+  .tl-text .tl-text-date {
+    font-family: $roboto;
+  }
+
+  .tl-timeline blockquote,
+  .tl-timeline blockquote p {
+    font-family: $serif;
+  }
+}
