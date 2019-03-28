@@ -60,6 +60,7 @@ class ComposerStaticInit356100170ff2882375cd04c4c76f9df3
         'P4BKS\\Controllers\\Blocks\\Subheader_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-subheader-controller.php',
         'P4BKS\\Controllers\\Blocks\\TakeActionBoxout_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-takeactionboxout-controller.php',
         'P4BKS\\Controllers\\Blocks\\Tasks_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-tasks-controller.php',
+        'P4BKS\\Controllers\\Blocks\\Timeline_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-timeline-controller.php',
         'P4BKS\\Controllers\\Blocks\\TwoColumn_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-twocolumn-controller.php',
         'P4BKS\\Controllers\\Menu\\Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-controller.php',
         'P4BKS\\Controllers\\Menu\\Settings_Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-settings-controller.php',

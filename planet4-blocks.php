@@ -120,6 +120,7 @@ P4BKS\Loader::get_instance(
 		'P4BKS\Controllers\Blocks\Counter_Controller',
 		'P4BKS\Controllers\Blocks\Gallery_Controller',
 		'P4BKS\Controllers\Blocks\Columns_Controller',
+		'P4BKS\Controllers\Blocks\Timeline_Controller',
 	],
 	'P4BKS\Views\View',
 	'P4BKS\Command\ShortcodeReplacer'
