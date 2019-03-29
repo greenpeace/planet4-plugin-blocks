@@ -1,8 +1,3 @@
-@font-face {
-  font-family: save-the-arctic;
-  src: url("fonts/arctic/save-the-arctic.otf");
-}
-
 body.theme-arctic {
   $open-sans: "Open Sans", sans-serif;
   $save-the-arctic: "save-the-arctic", sans-serif;
@@ -109,10 +104,10 @@ body.theme-arctic {
         line-height: 1.5625rem;
         font-weight: $bold;
       }
+    }
 
-      .cover-card-btn {
-        @extend .btn-primary;
-      }
+    .cover-card-btn {
+      @extend .btn-primary;
     }
   } // end .covers-block
 

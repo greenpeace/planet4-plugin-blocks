@@ -9,8 +9,9 @@
 			{% if ( title ) %}
 				<h2>{{ title }}</h2>
 			{% endif %}
-
-			{{ _self.show_menu(menu) }}
+			<div class="submenu-menu">
+				{{ _self.show_menu(menu, 'submenu-item') }}
+			</div>
 		</div>
 
 		<a href="#" class="back-top">&nbsp;</a>
@@ -18,17 +19,17 @@
 
 {% endblock %}
 
-{% macro show_menu(items) %}
-	<ul>
+{% macro show_menu(items, class) %}
+	<ul class={{ class }}>
 		{% for item in items %}
-			<li class="list-style-{{ item.style }} {% if item.link %}list-link{% else %}list-heading{% endif %}">
+			<li {% if item.link %}list-link{% else %}list-heading{% endif %}">
 				{% if ( item.link ) %}
 					<a href="#{{ item.id }}" class="icon-link submenu-link">{{ item.text }}</a>
 				{% else %}
 					<span class="submenu-heading">{{ item.text }}</span>
 				{% endif %}
 				{% if ( item.children ) %}
-					{{ _self.show_menu(item.children) }}
+					{{ _self.show_menu(item.children, '') }}
 				{% endif %}
 			</li>
 		{% endfor %}

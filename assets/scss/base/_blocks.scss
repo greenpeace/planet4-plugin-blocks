@@ -115,21 +115,12 @@
   }
 
   .cover-card-btn {
-    margin: 26px 0 0;
-    position: relative;
-
-    @include mobile-only {
-      width: 100%;
-    }
-
-    @include small-and-up {
-      position: absolute;
-      bottom: 20px;
-      left: 28px;
-      right: 28px;
-      width: auto;
-      margin: 0;
-    }
+    position: absolute;
+    bottom: 20px;
+    left: 28px;
+    right: 28px;
+    width: auto;
+    margin: 0;
   }
 
   .cover-card {

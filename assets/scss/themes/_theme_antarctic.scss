@@ -1,8 +1,3 @@
-@font-face {
-  font-family: sanctuary;
-  src: url("fonts/antarctic/sanctuary.otf");
-}
-
 body.theme-antarctic {
 
   $sanctuary: "sanctuary", sans-serif;
@@ -101,10 +96,10 @@ body.theme-antarctic {
       .cover-card-heading {
         line-height: 1.5625rem;
       }
+    }
 
-      .cover-card-btn {
-        @extend .btn-primary;
-      }
+    .cover-card-btn {
+      @extend .btn-primary;
     }
   } // end .covers-block
 
@@ -166,6 +161,7 @@ body.theme-antarctic {
   } // end .four-column
 
   .submenu-block {
+    background: pink;
     @include submenu-block(
       mix($antarctic-light-blue, white, 10%),
       $sanctuary, $antarctic-dark-blue, 1.75rem, 2.5rem, $regular,
