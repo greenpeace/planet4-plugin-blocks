@@ -114,7 +114,7 @@ if ( ! class_exists( 'Media_Controller' ) ) {
 
 			$data = [
 				'fields' => [
-					'title'      => $fields['video_title'],
+					'title'      => isset($fields['video_title']) ? $fields['video_title'] : 'No title',
 					'embed_html' => $embed_html,
 					'type'       => $type,
 				],
