@@ -102,16 +102,20 @@ if ( ! class_exists( 'Timeline_Controller' ) ) {
 		public function load() {
 			parent::load();
 
-			// Load css only if shortcode appears in post.
 			add_action(
 				'wp_enqueue_scripts',
 				function () {
 					global $post;
 
-					if ( strpos( $post->post_content, 'shortcake_' . self::BLOCK_NAME ) !== false ) {
-						$css = 'https://cdn.knightlab.com/libs/timeline3/' . self::TIMELINEJS_VERSION . '/css/timeline.css';
+					if ( isset( $post->post_content ) ) {
+						$has_timeline = strpos( $post->post_content, 'shortcake_' . self::BLOCK_NAME ) !== false;
 
-						wp_enqueue_style( 'timelinejs', $css, [], self::TIMELINEJS_VERSION );
+						// Load css only if timeline shortcode appears in post content, or the post hasn't been saved yet
+						// so we don't know (so as not to break the preview iframe before the post is saved).
+						if ( $has_timeline || 'auto-draft' === $post->post_status ) {
+							$css = 'https://cdn.knightlab.com/libs/timeline3/' . self::TIMELINEJS_VERSION . '/css/timeline.css';
+							wp_enqueue_style( 'timelinejs', $css, [], self::TIMELINEJS_VERSION );
+						}
 					}
 				}
 			);
