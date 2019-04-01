@@ -96,7 +96,8 @@
                 <div class="col">
                   <div class="{{ ordinals[key] }}-column split-image">
                     {% if ( single_image.image_src ) %}
-                      <img srcset="{{ single_image.image_srcset }}"
+                      <img src="{{ single_image.image_src }}"
+                        srcset="{{ single_image.image_srcset }}"
                         sizes="{{ single_image.image_sizes }}"
                         alt="{{ single_image.alt_text }}">
                     {% endif %}
