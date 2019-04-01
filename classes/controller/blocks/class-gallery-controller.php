@@ -165,7 +165,7 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 			$images_dimensions = [];
 			$image_sizes       = [
 				self::LAYOUT_SLIDER        => 'retina-large',
-				self::LAYOUT_THREE_COLUMNS => 'medium-large',
+				self::LAYOUT_THREE_COLUMNS => 'medium_large',
 				self::LAYOUT_GRID          => 'medium',
 			];
 
