@@ -514,6 +514,7 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 					}
 
 					$post->permalink = get_permalink( $post );
+					$post->link      = get_permalink( $post );
 					$posts_array[]   = $post;
 				}
 			}
