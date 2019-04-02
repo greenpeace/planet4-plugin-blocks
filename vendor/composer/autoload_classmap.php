@@ -30,6 +30,7 @@ return array(
     'P4BKS\\Controllers\\Blocks\\Subheader_Controller' => $baseDir . '/classes/controller/blocks/class-subheader-controller.php',
     'P4BKS\\Controllers\\Blocks\\TakeActionBoxout_Controller' => $baseDir . '/classes/controller/blocks/class-takeactionboxout-controller.php',
     'P4BKS\\Controllers\\Blocks\\Tasks_Controller' => $baseDir . '/classes/controller/blocks/class-tasks-controller.php',
+    'P4BKS\\Controllers\\Blocks\\Timeline_Controller' => $baseDir . '/classes/controller/blocks/class-timeline-controller.php',
     'P4BKS\\Controllers\\Blocks\\TwoColumn_Controller' => $baseDir . '/classes/controller/blocks/class-twocolumn-controller.php',
     'P4BKS\\Controllers\\Menu\\Controller' => $baseDir . '/classes/controller/menu/class-controller.php',
     'P4BKS\\Controllers\\Menu\\Settings_Controller' => $baseDir . '/classes/controller/menu/class-settings-controller.php',
