@@ -4,7 +4,7 @@ msgstr ""
 "n%100==3||n%100==4 ? 2 : 3;\n"
 "Project-Id-Version: Planet4 - Blocks\n"
 "POT-Creation-Date: 2018-12-20 10:13+0000\n"
-"PO-Revision-Date: 2019-04-02 20:11+0000\n"
+"PO-Revision-Date: 2019-04-02 20:13+0000\n"
 "Last-Translator: Ines Kavgic <ikavgic@greenpeace.org>\n"
 "Language-Team: Slovenian\n"
 "MIME-Version: 1.0\n"
@@ -39,11 +39,11 @@ msgstr "Naloži več"
 
 #: classes/controller/blocks/class-splittwocolumns-controller.php:277
 msgid "Learn more about this issue"
-msgstr ""
+msgstr "Izvej več o tej problematiki"
 
 #: classes/controller/blocks/class-splittwocolumns-controller.php:298
 msgid "Get Involved"
-msgstr ""
+msgstr "Pridruži se"
 
 #: classes/controller/blocks/class-takeactionboxout-controller.php:129
 msgid "take action"
@@ -55,7 +55,7 @@ msgstr "Publikacije"
 
 #: classes/controller/blocks/class-happypoint-controller.php:158
 msgid "Background image"
-msgstr ""
+msgstr "Slika ozadja"
 
 #: classes/controller/blocks/class-articles-controller.php:75
 #: classes/controller/blocks/class-articles-controller.php:217
@@ -74,11 +74,11 @@ msgstr "po"
 
 #. Plugin Name of the plugin/theme
 msgid "Planet4 - Blocks"
-msgstr ""
+msgstr "Planet4 - Blocks"
 
 #. Description of the plugin/theme
 msgid "Creates all the blocks that will be available for usage by Shortcake."
-msgstr ""
+msgstr "Creates all the blocks that will be available for usage by Shortcake."
 
 #. URI of the plugin
 msgid "http://github.com/greenpeace/planet4-plugin-blocks"
