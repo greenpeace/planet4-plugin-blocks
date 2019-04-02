@@ -245,7 +245,7 @@ if ( ! class_exists( 'Timeline_Controller' ) ) {
 			$options = wp_json_encode(
 				[
 					'timenav_position' => sanitize_text_field( $fields['timenav_position'] ),
-					'start_at_end'     => is_bool( $fields['start_at_end'] ) ? $fields['start_at_end'] : false,
+					'start_at_end'     => boolval( $fields['start_at_end'] ),
 					'language'         => sanitize_text_field( $fields['language'] ),
 				]
 			);
