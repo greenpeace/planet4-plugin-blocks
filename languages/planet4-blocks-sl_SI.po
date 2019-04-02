@@ -4,7 +4,7 @@ msgstr ""
 "n%100==3||n%100==4 ? 2 : 3;\n"
 "Project-Id-Version: Planet4 - Blocks\n"
 "POT-Creation-Date: 2018-12-20 10:13+0000\n"
-"PO-Revision-Date: 2019-04-02 20:10+0000\n"
+"PO-Revision-Date: 2019-04-02 20:11+0000\n"
 "Last-Translator: Ines Kavgic <ikavgic@greenpeace.org>\n"
 "Language-Team: Slovenian\n"
 "MIME-Version: 1.0\n"
@@ -70,7 +70,7 @@ msgstr "PREBERI VSE NOVICE"
 #: includes/teasers/tease-articles.twig:47
 #: includes/teasers/tease-articles.twig:55
 msgid "by"
-msgstr ""
+msgstr "po"
 
 #. Plugin Name of the plugin/theme
 msgid "Planet4 - Blocks"
@@ -82,12 +82,12 @@ msgstr ""
 
 #. URI of the plugin
 msgid "http://github.com/greenpeace/planet4-plugin-blocks"
-msgstr ""
+msgstr "http://github.com/greenpeace/planet4-plugin-blocks"
 
 #. Author of the plugin/theme
 msgid "Greenpeace International"
-msgstr ""
+msgstr "Greenpeace International"
 
 #. Author URI of the plugin/theme
 msgid "http://www.greenpeace.org/"
-msgstr ""
+msgstr "http://www.greenpeace.org/"
