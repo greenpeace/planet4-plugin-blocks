@@ -86,7 +86,7 @@ body.theme-antarctic {
   }
 
   .covers-block {
-    @include covers-block($antarctic-grey, $sanctuary, $montserrat, $antarctic-orange);
+    @include campaign_covers($antarctic-grey, $sanctuary, $montserrat, $antarctic-orange);
 
     .cover-card-content {
       .cover-card-tag {
@@ -104,15 +104,15 @@ body.theme-antarctic {
   } // end .covers-block
 
   .campaign-thumbnail-block {
-    @include campaign-thumbnail-block($antarctic-gradient, $antarctic-purple, white, $sanctuary);
+    @include campaign_thumbnail($antarctic-gradient, $antarctic-purple, white, $sanctuary);
   } // end .campaign-thumbnail-block
 
   .four-column-content {
-    @include campaign-covers-block($antarctic-gradient, $sanctuary, $montserrat, $antarctic-pink);
+    @include campaign_content_four_column($antarctic-gradient, $sanctuary, $montserrat, $antarctic-pink);
   } // end .four-column-content
 
   .article-listing {
-    @include article-listing-block($montserrat, $montserrat, $antarctic-pink, $sanctuary, $antarctic-orange);
+    @include campaign_articles($montserrat, $montserrat, $antarctic-pink, $sanctuary, $antarctic-orange);
 
     .article-list-item-tags .tag-item {
       line-height: 1.1875rem;
@@ -120,11 +120,11 @@ body.theme-antarctic {
   } // end .article-listing
 
   .carousel-wrap {
-    @include carousel-block(true, $antarctic-pink, white, #B5C7CF, $antarctic-purple, url("images/antarctic/carousel-arrow.svg"), 39px);
+    @include campaign_carousel(true, $antarctic-pink, white, #B5C7CF, $antarctic-purple, url("images/antarctic/carousel-arrow.svg"), 39px);
   } // end .carousel-block
 
   .happy-point-block-wrap {
-    @include happy-point-block();
+    @include campaign_happy_point();
 
     #happy-point {
       @include small-and-up {
@@ -137,7 +137,7 @@ body.theme-antarctic {
   } // end .happy-point-block-wrap
 
   .split-two-column {
-    @include split-two-column-block( $montserrat, 1.25rem, 1.5625rem, black, $regular, $antarctic-gradient, 0.6, none, 0 );
+    @include campaign_split_two_columns( $montserrat, 1.25rem, 1.5625rem, black, $regular, $antarctic-gradient, 0.6, none, 0 );
 
     .split-two-column-item-image img {
       opacity: 0.5;
@@ -153,7 +153,7 @@ body.theme-antarctic {
   } // end .split-two-column
 
   .four-column {
-    @include four-column-block(
+    @include campaign_static_four_column(
       $antarctic-light-blue,
       grayscale(0) invert(53%) sepia(74%) saturate(2689%) hue-rotate(266deg) brightness(79%) contrast(93%),
       $montserrat, $regular,
@@ -162,7 +162,7 @@ body.theme-antarctic {
 
   .submenu-block {
     background: pink;
-    @include submenu-block(
+    @include campaign_submenu(
       mix($antarctic-light-blue, white, 10%),
       $sanctuary, $antarctic-dark-blue, 1.75rem, 2.5rem, $regular,
       $roboto, $antarctic-purple,
@@ -172,7 +172,7 @@ body.theme-antarctic {
 
   // take action task block
   .what-you-can-do-wrapper {
-    @include task-block-base;
+    @include campaign_tasks;
 
     h3 {
       @extend .page-section-header;
@@ -236,15 +236,15 @@ body.theme-antarctic {
     }
 
     .three-column-images {
-      @include three-column-images--border($antarctic-gradient);
+      @include campaign_content_three_column_images_border($antarctic-gradient);
     }
   }
 
   .content-two-column-block {
-    @include content-two-column-block($sanctuary, $antarctic-blue);
+    @include campaign_content_two_column($sanctuary, $antarctic-blue);
   }
 
   .video-block {
-    @include video-block($antarctic-gradient);
+    @include campaign_video($antarctic-gradient);
   }
 }

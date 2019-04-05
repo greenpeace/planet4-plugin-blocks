@@ -87,7 +87,7 @@ body.theme-forest {
   }
 
   .covers-block {
-    @include covers-block($forest-cream, $kanit, $kanit, $forest-green);
+    @include campaign_covers($forest-cream, $kanit, $kanit, $forest-green);
 
     .cover-card-tag {
       line-height: 1.1875rem;
@@ -103,7 +103,7 @@ body.theme-forest {
   } // end .covers-block
 
   .campaign-thumbnail-block {
-    @include campaign-thumbnail-block(transparent, white, white, $kanit, 50, 0, auto);
+    @include campaign_thumbnail(transparent, white, white, $kanit, 50, 0, auto);
 
     .campaign-card-column a:hover {
       text-decoration: none;
@@ -166,7 +166,7 @@ body.theme-forest {
   } // end .campaign-thumbnail-block
 
   .four-column-content {
-    @include campaign-covers-block($forest-dark-green, $kanit, $roboto, $forest-grey);
+    @include campaign_content_four_column($forest-dark-green, $kanit, $roboto, $forest-grey);
 
     .four-column-content-info .four-column-content-information {
       .publication-date {
@@ -180,7 +180,7 @@ body.theme-forest {
   } // end .four-column-content
 
   .article-listing {
-    @include article-listing-block($kanit, $kanit, $forest-grey, $roboto, $forest-green, $semi-bold);
+    @include campaign_articles($kanit, $kanit, $forest-grey, $roboto, $forest-green, $semi-bold);
 
     .article-list-item-meta {
       font-weight: $regular;
@@ -194,7 +194,7 @@ body.theme-forest {
   } // end .article-listing
 
   .carousel-wrap {
-    @include carousel-block(true, $forest-dark-green, white, $forest-grey, $forest-dark-green, url("images/forest/carousel-arrow.svg"), 28px, 10px);
+    @include campaign_carousel(true, $forest-dark-green, white, $forest-grey, $forest-dark-green, url("images/forest/carousel-arrow.svg"), 28px, 10px);
 
     .carousel-indicators li {
       border-radius: 50%;
@@ -207,7 +207,7 @@ body.theme-forest {
   } // end .carousel-block
 
   .happy-point-block-wrap {
-    @include happy-point-block();
+    @include campaign_happy_point();
 
     background: $forest-dark-green;
 
@@ -290,7 +290,7 @@ body.theme-forest {
       }
     }
 
-    @include split-two-column-block(
+    @include campaign_split_two_columns(
       $kanit,
       1.25rem, 1.5625rem, $forest-cream, $semi-bold,
       none, 0,
@@ -395,7 +395,7 @@ body.theme-forest {
   }
 
   .four-column {
-    @include four-column-block(
+    @include campaign_static_four_column(
       $forest-green,
       brightness(0) invert(100%),
       $kanit, $semi-bold,
@@ -404,7 +404,7 @@ body.theme-forest {
   } // end .four-column
 
   .submenu-block {
-    @include submenu-block(
+    @include campaign_submenu(
       $forest-cream,
       $kanit, black, 1.875rem, 2.25rem, $semi-bold,
       $roboto, $forest-dark-green,
@@ -414,7 +414,7 @@ body.theme-forest {
 
   // take action task block
   .what-you-can-do-wrapper {
-    @include task-block-base;
+    @include campaign_tasks;
 
     h3 {
       @extend .page-section-header;
@@ -516,7 +516,7 @@ body.theme-forest {
     }
 
     .three-column-images {
-      @include three-column-images;
+      @include campaign_content_three_column_images;
 
       border-style: solid;
       border-color: $forest-dark-green;
@@ -572,13 +572,13 @@ body.theme-forest {
   }
 
   .content-two-column-block {
-    @include content-two-column-block($kanit, $forest-black, 600);
+    @include campaign_content_two_column($kanit, $forest-black, 600);
 
     font-size: 1.875rem;
     line-height: 2.25rem;
   }
 
   .video-block {
-    @include video-block($forest-dark-green);
+    @include campaign_video($forest-dark-green);
   }
 }
