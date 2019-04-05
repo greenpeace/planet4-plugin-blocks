@@ -92,7 +92,7 @@ body.theme-arctic {
   }
 
   .covers-block {
-    @include covers-block($arctic-cream, $open-sans, $open-sans, $arctic-blue);
+    @include campaign_covers($arctic-cream, $open-sans, $open-sans, $arctic-blue);
 
     .cover-card-content {
       .cover-card-tag {
@@ -112,7 +112,7 @@ body.theme-arctic {
   } // end .covers-block
 
   .campaign-thumbnail-block {
-    @include campaign-thumbnail-block($arctic-cream, white, $arctic-faded-red, $open-sans);
+    @include campaign_thumbnail($arctic-cream, white, $arctic-faded-red, $open-sans);
 
     .thumbnail-large .yellow-cta {
       font-weight: $bold;
@@ -120,7 +120,7 @@ body.theme-arctic {
   } // end .campaign-thumbnail-block
 
   .four-column-content {
-    @include campaign-covers-block($arctic-light-blue, $save-the-arctic, $open-sans, $arctic-turquoise);
+    @include campaign_content_four_column($arctic-light-blue, $save-the-arctic, $open-sans, $arctic-turquoise);
 
     .four-column-content-info .four-column-content-information {
       .publication-date {
@@ -130,7 +130,7 @@ body.theme-arctic {
   } // end .four-column-content
 
   .article-listing {
-    @include article-listing-block($open-sans, $open-sans, $arctic-turquoise, $open-sans, $arctic-faded-red, $bold);
+    @include campaign_articles($open-sans, $open-sans, $arctic-turquoise, $open-sans, $arctic-faded-red, $bold);
 
     .article-list-item-tags .tag-item {
       font-size: 0.875rem;
@@ -139,7 +139,7 @@ body.theme-arctic {
   } // end .article-listing
 
   .carousel-wrap {
-    @include carousel-block(true, $arctic-light-blue, $arctic-black, $arctic-greyblue, $arctic-blue, url("images/arctic/carousel-arrow.svg"), 24px);
+    @include campaign_carousel(true, $arctic-light-blue, $arctic-black, $arctic-greyblue, $arctic-blue, url("images/arctic/carousel-arrow.svg"), 24px);
 
     .carousel-indicators li {
       width: 32px;
@@ -152,7 +152,7 @@ body.theme-arctic {
   } // end .carousel-block
 
   .happy-point-block-wrap {
-    @include happy-point-block();
+    @include campaign_happy_point();
 
     #happy-point {
       background: $arctic-light-blue;
@@ -160,7 +160,7 @@ body.theme-arctic {
   } // end .happy-point-block-wrap
 
   .split-two-column {
-    @include split-two-column-block(
+    @include campaign_split_two_columns(
       $open-sans,
       1.25rem, 1.5625rem, $arctic-blue, $bold,
       $arctic-light-blue, 0.6,
@@ -198,7 +198,7 @@ body.theme-arctic {
 
   // take action task block
   .what-you-can-do-wrapper {
-    @include task-block-base;
+    @include campaign_tasks;
 
     h3 {
       @extend .page-section-header;
@@ -267,7 +267,7 @@ body.theme-arctic {
   } // end take action task block
 
   .four-column {
-    @include four-column-block(
+    @include campaign_static_four_column(
       $arctic-light-blue,
       grayscale(0) invert(12%) sepia(58%) saturate(7062%) hue-rotate(187deg) brightness(96%) contrast(98%),
       $open-sans, $bold,
@@ -276,7 +276,7 @@ body.theme-arctic {
   }
 
   .submenu-block {
-    @include submenu-block(
+    @include campaign_submenu(
       $arctic-cream,
       $save-the-arctic, $arctic-blue, 1.75rem, 2.5rem, $bold,
       $roboto, $arctic-faded-red,
@@ -293,15 +293,15 @@ body.theme-arctic {
     }
 
     .three-column-images {
-      @include three-column-images--divided($arctic-light-blue);
+      @include campaign_content_three_column_images_divided($arctic-light-blue);
     }
   }
 
   .content-two-column-block {
-    @include content-two-column-block($save-the-arctic, $arctic-blue, 700);
+    @include campaign_content_two_column($save-the-arctic, $arctic-blue, 700);
   }
 
   .video-block {
-    @include video-block($arctic-light-blue);
+    @include campaign_video($arctic-light-blue);
   }
 }

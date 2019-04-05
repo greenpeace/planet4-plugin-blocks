@@ -1,0 +1,170 @@
+// for .what-you-can-do-wrapper
+@mixin campaign_tasks {
+  font-size: 1.125rem;
+  line-height: 1.875rem;
+
+  h3 {
+    margin-bottom: 10px;
+  }
+
+  .can-do-steps {
+    text-align: center;
+
+    .step-number {
+      background: none;
+      border: none;
+      border-radius: 0;
+      font-size: 1.875rem;
+      height: 120px;
+      width: 120px;
+      line-height: 120px;
+      margin: 0 auto 34px auto;
+
+      .step-number-inner {
+        background: none;
+        background-size: cover;
+        border: none;
+        border-radius: 0;
+        color: black;
+        display: block;
+        font-weight: $regular;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+
+    .step-info {
+      h5,
+      p,
+      img {
+        max-width: 500px;
+      }
+
+      h5,
+      p {
+        margin: 0 auto 16px auto;
+        padding: 0;
+      }
+
+      h5 {
+        color: black;
+        font-size: 1.25rem;
+        font-weight: $regular;
+        line-height: 1.5625rem;
+        text-transform: uppercase;
+      }
+
+      p {
+        font-size: 1rem;
+        line-height: 1.5625rem;
+        opacity: unset;
+      }
+
+      img {
+        width: auto;
+        height: auto;
+        margin-bottom: 20px;
+        max-height: 210px;
+
+        @include x-large-and-up {
+          max-height: 250px;
+        }
+
+        @supports (object-fit: cover) {
+          width: 100%;
+          height: 210px;
+
+          @include x-large-and-up {
+            height: 250px;
+          }
+        }
+      }
+
+      .btn {
+        width: auto;
+      }
+    }
+  }
+
+  .can-do-steps-mobile {
+    margin: 30px 0 0 0;
+
+    .card-header {
+      background: none;
+      border: none;
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      font-size: 1.25rem;
+      height: 70px;
+      justify-content: center;
+      line-height: 1.5625rem;
+      margin-bottom: 20px;
+      padding: 20px 10px 20px 90px;
+      position: relative;
+      text-transform: uppercase;
+
+      .step-number {
+        background: none;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border: none;
+        color: inherit;
+        float: unset;
+        font-size: 1rem;
+        font-weight: $regular;
+        padding: unset;
+        position: absolute;
+        text-align: center;
+        vertical-align: unset;
+        height: 70px;
+        line-height: 70px;
+        width: 70px;
+        top: 0;
+        left: 0;
+      }
+    }
+
+    .card-block {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+
+      .mobile-accordion-info {
+        margin: 0 50px;
+        padding: 0;
+        width: auto;
+
+        p {
+          font-size: 1.125rem;
+          line-height: 1.875rem;
+          margin: 0 0 25px 0;
+          padding: 0;
+        }
+      }
+
+      .accordion-image-wrap {
+        margin: 0 50px;
+        padding: 0;
+
+        img {
+          width: auto;
+          height: auto;
+          max-height: 190px;
+          margin-bottom: 30px;
+
+          @include medium-and-up {
+            max-height: 220px;
+          }
+        }
+      }
+
+      .btn {
+        margin-bottom: 30px;
+        width: auto;
+      }
+    }
+  }
+}

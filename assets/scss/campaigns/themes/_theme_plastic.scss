@@ -97,7 +97,7 @@ body.theme-plastic {
   }
 
   .covers-block {
-    @include covers-block($plastics-peach-darker, $montserrat, $montserrat, white, white);
+    @include campaign_covers($plastics-peach-darker, $montserrat, $montserrat, white, white);
 
     .cover-card-content {
       .cover-card-tag {
@@ -123,7 +123,7 @@ body.theme-plastic {
   }
   // end .covers-block
   .campaign-thumbnail-block {
-    @include campaign-thumbnail-block($plastics-peach, white, white, $montserrat, 50);
+    @include campaign_thumbnail($plastics-peach, white, white, $montserrat, 50);
 
     .thumbnail-large {
       .yellow-cta {
@@ -143,7 +143,7 @@ body.theme-plastic {
   }
   // end .campaign-thumbnail-block
   .four-column-content {
-    @include campaign-covers-block(none, $montserrat, $roboto, $plastics-peach);
+    @include campaign_content_four_column(none, $montserrat, $roboto, $plastics-peach);
 
     .four-column-content-info {
       .four-column-content-symbol {
@@ -171,7 +171,7 @@ body.theme-plastic {
   }
   // end .four-column-content
   .article-listing {
-    @include article-listing-block($montserrat, $montserrat, $plastics-peach, $roboto, $plastics-blue-mid, $semi-bold);
+    @include campaign_articles($montserrat, $montserrat, $plastics-peach, $roboto, $plastics-blue-mid, $semi-bold);
 
     .article-list-item-meta {
       font-weight: $bold;
@@ -186,7 +186,7 @@ body.theme-plastic {
   }
   // end .article-listing
   .carousel-wrap {
-    @include carousel-block(false, $plastics-blue-light, white, white, $plastics-blue, url("images/plastic/carousel-arrow.svg"), 50px, 10px);
+    @include campaign_carousel(false, $plastics-blue-light, white, white, $plastics-blue, url("images/plastic/carousel-arrow.svg"), 50px, 10px);
 
     .carousel-indicators li {
       border-radius: 50%;
@@ -194,7 +194,7 @@ body.theme-plastic {
   }
   // end .carousel-block
   .happy-point-block-wrap {
-    @include happy-point-block();
+    @include campaign_happy_point();
 
     background: $plastics-peach-darker;
 
@@ -239,7 +239,7 @@ body.theme-plastic {
   }
   // end .happy-point-block-wrap
   .split-two-column {
-    @include split-two-column-block(
+    @include campaign_split_two_columns(
       $montserrat,
       1.25rem, 1.5625rem, white, $semi-bold,
       $plastics-blue-light, 0.7,
@@ -305,7 +305,7 @@ body.theme-plastic {
   }
   // end .split-two-column
   .four-column {
-    @include four-column-block(
+    @include campaign_static_four_column(
       $plastics-blue-mid url("images/plastic/four-column-header.svg") no-repeat,
       brightness(0) invert(100%),
       $montserrat, $semi-bold,
@@ -319,7 +319,7 @@ body.theme-plastic {
   }
   // end .four-column
   .submenu-block {
-    @include submenu-block(
+    @include campaign_submenu(
       mix($plastics-peach, white, 50%),
       $montserrat, $plastics-blue, 3.125rem, 3.75rem, $extra-bold,
       $roboto, $plastics-blue,
@@ -334,7 +334,7 @@ body.theme-plastic {
 
   // take action task block
   .what-you-can-do-wrapper {
-    @include task-block-base;
+    @include campaign_tasks;
 
     h3 {
       @extend .page-section-header;
@@ -403,18 +403,18 @@ body.theme-plastic {
     }
 
     .three-column-images {
-      @include three-column-images;
+      @include campaign_content_three_column_images;
     }
   }
 
   .content-two-column-block {
-    @include content-two-column-block($montserrat, $plastics-blue, 400);
+    @include campaign_content_two_column($montserrat, $plastics-blue, 400);
 
     font-size: 1.875rem;
     line-height: 2.25rem;
   }
 
   .video-block {
-    @include video-block($plastics-blue-light);
+    @include campaign_video($plastics-blue-light);
   }
 }

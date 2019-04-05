@@ -1,0 +1,19 @@
+@mixin campaign_content_two_column($font, $header-colour: black, $header-weight: $regular) {
+  h2 {
+    color: $header-colour;
+    font-family: $font;
+    font-size: 1.75rem;
+    font-weight: $header-weight;
+    line-height: 2.5rem;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.875rem;
+  }
+
+  .btn-secondary {
+    @extend .btn-secondary;
+  }
+}

@@ -164,7 +164,7 @@ body.theme-oil {
   }
 
   .covers-block {
-    @include covers-block(white, $anton, $amiko, $oil-blue);
+    @include campaign_covers(white, $anton, $amiko, $oil-blue);
 
     .cover-card {
       .cover-card-btn {
@@ -214,7 +214,7 @@ body.theme-oil {
   .campaign-thumbnail-block {
     $border: 20px;
 
-    @include campaign-thumbnail-block(url("images/oil/covers-block.svg") no-repeat, black, black, $anton, -10, #{$border + 16px}, #{$border + 16px});
+    @include campaign_thumbnail(url("images/oil/covers-block.svg") no-repeat, black, black, $anton, -10, #{$border + 16px}, #{$border + 16px});
 
     .thumbnail-large {
       img:not(:hover) {
@@ -241,7 +241,7 @@ body.theme-oil {
   }
   //end .campaign-thumbnail-block
   .four-column-content {
-    @include campaign-covers-block(linear-gradient(to right, $oil-green, $oil-green-2), $amiko, $amiko, $oil-blue);
+    @include campaign_content_four_column(linear-gradient(to right, $oil-green, $oil-green-2), $amiko, $amiko, $oil-blue);
 
     .four-column-content-info {
       .four-column-content-information h4 {
@@ -257,7 +257,7 @@ body.theme-oil {
   }
   // end .four-column-content
   .article-listing {
-    @include article-listing-block($amiko, $amiko, $oil-orange, $anton, $oil-blue);
+    @include campaign_articles($amiko, $amiko, $oil-orange, $anton, $oil-blue);
 
     .article-list-item-image:not(:hover) {
       @include monochrome;
@@ -273,7 +273,7 @@ body.theme-oil {
   }
   // end .article-listing
   .carousel-wrap {
-    @include carousel-block(true, $oil-gradient-standard, $oil-black, $oil-grey, $oil-green, url("images/oil/carousel-arrow.svg"), 39px);
+    @include campaign_carousel(true, $oil-gradient-standard, $oil-black, $oil-grey, $oil-green, url("images/oil/carousel-arrow.svg"), 39px);
 
     .carousel-control-prev-icon,
     .carousel-control-next-icon {
@@ -285,7 +285,7 @@ body.theme-oil {
   }
   // end .carousel-block
   .happy-point-block-wrap {
-    @include happy-point-block();
+    @include campaign_happy_point();
 
     picture {
       position: absolute;
@@ -363,7 +363,7 @@ body.theme-oil {
   }
   // end .happy-point-block-wrap
   .split-two-column {
-    @include split-two-column-block(
+    @include campaign_split_two_columns(
       $anton,
       1.75rem, 2.5rem, black, $regular,
       linear-gradient(to top right, #666, white), 0.8,
@@ -389,7 +389,7 @@ body.theme-oil {
   }
   // end .split-two-column
   .four-column {
-    @include four-column-block(
+    @include campaign_static_four_column(
       $oil-green,
       brightness(0%),
       $amiko, $regular,
@@ -398,7 +398,7 @@ body.theme-oil {
   }
   // end .four-column
   .submenu-block {
-    @include submenu-block(
+    @include campaign_submenu(
       mix($oil-black, white, 10%),
       $anton, black, 1.75rem, 2.5rem, $regular,
       $amiko, $oil-blue
@@ -408,7 +408,7 @@ body.theme-oil {
 
   // take action task block
   .what-you-can-do-wrapper {
-    @include task-block-base;
+    @include campaign_tasks;
 
     h3 {
       @extend .page-section-header;
@@ -475,7 +475,7 @@ body.theme-oil {
     }
 
     .three-column-images {
-      @include three-column-images--divided($oil-gradient-standard);
+      @include campaign_content_three_column_images_divided($oil-gradient-standard);
 
       img {
         @include monochrome;
@@ -484,11 +484,11 @@ body.theme-oil {
   }
 
   .content-two-column-block {
-    @include content-two-column-block($anton);
+    @include campaign_content_two_column($anton);
   }
 
   .video-block {
-    @include video-block($oil-gradient-standard);
+    @include campaign_video($oil-gradient-standard);
   }
 
   /** IE/Edge only **/
