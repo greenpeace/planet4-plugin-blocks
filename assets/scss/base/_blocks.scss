@@ -1,0 +1,53 @@
+@import "mixins";
+
+@mixin page-header-block($font) {
+  overflow-y: hidden;
+  min-height: 100vh;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-top: 78px;
+
+  .page-header-background {
+    overflow: hidden;
+
+    @include mobile-only {
+      height: 100%;
+
+      img {
+        position: absolute;
+        left: -99999px;
+        right: -99999px;
+        margin: auto;
+        height: 100%;
+        width: auto;
+        max-width: none;
+      }
+    }
+  }
+
+  @include small-and-up {
+    padding-top: 84px;
+  }
+
+  .page-header-title,
+  .page-header-subtitle {
+    font-family: $font;
+    text-transform: uppercase;
+    font-weight: $regular;
+
+    @include mobile-only {
+      max-width: none;
+    }
+  }
+
+  .page-header-content {
+    font-family: $roboto;
+    font-size: 1.125rem;
+    line-height: 1.875rem;
+    font-weight: $regular;
+  }
+
+  .page-header-btn {
+    margin-top: 4px;
+  }
+}

@@ -82,8 +82,10 @@ $(document).ready(function () {
   $('.load-more').off('mousedown touchstart').on('mousedown touchstart', function(e) {
     e.preventDefault();
 
+    // Save element to variable to use inside ajax call.
+    const el = $(this);
     // Append response only to current block.
-    const $content = $( this.dataset.content, $(this).closest('section') );
+    const $content = $(this.dataset.content, el.closest('section'));
     const next_page = parseInt(this.dataset.page) + 1;
     const total_pages = parseInt( this.dataset.total_pages );
     const url = p4_vars.ajaxurl + `?page=${ next_page }`;
@@ -102,7 +104,7 @@ $(document).ready(function () {
       // Append the response at the bottom of the results and then show it.
       $content.append( response );
       if (next_page === total_pages) {
-        $(this).fadeOut();
+        el.fadeOut();
       }  
     }).fail(function ( jqXHR, textStatus, errorThrown ) {
       console.log(errorThrown); //eslint-disable-line no-console
