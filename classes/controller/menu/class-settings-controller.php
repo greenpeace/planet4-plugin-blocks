@@ -2,11 +2,13 @@
 /**
  * Settings class
  *
- * @package P4BKS
- * @since 0.1.0
+ * @package P4BKS\Controllers\Menu
+ * @since 1.40.0
  */
 
 namespace P4BKS\Controllers\Menu;
+
+use P4BKS\Command\ShortcodeReplacer;
 
 if ( ! class_exists( 'Settings_Controller' ) ) {
 
@@ -32,47 +34,80 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 					'dashicons-layout'
 				);
 			}
-			add_action( 'admin_init', array( $this, 'register_settings' ) );
 		}
 
 		/**
 		 * Render the settings page of the plugin.
 		 */
 		public function prepare_settings() {
-			$this->view->settings(
-				[
-					'settings'            => get_option( 'p4bks_main_settings' ),
-					'available_languages' => P4BKS_LANGUAGES,
-				]
-			);
-		}
-
-		/**
-		 * Register and store the settings and their data.
-		 */
-		public function register_settings() {
-			$args = array(
-				'type'              => 'string',
-				'group'             => 'p4bks_main_settings_group',
-				'description'       => 'Planet 4 - Blocks settings',
-				'sanitize_callback' => [ $this, 'valitize' ],
-				'show_in_rest'      => false,
-			);
-			register_setting( 'p4bks_main_settings_group', 'p4bks_main_settings', $args );
-		}
-
-		/**
-		 * Validates and sanitizes the settings input.
-		 *
-		 * @param array $settings The associative array with the settings that are registered for the plugin.
-		 *
-		 * @return mixed Array if validation is ok, false if validation fails.
-		 */
-		public function valitize( $settings ) {
-			if ( $this->validate( $settings ) ) {
-				$this->sanitize( $settings );
+			$data = [];
+			$validated = $this->handle_submit($data );
+			if ( $validated ) {
+				$this->view->settings( $data );
 			}
-			return $settings;
+		}
+
+		/**
+		 * Handle form submit.
+		 *
+		 * @param mixed[] $current_user The current user.
+		 * @param mixed[] $data The form data.
+		 *
+		 * @return bool Array if validation is ok, false if validation fails.
+		 */
+		public function handle_submit( &$data ) : bool {
+			// CSRF protection.
+			$nonce   = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING );
+			$post_id = filter_input( INPUT_POST, 'p4bks_post_id', FILTER_SANITIZE_NUMBER_INT );
+
+			$data['nonce_action'] = 'convert-blocks-nonce';
+			$data['form_submit']  = 0;
+
+			if ( 'POST' === $_SERVER['REQUEST_METHOD'] ) {
+				$data['form_submit'] = 1;
+
+				if ( ! wp_verify_nonce( $nonce, 'convert-blocks-nonce' ) ) {
+					$data['message'] = __( 'Nonce verification failed!', 'planet4-blocks-backend' );
+					return false;
+				} else {
+					$data['message'] = $this->replace_shortcodes( [ $post_id ] );
+				}
+			}
+			return true;
+		}
+
+		/**
+		 * @param array $args
+		 *
+		 * @return string
+		 */
+		public function replace_shortcodes( $args = [] ) : string {
+
+			// Supply a post ID as first argument to update a single, specific post.
+			$post_id = $args[0] ?? null;
+
+			try {
+				$replacer = new ShortcodeReplacer();
+				try {
+					$updated = $replacer->replace_all( $post_id );
+				} catch ( \Exception $e ) {
+					return __( 'Exception: ', 'planet4-blocks-backend' ) . $e->getMessage();
+				}
+
+				if ( $post_id ) {
+					if ( $updated ) {
+						return sprintf( __( 'Replaced shortcodes in post %d', 'planet4-blocks-backend' ), $post_id );
+					} else {
+						return sprintf( __( 'No shortcodes replaced in post %d', 'planet4-blocks-backend' ), $post_id );
+					}
+				} else {
+					return sprintf( __( 'Replaced shortcodes in %d posts ', 'planet4-blocks-backend' ), $updated );
+				}
+			} catch ( \Error $e ) {
+				return $e->getMessage();
+			} catch ( \Exception $e ) {
+				return __( 'Exception: ', 'planet4-blocks-backend' ) . $e->getMessage();
+			}
 		}
 
 		/**
@@ -98,18 +133,6 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 					$settings[ $name ] = sanitize_text_field( $setting );
 				}
 			}
-		}
-
-		/**
-		 * Loads the saved language.
-		 *
-		 * @param string $locale Current locale.
-		 *
-		 * @return string The new locale.
-		 */
-		public function set_locale( $locale ) : string {
-			$main_settings = get_option( 'p4bks_main_settings' );
-			return $main_settings['p4bks_lang'] ?? $locale;
 		}
 	}
 }

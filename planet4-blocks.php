@@ -121,214 +121,46 @@ P4BKS\Loader::get_instance(
 		'P4BKS\Controllers\Blocks\Gallery_Controller',
 		'P4BKS\Controllers\Blocks\Columns_Controller',
 		'P4BKS\Controllers\Blocks\Timeline_Controller',
+		'P4BKS\Controllers\Menu\Settings_Controller',
+		'P4BKS\Controllers\Menu\Blocks_Usage_Controller',
 	],
 	'P4BKS\Views\View',
 	'P4BKS\Command\ShortcodeReplacer'
 );
 
-
-/*
-==========================
-	P L U G I N  R E P O R T
-==========================
-*/
-add_action( 'admin_menu', 'plugin_blocks_report_view' );
-
-/**
- * Adds blocks usage menu in admin.
- */
-function plugin_blocks_report_view() {
-	add_menu_page( 'Plugin Blocks Usage', 'Plugin Blocks Usage', 'manage_options', 'plugin_blocks_report', 'plugin_blocks_report' );
-}
-
-/**
- * Filters array elements on being a shortcake shortcode
- *
- * @param string $shortcode The shortcode.
- * @return bool
- */
-function is_shortcake( $shortcode ) {
-	$found = strpos( $shortcode, 'shortcake' );
-	if ( false !== $found ) {
-		return true;
-	}
-}
-
-/**
- * Finds blocks usage in pages/posts.
- */
-function plugin_blocks_report() {
-	global $wpdb, $shortcode_tags;
-
-	// Array filtering on shortcake shortcodes.
-	$blocks = array_filter( array_keys( $shortcode_tags ), 'is_shortcake' );
-	sort( $blocks );
-
-	// phpcs:disable
-	foreach ( $blocks as $block ) {
-		$block = substr( $block, 10 );
-		$shortcode = '%[shortcake_' . $wpdb->esc_like( $block ) . ' %';
-		$sql       = $wpdb->prepare(
-			"SELECT ID, post_title
-			FROM `wp_posts` 
-			WHERE post_status = 'publish' 
-			AND `post_content` LIKE %s
-			ORDER BY post_title",
-			$shortcode );
-
-		$results = $wpdb->get_results( $sql );
-
-		// Confusion between old and new covers.
-		if ( 'covers' === $block ) {
-			$block = 'Take Action Covers - Old block';
-		}
-
-		echo '<hr>';
-		echo '<h2>' . ucfirst( str_replace( '_', ' ', $block ) ) . '</h2>';
-
-		foreach ( $results as $result ) {
-			echo '<a href="post.php?post=' . $result->ID . '&action=edit" >' . $result->post_title . '</a>';
-			echo '<br>';
-		}
-	}
-
-	// Add to the report a breakdown of different styles for carousel Header
-	$sql       = "SELECT ID, post_title
-						FROM ". $wpdb->prefix . "posts 
-						WHERE post_status = 'publish'
-				      	AND `post_content` REGEXP 'shortcake_carousel_header.*full-width-classic'";
-	$results = $wpdb->get_results( $sql );
-	echo '<hr>';
-	echo '<h2>Carousel Header Full Width Classic style</h2>';
-	foreach ( $results as $result ) {
-		echo '<a href="post.php?post=' . $result->ID . '&action=edit" >' . $result->post_title . '</a>';
-		echo '<br>';
-	}
-
-	// Add to the report a breakdown of different styles for carousel Header
-	// Given that the default (if no style is defined) is the Slide to Gray, include in the query
-	// everything that is not Full Width Classic.
-	$sql       = "SELECT ID, post_title
-						FROM ". $wpdb->prefix . "posts 
-						WHERE post_status = 'publish'
-				      	AND `post_content` REGEXP 'shortcake_carousel_header'
-						AND ID NOT IN (SELECT ID
-											FROM ". $wpdb->prefix . "posts 
-											WHERE post_status = 'publish'
-											AND `post_content` REGEXP 'shortcake_carousel_header.*full-width-classic')";
-	$results = $wpdb->get_results( $sql );
-	echo '<hr>';
-	echo '<h2>Carousel Header Zoom and Slide to Grey</h2>';
-	foreach ( $results as $result ) {
-		echo '<a href="post.php?post=' . $result->ID . '&action=edit" >' . $result->post_title . '</a>';
-		echo '<br>';
-	}
-
-	// phpcs:enable
-}
-
-/**
- * Finds blocks usage in pages/posts.
- */
-function plugin_blocks_report_json() {
-	global $wpdb, $shortcode_tags;
-
-	$cache_key = 'plugin-blocks-report';
-	$report    = wp_cache_get( $cache_key );
-
-	if ( ! $report ) {
-		// Array filtering on shortcake shortcodes.
-		$blocks = array_filter( array_keys( $shortcode_tags ), 'is_shortcake' );
-
-		$report = [];
-
-		// phpcs:disable
-		foreach ( $blocks as $block ) {
-
-			$block     = substr( $block, 10 );
-			$shortcode = '%[shortcake_' . $wpdb->esc_like( $block ) . ' %';
-			$sql       = $wpdb->prepare(
-				"SELECT count(ID) AS cnt
-				FROM `wp_posts` 
-				WHERE post_status = 'publish' 
-				AND `post_content` LIKE %s", $shortcode );
-			$results = $wpdb->get_var( $sql );
-
-			$report[ ucfirst( str_replace( '_', ' ', $block ) ) ] = $results;
-
-		}
-
-		// Add to the report a breakdown of different styles for carousel Header
-		$sql       = "SELECT count(ID) AS cnt
-						FROM ". $wpdb->prefix . "posts 
-						WHERE post_status = 'publish'
-				      	AND `post_content` REGEXP 'shortcake_carousel_header'
-						AND ID NOT IN (SELECT ID
-											FROM ". $wpdb->prefix . "posts 
-											WHERE post_status = 'publish'
-											AND `post_content` REGEXP 'shortcake_carousel_header.*full-width-classic')";
-		$cnt = $wpdb->get_var( $sql );
-		$report['CarouselHeader-Zoom-And-Slide'] = $cnt;
-		$sql       = "SELECT count(ID) AS cnt
-						FROM ". $wpdb->prefix . "posts 
-						WHERE post_status = 'publish'
-				      	AND `post_content` REGEXP 'shortcake_carousel_header.*full-width-classic'";
-		$cnt = $wpdb->get_var( $sql );
-		$report['CarouselHeader-Full-Width-Classic'] = $cnt;
-
-		wp_cache_add( $cache_key, $report, '', 3600 );
-
-	}
-	return $report;
-
-	// phpcs:enable
-}
-
-
-/**
- * Register API route for report of blocks usage in pages/posts.
- */
-function plugin_blocks_report_register_rest_route() {
-	register_rest_route(
-		'plugin_blocks/v1',
-		'/plugin_blocks_report/',
-		[
-			'methods'  => 'GET',
-			'callback' => 'plugin_blocks_report_json',
-		]
-	);
-}
-
-add_action( 'rest_api_init', 'plugin_blocks_report_register_rest_route' );
-
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	WP_CLI::add_command(
-		'replace-shortcodes',
-		function ( $args ) {
+	try {
+		WP_CLI::add_command(
+			'replace-shortcodes',
+			function ( $args ) {
 
-			// Supply a post ID as first argument to update a single, specific post.
-			$post_id = $args[0] ?? null;
+				// Supply a post ID as first argument to update a single, specific post.
+				$post_id = $args[0] ?? null;
 
-			try {
-				WP_CLI::log( 'Replacing shortcodes...' );
+				try {
+					WP_CLI::log( 'Replacing shortcodes...' );
 
-				$updater = new P4BKS\Command\ShortcodeReplacer();
-				$updated = $updater->replace_all( $post_id );
 
-				if ( $post_id ) {
-					if ( $updated ) {
-						WP_CLI::success( "Replaced shortcodes in post $post_id" );
+					$updater = new P4BKS\Command\ShortcodeReplacer();
+					$updated = $updater->replace_all( $post_id );
+
+					if ( $post_id ) {
+						if ( $updated ) {
+							WP_CLI::success( "Replaced shortcodes in post $post_id" );
+						} else {
+							WP_CLI::log( "No shortcodes replaced in post $post_id" );
+						}
 					} else {
-						WP_CLI::log( "No shortcodes replaced in post $post_id" );
+						WP_CLI::success( "Replaced shortcodes in $updated posts" );
 					}
-				} else {
-					WP_CLI::success( "Replaced shortcodes in $updated posts" );
+				} catch ( \Error $e ) {
+					WP_CLI::error( $e->getMessage() );
+				} catch ( \Exception $e ) {
+					WP_CLI::log( 'Exception: ' . $e->getMessage() );
 				}
-			} catch ( \Error $e ) {
-				WP_CLI::error( $e->getMessage() );
-			} catch ( \Exception $e ) {
-				WP_CLI::log( 'Exception: ' . $e->getMessage() );
 			}
-		}
-	);
+		);
+	} catch ( \Exception $e ) {
+		WP_CLI::error( 'Exception: ' . $e->getMessage() );
+	}
 }
