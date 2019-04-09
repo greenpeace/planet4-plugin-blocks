@@ -40,8 +40,8 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 		 * Render the settings page of the plugin.
 		 */
 		public function prepare_settings() {
-			$data = [];
-			$validated = $this->handle_submit($data );
+			$data      = [];
+			$validated = $this->handle_submit( $data );
 			if ( $validated ) {
 				$this->view->settings( $data );
 			}
@@ -50,7 +50,6 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 		/**
 		 * Handle form submit.
 		 *
-		 * @param mixed[] $current_user The current user.
 		 * @param mixed[] $data The form data.
 		 *
 		 * @return bool Array if validation is ok, false if validation fails.
@@ -58,7 +57,7 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 		public function handle_submit( &$data ) : bool {
 			// CSRF protection.
 			$nonce   = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_STRING );
-			$post_id = filter_input( INPUT_POST, 'p4bks_post_id', FILTER_SANITIZE_NUMBER_INT );
+			$page_id = filter_input( INPUT_POST, 'p4bks_page_id', FILTER_SANITIZE_NUMBER_INT );
 
 			$data['nonce_action'] = 'convert-blocks-nonce';
 			$data['form_submit']  = 0;
@@ -70,38 +69,43 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 					$data['message'] = __( 'Nonce verification failed!', 'planet4-blocks-backend' );
 					return false;
 				} else {
-					$data['message'] = $this->replace_shortcodes( [ $post_id ] );
+					$data['message'] = $this->replace_shortcodes( [ $page_id ] );
 				}
 			}
 			return true;
 		}
 
 		/**
-		 * @param array $args
+		 * Replace shortcodes in one or more Pages.
+		 *
+		 * @param array $page_ids Array with the ids of the pages that need shortcode replacements.
 		 *
 		 * @return string
 		 */
-		public function replace_shortcodes( $args = [] ) : string {
+		public function replace_shortcodes( $page_ids = [] ) : string {
 
-			// Supply a post ID as first argument to update a single, specific post.
-			$post_id = $args[0] ?? null;
+			// Supply a page ID as first argument to update a single, specific page.
+			$page_id = $page_ids[0] ?? null;
 
 			try {
 				$replacer = new ShortcodeReplacer();
 				try {
-					$updated = $replacer->replace_all( $post_id );
+					$updated = $replacer->replace_all( $page_id );
 				} catch ( \Exception $e ) {
 					return __( 'Exception: ', 'planet4-blocks-backend' ) . $e->getMessage();
 				}
 
-				if ( $post_id ) {
+				if ( $page_id ) {
 					if ( $updated ) {
-						return sprintf( __( 'Replaced shortcodes in post %d', 'planet4-blocks-backend' ), $post_id );
+						// translators: %d = The page ID.
+						return sprintf( __( 'Replaced shortcodes in page %d', 'planet4-blocks-backend' ), $page_id );
 					} else {
-						return sprintf( __( 'No shortcodes replaced in post %d', 'planet4-blocks-backend' ), $post_id );
+						// translators: %d = The page ID.
+						return sprintf( __( 'No shortcodes replaced in page %d', 'planet4-blocks-backend' ), $page_id );
 					}
 				} else {
-					return sprintf( __( 'Replaced shortcodes in %d posts ', 'planet4-blocks-backend' ), $updated );
+					// translators: %d = Number of pages that shortcode replacement took place in.
+					return sprintf( __( 'Replaced shortcodes in %d pages ', 'planet4-blocks-backend' ), $updated );
 				}
 			} catch ( \Error $e ) {
 				return $e->getMessage();

@@ -140,7 +140,6 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 				try {
 					WP_CLI::log( 'Replacing shortcodes...' );
 
-
 					$updater = new P4BKS\Command\ShortcodeReplacer();
 					$updated = $updater->replace_all( $post_id );
 
@@ -161,6 +160,6 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			}
 		);
 	} catch ( \Exception $e ) {
-		WP_CLI::error( 'Exception: ' . $e->getMessage() );
+		WP_CLI::log( 'Exception: ' . $e->getMessage() );
 	}
 }

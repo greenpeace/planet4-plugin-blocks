@@ -1,10 +1,10 @@
 <?php
 /**
-* Blocks Usage class
-*
-* @package P4BKS\Controllers\Menu
-* @since 1.40.0
-*/
+ * Blocks Usage class
+ *
+ * @package P4BKS\Controllers\Menu
+ * @since 1.40.0
+ */
 
 namespace P4BKS\Controllers\Menu;
 
@@ -41,11 +41,9 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 		 * @param string $shortcode The shortcode.
 		 * @return bool
 		 */
-		public function is_shortcake( $shortcode ) {
+		public function is_shortcake( $shortcode ) : bool {
 			$found = strpos( $shortcode, 'shortcake' );
-			if ( false !== $found ) {
-				return true;
-			}
+			return false !== $found ? true : false;
 		}
 
 		/**
