@@ -54,6 +54,8 @@ body.theme-antarctic {
   .page-header {
     @include page-header-block($sanctuary);
 
+    min-height: 0;
+
     .page-header-title {
       font-size: 3.125rem;
       line-height: 4.375rem;

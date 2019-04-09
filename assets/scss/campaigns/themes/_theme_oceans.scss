@@ -68,6 +68,7 @@ body.theme-oceans {
     @include page-header-block($montserrat);
 
     overflow: hidden;
+    min-height: 0;
 
     .page-header-title {
       font-size: 3.125rem;
