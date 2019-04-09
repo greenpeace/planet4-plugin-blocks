@@ -71,6 +71,9 @@
     right: 28px;
     width: auto;
     margin: 0;
+    background-color: transparentize($white, .8);
+    border-color: $white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
   }
 
   .cover-card {
