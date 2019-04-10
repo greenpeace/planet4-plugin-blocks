@@ -67,7 +67,7 @@ body.theme-antarctic {
     }
 
     .page-header-background:after {
-      background: linear-gradient(to top, white 0%, white 1%, transparent);
+      background: linear-gradient(to top, white 0%, white 1%, $transparent);
       bottom: -0.1%;
       height: 50%;
     }
@@ -76,7 +76,7 @@ body.theme-antarctic {
     &:after {
       content: "";
       display: block;
-      background: linear-gradient(to top, white 0%, white 1%, transparent);
+      background: linear-gradient(to top, white 0%, white 1%, $transparent);
       position: absolute;
       bottom: -0.5%;
       height: 50%;

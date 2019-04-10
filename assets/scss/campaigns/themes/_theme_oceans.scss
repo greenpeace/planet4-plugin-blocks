@@ -21,7 +21,7 @@ body.theme-oceans {
     border-radius: 25px;
     position: relative;
 
-    // use pseudo element and transparent background on hover
+    // use pseudo element and $transparent background on hover
     // to make it possible to transition the gradient
     &:hover {
       &::before {
@@ -35,7 +35,7 @@ body.theme-oceans {
         width: 100%;
         z-index: -1;
       }
-      background: transparent;
+      background: $transparent;
       color: $foreground;
     }
   }
@@ -332,7 +332,7 @@ body.theme-oceans {
 
     .can-do-steps-mobile {
       .card-header {
-        background-image: linear-gradient(to right, transparent 0, transparent 35px, $oceans-blue 35px, $oceans-blue 100%);
+        background-image: linear-gradient(to right, $transparent 0, $transparent 35px, $oceans-blue 35px, $oceans-blue 100%);
         color: white;
         font-family: $montserrat;
         font-weight: $semi-bold;
@@ -347,7 +347,7 @@ body.theme-oceans {
         }
 
         &.collapsed {
-          background: linear-gradient(to right, transparent 0, transparent 35px, $oceans-aqua-light 35px, $oceans-aqua-light 100%);
+          background: linear-gradient(to right, $transparent 0, $transparent 35px, $oceans-aqua-light 35px, $oceans-aqua-light 100%);
           color: $oceans-blue;
 
           .step-number {

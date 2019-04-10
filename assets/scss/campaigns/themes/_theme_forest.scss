@@ -78,7 +78,7 @@ body.theme-forest {
       }
 
       &:after {
-        background: linear-gradient(to bottom, white, transparent);
+        background: linear-gradient(to bottom, white, $transparent);
         top: 0;
         bottom: 25%;
         height: 75%;
@@ -103,7 +103,7 @@ body.theme-forest {
   } // end .covers-block
 
   .campaign-thumbnail-block {
-    @include campaign_thumbnail(transparent, white, white, $kanit, 50, 0, auto);
+    @include campaign_thumbnail($transparent, white, white, $kanit, 50, 0, auto);
 
     .campaign-card-column a:hover {
       text-decoration: none;
@@ -131,7 +131,7 @@ body.theme-forest {
         height: auto;
         bottom: 0;
         opacity: 1;
-        background: transparent;
+        background: $transparent;
       }
 
       $skew: 15deg;
@@ -285,7 +285,7 @@ body.theme-forest {
           @else {
             height: 30px;
           }
-          background: transparent;
+          background: $transparent;
         }
       }
     }
@@ -453,7 +453,7 @@ body.theme-forest {
 
     .can-do-steps-mobile {
       .card-header {
-        background: linear-gradient(to right, transparent 0, transparent 35px, $forest-dark-green 35px, $forest-dark-green 100%);
+        background: linear-gradient(to right, $transparent 0, $transparent 35px, $forest-dark-green 35px, $forest-dark-green 100%);
         color: $forest-cream;
         font-family: $kanit;
         font-weight: 500;
@@ -478,7 +478,7 @@ body.theme-forest {
         }
 
         &.collapsed {
-          background: linear-gradient(to right, transparent 0, transparent 35px, $forest-cream 35px, $forest-cream 100%);
+          background: linear-gradient(to right, $transparent 0, $transparent 35px, $forest-cream 35px, $forest-cream 100%);
           color: $forest-light-green;
 
           .step-number {
