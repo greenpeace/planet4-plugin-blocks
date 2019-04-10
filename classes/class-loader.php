@@ -40,7 +40,7 @@ if ( ! class_exists( 'Loader' ) ) {
 		 *
 		 * @return Loader
 		 */
-		public static function get_instance( $services = array(), $view_class ) : Loader {
+		public static function get_instance( $services, $view_class ) : Loader {
 			if ( ! isset( self::$instance ) ) {
 				self::$instance = new self( $services, $view_class );
 			}
@@ -56,7 +56,7 @@ if ( ! class_exists( 'Loader' ) ) {
 		 * @param array  $services The Controller services to inject.
 		 * @param string $view_class The View class name.
 		 */
-		private function __construct( $services = array(), $view_class ) {
+		private function __construct( $services, $view_class ) {
 			$this->load_services( $services, $view_class );
 			$this->check_requirements();
 			add_action( 'plugins_loaded', [ $this, 'load_i18n' ] );

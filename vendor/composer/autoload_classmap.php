@@ -32,6 +32,7 @@ return array(
     'P4BKS\\Controllers\\Blocks\\Tasks_Controller' => $baseDir . '/classes/controller/blocks/class-tasks-controller.php',
     'P4BKS\\Controllers\\Blocks\\Timeline_Controller' => $baseDir . '/classes/controller/blocks/class-timeline-controller.php',
     'P4BKS\\Controllers\\Blocks\\TwoColumn_Controller' => $baseDir . '/classes/controller/blocks/class-twocolumn-controller.php',
+    'P4BKS\\Controllers\\Menu\\Blocks_Usage_Controller' => $baseDir . '/classes/controller/menu/class-blocks-usage-controller.php',
     'P4BKS\\Controllers\\Menu\\Controller' => $baseDir . '/classes/controller/menu/class-controller.php',
     'P4BKS\\Controllers\\Menu\\Settings_Controller' => $baseDir . '/classes/controller/menu/class-settings-controller.php',
     'P4BKS\\Controllers\\Uninstall_Controller' => $baseDir . '/classes/controller/class-uninstall-controller.php',
