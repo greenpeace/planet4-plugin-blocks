@@ -141,10 +141,13 @@ function plugin_blocks_report_json() {
 
 	if ( ! $report ) {
 		// Array filtering on shortcake shortcodes.
-		$blocks = array_filter( array_keys( $shortcode_tags ), function ( $shortcode ) {
-			$found = strpos( $shortcode, 'shortcake' );
-			return false !== $found ? true : false;
-		} );
+		$blocks = array_filter(
+			array_keys( $shortcode_tags ),
+			function ( $shortcode ) {
+				$found = strpos( $shortcode, 'shortcake' );
+				return false !== $found ? true : false;
+			}
+		);
 
 		$report = [];
 
