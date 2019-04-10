@@ -40,11 +40,9 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 		 * Render the settings page of the plugin.
 		 */
 		public function prepare_settings() {
-			$data      = [];
-			$validated = $this->handle_submit( $data );
-			if ( $validated ) {
-				$this->view->settings( $data );
-			}
+			$data = [];
+			$this->handle_submit( $data );
+			$this->view->settings( $data );
 		}
 
 		/**
