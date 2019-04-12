@@ -302,22 +302,22 @@ body.theme-plastic {
         background: $plastics-peach;
       }
     }
-  }
-  // end .split-two-column
-  .four-column {
-    @include campaign_static_four_column(
+  } // end .split-two-column
+
+  .columns-block.block-style-icons {
+    @include campaign_columns_style_icons(
       $plastics-blue-mid url("images/plastic/four-column-header.svg") no-repeat,
       brightness(0) invert(100%),
       $montserrat, $semi-bold,
       $montserrat, $extra-bold, url("images/plastic/arrow.svg"), url("images/plastic/arrow-light.svg")
     );
 
-    .four-column-symbol-container {
+    .attachment-container {
       background-size: cover;
       background-position: center center;
     }
-  }
-  // end .four-column
+  } // end .columns-block.block-style-icons
+
   .submenu-block {
     @include campaign_submenu(
       mix($plastics-peach, white, 50%),
@@ -332,9 +332,9 @@ body.theme-plastic {
   }
   // end .submenu-block
 
-  // take action task block
-  .what-you-can-do-wrapper {
-    @include campaign_tasks;
+  // tasks columns block
+  .columns-block.block-style-tasks {
+    @include campaign_columns_style_tasks;
 
     h3 {
       @extend .page-section-header;
@@ -407,8 +407,8 @@ body.theme-plastic {
     }
   }
 
-  .content-two-column-block {
-    @include campaign_content_two_column($montserrat, $plastics-blue, 400);
+  .columns-block.block-style-no_image {
+    @include campaign_columns_style_no_image($montserrat, $plastics-blue, 400);
 
     font-size: 1.875rem;
     line-height: 2.25rem;

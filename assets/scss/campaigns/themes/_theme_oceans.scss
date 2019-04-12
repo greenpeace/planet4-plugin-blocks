@@ -298,9 +298,9 @@ body.theme-oceans {
     }
   } //end .split-two-column
 
-  // take action task block
-  .what-you-can-do-wrapper {
-    @include campaign_tasks;
+  // tasks columns block
+  .columns-block.block-style-tasks {
+    @include campaign_columns_style_tasks;
 
     h3 {
       @extend .page-section-header;
@@ -358,14 +358,14 @@ body.theme-oceans {
     }
   } //end take action task block
 
-  .four-column {
-    @include campaign_static_four_column(
+  .columns-block.block-style-icons {
+    @include campaign_columns_style_icons(
       $oceans-aqua,
       brightness(0) invert(100%),
       $montserrat, $semi-bold,
       $montserrat, $extra-bold, url("images/oceans/arrow.svg"), url("images/oceans/arrow-dark.svg")
     );
-  } // end .four-column
+  } // end .columns-block.block-style-icons
 
   .submenu-block {
     @include campaign_submenu(
@@ -397,8 +397,8 @@ body.theme-oceans {
     }
   }
 
-  .content-two-column-block {
-    @include campaign_content_two_column($montserrat, $oceans-blue, 400);
+  .columns-block.block-style-no_image {
+    @include campaign_columns_style_no_image($montserrat, $oceans-blue, 400);
 
     font-size: 1.875rem;
     line-height: 2.25rem;

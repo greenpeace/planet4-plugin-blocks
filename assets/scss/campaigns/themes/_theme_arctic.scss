@@ -196,9 +196,9 @@ body.theme-arctic {
     }
   }
 
-  // take action task block
-  .what-you-can-do-wrapper {
-    @include campaign_tasks;
+  // tasks columns block
+  .columns-block.block-style-tasks {
+    @include campaign_columns_style_tasks;
 
     h3 {
       @extend .page-section-header;
@@ -266,14 +266,14 @@ body.theme-arctic {
     }
   } // end take action task block
 
-  .four-column {
-    @include campaign_static_four_column(
+  .columns-block.block-style-icons {
+    @include campaign_columns_style_icons(
       $arctic-light-blue,
       grayscale(0) invert(12%) sepia(58%) saturate(7062%) hue-rotate(187deg) brightness(96%) contrast(98%),
       $open-sans, $bold,
       $open-sans, $bold, url("images/arctic/arrow.svg"), url("images/arctic/arrow-dark.svg")
     );
-  }
+  } // end .columns-block.block-style-icons
 
   .submenu-block {
     @include campaign_submenu(
@@ -297,8 +297,8 @@ body.theme-arctic {
     }
   }
 
-  .content-two-column-block {
-    @include campaign_content_two_column($save-the-arctic, $arctic-blue, 700);
+  .columns-block.block-style-no_image {
+    @include campaign_columns_style_no_image($save-the-arctic, $arctic-blue, 700);
   }
 
   .video-block {
