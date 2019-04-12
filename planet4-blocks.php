@@ -125,7 +125,8 @@ P4BKS\Loader::get_instance(
 		'P4BKS\Controllers\Menu\Blocks_Usage_Controller',
 	],
 	'P4BKS\Views\View',
-	'P4BKS\Command\ShortcodeReplacer'
+	'P4BKS\Command\ShortcodeReplacer',
+	'P4BKS\Command\Controller'
 );
 
 add_action( 'rest_api_init', 'plugin_blocks_report_register_rest_route' );
@@ -206,40 +207,4 @@ function plugin_blocks_report_register_rest_route() {
 			'callback' => 'plugin_blocks_report_json',
 		]
 	);
-}
-
-if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	try {
-		WP_CLI::add_command(
-			'replace-shortcodes',
-			function ( $args ) {
-
-				// Supply a post ID as first argument to update a single, specific post.
-				$post_id = $args[0] ?? null;
-
-				try {
-					WP_CLI::log( 'Replacing shortcodes...' );
-
-					$updater = new P4BKS\Command\ShortcodeReplacer();
-					$updated = $updater->replace_all( $post_id );
-
-					if ( $post_id ) {
-						if ( $updated ) {
-							WP_CLI::success( "Replaced shortcodes in post $post_id" );
-						} else {
-							WP_CLI::log( "No shortcodes replaced in post $post_id" );
-						}
-					} else {
-						WP_CLI::success( "Replaced shortcodes in $updated posts" );
-					}
-				} catch ( \Error $e ) {
-					WP_CLI::error( $e->getMessage() );
-				} catch ( \Exception $e ) {
-					WP_CLI::log( 'Exception: ' . $e->getMessage() );
-				}
-			}
-		);
-	} catch ( \Exception $e ) {
-		WP_CLI::log( 'Exception: ' . $e->getMessage() );
-	}
 }

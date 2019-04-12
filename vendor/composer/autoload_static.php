@@ -36,6 +36,7 @@ class ComposerStaticInit356100170ff2882375cd04c4c76f9df3
     );
 
     public static $classMap = array (
+        'P4BKS\\Command\\Controller' => __DIR__ . '/../..' . '/classes/command/class-controller.php',
         'P4BKS\\Command\\ShortcodeReplacer' => __DIR__ . '/../..' . '/classes/command/class-shortcodereplacer.php',
         'P4BKS\\Controllers\\Blocks\\Articles_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-articles-controller.php',
         'P4BKS\\Controllers\\Blocks\\CampaignThumbnail_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-campaignthumbnail-controller.php',
