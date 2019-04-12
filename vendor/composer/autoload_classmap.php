@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'P4BKS\\Command\\Controller' => $baseDir . '/classes/command/class-controller.php',
     'P4BKS\\Command\\ShortcodeReplacer' => $baseDir . '/classes/command/class-shortcodereplacer.php',
     'P4BKS\\Controllers\\Blocks\\Articles_Controller' => $baseDir . '/classes/controller/blocks/class-articles-controller.php',
     'P4BKS\\Controllers\\Blocks\\CampaignThumbnail_Controller' => $baseDir . '/classes/controller/blocks/class-campaignthumbnail-controller.php',
