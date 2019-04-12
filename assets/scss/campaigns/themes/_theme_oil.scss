@@ -69,7 +69,7 @@ body.theme-oil {
   .page-header {
     // don't use the standard mixin, as this is very different from the others
     overflow-y: hidden;
-    min-height: 100vh;
+    min-height: 0;
     margin-bottom: 2rem;
 
     .page-header-title,
