@@ -53,8 +53,6 @@ body.theme-forest {
   .page-header {
     @include page-header-block($kanit);
 
-    min-height: 0;
-
     .page-header-title {
       font-size: 3.125rem;
       line-height: 3.75rem;

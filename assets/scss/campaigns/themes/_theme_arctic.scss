@@ -60,8 +60,6 @@ body.theme-arctic {
   .page-header {
     @include page-header-block($save-the-arctic);
 
-    min-height: 0;
-
     .page-header-title {
       font-size: 3.125rem;
       line-height: 3.75rem;
