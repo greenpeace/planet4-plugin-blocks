@@ -152,13 +152,13 @@ body.theme-antarctic {
     }
   } // end .split-two-column
 
-  .four-column {
-    @include campaign_static_four_column(
+  .columns-block.block-style-icons {
+    @include campaign_columns_style_icons(
       $antarctic-light-blue,
       grayscale(0) invert(53%) sepia(74%) saturate(2689%) hue-rotate(266deg) brightness(79%) contrast(93%),
       $montserrat, $regular,
       $sanctuary, $regular, url("images/antarctic/arrow.svg"), url("images/antarctic/arrow-light.svg"), 3px);
-  } // end .four-column
+  } // end .columns-block.block-style-icons
 
   .submenu-block {
     background: pink;
@@ -170,9 +170,9 @@ body.theme-antarctic {
     );
   } // end .submenu-block
 
-  // take action task block
-  .what-you-can-do-wrapper {
-    @include campaign_tasks;
+  // tasks columns block
+  .columns-block.block-style-tasks {
+    @include campaign_columns_style_tasks;
 
     h3 {
       @extend .page-section-header;
@@ -240,8 +240,8 @@ body.theme-antarctic {
     }
   }
 
-  .content-two-column-block {
-    @include campaign_content_two_column($sanctuary, $antarctic-blue);
+  .columns-block.block-style-no_image {
+    @include campaign_columns_style_no_image($sanctuary, $antarctic-blue);
   }
 
   .video-block {

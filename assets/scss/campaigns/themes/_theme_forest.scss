@@ -394,14 +394,14 @@ body.theme-forest {
     }
   }
 
-  .four-column {
-    @include campaign_static_four_column(
+  .columns-block.block-style-icons {
+    @include campaign_columns_style_icons(
       $forest-green,
       brightness(0) invert(100%),
       $kanit, $semi-bold,
       $kanit, $semi-bold, url("images/forest/arrow.svg"), url("images/forest/arrow-light.svg"), 5px
     );
-  } // end .four-column
+  } // end .columns-block.block-style-icons
 
   .submenu-block {
     @include campaign_submenu(
@@ -412,9 +412,9 @@ body.theme-forest {
     );
   } // end .submenu-block
 
-  // take action task block
-  .what-you-can-do-wrapper {
-    @include campaign_tasks;
+  // tasks columns block
+  .columns-block.block-style-tasks {
+    @include campaign_columns_style_tasks;
 
     h3 {
       @extend .page-section-header;
@@ -571,8 +571,8 @@ body.theme-forest {
     }
   }
 
-  .content-two-column-block {
-    @include campaign_content_two_column($kanit, $forest-black, 600);
+  .columns-block.block-style-no_image {
+    @include campaign_columns_style_no_image($kanit, $forest-black, 600);
 
     font-size: 1.875rem;
     line-height: 2.25rem;

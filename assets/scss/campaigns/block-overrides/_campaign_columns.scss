@@ -1,5 +1,114 @@
-// for .what-you-can-do-wrapper
-@mixin campaign_tasks {
+@mixin campaign_columns_style_icons($icon-background, $icon-filter,
+$header-font, $header-weight,
+$link-font, $link-weight, $link-icon: none, $link-icon-hover: none, $link-offset: 4px) {
+  h2 {
+    @extend .page-section-header;
+    margin-bottom: 40px;
+  }
+
+  > .container > .row {
+    margin: 0 -8px;
+
+    > [class^=col-] {
+      padding: 0 8px;
+    }
+  }
+
+  .column-wrap {
+    float: none;
+    padding: 0 6px;
+
+    .attachment-container {
+      background: $icon-background;
+      text-align: center;
+      width: 100%;
+      padding-top: 43px;
+      padding-bottom: 43px;
+      height: auto;
+      margin-bottom: 20px;
+
+      img {
+        filter: $icon-filter;
+        height: 96px;
+        width: auto;
+      }
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      text-align: left;
+
+      a {
+        font-family: $header-font;
+        font-weight: $header-weight;
+        color: black;
+        font-size: 1.25rem;
+        line-height: 1.5625rem;
+      }
+    }
+
+    p {
+      margin-bottom: 10px;
+      font-size: 0.875rem;
+      line-height: 1.375rem;
+    }
+
+    a {
+      font-family: $link-font;
+      font-weight: $link-weight;
+      font-size: 0.875rem;
+      line-height: 1.1875rem;
+      text-transform: uppercase;
+    }
+
+    @if ($link-icon != none) {
+      > a {
+        position: relative;
+        padding-right: 18px;
+
+        &:after {
+          @include overlay(auto, 0, $link-offset, auto) {
+            height: 10px;
+            width: 10px;
+            background: $link-icon no-repeat;
+          }
+        }
+
+        &:hover:after {
+          background-image: $link-icon-hover;
+        }
+      }
+    }
+  }
+}
+
+@mixin campaign_columns_style_no_image($font, $header-colour: black, $header-weight: $regular) {
+  h2 {
+    @extend .page-section-header;
+    margin-bottom: 40px;
+  }
+
+  .column-wrap {
+    h3 > a {
+      font-family: $font;
+      font-size: 1.75rem;
+      font-weight: $header-weight;
+      line-height: 2.5rem;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 1.125rem;
+      line-height: 1.875rem;
+    }
+
+    .btn-secondary {
+      @extend .btn-secondary;
+    }
+  }
+}
+
+@mixin campaign_columns_style_tasks {
   font-size: 1.125rem;
   line-height: 1.875rem;
 
