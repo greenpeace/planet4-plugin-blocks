@@ -15,7 +15,10 @@
 
   .carousel-inner {
     background: $background;
-    padding: $spacing;
+
+    .carousel-item {
+      padding: $spacing;
+    }
   }
 
   .carousel-item-container {
@@ -60,6 +63,11 @@
       font-size: 1rem;
       line-height: 1.5625rem;
       margin: 0;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+      overflow: hidden;
 
       @include medium-and-up {
         font-size: 1.125rem;
