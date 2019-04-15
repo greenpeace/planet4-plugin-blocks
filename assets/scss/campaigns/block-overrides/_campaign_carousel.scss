@@ -28,10 +28,10 @@
 
   .carousel-caption {
     color: $caption;
-    background: none;
-    position: static;
+    background: $background;
+    position: absolute;
     text-align: left;
-    padding: 30px 10px 10px;
+    padding: 30px 10px;
     @include letter-spacing(20);
 
     @if ($bordered == false) {
@@ -63,11 +63,6 @@
       font-size: 1rem;
       line-height: 1.5625rem;
       margin: 0;
-
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      width: 100%;
-      overflow: hidden;
 
       @include medium-and-up {
         font-size: 1.125rem;
@@ -121,10 +116,11 @@
     width: 100px;
     margin: 0;
     position: absolute;
-    bottom: -#{$spacing};
-    height: auto;
+    top: auto;
+    bottom: 0;
+    height: 100px;
     text-align: center;
-    display: none;
+    display: flex;
 
     @include medium-and-up {
       @if ($bordered) {
@@ -133,23 +129,6 @@
       @else {
         width: 150px;
       }
-    }
-
-    @include small-and-up {
-      top: 300px;
-      display: flex;
-    }
-
-    @include medium-and-up {
-      top: 400px;
-    }
-
-    @include large-and-up {
-      top: 500px;
-    }
-
-    @include x-large-and-up {
-      top: 600px;
     }
 
     &-icon {
