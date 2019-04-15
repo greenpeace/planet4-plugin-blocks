@@ -65,9 +65,10 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none, $link-offset
       > a {
         position: relative;
         padding-right: 18px;
+        display: inline-block;
 
         &:after {
-          @include overlay(auto, 0, $link-offset, auto) {
+          @include overlay($link-offset, 0, auto, auto) {
             height: 10px;
             width: 10px;
             background: $link-icon no-repeat;
