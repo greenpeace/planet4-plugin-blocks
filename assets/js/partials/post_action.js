@@ -9,7 +9,7 @@ $(document).ready(function() {
 
   function scroll_action_card() {
     if ($(window).width() > 992) {
-      let absPosition = $('.post-details > p:last-child').offset().top - $sidebar.outerHeight() - topPadding;
+      let absPosition = $('.post-details > :last-child').offset().top - $sidebar.outerHeight() - topPadding;
 
       if ($(window).scrollTop() > offset.top && $(window).scrollTop() < absPosition) {
         $sidebar.stop().animate({

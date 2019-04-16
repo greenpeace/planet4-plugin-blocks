@@ -15,6 +15,7 @@ $extra-large-width:  1200px;
 // Primary Colors.
 $black:       #000;
 $white:       #fff;
+$transparent: rgba(255, 255, 255, 0);
 
 $grey-80:     #191919;
 $grey:        #333;
@@ -153,6 +154,14 @@ $shadow-color:          $grey-60;
 $hover-nav:             #052a30;
 $cookie-bkg:            #c0dbe2;
 $cookie-blue:           #094464;
+
+// Blocks
+$transition: 150ms;
+$light: 300;
+$regular: 400;
+$semi-bold: 600;
+$bold: 700;
+$extra-bold: 800;
 
 // Units:
 $au: auto;
