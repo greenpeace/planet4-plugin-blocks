@@ -399,7 +399,7 @@ body.theme-forest {
       $forest-green,
       brightness(0) invert(100%),
       $kanit, $semi-bold,
-      $kanit, $semi-bold, url("images/forest/arrow.svg"), url("images/forest/arrow-light.svg"), 5px
+      $kanit, $semi-bold, url("images/forest/arrow.svg"), url("images/forest/arrow-light.svg")
     );
   } // end .columns-block.block-style-icons
 

@@ -2,7 +2,7 @@
   $background,
   $header-font, $header-colour, $header-size, $header-line-height, $header-weight,
   $link-font, $link-colour,
-  $icon: none, $icon-hover: none, $icon-offset: 4px
+  $icon: none, $icon-hover: none, $arrow-offset: 6px
 ) {
   background: $background;
   box-shadow: none;
@@ -38,7 +38,7 @@
         padding-right: 18px;
 
         &:after {
-          @include overlay(auto, 0, $icon-offset, auto) {
+          @include arrow-right($arrow-offset) {
             height: 10px;
             width: 10px;
             background: $icon no-repeat;

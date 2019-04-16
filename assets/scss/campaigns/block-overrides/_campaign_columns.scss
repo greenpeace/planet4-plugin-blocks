@@ -1,6 +1,6 @@
 @mixin campaign_columns_style_icons($icon-background, $icon-filter,
 $header-font, $header-weight,
-$link-font, $link-weight, $link-icon: none, $link-icon-hover: none, $link-offset: 4px) {
+$link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
   h2 {
     @extend .page-section-header;
     margin-bottom: 40px;
@@ -61,14 +61,14 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none, $link-offset
       text-transform: uppercase;
     }
 
-    @if ($link-icon != none) {
-      > a {
-        position: relative;
-        padding-right: 18px;
-        display: inline-block;
+    > a {
+      position: relative;
+      padding-right: 18px;
+      display: inline-block;
 
+      @if ($link-icon != none) {
         &:after {
-          @include overlay($link-offset, 0, auto, auto) {
+          @include arrow-right() {
             height: 10px;
             width: 10px;
             background: $link-icon no-repeat;

@@ -239,6 +239,13 @@ $nested-comment-left-margin: $n50;
   @content;
 }
 
+@mixin arrow-right($arrow-offset: 4px) {
+  content: "";
+  display: inline-block;
+  margin-left: $arrow-offset;
+  @content;
+}
+
 @keyframes fadeIn {
   50% {
     visibility: hidden;
