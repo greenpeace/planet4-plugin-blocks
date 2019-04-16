@@ -32,7 +32,7 @@
 					<p class="split-two-column-item-subtitle">{{ issue.description|truncate(25, true)|raw }}</p>
 				{% endif %}
 				{% if ( issue.link_text and issue.link_url ) %}
-					<a class="split-two-column-item-link" href="{{ issue.link_url }}">{{ issue.link_text }}</a>
+					<a class="split-two-column-item-link btn-secondary" href="{{ issue.link_url }}">{{ issue.link_text }}</a>
 				{% endif %}
 			</div>
 		</div>

@@ -8,6 +8,8 @@
 
 namespace P4BKS;
 
+use WP_CLI;
+
 if ( ! class_exists( 'Loader' ) ) {
 
 	/**
@@ -40,7 +42,7 @@ if ( ! class_exists( 'Loader' ) ) {
 		 *
 		 * @return Loader
 		 */
-		public static function get_instance( $services = array(), $view_class ) : Loader {
+		public static function get_instance( $services, $view_class ) : Loader {
 			if ( ! isset( self::$instance ) ) {
 				self::$instance = new self( $services, $view_class );
 			}
@@ -56,11 +58,12 @@ if ( ! class_exists( 'Loader' ) ) {
 		 * @param array  $services The Controller services to inject.
 		 * @param string $view_class The View class name.
 		 */
-		private function __construct( $services = array(), $view_class ) {
+		private function __construct( $services, $view_class ) {
 			$this->load_services( $services, $view_class );
+			$this->load_commands();
 			$this->check_requirements();
+
 			add_action( 'plugins_loaded', [ $this, 'load_i18n' ] );
-			add_action( 'plugins_loaded', [ $this, 'load_external_services' ] );
 			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_public_assets' ] );
 		}
 
@@ -82,13 +85,17 @@ if ( ! class_exists( 'Loader' ) ) {
 		}
 
 		/**
-		 * Loads all shortcake blocks registered outside of this plugin.
+		 * Registers commands for Blocks plugin.
 		 */
-		public function load_external_services() {
-			$this->external_services = apply_filters( 'p4bks_add_external_services', $this->external_services );
-			if ( $this->external_services ) {
-				foreach ( $this->external_services as $service ) {
-					( new $service( $this->view ) )->load();
+		public function load_commands() {
+			if ( defined( 'WP_CLI' ) && WP_CLI ) {
+				try {
+					WP_CLI::add_command(
+						'p4-blocks',
+						'P4BKS\Command\Controller'
+					);
+				} catch ( \Exception $e ) {
+					WP_CLI::log( 'Exception: ' . $e->getMessage() );
 				}
 			}
 		}
