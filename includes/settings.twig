@@ -4,32 +4,15 @@
         <h2>{{ __( 'Settings', 'planet4-blocks-backend' ) }}</h2>
     </div>
 
-    {{ fn( 'settings_errors' ) }}
-
-    <form id="p4bks_main_settings_form" name="p4bks_main_settings_form" method="post" action="options.php"> {# ../../../../wp-admin/options.php #}
-
-        {{ fn( 'settings_fields', 'p4bks_main_settings_group' ) }}
-        {{ fn( 'do_settings_sections', 'p4bks_main_settings_group' ) }}
-
-        <br /><br />
-        <table class="form-table">
-            <tr valign="top">
-                <th>{{ __( 'Language', 'planet4-blocks-backend' ) }}:</th>
-                <td>
-                    <select id="p4bks_lang" name="p4bks_main_settings[p4bks_lang]">
-                        <option selected disabled>- {{ __( 'Select Language', 'planet4-blocks-backend' ) }} -</option>
-                        {% for key, language in available_languages %}
-                            {% if key == settings.p4bks_lang %}
-                                <option value="{{ key }}" selected>{{ language }}</option>
-                            {% else %}
-                                <option value="{{ key }}">{{ language }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </td>
-            </tr>
-        </table>
-        {{ fn( 'submit_button', __( 'Save Changes', 'planet4-blocks-backend' ), 'primary', 'p4bks_main_settings_save_button' ) }}
+    <form id="p4bks_main_settings_form" name="p4bks_main_settings_form" method="post">
+        {{ fn( 'wp_nonce_field', nonce_action, '_wpnonce', true, false )|raw }}
+        <p class="submit">
+            <input type="text" name="p4bks_page_id" id="p4bks_page_id" value="" placeholder="{{ __( 'Page ID', 'planet4-blocks-backend' ) }}">
+            <input type="submit" name="p4bks_convert_blocks_button" id="p4bks_convert_blocks_button" class="button button-primary" value="{{ __( 'Convert block(s)', 'planet4-blocks-backend' ) }}">&nbsp;
+            <span class="convert-blocks-response cp-success">{{ message }}</span>
+            <br />{{ __( '1) The blocks "Static four column", "Two columns" and "Take action cards" will be replaced by block "Columns"', 'planet4-blocks-backend' ) }}
+            <br />{{ __( '2) The blocks "Three columns" and "Carousel" will be replaced by block "Gallery"', 'planet4-blocks-backend' ) }}
+        </p>
     </form>
     <div class="clear"></div>
 
