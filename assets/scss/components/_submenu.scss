@@ -54,14 +54,20 @@
     .submenu-menu {
       ul.submenu-item {
         flex-basis: 100%;
-
-        @include large-and-up {
-          flex-basis: 33%;
-        }
+        column-count: 3;
 
         li:before {
           content: "";
         }
+      }
+    }
+  }
+
+  &.submenu-long {
+    .submenu-menu {
+      ul.submenu-item {
+        flex-basis: 100%;
+        column-count: 2;
       }
     }
   }
