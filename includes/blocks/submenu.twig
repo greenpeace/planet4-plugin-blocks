@@ -22,7 +22,7 @@
 {% macro show_menu(items, class) %}
 	<ul class={{ class }}>
 		{% for item in items %}
-			<li {% if item.link %}list-link{% else %}list-heading{% endif %}">
+			<li class="list-style-{{ item.style }} {% if item.link %}list-link{% else %}list-heading{% endif %}">
 				{% if ( item.link ) %}
 					<a href="#{{ item.id }}" class="icon-link submenu-link">{{ item.text }}</a>
 				{% else %}
