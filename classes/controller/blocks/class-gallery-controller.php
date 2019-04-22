@@ -196,7 +196,7 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 				$images[] = $image_data;
 			}
 
-			$gallery_id = $this->generate_hash( $gallery_title, $images_dimensions );
+			$gallery_id = 'gallery_' . uniqid();
 
 			$data = [
 				'id'          => $gallery_id,
@@ -207,21 +207,6 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 			];
 
 			return $data;
-		}
-
-		/**
-		 * Create a short hash to be used as the carousel's dom id.
-		 *
-		 * @param string $title      Gallery's title.
-		 * @param array  $dimensions Dimensions of gallery's images.
-		 *
-		 * @return string A string that will be the carousel's id.
-		 */
-		private function generate_hash( $title, $dimensions ) {
-			$temp_string     = $title . '_' . implode( '_', $dimensions );
-			$gallery_id_hash = hash( 'crc32', $temp_string );
-
-			return 'gallery_' . $gallery_id_hash;
 		}
 	}
 }
