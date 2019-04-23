@@ -149,7 +149,7 @@ if ( ! class_exists( 'Carousel_Controller' ) ) {
 			}
 
 			$carousel_title = ( isset( $fields['carousel_block_title'] ) && ! empty( $fields['carousel_block_title'] ) ) ? $fields['carousel_block_title'] : '';
-			$carousel_id    = $this->generate_hash( $carousel_title, $images_dimensions );
+			$carousel_id    = 'gallery_' . uniqid();
 
 			$data = [
 				'id'     => $carousel_id,
@@ -158,21 +158,6 @@ if ( ! class_exists( 'Carousel_Controller' ) ) {
 			];
 
 			return $data;
-		}
-
-		/**
-		 * Create a short hash to be used as the carousel's dom id.
-		 *
-		 * @param string $title      Carousel's title.
-		 * @param array  $dimensions Dimensions of carousel's images.
-		 *
-		 * @return string A string that will be the carousel's id.
-		 */
-		private function generate_hash( $title, $dimensions ) {
-			$temp_string      = $title . '_' . implode( '_', $dimensions );
-			$carousel_id_hash = hash( 'crc32', $temp_string );
-
-			return 'carousel_' . $carousel_id_hash;
 		}
 	}
 }
