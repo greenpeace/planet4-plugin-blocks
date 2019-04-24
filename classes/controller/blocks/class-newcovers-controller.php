@@ -466,8 +466,7 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 					$covers[] = [
 						'tags'        => $tags,
 						'title'       => get_the_title( $action ),
-						'excerpt'     => get_the_excerpt( $action ),
-						// Note: WordPress removes shortcodes from auto-generated excerpts.
+						'excerpt'     => $action->post_excerpt,
 						'image'       => get_the_post_thumbnail_url( $action, 'large' ),
 						'button_text' => $cover_button_text,
 						'button_link' => get_permalink( $action->ID ),
