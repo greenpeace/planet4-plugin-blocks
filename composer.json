@@ -14,13 +14,5 @@
     "wp-coding-standards/wpcs": "^1.1.0",
     "phpunit/phpunit": "^6.2"
   },
-  "require": {},
-  "autoload": {
-    "psr-4": {
-      "P4BKS\\": "classes/",
-      "P4BKS\\Controllers\\": "classes/controller/",
-      "P4BKS\\Controllers\\Blocks\\": "classes/controller/blocks",
-      "P4BKS\\Controllers\\Menu\\": "classes/controller/menu"
-    }
-  }
+  "require": {}
 }
