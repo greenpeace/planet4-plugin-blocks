@@ -3,7 +3,7 @@
  * Plugin Name: Planet4 - Blocks
  * Description: Creates all the blocks that will be available for usage by Shortcake.
  * Plugin URI: http://github.com/greenpeace/planet4-plugin-blocks
- * Version: 1.41.0
+ * Version: 1.42.0
  * Php Version: 7.0
  *
  * Author: Greenpeace International
@@ -86,7 +86,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	define( 'WP_UNINSTALL_PLUGIN', P4BKS_PLUGIN_BASENAME );
 }
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/classes/class-loader.php';
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 
