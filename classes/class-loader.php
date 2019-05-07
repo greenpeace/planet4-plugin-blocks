@@ -15,23 +15,44 @@ if ( ! class_exists( 'Loader' ) ) {
 	/**
 	 * Class Loader
 	 *
-	 * This class checks requirements and if all are met then it hooks the plugin.
+	 * Loads required files.
+	 * Starts services.
+	 * Loads commands.
+	 * Checks requirements and if all are met.
+	 * Hooks plugin and loads assets.
 	 */
 	final class Loader {
 
-		/** @var Loader $instance */
+		/**
+		 * A static instance of Loader.
+		 *
+		 * @var Loader $instance
+		 */
 		private static $instance;
-		/** @var array $services */
+		/**
+		 * Indexed array of all the classes/services that are needed.
+		 *
+		 * @var array $services
+		 */
 		private $services;
-		/** @var array $external_services */
-		private $external_services = [];
-		/** @var Views\View $view */
+		/**
+		 * An instance of the View class.
+		 *
+		 * @var Views\View $view
+		 */
 		private $view;
-		/** @var string $required_php */
+		/**
+		 * Required version of php.
+		 *
+		 * @var string $required_php
+		 */
 		private $required_php = P4BKS_REQUIRED_PHP;
-		/** @var array $required_plugins */
+		/**
+		 * Array with all required plugins and their required versions.
+		 *
+		 * @var array $required_plugins
+		 */
 		private $required_plugins = P4BKS_REQUIRED_PLUGINS;
-
 
 		/**
 		 * Singleton creational pattern.
@@ -59,12 +80,43 @@ if ( ! class_exists( 'Loader' ) ) {
 		 * @param string $view_class The View class name.
 		 */
 		private function __construct( $services, $view_class ) {
+			$this->load_files();
 			$this->load_services( $services, $view_class );
 			$this->load_commands();
 			$this->check_requirements();
 
 			add_action( 'plugins_loaded', [ $this, 'load_i18n' ] );
 			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_public_assets' ] );
+		}
+
+		/**
+		 * Load required files. The plugins namespaces should:
+		 * a. include P4BKS string
+		 * b. follow the names of the sub-directories of the current __DIR__ (classes/)
+		 *    - if not, then proper replacements should be added like below
+		 */
+		private function load_files() {
+			try {
+				spl_autoload_register(
+					function ( $class_name ) {
+						if ( false !== strpos( $class_name, 'P4BKS' ) ) {
+							$class_name_parts = explode( '\\', $class_name );
+							$real_class_name  = array_pop( $class_name_parts );
+							$file_name        = 'class-' . str_ireplace( '_', '-', strtolower( $real_class_name ) );
+
+							$namespace = implode( '\\', $class_name_parts );
+							$path      = str_ireplace(
+								[ 'P4BKS', 'Controllers', 'Views', '_', '\\' ],
+								[ '', 'controller', 'view', '-', '/' ],
+								strtolower( $namespace )
+							);
+							require_once __DIR__ . '/' . $path . '/' . $file_name . '.php';
+						}
+					}
+				);
+			} catch ( \Exception $e ) {
+				echo esc_html( $e->getMessage() );
+			}
 		}
 
 		/**
