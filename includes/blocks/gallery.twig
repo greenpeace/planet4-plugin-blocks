@@ -4,7 +4,7 @@
 		{% if ( layout == 1 ) %} {# If the chosen layout is Carousel #}
 
 			{# Start of the Carousel template #}
-			<div class="carousel-wrap">
+			<section class="block carousel-wrap">
 				<div id="{{ id }}" class="carousel slide" data-ride="carousel">
 
 					{% if ( title ) %}
@@ -63,7 +63,7 @@
 						{% endif %}
 					</div>
 				</div>
-			</div>
+			</section>
 			{# End of the Carousel template #}
 
 		{% elseif ( layout == 2 ) %} {# If the chosen layout is Three Column #}
@@ -72,7 +72,7 @@
 			{% set ordinals = ['first', 'second', 'third'] %}
 
 			{# Start of the Three Column template #}
-			<div class="split-three-column">
+			<section class="block split-three-column">
 				<div class="container">
 					<div class="three-column-box">
 						{% if ( title or description ) %}
@@ -105,12 +105,12 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</section>
 		{# End of the Three Column template #}
 
 		{% elseif ( layout == 3 ) %}
 
-			<div class="gallery-grid">
+			<section class="block gallery-grid">
 
 				{% if ( title or description ) %}
 					{% if ( title ) %}
@@ -133,7 +133,7 @@
 						{% endfor %}
 					</div>
 				</div>
-			</div>
+			</section>
 
 		{% endif %}
 	{% endif %}

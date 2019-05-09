@@ -3,13 +3,13 @@
     {{ text|length > maxLength ? text|slice(0, maxLength) ~ '…' : text }}
 {% endmacro %}
 
-<div class="carousel-header_{{ fields.block_style }} block-wide">
+<section class="block block-header block-wide carousel-header_{{ fields.block_style }}">
 	<div id="carousel-wrapper-header"
 		data-block-style="{{ fields.block_style }}"
 		data-carousel-autoplay="{{ fields.carousel_autoplay }}">
 
 		{% if fields.total_images > 1 %}
-	<ol class="carousel-indicators"></ol>
+			<ol class="carousel-indicators"></ol>
 		{% endif %}
 		<div class="carousel-inner" role="listbox">
 
@@ -70,4 +70,4 @@
 			</a>
 		{% endif %}
 	</div>
-</div>
+</section>

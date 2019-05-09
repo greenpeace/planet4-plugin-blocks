@@ -1,6 +1,6 @@
 {% block media_video %}
 	{% if ( fields ) %}
-		<div class="media-block">
+		<section class="block media-block">
 			{% if ( fields.title ) %}
 				<header>
 					<h2 class="page-section-header">{{ fields.title }}</h2>
@@ -13,6 +13,6 @@
 					<p>Failed to embed media.</p>
 				{% endif %}
 			</div>
-		</div>
+		</section>
 	{% endif %}
 {% endblock %}

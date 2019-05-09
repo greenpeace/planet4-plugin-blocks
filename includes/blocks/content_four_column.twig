@@ -9,7 +9,7 @@
 			{% set posts_view_class = 'show-all-rows' %}
 		{% endif %}
 
-		<div class="four-column-content {{ posts_view_class }}">
+		<section class="block four-column-content {{ posts_view_class }}">
 			<div class="container">
 
 				{% if (title) %}
@@ -75,7 +75,7 @@
 					</div>
 				{% endif %}
 			</div>
-		</div>
+		</section>
 	{% endif %}
 
 {% endblock %}

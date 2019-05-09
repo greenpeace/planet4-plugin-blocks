@@ -10,7 +10,7 @@
 			{% set covers_view_class = 'show-all-covers' %}
 		{% endif %}
 
-		<div class="covers-block page-section {{ covers_view_class }}">
+		<section class="block covers-block {{ covers_view_class }}">
 			<div class="container">
 				{% if ( fields.title ) %}
 					<header>
@@ -59,7 +59,7 @@
 					</div>
 				{% endif %}
 			</div>
-		</div>
+		</section>
 	{% endif %}
 
 {% endblock %}

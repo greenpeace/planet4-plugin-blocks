@@ -1,7 +1,7 @@
 {% block cookies %}
 
 	{% if ( data ) %}
-		<div class="cookies-block">
+		<section class="block cookies-block">
 			{% if ( data.title ) %}
 				<header>
 					<h2 class="page-section-header">{{ data.title }}</h2>
@@ -26,7 +26,7 @@
 				</label>
 				<p class="cookies-checkbox-description">{{ data.all_cookies_description }}</p>
 			{% endif %}
-		</div>
+		</section>
 	{% endif %}
 
 {% endblock %}

@@ -13,7 +13,7 @@
 			{% set covers_view_class = '' %}
 		{% endif %}
 
-		<div class="campaign-thumbnail-block {{ covers_view_class }}">
+		<section class="block campaign-thumbnail-block {{ covers_view_class }}">
 			<div class="container">
 				{% if ( fields.title ) %}
 					<h2 class="page-section-header">{{ fields.title }}</h2>
@@ -23,7 +23,7 @@
 					<p class="page-section-description">{{ fields.description|e('wp_kses_post')|raw }}</p>
 				{% endif %}
 
-				<div class="row thumbnail-largeview-container mb-2 limit-visibility">
+				<div class="row thumbnail-largeview-container limit-visibility">
 					{% for tag in fields.tags %}
 						<div class="col-md-4 campaign-card-column">
 							<a href="{{ tag.href }}">
@@ -51,6 +51,6 @@
 					{% endif %}
 				{% endif %}
 			</div>
-		</div>
+		</section>
 	{% endif %}
 {% endblock %}
