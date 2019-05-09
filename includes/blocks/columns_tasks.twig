@@ -5,17 +5,13 @@
 		<div class="columns-block block-style-{{ fields.columns_block_style }}">
 			<div class="container">
 				{% if ( fields['columns_title'] ) %}
-					<h3>{{ fields['columns_title'] }}</h3>
+					<header>
+						<h2 class="page-section-header">{{ fields['columns_title'] }}</h2>
+					</header>
 				{% endif %}
-				<div class="row">
-					{% if ( fields['columns_description'] ) %}
-						<div class="col-md-12 col">
-							<p>{{ fields['columns_description']|e('wp_kses_post')|raw }}</p>
-						</div>
-					{% endif %}
-				</div>
-
-				<div class="clearfix"></div>
+				{% if ( fields['columns_description'] ) %}
+					<p class="page-section-description">{{ fields['columns_description']|e('wp_kses_post')|raw }}</p>
+				{% endif %}
 
 				<div class="can-do-steps d-none d-lg-block">
 					<div class="row">

@@ -3,10 +3,12 @@
 		<div class="subheader">
 			<div class="container">
 				{% if ( fields.title ) %}
-					<h2>{{ fields.title }}</h2>
+					<header>
+						<h2 class="page-section-header">{{ fields.title }}</h2>
+					</header>
 				{% endif %}
                 {% if ( fields.description ) %}
-					<p>{{ fields.description|e('wp_kses_post')|raw }}</p>
+					<p class="page-section-description">{{ fields.description|e('wp_kses_post')|raw }}</p>
                 {% endif %}
 			</div>
 		</div>

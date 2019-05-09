@@ -7,14 +7,14 @@
 			<div class="carousel-wrap">
 				<div id="{{ id }}" class="carousel slide" data-ride="carousel">
 
-					{% if ( title or description ) %}
-						{% if ( title ) %}
-							<h1>{{ title }}</h1>
-						{% endif %}
+					{% if ( title ) %}
+						<header>
+							<h2 class="page-section-header">{{ title }}</h2>
+						</header>
+					{% endif %}
 
-						{% if ( description ) %}
-							<p>{{ description|e('wp_kses_post')|raw }}</p>
-						{% endif %}
+					{% if ( description ) %}
+						<p class="page-section-description">{{ description|e('wp_kses_post')|raw }}</p>
 					{% endif %}
 
 					{% if images|length > 1 %}
@@ -78,11 +78,13 @@
 						{% if ( title or description ) %}
 							<div class="three-column-info col-md-11 col-lg-9">
 								{% if ( title ) %}
-									<h2 class="page-section-header">{{ title }}</h2>
+									<header>
+										<h2 class="page-section-header">{{ title }}</h2>
+									</header>
 								{% endif %}
 
 								{% if ( description ) %}
-									<p>{{ description|e('wp_kses_post')|raw }}</p>
+									<p class="page-section-description">{{ description|e('wp_kses_post')|raw }}</p>
 								{% endif %}
 							</div>
 						{% endif %}
@@ -112,11 +114,13 @@
 
 				{% if ( title or description ) %}
 					{% if ( title ) %}
-						<h2 class="page-section-header">{{ title }}</h2>
+						<header>
+							<h2 class="page-section-header">{{ title }}</h2>
+						</header>
 					{% endif %}
 
 					{% if ( description ) %}
-						<p>{{ description|e('wp_kses_post')|raw }}</p>
+						<p class="page-section-description">{{ description|e('wp_kses_post')|raw }}</p>
 					{% endif %}
 				{% endif %}
 

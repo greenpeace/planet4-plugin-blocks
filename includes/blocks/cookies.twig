@@ -3,10 +3,12 @@
 	{% if ( data ) %}
 		<div class="cookies-block">
 			{% if ( data.title ) %}
-				<h3 class="cookies-block-title">{{ data.title }}</h3>
+				<header>
+					<h2 class="page-section-header">{{ data.title }}</h2>
+				</header>
 			{% endif %}
 			{% if ( data.description ) %}
-				<p class="cookies-block-description">{{ data.description }}</p>
+				<p class="page-section-description">{{ data.description }}</p>
 			{% endif %}
 			{% if ( data.necessary_cookies_name and data.necessary_cookies_description ) %}
 				<label class="custom-control custom-checkbox">

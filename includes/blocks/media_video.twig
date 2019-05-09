@@ -2,7 +2,9 @@
 	{% if ( fields ) %}
 		<div class="media-block">
 			{% if ( fields.title ) %}
-				<h2 class="page-section-header">{{ fields.title }}</h2>
+				<header>
+					<h2 class="page-section-header">{{ fields.title }}</h2>
+				</header>
 			{% endif %}
 			<div class="{{ fields.type }}-embed">
 				{% if fields.embed_html %}
