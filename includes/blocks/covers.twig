@@ -13,7 +13,9 @@
 		<div class="covers-block page-section {{ covers_view_class }}">
 			<div class="container">
 				{% if ( fields.title ) %}
-					<h2 class="page-section-header">{{ fields.title }}</h2>
+					<header>
+						<h2 class="page-section-header">{{ fields.title }}</h2>
+					</header>
 				{% endif %}
 				{% if ( fields.description ) %}
 					<p class="page-section-description">{{ fields.description|e('wp_kses_post')|raw }}</p>

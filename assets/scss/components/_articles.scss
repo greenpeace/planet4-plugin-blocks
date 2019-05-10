@@ -1,11 +1,3 @@
-.article-listing-intro {
-  display: flex;
-
-  & > div:first-of-type {
-    padding-left: 0;
-  }
-}
-
 .article-list-item {
   display: flex;
   flex-direction: column;
