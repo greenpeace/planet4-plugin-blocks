@@ -13,7 +13,7 @@
 					<p class="page-section-description">{{ fields['columns_description']|e('wp_kses_post')|raw }}</p>
 				{% endif %}
 
-				<div class="can-do-steps d-none d-lg-block">
+				<div class="tasks-wrap can-do-steps d-none d-lg-block">
 					<div class="row">
 						{% for i in 1..4 %}
 							{% if ( fields['title_'~i] ) %}
@@ -81,7 +81,7 @@
 					</div>
 				</div>
 
-				<div class="can-do-steps-mobile d-lg-none">
+				<div class="tasks-wrap can-do-steps-mobile d-lg-none">
 					<div id="accordion" role="tablist" aria-multiselectable="true">
 						{% for i in 1..4 %}
 

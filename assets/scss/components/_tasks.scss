@@ -88,10 +88,6 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
   cursor: default;
   position: relative;
 
-  @include x-large-and-up {
-    @include clearfix;
-  }
-
   .step-number {
     float: left;
     display: block;
@@ -175,12 +171,7 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
       }
 
       @include large-and-up {
-        padding-top: 48px;
         color: $dark-shade-black;
-      }
-
-      @include x-large-and-up {
-        margin-bottom: 18px;
       }
     }
 
@@ -201,8 +192,6 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
     }
 
     .steps-action {
-      margin-top: 20px;
-
       a.btn {
         width: 210px;
         white-space: nowrap;
@@ -219,7 +208,6 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
         height: 210px;
         object-fit: cover;
         object-position: 10% 10%;
-        margin-bottom: 35px;
 
         @include x-large-and-up {
           height: 250px;
