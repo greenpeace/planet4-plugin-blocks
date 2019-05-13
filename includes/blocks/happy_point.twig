@@ -1,6 +1,6 @@
 {% block happy_point %}
 	{% if ( fields ) %}
-		<div class="happy-point-block-wrap block-wide">
+		<section class="block block-footer block-wide happy-point-block-wrap">
 			<picture>
 				<img src="{{ fields.background_src.0|default(fields.default_image) }}"
 					 style="object-position:{{ fields.focus_image }};opacity:{{ fields.opacity }};"
@@ -23,6 +23,6 @@
 					{% endif %}
 				</div>
 			</div>
-		</div>
+		</section>
 	{% endif %}
 {% endblock %}

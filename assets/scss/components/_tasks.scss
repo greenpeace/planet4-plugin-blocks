@@ -86,24 +86,10 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
 
 .can-do-steps {
   cursor: default;
-  margin-top: 35px;
   position: relative;
-
-  @include medium-and-up {
-    margin-bottom: 50px;
-  }
-
-  @include medium-and-up {
-    margin-bottom: 60px;
-  }
-
-  @include large-and-up {
-    margin: $n35 0 0 0;
-  }
 
   @include x-large-and-up {
     @include clearfix;
-    margin: $n35 0 $n80;
   }
 
   .step-number {
@@ -222,7 +208,6 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        margin-bottom: 35px;
 
         @include x-large-and-up {
           width: 250px;

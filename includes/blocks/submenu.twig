@@ -1,7 +1,7 @@
 {% block submenu %}
 
 	{% if ( menu ) %}
-		<div class="submenu-block
+		<section class="block submenu-block
 			{% if style == 1 %}submenu-long{% endif %}
 			{% if style == 2 %}submenu-short{% endif %}
 			{% if style == 3 %}submenu-sidebar{% endif %}">
@@ -12,7 +12,7 @@
 			<div class="submenu-menu">
 				{{ _self.show_menu(menu, 'submenu-item') }}
 			</div>
-		</div>
+		</section>
 
 		<a href="#" class="back-top">&nbsp;</a>
 	{% endif %}

@@ -1,6 +1,6 @@
 {% block subheader %}
 	{% if ( fields ) %}
-		<div class="subheader">
+		<section class="block subheader">
 			<div class="container">
 				{% if ( fields.title ) %}
 					<header>
@@ -11,6 +11,6 @@
 					<p class="page-section-description">{{ fields.description|e('wp_kses_post')|raw }}</p>
                 {% endif %}
 			</div>
-		</div>
+		</section>
 	{% endif %}
 {% endblock %}
