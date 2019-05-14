@@ -11,19 +11,16 @@
   .column-wrap:nth-last-child(1):first-child {
     h3, h3 > a {
       line-height: 1.2;
-      margin-bottom: 15px;
       font-size: 1.375rem;
       font-family: $roboto;
       font-weight: 700;
 
       @include medium-and-up {
         font-size: 1.5rem;
-        margin-bottom: 24px;
       }
 
       @include large-and-up {
         font-size: 1.75rem;
-        margin-bottom: 12px;
       }
 
       @include x-large-and-up {
@@ -39,7 +36,6 @@
       @include x-large-and-up {
         font-size: 1.125rem;
         line-height: 1.6;
-        margin-bottom: 24px;
       }
     }
   }
@@ -48,14 +44,14 @@
   &.block-style-no_image {
     .column-wrap {
       @include medium-and-up {
-        padding-bottom: $n60;  // Leave enough room for the CTA button
+        padding-bottom: $space-xl; // Leave enough room for the CTA button
       }
 
       h3 {
         font-size: 1.375rem;
         font-weight: bold;
         line-height: 1.2;
-        margin-bottom: 15px;
+        margin-bottom: $space-lg;
         color: $black;
 
         @include medium-and-up {
@@ -65,7 +61,6 @@
 
         @include large-and-up {
           font-size: 1.25rem;
-          margin-bottom: 20px;
           width: 75%;
         }
       }
@@ -73,7 +68,7 @@
       p {
         font-size: 1rem;
         line-height: 1.6;
-        margin-bottom: 16px;
+        margin-bottom: $space-xxl;
         color: $dark-shade-black;
 
         @include medium-and-up {
@@ -110,12 +105,6 @@
         padding-bottom: 1em;  // Leave enough room for the CTA link
       }
 
-      h2 {
-        font-weight: 700;
-        font-size: 1.875rem;
-        color: $dark-shade-black;
-      }
-
       h3,
       .icon-container {
         text-align: center;
@@ -127,20 +116,11 @@
 
       h3 {
         line-height: 1.2;
-        margin-bottom: 15px;
+        margin-bottom: $space-lg;
         font-size: 1.25rem;
 
-        @include medium-and-up {
-          margin-bottom: 16px;
-        }
-
         @include large-and-up {
-          margin-bottom: 12px;
           font-weight: 500;
-        }
-
-        @include x-large-and-up {
-          margin-bottom: 20px;
         }
 
         a {
@@ -250,6 +230,7 @@
         float: left;
         display: block;
         margin-right: 20px;
+        margin-bottom: $space-xl;
         width: 74px;
         height: 74px;
         line-height: 74px;
@@ -320,6 +301,7 @@
           line-height: 19px;
           font-weight: 700;
           color: $percentage-text;
+          margin-bottom: $space-lg;
 
           @include medium-and-up {
             font-weight: 500;
@@ -329,12 +311,7 @@
           }
 
           @include large-and-up {
-            padding-top: 48px;
             color: $dark-shade-black;
-          }
-
-          @include x-large-and-up {
-            margin-bottom: 18px;
           }
         }
 
@@ -342,11 +319,11 @@
           color: $dark-shade-black;
           font-size: 0.875rem;
           opacity: 0.75;
+          margin-bottom: $space-lg;
 
           @include x-large-and-up {
             font-size: 0.9375rem;
             line-height: 1.6;
-            margin-bottom: 20px;
           }
         }
 
@@ -355,8 +332,6 @@
         }
 
         .steps-action {
-          margin-top: 20px;
-
           a.btn {
             width: 210px;
             white-space: nowrap;
@@ -373,7 +348,7 @@
             height: 210px;
             object-fit: cover;
             object-position: 10% 10%;
-            margin-bottom: 35px;
+            margin-bottom: $space-lg;
 
             @include x-large-and-up {
               height: 250px;
@@ -479,19 +454,16 @@
     .row .col:nth-last-child(1):first-child {
       h5, h3 {
         line-height: 1.2;
-        margin-bottom: 15px;
         font-size: 1.375rem;
         font-family: $roboto;
         font-weight: 700;
 
         @include medium-and-up {
           font-size: 1.5rem;
-          margin-bottom: 24px;
         }
 
         @include large-and-up {
           font-size: 1.75rem;
-          margin-bottom: 12px;
         }
 
         @include x-large-and-up {
@@ -504,18 +476,9 @@
         font-size: 1rem;
         color: $dark-shade-black;
 
-        @include medium-and-up {
-          margin-bottom: 24px;
-        }
-
-        @include large-and-up {
-          margin-bottom: 12px;
-        }
-
         @include x-large-and-up {
           font-size: 1.125rem;
           line-height: 1.6;
-          margin-bottom: 24px;
         }
       }
     }
