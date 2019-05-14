@@ -68,8 +68,7 @@
 
   .thumbnail-largeview-container {
     @include medium-and-up {
-      margin-left: -7.5px;
-      margin-right: -7.5px;
+      margin: -8px -7.5px;
     }
 
     .campaign-card-column {
