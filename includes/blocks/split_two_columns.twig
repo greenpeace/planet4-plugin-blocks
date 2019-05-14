@@ -1,7 +1,7 @@
 {% block split_two_columns %}
 
 {% if ( issue ) %}
-	<div class="split-two-column block-wide">
+	<section class="block-wide split-two-column">
 		<div class="split-two-column-item item--left">
 			{% if ( issue.image ) %}
 				{% if ( issue.focus ) %}
@@ -64,7 +64,7 @@
 				{% endif %}
 			</div>
 		</div>
-	</div>
+	</section>
 {% endif %}
 
 {% endblock %}

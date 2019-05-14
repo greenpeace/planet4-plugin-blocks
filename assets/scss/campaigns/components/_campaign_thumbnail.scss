@@ -56,21 +56,6 @@
 }
 
 .campaign-thumbnail-block {
-  margin-bottom: 30px;
-  padding-top: 0;
-
-  @include medium-and-up {
-    padding-bottom: 40px;
-  }
-
-  @include large-and-up {
-    padding-bottom: 60px;
-  }
-
-  @include x-large-and-up {
-    margin-bottom: 0;
-  }
-
   .container {
     padding-left: 0;
     padding-right: 0;

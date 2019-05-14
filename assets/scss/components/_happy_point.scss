@@ -3,6 +3,7 @@
   width: 100vw;
   height: 444px;
   overflow: hidden;
+  display: block;
 
   @include medium-and-up {
     max-height: 480px;
