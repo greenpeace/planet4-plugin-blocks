@@ -5,7 +5,6 @@
   position: relative;
   overflow: hidden;
   z-index: 2;
-  margin-bottom: 5px;
   width: 100vw;
 
   @include small-and-up {
@@ -14,12 +13,10 @@
 
   @include medium-and-up {
     height: 360px;
-    margin-bottom: 10px;
   }
 
   @include large-and-up {
     height: 416px;
-    margin-bottom: 10px;
   }
 
   @include x-large-and-up {

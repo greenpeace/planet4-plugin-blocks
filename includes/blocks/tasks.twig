@@ -2,16 +2,16 @@
 
 	{% if ( fields ) %}
 
-		<div id="p4bks_tasks_container" class="what-you-can-do-wrapper">
+		<div id="p4bks_tasks_container" class="block what-you-can-do-wrapper">
 			<div class="container">
 				{% if ( fields.tasks_title ) %}
-					<h3>{{ fields.tasks_title }}</h3>
+					<header>
+						<h2 class="page-section-header">{{ fields.tasks_title }}</h2>
+					</header>
 				{% endif %}
 				<div class="row">
 					{% if ( fields.tasks_description ) %}
-						<div class="col-md-12">
-							{{ fields.tasks_description|e('wp_kses_post')|raw }}
-						</div>
+						<p class="page-section-description">{{ fields.tasks_description|e('wp_kses_post')|raw }}</p>
 					{% endif %}
 				</div>
 

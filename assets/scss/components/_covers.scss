@@ -1,18 +1,4 @@
 .covers-block {
-  padding-bottom: 0;
-
-  @include medium-and-up {
-    margin-bottom: 40px;
-  }
-
-  @include large-and-up {
-    margin-bottom: 60px;
-  }
-
-  @include x-large-and-up {
-    margin-bottom: 80px;
-  }
-
   h2 {
     margin-bottom: 15px;
 
@@ -85,7 +71,7 @@
 .cover-card {
   flex-basis: 100%;
   padding: 32px $n15 $n60;
-  margin-bottom: 16px;
+  margin-top: 16px;
   position: relative;
   box-shadow: 0 0 10px rgba(0, 0, 0, .35);
   background-size: cover;
@@ -96,7 +82,7 @@
     flex-basis: 48%;
     min-height: 414px;
     padding: 18px $n15 $n60;
-    margin-bottom: 32px;
+    margin-top: 32px;
   }
 
   @include large-and-up {
