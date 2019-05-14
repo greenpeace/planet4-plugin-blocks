@@ -127,6 +127,14 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 					'addButton'   => 'Select Gallery Images',
 					'frameTitle'  => 'Select Gallery Images',
 				],
+				[
+					'label' => __( 'Image focus points', 'planet4-blocks-backend' ),
+					'attr'  => 'gallery_block_focus_points',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Enter image focus points', 'planet4-blocks-backend' ),
+					],
+				],
 			];
 
 			// Define the Shortcode UI arguments.
