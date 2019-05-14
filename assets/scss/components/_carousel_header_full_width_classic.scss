@@ -74,20 +74,6 @@ $medium-image-height: 600px;
   position: relative;
   width: 100vw;
 
-  &::after {
-    content: "";
-    display: block;
-    margin-bottom: 40px;
-
-    @include large-and-up {
-      margin-bottom: 60px;
-    }
-
-    @include x-large-and-up {
-      margin-bottom: 80px;
-    }
-  }
-
   .carousel-inner {
     position: relative;
     overflow: visible;

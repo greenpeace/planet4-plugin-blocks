@@ -1,16 +1,5 @@
 .carousel-wrap {
-  padding-top: 0;
-  padding-bottom: 40px;
   overflow: hidden;
-
-  @include large-and-up {
-    padding-bottom: 60px;
-  }
-
-  @include x-large-and-up {
-    padding-top: 0;
-    padding-bottom: 80px;
-  }
 
   .single-post & {
     padding-bottom: 30px;

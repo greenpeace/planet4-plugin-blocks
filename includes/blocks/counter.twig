@@ -1,6 +1,6 @@
 {% block counter %}
     {% if ( fields ) %}
-        <div class="container counter-block counter-style-{{ fields.style }}">
+        <section class="block container counter-block counter-style-{{ fields.style }}">
             <div class="content-counter">
                 {% if fields.style == 'bar' %}
                     <div class="progress-container">
@@ -21,6 +21,6 @@
                     {{ fields.text }}
                 </p>
             </div>
-        </div>
+        </section>
     {% endif %}
 {% endblock %}

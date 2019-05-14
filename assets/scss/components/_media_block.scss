@@ -1,10 +1,4 @@
 .block-media {
-  padding: $n50 $n15;
-
-  @include small-and-up {
-    padding: $n50 0;
-  }
-
   img {
     width: 100%;
   }
