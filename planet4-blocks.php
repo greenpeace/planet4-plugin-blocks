@@ -64,6 +64,9 @@ if ( ! defined( 'P4BKS_PLUGIN_SLUG_NAME' ) ) {
 if ( ! defined( 'P4BKS_INCLUDES_DIR' ) ) {
 	define( 'P4BKS_INCLUDES_DIR', P4BKS_PLUGIN_DIR . '/includes/' );
 }
+if ( ! defined( 'P4BKS_TEMPLATE_OVERRIDE_SUBDIR' ) ) {
+	define( 'P4BKS_TEMPLATE_OVERRIDE_SUBDIR', '/templates/plugins/planet4-plugin-blocks/includes/' );
+}
 if ( ! defined( 'P4BKS_ADMIN_DIR' ) ) {
 	define( 'P4BKS_ADMIN_DIR', plugins_url( P4BKS_PLUGIN_DIRNAME . '/admin/' ) );
 }
