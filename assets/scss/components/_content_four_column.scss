@@ -1,13 +1,8 @@
 .four-column-content {
   color: $black;
-  padding: 0 0 $n40 0;
 
-  @include medium-and-up {
-    padding: 0 0 $n40 0;
-  }
-
-  @include medium-and-up {
-    padding: 0 0 $n60 0;
+  .limit-visibility {
+    margin-top: -$space-lg;
   }
 
   .col-md-4 {
@@ -16,6 +11,8 @@
   }
 
   .four-column-content-wrap {
+    margin-top: $space-lg;
+
     .four-column-content-symbol {
       position: relative;
       margin: 0 0 24px 0;
@@ -88,6 +85,7 @@
 
       p {
         font-size: 1rem;
+        margin-bottom: 0;
 
         @include large-and-up {
           font-size: 0.875rem;
@@ -104,7 +102,6 @@
           line-height: 1.6;
           font-style: italic;
           font-weight: 300;
-          margin-bottom: 0;
           color: $grey-60;
 
           @include large-and-up {
