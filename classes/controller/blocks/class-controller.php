@@ -76,7 +76,7 @@ if ( ! class_exists( 'Controller' ) ) {
 			add_action(
 				'enqueue_shortcode_ui',
 				function () {
-					wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'blocks-admin.min.js', [ 'shortcode-ui' ], '0.3', true );
+					wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'blocks-admin.min.js', [ 'shortcode-ui' ], 0.4, true );
 				}
 			);
 		}
