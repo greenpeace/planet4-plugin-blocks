@@ -251,7 +251,7 @@ if ( ! class_exists( 'Loader' ) ) {
 					}
 				}
 				foreach ( $plugins as $plugin ) {
-					if ( count( $plugin ) > 0 ) {
+					if ( is_array( $plugin ) && count( $plugin ) > 0 ) {
 						return false;
 					}
 				}
