@@ -43,8 +43,14 @@
   // Columns block, layout no-image.
   &.block-style-no_image {
     .column-wrap {
+      margin-bottom: $space-lg;
+
       @include medium-and-up {
         padding-bottom: $space-xl; // Leave enough room for the CTA button
+      }
+
+      @include large-and-up {
+        margin-bottom: 0;
       }
 
       h3 {
@@ -100,9 +106,20 @@
 
   // Columns block, layout icons.
   &.block-style-icons {
+    .row {
+      margin-bottom: -$space-lg; // Compensate for last row margin
+
+      @include large-and-up {
+        margin-bottom: 0;
+      }
+    }
+
     .column-wrap {
-      @include medium-and-up {
-        padding-bottom: 1em;  // Leave enough room for the CTA link
+      margin-bottom: $space-lg;
+
+      @include large-and-up {
+        padding-bottom: 1em; // Leave enough room for the CTA link
+        margin-bottom: 0;
       }
 
       h3,
@@ -143,16 +160,11 @@
 
         @include medium-and-up {
           font-size: 0.875rem;
-          margin-bottom: 24px;
-        }
-
-        @include large-and-up {
-          margin-bottom: 12px;
+          margin-bottom: $space-lg;
         }
 
         @include x-large-and-up {
           font-size: 0.9375rem;
-          margin-bottom: 24px;
         }
 
         a {
@@ -191,9 +203,9 @@
 
       .attachment-container {
         text-align: center;
-        padding-bottom: 20px;
+        margin-bottom: $space-md;
+
         @include medium-and-up {
-          padding-bottom: 0;
           text-align: inherit;
         }
       }
@@ -202,10 +214,8 @@
         display: inline-block;
         width: 102px;
         height: 102px;
-        margin-bottom: 5px;
 
         @include medium-and-up {
-          margin-bottom: 10px;
           text-align: inherit;
         }
 
