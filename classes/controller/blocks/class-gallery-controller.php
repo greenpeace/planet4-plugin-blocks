@@ -295,7 +295,7 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 							'landscape' => esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png' ) ),
 							'portrait'  => esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_3.png' ) ),
 						],
-						'label'            => __( 'Select focus points', 'planet4-blocks-backend' ),
+						'label'            => __( 'Select focus point', 'planet4-blocks-backend' ),
 					];
 
 					wp_localize_script( 'blocks-ui', 'image_focus_points', $image_focus_points );
