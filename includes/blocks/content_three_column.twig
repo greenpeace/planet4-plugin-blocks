@@ -1,43 +1,40 @@
 {% block content_three_column %}
 	{% if ( fields ) %}
-		<div class="split-three-column">
+		<section class="block split-three-column">
 			<div class="container">
-				<div class="three-column-box">
-					{% if ( fields.title or fields.description ) %}
-						<div class="three-column-info col-md-11 col-lg-9">
-							{% if ( fields.title ) %}
-								<h2 class="page-section-header">{{ fields.title }}</h2>
+				{% if ( fields.title ) %}
+					<header>
+						<h2 class="page-section-header">{{ fields.title }}</h2>
+					</header>
+				{% endif %}
+				{% if ( fields.description ) %}
+					<p class="page-section-description">{{ fields.description|e('wp_kses_post')|raw }}</p>
+				{% endif %}
+
+				<div class="three-column-images row">
+					<div class="col">
+						<div class="first-column split-image">
+							{% if ( fields.image_3 ) %}
+								<img src="{{ fields.image_1 }}" alt="{{ fields.alt_1 }}">
 							{% endif %}
-							{% if ( fields.description ) %}
-								<p>{{ fields.description|e('wp_kses_post')|raw }}</p>
+						</div>
+					</div>
+					<div class="col">
+						<div class="second-column split-image">
+							{% if ( fields.image_2 ) %}
+								<img src="{{ fields.image_2 }}" alt="{{ fields.alt_2 }}">
 							{% endif %}
 						</div>
-					{% endif %}
-					<div class="three-column-images row">
-						<div class="col">
-							<div class="first-column split-image">
-								{% if ( fields.image_3 ) %}
-									<img src="{{ fields.image_1 }}" alt="{{ fields.alt_1 }}">
-								{% endif %}
-							</div>
-						</div>
-						<div class="col">
-							<div class="second-column split-image">
-								{% if ( fields.image_2 ) %}
-									<img src="{{ fields.image_2 }}" alt="{{ fields.alt_2 }}">
-								{% endif %}
-							</div>
-						</div>
-						<div class="col">
-							<div class="third-column split-image">
-								{% if ( fields.image_3 ) %}
-									<img src="{{ fields.image_3 }}" alt="{{ fields.alt_3 }}">
-								{% endif %}
-							</div>
+					</div>
+					<div class="col">
+						<div class="third-column split-image">
+							{% if ( fields.image_3 ) %}
+								<img src="{{ fields.image_3 }}" alt="{{ fields.alt_3 }}">
+							{% endif %}
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	{% endif %}
 {% endblock %}

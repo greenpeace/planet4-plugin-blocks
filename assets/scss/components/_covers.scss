@@ -1,19 +1,15 @@
 .covers-block {
-  h2 {
-    margin-bottom: 15px;
-
-    @include medium-and-up {
-      margin-bottom: 22px;
-    }
-
-    @include large-and-up {
-      margin-bottom: 20px;
-    }
-  }
-
   .row {
     display: flex;
     flex-wrap: wrap;
+  }
+
+  .limit-visibility {
+    margin-top: -$space-md;
+
+    @include large-and-up {
+      margin-top: -$space-lg;
+    }
   }
 }
 
@@ -71,7 +67,7 @@
 .cover-card {
   flex-basis: 100%;
   padding: 32px $n15 $n60;
-  margin-top: 16px;
+  margin-top: $space-md;
   position: relative;
   box-shadow: 0 0 10px rgba(0, 0, 0, .35);
   background-size: cover;
@@ -82,7 +78,7 @@
     flex-basis: 48%;
     min-height: 414px;
     padding: 18px $n15 $n60;
-    margin-top: 32px;
+    margin-top: $space-lg;
   }
 
   @include large-and-up {
@@ -217,4 +213,8 @@
   margin: $n15 auto;
   width: 92%;
   cursor: pointer;
+}
+
+.load-more-covers-button-div {
+  margin-top: $space-lg;
 }
