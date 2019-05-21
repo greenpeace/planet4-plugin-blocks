@@ -3,7 +3,7 @@
  * Plugin Name: Planet4 - Blocks
  * Description: Creates all the blocks that will be available for usage by Shortcake.
  * Plugin URI: http://github.com/greenpeace/planet4-plugin-blocks
- * Version: 1.43.0
+ * Version: 1.44.0
  * Php Version: 7.0
  *
  * Author: Greenpeace International
@@ -63,6 +63,9 @@ if ( ! defined( 'P4BKS_PLUGIN_SLUG_NAME' ) ) {
 }
 if ( ! defined( 'P4BKS_INCLUDES_DIR' ) ) {
 	define( 'P4BKS_INCLUDES_DIR', P4BKS_PLUGIN_DIR . '/includes/' );
+}
+if ( ! defined( 'P4BKS_TEMPLATE_OVERRIDE_SUBDIR' ) ) {
+	define( 'P4BKS_TEMPLATE_OVERRIDE_SUBDIR', '/templates/plugins/planet4-plugin-blocks/includes/' );
 }
 if ( ! defined( 'P4BKS_ADMIN_DIR' ) ) {
 	define( 'P4BKS_ADMIN_DIR', plugins_url( P4BKS_PLUGIN_DIRNAME . '/admin/' ) );
