@@ -5,10 +5,10 @@
 		<div class="split-two-column-item item--left">
 			{% if ( issue.image ) %}
 				{% if ( issue.focus ) %}
-						<div class="split-two-column-item-image" style="background-position:{{ issue.focus }};">
+						<div class="split-two-column-item-image">
 							<img src="{{ issue.image }}"
 								 srcset="{{ issue.srcset }}"
-								 alt="{{ issue.image_alt }}">
+								 alt="{{ issue.image_alt }}" style="object-position: {{ issue.focus }};">
 						</div>
 				{% else %}
 						<div class="split-two-column-item-image">
@@ -39,10 +39,10 @@
 		<div class="split-two-column-item item--right">
 			{% if ( campaign.image ) %}
 				{% if ( campaign.focus ) %}
-					<div class="split-two-column-item-image" style="background-position:{{ campaign.focus }};">
+					<div class="split-two-column-item-image">
 						<img src="{{ campaign.image }}"
 							 srcset="{{ campaign.srcset }}"
-							 alt="{{ campaign.image_alt }}">
+							 alt="{{ campaign.image_alt }}" style="object-position: {{ issue.focus }};">
 					</div>
 				{% else %}
 					<div class="split-two-column-item-image">
