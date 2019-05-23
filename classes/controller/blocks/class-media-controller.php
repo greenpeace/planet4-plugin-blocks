@@ -39,6 +39,15 @@ if ( ! class_exists( 'Media_Controller' ) ) {
 					],
 				],
 				[
+					'label'       => __( 'Description', 'planet4-blocks-backend' ),
+					'attr'        => 'description',
+					'type'        => 'textarea',
+					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
+					'meta'        => [
+						'placeholder' => __( 'Enter description', 'planet4-blocks-backend' ),
+					],
+				],
+				[
 					'label'       => __( 'Media URL/ID', 'planet4-blocks-backend' ),
 					'attr'        => 'youtube_id',
 					'type'        => 'text',
@@ -81,6 +90,7 @@ if ( ! class_exists( 'Media_Controller' ) ) {
 		public function prepare_data( $fields, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 			$media_url        = $fields['youtube_id'];
 			$url_path_segment = wp_parse_url( $media_url, PHP_URL_PATH );
+			$description      = $fields['description'] ?? '';
 
 			// Assume that a non-URL is a YouTube video ID, for back compat.
 			if ( false === strstr( $media_url, '/' ) ) {
@@ -114,9 +124,10 @@ if ( ! class_exists( 'Media_Controller' ) ) {
 
 			$data = [
 				'fields' => [
-					'title'      => $fields['video_title'],
-					'embed_html' => $embed_html,
-					'type'       => $type,
+					'title'       => $fields['video_title'],
+					'description' => $description,
+					'embed_html'  => $embed_html,
+					'type'        => $type,
 				],
 			];
 			return $data;
