@@ -1,4 +1,4 @@
-<article class="article-list-item" >
+<article class="article-list-item{% for tag in recent_post.tags %} tag-{{ tag.name|e('wp_kses_post')|lower }}{% endfor %}" >
 	{% if recent_post.thumbnail_ratio < 1 %}
 		<div class="article-list-item-image">
 			<div class="article-image-holder">
