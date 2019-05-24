@@ -1,8 +1,8 @@
 .counter-block {
   text-align: center;
   font-family: $roboto;
-  margin-top: 48px;
-  margin-bottom: 48px;
+  margin-top: $space-xl;
+  margin-bottom: $space-xl;
 
   .counter-target {
     display: block;
@@ -10,21 +10,21 @@
     line-height: 1;
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 32px;
+    margin-bottom: $space-lg;
   }
 
   &.counter-style-plain {
     .counter-target {
       font-size: 3rem;
       font-weight: bold;
-      margin-bottom: 32px;
+      margin-bottom: $space-lg;
     }
   }
 
   .progress-container {
     background-color: $grey-20;
     height: 30px;
-    margin-bottom: 32px;
+    margin-bottom: $space-lg;
     overflow: hidden;
   }
 
@@ -56,7 +56,7 @@
     font-size: 1rem;
   }
 
-  .counter-text-arc {
+  .counter-text-goal_reached {
     font-weight: bold;
   }
 }
