@@ -189,6 +189,28 @@ function plugin_blocks_report_json() {
 		$cnt = $wpdb->get_var( $sql );
 		$report['CarouselHeader-Full-Width-Classic'] = $cnt;
 
+		// Add to the report a breakdown of which tags are using redirect to page and which not part 1
+		$sql = "SELECT count(tt.term_id) AS cnt
+				FROM " . $wpdb->prefix . "term_taxonomy AS tt, " . $wpdb->prefix . "terms AS term, " . $wpdb->prefix . "termmeta AS tm
+				WHERE tt.`taxonomy`='post_tag' 
+				AND term.term_id = tt.term_id
+				AND tm.term_id=tt.term_id
+				AND tm.meta_key='redirect_page'
+				AND tm.meta_value !=''";
+		$cnt = $wpdb->get_var( $sql );
+		$report['TagsUsingRedirectionPage'] = $cnt;
+
+		// Add to the report a breakdown of which tags are using redirect to page and which not part 2
+		$sql = "SELECT count(tt.term_id) AS cnt
+				FROM " . $wpdb->prefix . "term_taxonomy AS tt, " . $wpdb->prefix . "terms AS term, " . $wpdb->prefix . "termmeta AS tm
+				WHERE tt.`taxonomy`='post_tag' 
+				AND term.term_id = tt.term_id
+				AND tm.term_id=tt.term_id
+				AND tm.meta_key='redirect_page'
+				AND tm.meta_value =''";
+		$cnt = $wpdb->get_var( $sql );
+		$report['TagsNotUsingRedirectionPage'] = $cnt;
+
 		wp_cache_add( $cache_key, $report, '', 3600 );
 
 	}
