@@ -1,21 +1,25 @@
 #p4bks_main_settings_save_button { margin-top: 15vh; }
 
 ::-webkit-input-placeholder {
-    font-style: italic;
+  font-style: italic;
 }
+
 :-moz-placeholder {
-    font-style: italic;
+  font-style: italic;
 }
+
 ::-moz-placeholder {
-    font-style: italic;
+  font-style: italic;
 }
+
 :-ms-input-placeholder {
-    font-style: italic;
+  font-style: italic;
 }
+
 .notice.is-dismissible {
-    opacity: 0.1;
-    color: white;
-    background-color: #32373C;
-    display: inline-block;
-    position: absolute;
+  opacity: 0.1;
+  color: white;
+  background-color: #32373c;
+  display: inline-block;
+  position: absolute;
 }
