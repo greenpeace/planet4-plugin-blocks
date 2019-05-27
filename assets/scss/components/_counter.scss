@@ -1,32 +1,38 @@
 .counter-block {
   text-align: center;
-  font-family: $sans-serif;
+  font-family: $roboto;
+  margin-top: $space-xl;
+  margin-bottom: $space-xl;
 
   .counter-target {
     display: block;
 
     line-height: 1;
-    font-size: 30px;
-    letter-spacing: 0.05em;
-    margin-bottom: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: $space-lg;
   }
 
   &.counter-style-plain {
     .counter-target {
-      font-size: 50px;
-      margin-bottom: 20px;
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: $space-lg;
     }
   }
 
   .progress-container {
     background-color: $grey-20;
     height: 30px;
-    margin-bottom: 15px;
+    margin-bottom: $space-lg;
+    overflow: hidden;
   }
 
   .progress-bar {
     background-color: $dark-blue;
     height: 100%;
+    transform: skew(-30deg, 0deg);
+    margin-left: -10px;
   }
 
   .progress-arc {
@@ -43,5 +49,14 @@
     .foreground {
       stroke: $dark-blue;
     }
+  }
+
+  .counter-text {
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+
+  .counter-text-goal_reached {
+    font-weight: bold;
   }
 }

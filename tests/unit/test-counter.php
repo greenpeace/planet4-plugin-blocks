@@ -43,7 +43,7 @@ if ( ! class_exists( 'P4_CounterTest' ) ) {
 			];
 			$data   = $this->block->prepare_data( $fields, '', '' );
 
-			$this->assertEquals( '', $data['fields']['completed'] );
+			$this->assertEquals( 0, $data['fields']['completed'] );
 			$this->assertEquals( '', $data['fields']['target'] );
 			$this->assertEquals( 0, $data['fields']['percent'] );
 		}

@@ -3,7 +3,7 @@
  * Plugin Name: Planet4 - Blocks
  * Description: Creates all the blocks that will be available for usage by Shortcake.
  * Plugin URI: http://github.com/greenpeace/planet4-plugin-blocks
- * Version: 1.43.0
+ * Version: 1.45.0
  * Php Version: 7.0
  *
  * Author: Greenpeace International
@@ -63,6 +63,9 @@ if ( ! defined( 'P4BKS_PLUGIN_SLUG_NAME' ) ) {
 }
 if ( ! defined( 'P4BKS_INCLUDES_DIR' ) ) {
 	define( 'P4BKS_INCLUDES_DIR', P4BKS_PLUGIN_DIR . '/includes/' );
+}
+if ( ! defined( 'P4BKS_TEMPLATE_OVERRIDE_SUBDIR' ) ) {
+	define( 'P4BKS_TEMPLATE_OVERRIDE_SUBDIR', '/templates/plugins/planet4-plugin-blocks/includes/' );
 }
 if ( ! defined( 'P4BKS_ADMIN_DIR' ) ) {
 	define( 'P4BKS_ADMIN_DIR', plugins_url( P4BKS_PLUGIN_DIRNAME . '/admin/' ) );
@@ -185,6 +188,28 @@ function plugin_blocks_report_json() {
                 AND `post_content` REGEXP 'shortcake_carousel_header.*full-width-classic'";
 		$cnt = $wpdb->get_var( $sql );
 		$report['CarouselHeader-Full-Width-Classic'] = $cnt;
+
+		// Add to the report a breakdown of which tags are using redirect to page and which not part 1
+		$sql = "SELECT count(tt.term_id) AS cnt
+				FROM " . $wpdb->prefix . "term_taxonomy AS tt, " . $wpdb->prefix . "terms AS term, " . $wpdb->prefix . "termmeta AS tm
+				WHERE tt.`taxonomy`='post_tag' 
+				AND term.term_id = tt.term_id
+				AND tm.term_id=tt.term_id
+				AND tm.meta_key='redirect_page'
+				AND tm.meta_value !=''";
+		$cnt = $wpdb->get_var( $sql );
+		$report['TagsUsingRedirectionPage'] = $cnt;
+
+		// Add to the report a breakdown of which tags are using redirect to page and which not part 2
+		$sql = "SELECT count(tt.term_id) AS cnt
+				FROM " . $wpdb->prefix . "term_taxonomy AS tt, " . $wpdb->prefix . "terms AS term, " . $wpdb->prefix . "termmeta AS tm
+				WHERE tt.`taxonomy`='post_tag' 
+				AND term.term_id = tt.term_id
+				AND tm.term_id=tt.term_id
+				AND tm.meta_key='redirect_page'
+				AND tm.meta_value =''";
+		$cnt = $wpdb->get_var( $sql );
+		$report['TagsNotUsingRedirectionPage'] = $cnt;
 
 		wp_cache_add( $cache_key, $report, '', 3600 );
 

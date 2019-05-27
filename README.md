@@ -6,6 +6,12 @@
 
 This WordPress plugin provides the necessary blocks to be used with Shortcake UI plugin.
 
+## Overide default twig templates of blocks
+
+You can overide the default block twig templates by including in your child theme a file with the same name in the subdirectory
+`/templates/plugins/planet4-plugin-blocks/includes/`
+
+
 **How to develop a new block you ask?**
 
 1. Create a new controller class that extends Controller inside directory _classes/controller/blocks_. The class name should follow naming convention, for example **Blockname**_Controller and its file name should be class-**blockname**-controller.php.
