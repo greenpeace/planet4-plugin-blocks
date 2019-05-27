@@ -9,7 +9,8 @@
     NewCoversBlock,
     CarouselHeaderBlock,
     SocialMediaBlock,
-    SubmenuBlock
+    SubmenuBlock,
+    GalleryBlock
 */
 
 // Define a p4_blocks object that holds functions used during rendering backend blocks' views.
@@ -76,6 +77,7 @@ jQuery(function () {
     'NewCoversBlock'      : NewCoversBlock,
     'SocialMediaBlock'    : SocialMediaBlock,
     'SubmenuBlock'        : SubmenuBlock,
+    'GalleryBlock'        : GalleryBlock
   };
 
   var p4BlocksUI = new P4BlocksAdminUI(Select2FieldsSetup, P4FieldsSetup, WPShortcakeHooksSetup, blocksMap);
