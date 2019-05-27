@@ -1,6 +1,5 @@
 /*
-  global $,
-    _,
+  global _,
     Select2FieldsSetup,
     P4FieldsSetup,
     WPShortcakeHooksSetup,
