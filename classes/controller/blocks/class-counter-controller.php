@@ -25,6 +25,22 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 		public function prepare_fields() {
 			$fields = [
 				[
+					'label'       => __( 'Title', 'planet4-blocks-backend' ),
+					'attr'        => 'title',
+					'type'        => 'text',
+					'meta'        => [
+						'placeholder' => __( 'Enter title', 'planet4-blocks-backend' ),
+					],
+				],
+				[
+					'label'       => __( 'Description', 'planet4-blocks-backend' ),
+					'attr'        => 'description',
+					'type'        => 'textarea',
+					'meta'  => [
+						'placeholder' => __( 'Enter description', 'planet4-blocks-backend' ),
+					],
+				],
+				[
 					'attr'    => 'style',
 					'label'   => __( 'What style of counter do you need?', 'planet4-blocks-backend' ),
 					'type'    => 'p4_radio',
