@@ -56,23 +56,16 @@
 }
 
 .campaign-thumbnail-block {
-  .container {
-    padding-left: 0;
-    padding-right: 0;
-
-    @include medium-and-up {
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-  }
-
   .thumbnail-largeview-container {
-    @include medium-and-up {
-      margin: -8px -7.5px;
-    }
+    @supports (display: grid) {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-column-gap: $space-sm;
+      grid-row-gap: $space-sm;
 
-    .campaign-card-column {
-      padding: 8px;
+      @include medium-and-up {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
 
     .thumbnail-large {
@@ -144,7 +137,7 @@
 // remove limit visibility class on load more button click
 .show-3-covers .limit-visibility {
   .campaign-card-column:nth-child(-n+4) {
-    display: block;
+    display: inline-block;
   }
 
   .campaign-card-column:nth-child(n+4) {
@@ -154,7 +147,7 @@
 
 .show-6-covers .limit-visibility {
   .campaign-card-column:nth-child(-n+7) {
-    display: block;
+    display: inline-block;
   }
 
   .campaign-card-column:nth-child(n+7) {
@@ -164,6 +157,6 @@
 
 .show-all-covers .limit-visibility {
   .campaign-card-column:nth-child(n+5) {
-    display: block;
+    display: inline-block;
   }
 }

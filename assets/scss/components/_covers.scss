@@ -138,6 +138,10 @@
     }
   }
 
+  &.action-card {
+    margin-bottom: $space-lg;
+  }
+
   &.dark-card-bg {
     color: $white;
   }

@@ -5,39 +5,33 @@
 }
 
 .gallery-grid {
-  $aspect-ratio: 3 / 2;
-  $gutter: 15px / 2;
-
   .grid-row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 0 -$gutter;
+    text-align: center;
+
+    .grid-item {
+      display: inline-block;
+      padding: 12px;
+    }
   }
 
-  .grid-item {
-    height: 0;
-    overflow: hidden;
-    position: relative;
-    margin: $gutter 0;
+  @supports (display: grid) {
+    .grid-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: $space-sm;
+      grid-row-gap: $space-sm;
 
-    @include aspect-ratio-column($aspect-ratio, 2);
+      @include medium-and-up {
+        grid-template-columns: repeat(3, 1fr);
+      }
 
-    @include medium-and-up {
-      @include aspect-ratio-column($aspect-ratio, 3);
-    }
+      @include large-and-up {
+        grid-template-columns: repeat(4, 1fr);
+      }
 
-    @include x-large-and-up {
-      @include aspect-ratio-column($aspect-ratio, 4);
-    }
-
-    img {
-      position: absolute;
-      top: 0;
-      left: $gutter;
-      width: calc(100% - #{$gutter * 2});
-      height: 100%;
-      object-fit: cover;
+      .grid-item {
+        padding: 0;
+      }
     }
   }
 }

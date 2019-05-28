@@ -168,6 +168,24 @@ if ( ! class_exists( 'Timeline_Controller' ) ) {
 
 			$fields = [
 				[
+					'label'       => __( 'Timeline Title', 'planet4-blocks-backend' ),
+					'attr'        => 'timeline_title',
+					'type'        => 'text',
+					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
+					'meta'        => [
+						'placeholder' => __( 'Enter timeline title', 'planet4-blocks-backend' ),
+					],
+				],
+				[
+					'label'       => __( 'Description', 'planet4-blocks-backend' ),
+					'attr'        => 'description',
+					'type'        => 'textarea',
+					'description' => __( '(Optional)', 'planet4-blocks-backend' ),
+					'meta'        => [
+						'placeholder' => __( 'Enter description', 'planet4-blocks-backend' ),
+					],
+				],
+				[
 					'label'       => __( 'Google Sheets URL', 'planet4-blocks-backend' ),
 					'attr'        => 'google_sheets_url',
 					'type'        => 'text',
@@ -230,6 +248,9 @@ if ( ! class_exists( 'Timeline_Controller' ) ) {
 			$timeline_id = 'timeline-' . self::$id;
 			self::$id ++;
 
+			$title       = $fields['timeline_title'] ?? '';
+			$description = $fields['description'] ?? '';
+
 			$fields = wp_parse_args(
 				$fields,
 				[
@@ -256,6 +277,8 @@ if ( ! class_exists( 'Timeline_Controller' ) ) {
 
 			return [
 				'timeline_id' => $timeline_id,
+				'title'       => $title,
+				'description' => $description,
 			];
 		}
 

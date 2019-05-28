@@ -29,6 +29,7 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 		public function load() {
 			add_filter( 'attachment_fields_to_edit', [ $this, 'add_image_attachment_fields_to_edit' ], null, 2 );
 			add_filter( 'attachment_fields_to_save', [ $this, 'add_image_attachment_fields_to_save' ], null, 2 );
+			add_action( 'admin_enqueue_scripts', [ $this, 'load_admin_assets' ] );
 			parent::load();
 		}
 
@@ -127,6 +128,14 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 					'addButton'   => 'Select Gallery Images',
 					'frameTitle'  => 'Select Gallery Images',
 				],
+				[
+					'label' => __( 'Image focus points', 'planet4-blocks-backend' ),
+					'attr'  => 'gallery_block_focus_points',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Enter image focus points', 'planet4-blocks-backend' ),
+					],
+				],
 			];
 
 			// Define the Shortcode UI arguments.
@@ -162,6 +171,12 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 				$exploded_images = [];
 			}
 
+			if ( isset( $fields['gallery_block_focus_points'] ) ) {
+				$img_focus_points = json_decode( str_replace( "'", '"', $fields['gallery_block_focus_points'] ), true );
+			} else {
+				$img_focus_points = [];
+			}
+
 			$images_dimensions = [];
 			$image_sizes       = [
 				self::LAYOUT_SLIDER        => 'retina-large',
@@ -179,6 +194,7 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 				$image_data['image_sizes']  = wp_calculate_image_sizes( $image_size, null, null, $image_id );
 				$image_data['alt_text']     = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
 				$image_data['caption']      = wp_get_attachment_caption( $image_id );
+				$image_data['focus_image']  = $img_focus_points[ $image_id ] ?? '';
 				$attachment_fields          = get_post_custom( $image_id );
 				$image_data['credits']      = '';
 				if ( isset( $attachment_fields['_credit_text'][0] ) && ! empty( $attachment_fields['_credit_text'][0] ) ) {
@@ -207,6 +223,84 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 			];
 
 			return $data;
+		}
+
+		/**
+		 * Load assets only on the admin pages of the plugin.
+		 *
+		 * @param string $hook The slug name of the current admin page.
+		 */
+		public function load_admin_assets( $hook ) {
+			if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
+				return;
+			}
+
+			add_action(
+				'enqueue_shortcode_ui',
+				function () {
+					$image_focus_points = [
+						'landscape'        => [
+							[
+								'value' => 'left top',
+								'label' => __( '1 - Top Left', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'center top',
+								'label' => __( '2 - Top Center', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'right top',
+								'label' => __( '3 - Top Right', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'left center',
+								'label' => __( '4 - Middle Left', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'center center',
+								'label' => __( '5 - Middle Center', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'right center',
+								'label' => __( '6 - Middle Right', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'left bottom',
+								'label' => __( '7 - Bottom Left', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'center bottom',
+								'label' => __( '8 - Bottom Center', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'right bottom',
+								'label' => __( '9 - Bottom Right', 'planet4-blocks-backend' ),
+							],
+						],
+						'portrait'         => [
+							[
+								'value' => 'top',
+								'label' => __( '1 - Top', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'center',
+								'label' => __( '2 - Center', 'planet4-blocks-backend' ),
+							],
+							[
+								'value' => 'bottom',
+								'label' => __( '3 - Bottom', 'planet4-blocks-backend' ),
+							],
+						],
+						'options_img_grid' => [
+							'landscape' => esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png' ) ),
+							'portrait'  => esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_3.png' ) ),
+						],
+						'label'            => __( 'Select focus point', 'planet4-blocks-backend' ),
+					];
+
+					wp_localize_script( 'blocks-ui', 'image_focus_points', $image_focus_points );
+				}
+			);
 		}
 	}
 }
