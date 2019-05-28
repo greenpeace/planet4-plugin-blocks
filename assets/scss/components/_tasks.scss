@@ -218,7 +218,6 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
 }
 
 .can-do-steps-mobile {
-  margin: 6px $n15 0 0;
   width: 100%;
 
   .card {
@@ -232,7 +231,7 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
       font-family: $roboto;
       text-decoration: none;
       padding: $n10 $n10 $n5 $n10;
-      margin-bottom: 10px;
+      margin-bottom: $space-sm;
       background: $dark-blue;
       border: none;
       color: $white;
@@ -249,7 +248,7 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
       }
 
       .accordion-image-wrap {
-        padding-bottom: 35px;
+        padding-bottom: $space-lg;
 
         img {
           width: 100%;
@@ -269,15 +268,14 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
       }
 
       .btn-secondary {
-        margin-bottom: 20px;
+        margin-bottom: 0;
         width: 100%;
       }
     }
 
     .card-block {
-      padding: 8px 28px;
+      padding: calc(#{$space-lg} - #{$space-md}) 28px $space-lg 28px;
       border-bottom: none;
-      margin-bottom: 10px;
 
       p {
         color: $dark-shade-black;

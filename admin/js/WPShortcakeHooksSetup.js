@@ -23,6 +23,8 @@ function WPShortcakeHooksSetup(p4BlocksUI) { // eslint-disable-line no-unused-va
         wp.shortcake.hooks.addAction('shortcake_articles.read_more_link', p4BlocksUI.blocks['ArticlesBlock'].read_more_change_hook);
 
         wp.shortcake.hooks.addAction('shortcake_social_media.embed_type', p4BlocksUI.blocks['SocialMediaBlock'].embed_type_change_hook);
+
+        wp.shortcake.hooks.addAction('shortcake_gallery.multiple_image', p4BlocksUI.blocks['GalleryBlock'].gallery_image_change_hook);
       }
 
       // There may be multiple social media embeds on a page; fields need initializing separately for each one.
