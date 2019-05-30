@@ -60,6 +60,11 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 							'label' => __( 'Progress dial', 'planet4-blocks-backend' ),
 							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter_th_arc.png' ),
 						],
+						[
+							'value' => 'en-forms-bar',
+							'label' => __( 'Progress bar inside EN Form', 'planet4-blocks-backend' ),
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter_th_bar.png' ),
+						],
 					],
 				],
 				[
