@@ -67,10 +67,6 @@ if ( ! class_exists( 'Controller' ) ) {
 		 * @param string $hook The slug name of the current admin page.
 		 */
 		public function load_base_admin_assets( $hook ) {
-			if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
-				return;
-			}
-
 			wp_enqueue_style( 'p4bks_admin_style_blocks', P4BKS_ADMIN_DIR . 'blocks-admin.css', [], '0.1' );
 
 			add_action(
