@@ -4,6 +4,10 @@
   margin-top: $space-xl;
   margin-bottom: $space-xl;
 
+  &.counter-style-en-forms-bar {
+    display: none;
+  }
+
   .counter-target {
     display: block;
 

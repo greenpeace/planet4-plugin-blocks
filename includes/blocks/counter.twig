@@ -12,7 +12,7 @@
                 {% endif %}
             </div>
             <div class="content-counter">
-                {% if fields.style == 'bar' %}
+                {% if fields.style == 'bar' or fields.style == 'en-forms-bar' %}
                     <div class="progress-container">
                         <div class="progress-bar" style="width: calc( {{ fields.percent }}% + 20px);"></div>
                     </div>
