@@ -118,13 +118,32 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 
 			// Add to the report a breakdown of which tags are using a redirect page and which do not
 			// The first query shows the ones that do not use a redirect page
-			$sql     = "SELECT term.name, tm.meta_value, tt.term_id
-						FROM " . $wpdb->prefix . "term_taxonomy AS tt, " . $wpdb->prefix . "terms AS term, " . $wpdb->prefix . "termmeta AS tm
-						WHERE tt.`taxonomy`='post_tag' 
-						AND term.term_id = tt.term_id
-						AND tm.term_id=tt.term_id
-						AND tm.meta_key='redirect_page'
-						AND tm.meta_value =''";
+			$sql = "( SELECT term.name, tt.term_id 
+							FROM " . $wpdb->prefix . "term_taxonomy AS tt, 
+							" . $wpdb->prefix . "terms AS term, 
+							" . $wpdb->prefix . "termmeta AS tm 
+							WHERE tt.`taxonomy`='post_tag' 
+							AND term.term_id = tt.term_id 
+							AND tm.term_id=tt.term_id 
+							AND tm.meta_key='redirect_page' 
+							AND tm.meta_value ='' )
+						UNION 
+						( SELECT term.name, tt.term_id 
+							FROM " . $wpdb->prefix . "term_taxonomy AS tt, 
+							" . $wpdb->prefix . "terms AS term, 
+							" . $wpdb->prefix . "termmeta AS tm
+							WHERE tt.`taxonomy`='post_tag' 
+							AND term.term_id = tt.term_id 
+							AND tm.term_id=tt.term_id 
+							AND tm.term_id NOT IN (SELECT tt.term_id 
+													FROM " . $wpdb->prefix . "term_taxonomy AS tt, 
+													" . $wpdb->prefix . "terms AS term, 
+													" . $wpdb->prefix . "termmeta AS tm 
+													WHERE tt.`taxonomy`='post_tag' 
+													AND term.term_id = tt.term_id 
+													AND tm.term_id=tt.term_id 
+													AND tm.meta_key='redirect_page')
+							GROUP BY term.name, tt.term_id )";
 			$results = $wpdb->get_results( $sql );
 			echo '<hr>';
 			echo '<h2>Tags without redirection page</h2>';
