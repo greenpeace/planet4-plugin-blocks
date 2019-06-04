@@ -25,6 +25,22 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 		public function prepare_fields() {
 			$fields = [
 				[
+					'label' => __( 'Title', 'planet4-blocks-backend' ),
+					'attr'  => 'title',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Enter title', 'planet4-blocks-backend' ),
+					],
+				],
+				[
+					'label' => __( 'Description', 'planet4-blocks-backend' ),
+					'attr'  => 'description',
+					'type'  => 'textarea',
+					'meta'  => [
+						'placeholder' => __( 'Enter description', 'planet4-blocks-backend' ),
+					],
+				],
+				[
 					'attr'    => 'style',
 					'label'   => __( 'What style of counter do you need?', 'planet4-blocks-backend' ),
 					'type'    => 'p4_radio',
@@ -43,6 +59,11 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 							'value' => 'arc',
 							'label' => __( 'Progress dial', 'planet4-blocks-backend' ),
 							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter_th_arc.png' ),
+						],
+						[
+							'value' => 'en-forms-bar',
+							'label' => __( 'Progress bar inside EN Form', 'planet4-blocks-backend' ),
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter_th_bar.png' ),
 						],
 					],
 				],
