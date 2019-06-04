@@ -4,6 +4,23 @@
   margin-top: $space-xl;
   margin-bottom: $space-xl;
 
+  .enform-extra-header-placeholder & {
+    margin-top: 40px;
+    margin-bottom: 30px;
+
+    .counter-text {
+      text-align: left;
+    }
+
+    .progress-container {
+      height: 20px;
+    }
+  }
+
+  &.counter-style-en-forms-bar {
+    display: none;
+  }
+
   .counter-target {
     display: block;
 

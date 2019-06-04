@@ -250,8 +250,10 @@ if ( ! class_exists( 'Loader' ) ) {
 						array_push( $plugins['not_updated'], array_merge( $plugin_data, $required_plugin ) );
 					}
 				}
-				if ( count( $plugins ) > 0 ) {
-					return false;
+				foreach ( $plugins as $plugin ) {
+					if ( is_array( $plugin ) && count( $plugin ) > 0 ) {
+						return false;
+					}
 				}
 			}
 			return true;
