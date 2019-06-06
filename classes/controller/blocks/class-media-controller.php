@@ -126,7 +126,7 @@ if ( ! class_exists( 'Media_Controller' ) ) {
 				'fields' => [
 					'title'       => $fields['video_title'],
 					'description' => $description,
-					'embed_html'  => $embed_html,
+					'embed_html'  => str_replace( 'youtube.com', 'youtube-nocookie.com', $embed_html ),
 					'type'        => $type,
 				],
 			];
