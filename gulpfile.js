@@ -29,6 +29,8 @@ const blocks_javascripts = [
   'admin/js/blocks-admin.js',
 ];
 
+const path_git_hooks = '.githooks/*';
+
 let error_handler = {
   errorHandler: notify.onError({
     title: 'Gulp',
@@ -106,9 +108,17 @@ function watch() {
   gulp.watch(blocks_javascripts, gulp.series(lint_js, uglify_admin));
 }
 
+function git_hooks() {
+  return gulp.src(path_git_hooks)
+    .pipe(plumber(error_handler))
+    .pipe(gulp.dest('.git/hooks/', {'mode': '755', 'overwrite': true}))
+    .pipe(notify('Copied git hooks'));
+}
+
 exports.sass = sass;
 exports.uglify = uglify;
 exports.uglify_admin = uglify_admin;
 exports.watch = watch;
+exports.git_hooks = git_hooks;
 exports.test = gulp.parallel(lint_css, lint_js);
 exports.default = gulp.series(lint_css, lint_js, sass, sass_admin, uglify, uglify_admin);
