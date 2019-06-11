@@ -21,43 +21,59 @@ $(document).ready(function () {
 
       for (var j = 0; j < $headings.length; j++) {
         var $heading = $($headings[j]);
-        if ($heading.text() === menu.text) {
-          $heading.prepend('<a id="' + menu.id + '"></a>');
+        if ($heading.text().replace(/\u2010|\u2011|\u2013/, '') === menu.text.replace('-', '')) {
+          $heading.prepend('<a id="' + menu.id + '" data-hash-target="' + menu.hash + '"></a>');
         }
       }
     }
 
-    if ('undefined' === menu.children || !Array.isArray(menu.children)) {
-      continue;
-    }
-
-    for (var k = 0; k < menu.children.length; k++) {
-      var child = menu.children[k];
-      var child_type = child.type;
-      var $headings2 = $('body ' + child_type);
-
-      for (var l = 0; l < $headings2.length; l++) {
-
-        var $heading2 = $($headings2[l]);
-        if ($heading2.text() === child.text) {
-          $heading2.prepend('<a id="' + child.id + '"></a>');
-        }
-      }
-    }
+    addChildrenLinks(menu);
   }
 
   // Add click event for submenu links.
   $('.submenu-link').click(function (event) {
     event.preventDefault();
     var link = $.attr(this, 'href');
-    $('html, body').animate({
-      scrollTop: $(link).offset().top - 100
-    }, 2000, function () {
-      var position = $(window).scrollTop();
-      window.location.hash = link;
-      $(window).scrollTop(position);
-    });
+    var h = $(this).data('hash');
+    var $target = $('*[data-hash-target="'+h+'"]');
+    if ($target) {
+      $('html, body').animate({
+        scrollTop: $target.offset().top - 100
+      }, 2000, function () {
+        var position = $(window).scrollTop();
+        window.location.hash = link;
+        $(window).scrollTop(position);
+      });
+    }
 
     return false;
   });
+
+  /**
+   * Append html links for a submenu entry children.
+   *
+   * @param menu Submenu entry
+   */
+  function addChildrenLinks(menu) {
+    if ('undefined' === menu.children || !Array.isArray(menu.children)) {
+      return;
+    }
+
+    for (var k = 0; k < menu.children.length; k++) {
+      var child = menu.children[k];
+      var child_type = child.type;
+      var $headings = $('body ' + child_type);
+
+      addChildrenLinks(child);
+
+      for (var l = 0; l < $headings.length; l++) {
+
+        var $heading = $($headings[l]);
+        if ($heading.text().replace(/\u2010|\u2011|\u2013/, '') === child.text.replace('-', '')) {
+          $heading.prepend('<a id="' + child.id + '" data-hash-target="' + child.hash + '"></a>');
+          break;
+        }
+      }
+    }
+  }
 });

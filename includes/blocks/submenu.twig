@@ -24,7 +24,7 @@
 		{% for item in items %}
 			<li class="list-style-{{ item.style }} {% if item.link %}list-link{% else %}list-heading{% endif %}">
 				{% if ( item.link ) %}
-					<a href="#{{ item.id }}" class="icon-link submenu-link">{{ item.text }}</a>
+					<a href="#{{ item.id }}" class="icon-link submenu-link" data-hash="{{ item.hash }}">{{ item.text }}</a>
 				{% else %}
 					<span class="submenu-heading">{{ item.text }}</span>
 				{% endif %}

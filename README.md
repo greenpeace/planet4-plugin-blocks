@@ -25,6 +25,21 @@ you need to set the BLOCK_NAME constant as **'blockname'** It also works with ht
 
 5. Finally, before committing do **composer update --no-dev** and **composer dump-autoload --optimize** in order to add your new class to composer's autoload.
 
+
+## Task automation
+We use gulp as automation tools for local development.
+
+Available tasks
+
+* `gulp lint_css` 'checks for css/sass lint errors'
+* `gulp lint_js` 'checks for js lint errors'
+* `gulp sass` 'concatanates/compiles sass files into a minified single stylesheet'
+* `gulp sass_admin` 'concatanates/compiles admin sass files into a minified single stylesheet'
+* `gulp uglify` 'concatanates/mangles js files into a minified single js file'
+* `gulp uglify_admin` 'concatanates/mangles admin js files into a minified single js file'
+* `gulp watch` 'watches for changes in js or sccs and runs the minification tasks'
+* `gulp git_hooks` 'copies repo's git hooks to local git repo'
+
 ## Contribute
 
 Please read the [Contribution Guidelines](https://planet4.greenpeace.org/handbook/dev-contribute-to-planet4/) for Planet4.
