@@ -17,7 +17,12 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 	 * @package P4BKS\Controllers\Blocks
 	 */
 	class Counter_Controller extends Controller {
+
+		/** @const string BLOCK_NAME */
 		const BLOCK_NAME = 'counter';
+
+		/** @const array BLOCK_ALLOWED_POST_TYPES */
+		const BLOCK_ALLOWED_POST_TYPES = [ 'page', 'campaign', 'post' ];
 
 		/**
 		 * Shortcode UI setup
@@ -112,7 +117,7 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 				// TODO make preview thumbnail image.
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/counter.png' ) . '" />',
 				'attrs'         => $fields,
-				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
+				'post_type'     => self::BLOCK_ALLOWED_POST_TYPES,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
