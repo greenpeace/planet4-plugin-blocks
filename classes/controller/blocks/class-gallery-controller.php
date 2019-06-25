@@ -19,6 +19,9 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 		/** @const string BLOCK_NAME */
 		const BLOCK_NAME = 'gallery';
 
+		/** @const array BLOCK_ALLOWED_POST_TYPES */
+		const BLOCK_ALLOWED_POST_TYPES = [ 'page', 'campaign', 'post' ];
+
 		const LAYOUT_SLIDER        = 1;
 		const LAYOUT_THREE_COLUMNS = 2;
 		const LAYOUT_GRID          = 3;
@@ -143,7 +146,7 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 				'label'         => __( 'Gallery', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/take_action_carousel.png' ) . '" />',
 				'attrs'         => $fields,
-				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
+				'post_type'     => self::BLOCK_ALLOWED_POST_TYPES,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

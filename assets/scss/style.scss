@@ -1,8 +1,13 @@
 // Global
+@import "styleguide/src/base/variables";
+@import "styleguide/src/base/colors";
+@import "styleguide/src/base/functions";
+@import "styleguide/src/base/mixins";
+
+// Local
 @import "base/variables";
-@import "base/functions";
-@import "base/mixins";
 @import "base/fonts";
+@import "base/mixins";
 
 // Components
 @import "components/articles";
