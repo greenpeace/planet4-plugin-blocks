@@ -3,7 +3,7 @@
  * Plugin Name: Planet4 - Blocks
  * Description: Creates all the blocks that will be available for usage by Shortcake.
  * Plugin URI: http://github.com/greenpeace/planet4-plugin-blocks
- * Version: 1.47.0
+ * Version: 1.48.0
  * Php Version: 7.0
  *
  * Author: Greenpeace International
@@ -162,8 +162,8 @@ function plugin_blocks_report_json() {
 			$shortcode = '%[shortcake_' . $wpdb->esc_like( $block ) . ' %';
 			$sql       = $wpdb->prepare(
 				"SELECT count(ID) AS cnt
-                FROM `wp_posts` 
-                WHERE post_status = 'publish' 
+                FROM `wp_posts`
+                WHERE post_status = 'publish'
                 AND `post_content` LIKE %s", $shortcode );
 			$results = $wpdb->get_var( $sql );
 
@@ -173,17 +173,17 @@ function plugin_blocks_report_json() {
 
 		// Add to the report a breakdown of different styles for carousel Header
 		$sql = "SELECT count(ID) AS cnt
-                FROM ". $wpdb->prefix . "posts 
+                FROM ". $wpdb->prefix . "posts
                 WHERE post_status = 'publish'
                 AND `post_content` REGEXP 'shortcake_carousel_header'
                 AND ID NOT IN (SELECT ID
-                    FROM ". $wpdb->prefix . "posts 
+                    FROM ". $wpdb->prefix . "posts
                     WHERE post_status = 'publish'
                     AND `post_content` REGEXP 'shortcake_carousel_header.*full-width-classic')";
 		$cnt = $wpdb->get_var( $sql );
 		$report['CarouselHeader-Zoom-And-Slide'] = $cnt;
 		$sql = "SELECT count(ID) AS cnt
-                FROM ". $wpdb->prefix . "posts 
+                FROM ". $wpdb->prefix . "posts
                 WHERE post_status = 'publish'
                 AND `post_content` REGEXP 'shortcake_carousel_header.*full-width-classic'";
 		$cnt = $wpdb->get_var( $sql );
@@ -192,7 +192,7 @@ function plugin_blocks_report_json() {
 		// Add to the report a breakdown of which tags are using redirect to page and which not part 1
 		$sql = "SELECT count(tt.term_id) AS cnt
 				FROM " . $wpdb->prefix . "term_taxonomy AS tt, " . $wpdb->prefix . "terms AS term, " . $wpdb->prefix . "termmeta AS tm
-				WHERE tt.`taxonomy`='post_tag' 
+				WHERE tt.`taxonomy`='post_tag'
 				AND term.term_id = tt.term_id
 				AND tm.term_id=tt.term_id
 				AND tm.meta_key='redirect_page'
@@ -201,34 +201,34 @@ function plugin_blocks_report_json() {
 		$report['TagsUsingRedirectionPage'] = $cnt;
 
 		// Add to the report a breakdown of which tags are using redirect to page and which not part 2
-		// Add to the report a breakdown of which tags are using redirect to page and which not part 2
-		$sql                                   = "SELECT count(term_id) FROM
-				(( SELECT tt.term_id 
-					FROM " . $wpdb->prefix . "term_taxonomy AS tt, 
-					" . $wpdb->prefix . "terms AS term, 
-					" . $wpdb->prefix . "termmeta AS tm 
-					WHERE tt.`taxonomy`='post_tag' 
-					AND term.term_id = tt.term_id 
-					AND tm.term_id=tt.term_id 
-					AND tm.meta_key='redirect_page' 
-					AND tm.meta_value ='' )
-				UNION 
-					( SELECT tt.term_id 
-					FROM " . $wpdb->prefix . "term_taxonomy AS tt, 
-					" . $wpdb->prefix . "terms AS term, 
+		$sql = "SELECT count(term_id) FROM
+				(( SELECT tt.term_id
+					FROM " . $wpdb->prefix . "term_taxonomy AS tt,
+					" . $wpdb->prefix . "terms AS term,
 					" . $wpdb->prefix . "termmeta AS tm
-					WHERE tt.`taxonomy`='post_tag' 
-					AND term.term_id = tt.term_id 
-					AND tm.term_id=tt.term_id 
-					AND tm.term_id NOT IN (SELECT tt.term_id 
-										FROM " . $wpdb->prefix . "term_taxonomy AS tt, 
-										" . $wpdb->prefix . "terms AS term, 
-										" . $wpdb->prefix . "termmeta AS tm 
-										WHERE tt.`taxonomy`='post_tag' 
-										AND term.term_id = tt.term_id 
-										AND tm.term_id=tt.term_id 
+					WHERE tt.`taxonomy`='post_tag'
+					AND term.term_id = tt.term_id
+					AND tm.term_id=tt.term_id
+					AND tm.meta_key='redirect_page'
+					AND tm.meta_value ='' )
+				UNION
+					( SELECT tt.term_id
+					FROM " . $wpdb->prefix . "term_taxonomy AS tt,
+					" . $wpdb->prefix . "terms AS term,
+					" . $wpdb->prefix . "termmeta AS tm
+					WHERE tt.`taxonomy`='post_tag'
+					AND term.term_id = tt.term_id
+					AND tm.term_id=tt.term_id
+					AND tm.term_id NOT IN (SELECT tt.term_id
+										FROM " . $wpdb->prefix . "term_taxonomy AS tt,
+										" . $wpdb->prefix . "terms AS term,
+										" . $wpdb->prefix . "termmeta AS tm
+										WHERE tt.`taxonomy`='post_tag'
+										AND term.term_id = tt.term_id
+										AND tm.term_id=tt.term_id
 										AND tm.meta_key='redirect_page')
 				GROUP BY term.name, tt.term_id )) as TEMP";
+
 		$cnt                                   = $wpdb->get_var( $sql );
 		$report['TagsNotUsingRedirectionPage'] = $cnt;
 
