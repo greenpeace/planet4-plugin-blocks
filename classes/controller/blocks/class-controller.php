@@ -126,8 +126,8 @@ if ( ! class_exists( 'Controller' ) ) {
 				wp_doing_ajax()
 				&& is_user_logged_in()
 				&& wp_get_current_user()->has_cap( 'edit_posts' )
-				&& isset( $_REQUEST['action'] ) // phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
-				&& 'bulk_do_shortcode' === $_REQUEST['action']  // phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
+				&& isset( $_REQUEST['action'] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				&& 'bulk_do_shortcode' === $_REQUEST['action']  // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			) {
 				// Render a preview iframe using a wrapper method.
 				add_shortcode( 'shortcake_' . static::BLOCK_NAME, [ $this, 'prepare_template_preview_iframe' ] );
@@ -258,7 +258,7 @@ if ( ! class_exists( 'Controller' ) ) {
 					<?php do_action( 'wp_head' ); ?>
 				</head>
 				<body style="background-color: transparent;">
-					<?php echo $this->prepare_template( $fields, $content, $tag ); // WPCS: XSS ok. ?>
+					<?php echo $this->prepare_template( $fields, $content, $tag ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</body>
 				<footer>
 					<?php do_action( 'wp_footer' ); ?>
