@@ -194,18 +194,18 @@ if ( ! class_exists( 'Loader' ) ) {
 						}
 
 						$message .= '</div><br />';
-						wp_die( // WPCS: XSS OK.
-							$message,
+						wp_die(
+							$message, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							'Plugin Requirements Error',
 							[
-								'response'  => \WP_Http::OK,
+								'response'  => \WP_Http::OK, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 								'back_link' => true,
 							]
 						);
 					}
 				} else {
 					deactivate_plugins( P4BKS_PLUGIN_BASENAME );
-					wp_die( // WPCS: XSS OK.
+					wp_die( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						'<div class="error fade">' .
 						'<strong>' . esc_html__( 'PHP Requirements Error', 'planet4-blocks-backend' ) . '</strong><br /><br />' . esc_html( P4BKS_PLUGIN_NAME . __( ' requires a newer version of PHP.', 'planet4-blocks-backend' ) ) . '<br />' .
 						'<br/>' . esc_html__( 'Minimum required version of PHP: ', 'planet4-blocks-backend' ) . '<strong>' . esc_html( $this->required_php ) . '</strong>' .
@@ -213,7 +213,7 @@ if ( ! class_exists( 'Loader' ) ) {
 						'</div>',
 						'Plugin Requirements Error',
 						[
-							'response'  => \WP_Http::OK,
+							'response'  => \WP_Http::OK, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 							'back_link' => true,
 						]
 					);
@@ -318,13 +318,13 @@ if ( ! class_exists( 'Loader' ) ) {
 
 } else {
 	deactivate_plugins( P4BKS_PLUGIN_BASENAME );
-	wp_die( // WPCS: XSS OK.
+	wp_die(
 		'<div class="error fade">' .
 		'<u>' . esc_html( P4BKS_PLUGIN_NAME ) . esc_html__( 'Conflict Error', 'planet4-blocks-backend' ) . '</u><br /><br />' . esc_html__( 'Class P4BKS_Loader already exists.', 'planet4-blocks-backend' ) . '<br />' .
 		'</div>',
 		'Plugin Conflict Error',
 		[
-			'response'  => \WP_Http::OK,
+			'response'  => \WP_Http::OK, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			'back_link' => true,
 		]
 	);
