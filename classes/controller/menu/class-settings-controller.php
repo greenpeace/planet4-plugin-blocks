@@ -33,6 +33,14 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 					[ $this, 'prepare_settings' ],
 					'dashicons-layout'
 				);
+				add_submenu_page(
+					P4BKS_PLUGIN_SLUG_NAME,
+					'Convert Blocks',
+					'Convert Blocks',
+					'manage_options',
+					P4BKS_PLUGIN_SLUG_NAME,
+					[ $this, 'prepare_settings' ]
+				);
 			}
 		}
 

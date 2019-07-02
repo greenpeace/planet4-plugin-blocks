@@ -14,7 +14,7 @@
             <div class="content-counter">
                 {% if fields.style == 'bar' or fields.style == 'en-forms-bar' %}
                     <div class="progress-container">
-                        <div class="progress-bar" style="width: calc( {{ fields.percent }}% + 20px);"></div>
+                        <div class="progress-bar {{ 'en-forms-bar' == fields.style ? 'enform-progress-bar' }}" style="width: calc( {{ fields.percent }}% + 20px);"></div>
                     </div>
                 {% elseif fields.style == 'arc' %}
                     <svg class="progress-arc" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 14">
