@@ -80,6 +80,7 @@ if ( ! class_exists( 'Loader' ) ) {
 		 * @param string $view_class The View class name.
 		 */
 		private function __construct( $services, $view_class ) {
+			add_filter( 'block_categories', array( $this, 'register_block_category' ), 10, 2 );
 			$this->load_files();
 			$this->load_services( $services, $view_class );
 			$this->load_commands();
@@ -160,6 +161,28 @@ if ( ! class_exists( 'Loader' ) ) {
 			add_action( 'admin_enqueue_scripts', [ $this, 'load_admin_assets' ] );
 			// Provide hook for other plugins.
 			do_action( 'p4bks_plugin_loaded' );
+
+
+		}
+
+		/**
+		 * Registers a new categories for our blocks
+		 *
+		 * @param $categories
+		 * @param $post
+		 *
+		 * @return array
+		 */
+		public function register_block_category( $categories, $post ) {
+			return array_merge(
+				$categories,
+				array(
+					array(
+						'slug'  => 'planet4',
+						'title' => __( 'Planet 4', 'planet4-blocks' ),
+					),
+				)
+			);
 		}
 
 		/**

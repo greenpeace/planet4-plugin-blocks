@@ -126,6 +126,7 @@ P4BKS\Loader::get_instance(
 		'P4BKS\Controllers\Blocks\Timeline_Controller',
 		'P4BKS\Controllers\Menu\Settings_Controller',
 		'P4BKS\Controllers\Menu\Blocks_Usage_Controller',
+		'P4BKS\Controllers\Blocks\NewCovers_Gutenberg_Controller',
 	],
 	'P4BKS\Views\View',
 	'P4BKS\Command\ShortcodeReplacer',
