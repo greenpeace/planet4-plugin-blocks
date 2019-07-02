@@ -34,7 +34,7 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 		 * Load underscore templates to footer.
 		 */
 		public function print_admin_footer_scripts() {
-			echo $this->get_template( 'submenu' ); // WPCS: XSS ok.
+			echo $this->get_template( 'submenu' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		/**

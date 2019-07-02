@@ -17,13 +17,12 @@
 					<div class="row">
 						{% for i in 1..4 %}
 							{% if fields['title_'~i] %}
-								<div class="col-md-6 col-lg column-wrap">
-									{% set title = fields['title_'~i] %}
-									{% set attachment = fields['attachment_'~i] %}
-									{% set description = fields['description_'~i] %}
-									{% set link = fields['link_'~i] %}
-									{% set cta_text = fields['cta_text_'~i] %}
-
+								{% set title = fields['title_'~i] %}
+								{% set attachment = fields['attachment_'~i] %}
+								{% set description = fields['description_'~i] %}
+								{% set link = fields['link_'~i] %}
+								{% set cta_text = fields['cta_text_'~i] %}
+								<div class="col-md-6 col-lg column-wrap {% if cta_text and link %}has-cta{% endif %}">
 									{% if attachment and fields.columns_block_style != 'no_image' %}
 										<div class="attachment-container">
 											{% if link %}<a href="{{ link|e('esc_url') }}">{% endif %}

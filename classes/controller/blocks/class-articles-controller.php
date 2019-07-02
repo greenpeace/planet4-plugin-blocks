@@ -208,13 +208,23 @@ For good user experience, please include at least three articles so that spacing
 
 			// Six scenarios for filtering posts.
 			// 1) inside tag page - Get posts that have the specific tag assigned.
+			// Add extra check for post_types and posts attributes to ensure that the block is rendered from a tag page.
 			// 2) inside post - Get results excluding specific post.
 			// 3) post types - Get posts by post types specified using checkboxes in backend - old behavior.
 			// 4) post types or tags - Get posts by post types or tags defined from select boxes - new behavior.
 			// 5) specific posts - Get posts by ids specified in backend - new behavior / manual override.
 			// 6) issue page - Get posts based on page's tags.
 			$all_posts = false;
-			if ( is_tag() && '' !== $tag_id ) {
+			if ( is_tag() && '' !== $tag_id &&
+				2 === count(
+					array_diff(
+						[
+							'post_types',
+							'posts',
+						],
+						array_keys( $fields )
+					)
+				) ) {
 				$args = $this->filter_posts_for_tag_page( $fields );
 			} elseif ( ! empty( $exclude_post_id ) ) {
 				$args = $this->filter_posts_by_page_types( $fields );

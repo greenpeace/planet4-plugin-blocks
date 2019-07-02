@@ -91,13 +91,17 @@ $(document).ready(function () {
     const url = p4_vars.ajaxurl + `?page=${ next_page }`;
     this.dataset.page = next_page;
 
+    var wpnonceValue = this.dataset['nonce_element_id']
+      ? $('#' + this.dataset['nonce_element_id']).val()
+      : $('#_wpnonce').val();
+
     $.ajax({
       url: url,
       type: 'GET',
       data: {
         action:     'load_more',
         args:       this.dataset,
-        '_wpnonce': $( '#_wpnonce' ).val(),
+        '_wpnonce': wpnonceValue,
       },
       dataType: 'html'
     }).done(function ( response ) {
@@ -105,7 +109,7 @@ $(document).ready(function () {
       $content.append( response );
       if (next_page === total_pages) {
         el.fadeOut();
-      }  
+      }
     }).fail(function ( jqXHR, textStatus, errorThrown ) {
       console.log(errorThrown); //eslint-disable-line no-console
     });

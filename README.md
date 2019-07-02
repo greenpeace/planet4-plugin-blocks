@@ -2,6 +2,15 @@
 
 ![Planet4](./planet4.png)
 
+
+# Contents
+- [Introduction](#introduction)
+- [Override default twig templates](#overide-default-twig-templates-of-blocks)
+- [Task automation](#task-automation)
+- [Composer](#composer)
+- [Code Standards](#code-standards)
+- [Contribute](#contribute)
+
 ## Introduction
 
 This WordPress plugin provides the necessary blocks to be used with Shortcake UI plugin.
@@ -39,6 +48,33 @@ Available tasks
 * `gulp uglify_admin` 'concatanates/mangles admin js files into a minified single js file'
 * `gulp watch` 'watches for changes in js or sccs and runs the minification tasks'
 * `gulp git_hooks` 'copies repo's git hooks to local git repo'
+
+## Composer
+We use composer as dependency manager for the this plugin.
+To install dependencies run
+
+`$ composer install`
+
+## Code standards
+We follow the [WordPress Coding Standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/)
+
+We use a custom [php codesniffer](https://github.com/squizlabs/PHP_CodeSniffer) ruleset which adds some rules over WordPress-Core, WordPress-Docs and WordPress-Extra rulesets.
+
+[WordPress Coding Standards Rulesets](https://github.com/WordPress/WordPress-Coding-Standards)
+
+[WordPress Coding Standards Wiki](https://github.com/WordPress/WordPress-Coding-Standards/wiki)
+
+To run the [php codesniffer](https://github.com/squizlabs/PHP_CodeSniffer)
+
+`$ vendor/bin/phpcs` 
+or 
+`$ composer sniffs`
+
+To run the [php code beautifier and fixer](https://github.com/squizlabs/PHP_CodeSniffer/wiki/Fixing-Errors-Automatically)
+
+`$ vendor/bin/phpcbf` 
+or 
+`$ composer fixes`
 
 ## Contribute
 
