@@ -53,12 +53,14 @@
     .column-wrap {
       margin-top: $space-xl;
 
-      @include medium-and-up {
-        padding-bottom: $space-xl; // Leave enough room for the CTA button
-      }
-
       @include large-and-up {
         margin-top: 0;
+      }
+
+      &.has-cta {
+        @include medium-and-up {
+          padding-bottom: $space-xl; // Leave enough room for the CTA button
+        }
       }
 
       h3 {
@@ -100,6 +102,10 @@
           font-size: 0.9375rem;
           width: 76%;
         }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
 
       .btn {
@@ -128,8 +134,13 @@
       margin-bottom: $space-lg;
 
       @include large-and-up {
-        padding-bottom: 1em; // Leave enough room for the CTA link
         margin-bottom: 0;
+      }
+
+      &.has-cta {
+        @include large-and-up {
+          padding-bottom: $space-md; // Leave enough room for the CTA link
+        }
       }
 
       h3,
@@ -175,6 +186,10 @@
 
         @include x-large-and-up {
           font-size: 0.9375rem;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
         }
 
         a {
@@ -339,11 +354,15 @@
           color: $dark-shade-black;
           font-size: 0.875rem;
           opacity: 0.75;
-          margin-bottom: $space-lg;
+          margin-bottom: 0;
 
           @include x-large-and-up {
             font-size: 0.9375rem;
             line-height: 1.6;
+          }
+
+          &.has-cta {
+            margin-bottom: $space-lg;
           }
         }
 
@@ -452,8 +471,12 @@
             font-size: 0.875rem;
             line-height: 22px;
             margin-left: 0;
-            margin-bottom: $space-lg;
+            margin-bottom: 0;
             padding-right: 0;
+
+            &.has-cta {
+              margin-bottom: $space-lg;
+            }
           }
         }
 

@@ -40,7 +40,9 @@
 								{% if ( fields['title_'~i] ) %}
 									<div class="col" data-id="{{ i }}">
 										{% if ( fields['description_'~i] ) %}
-											<p>{{ fields['description_'~i]|e('wp_kses_post')|raw }}</p>
+											<p {% if ( fields['cta_text_'~i] and fields['link_'~i] ) %}class="has-cta"{% endif %}>
+												{{ fields['description_'~i]|e('wp_kses_post')|raw }}
+											</p>
 										{% endif %}
 									</div>
 								{% endif %}
@@ -124,7 +126,9 @@
 										<div class="card-block info-with-image-wrap clearfix">
 											<div class="mobile-accordion-info">
 												{% if ( fields['description_'~i] ) %}
-													<p>{{ fields['description_'~i]|e('wp_kses_post')|raw }}</p>
+													<p {% if ( fields['cta_text_'~i] and fields['link_'~i] ) %}class="has-cta"{% endif %}>
+														{{ fields['description_'~i]|e('wp_kses_post')|raw }}
+													</p>
 												{% endif %}
 											</div>
 

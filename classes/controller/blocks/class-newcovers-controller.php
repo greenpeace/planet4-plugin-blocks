@@ -39,7 +39,7 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 		 * Load underscore templates to footer.
 		 */
 		public function print_admin_footer_scripts() {
-			echo $this->get_template( 'submenu' ); // WPCS: XSS ok.
+			echo $this->get_template( 'submenu' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		/**
@@ -531,8 +531,8 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 		 */
 		public function action_wp_ajax_shortcode_ui_post_field() {
 
-			$nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : null; // WPCS: CSRF ok.
-			$type  = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : '0'; // WPCS: CSRF ok.
+			$nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : null; // phpcs:ignore WordPress.Security.NonceVerification
+			$type  = isset( $_GET['type'] ) ? sanitize_text_field( wp_unslash( $_GET['type'] ) ) : '0'; // phpcs:ignore WordPress.Security.NonceVerification
 
 			$response = array(
 				'items'          => array(),
