@@ -40,8 +40,7 @@ class NewCovers_Gutenberg_Controller extends Controller {
 	public function register_field_group() {
 		if ( function_exists( 'acf_add_local_field_group' ) ) {
 
-			acf_add_local_field_group(
-				array(
+			acf_add_local_field_group( array(
 					'key'                   => 'group_5d1374790e263',
 					'title'                 => 'Covers block fields',
 					'fields'                => array(
@@ -96,7 +95,37 @@ class NewCovers_Gutenberg_Controller extends Controller {
 							'type'              => 'taxonomy',
 							'instructions'      => '',
 							'required'          => 0,
-							'conditional_logic' => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_5d137764262e8',
+										'operator' => '==empty',
+									),
+									array(
+										'field'    => 'field_5d1374f1262e2',
+										'operator' => '==',
+										'value'    => '3',
+									),
+								),
+								array(
+									array(
+										'field'    => 'field_5d1b60b46b959',
+										'operator' => '==empty',
+									),
+									array(
+										'field'    => 'field_5d1374f1262e2',
+										'operator' => '==',
+										'value'    => '1',
+									),
+								),
+								array(
+									array(
+										'field'    => 'field_5d1374f1262e2',
+										'operator' => '==',
+										'value'    => '2',
+									),
+								),
+							),
 							'wrapper'           => array(
 								'width' => '',
 								'class' => '',
@@ -118,7 +147,19 @@ class NewCovers_Gutenberg_Controller extends Controller {
 							'type'              => 'taxonomy',
 							'instructions'      => 'Search for post types',
 							'required'          => 0,
-							'conditional_logic' => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_5d1374f1262e2',
+										'operator' => '==',
+										'value'    => '3',
+									),
+									array(
+										'field'    => 'field_5d137764262e8',
+										'operator' => '==empty',
+									),
+								),
+							),
 							'wrapper'           => array(
 								'width' => '',
 								'class' => '',
@@ -180,12 +221,28 @@ class NewCovers_Gutenberg_Controller extends Controller {
 						),
 						array(
 							'key'               => 'field_5d137764262e8',
-							'label'             => 'Manual Override',
+							'label'             => 'Manual Override Posts',
 							'name'              => 'posts',
 							'type'              => 'post_object',
 							'instructions'      => 'CAUTION: Adding covers manually will override the automatic functionality.<br>DRAG & DROP: Drag and drop to reorder cover display priority.',
 							'required'          => 0,
-							'conditional_logic' => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_5d1374f1262e2',
+										'operator' => '==',
+										'value'    => '3',
+									),
+									array(
+										'field'    => 'field_5d1375dc262e4',
+										'operator' => '==empty',
+									),
+									array(
+										'field'    => 'field_5d137629262e5',
+										'operator' => '==empty',
+									),
+								),
+							),
 							'wrapper'           => array(
 								'width' => '',
 								'class' => '',
@@ -193,6 +250,36 @@ class NewCovers_Gutenberg_Controller extends Controller {
 							),
 							'post_type'         => array(
 								0 => 'post',
+							),
+							'taxonomy'          => '',
+							'allow_null'        => 0,
+							'multiple'          => 1,
+							'return_format'     => 'id',
+							'ui'                => 1,
+						),
+						array(
+							'key'               => 'field_5d1b60b46b959',
+							'label'             => 'Manual Override take action pages',
+							'name'              => 'take_action_pages',
+							'type'              => 'post_object',
+							'instructions'      => 'CAUTION: Adding covers manually will override the automatic functionality.<br>DRAG & DROP: Drag and drop to reorder cover display priority.',
+							'required'          => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_5d1374f1262e2',
+										'operator' => '==',
+										'value'    => '1',
+									),
+								),
+							),
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'post_type'         => array(
+								0 => 'page',
 							),
 							'taxonomy'          => '',
 							'allow_null'        => 0,
@@ -524,11 +611,12 @@ class NewCovers_Gutenberg_Controller extends Controller {
 	 */
 	private function populate_posts_for_act_pages( &$fields ) {
 
-		$post_ids = $fields['posts'] ?? '';
+		$post_ids = $fields['take_action_pages'] ?? '';
 		$options  = get_option( 'planet4_options' );
 
 		if ( '' !== $post_ids ) {
-			$actions = $this->filter_posts_by_ids( $fields );
+			$fields['posts'] = $fields['take_action_pages'];
+			$actions         = $this->filter_posts_by_ids( $fields );
 		} else {
 			$actions = $this->filter_posts_for_act_pages( $fields );
 		}
