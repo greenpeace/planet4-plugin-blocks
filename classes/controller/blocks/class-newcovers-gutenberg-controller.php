@@ -271,6 +271,10 @@ class NewCovers_Gutenberg_Controller extends Controller {
 										'operator' => '==',
 										'value'    => '1',
 									),
+									array(
+										'field'    => 'field_5d1375dc262e4',
+										'operator' => '==empty',
+									),
 								),
 							),
 							'wrapper'           => array(
@@ -494,8 +498,8 @@ class NewCovers_Gutenberg_Controller extends Controller {
 	 */
 	private function filter_posts_for_cfc( $fields ) {
 
-		$tags       = $fields['tags'] ?? '';
-		$post_types = $fields['post_types'] ?? '';
+		$tags       = $fields['tags'] ?? [];
+		$post_types = $fields['post_types'] ?? [];
 
 		// If post_ids is empty or is not a comma separated integers string then make post_ids an empty array.
 		// If any tag is selected convert the value to an array of tag ids.
@@ -513,14 +517,14 @@ class NewCovers_Gutenberg_Controller extends Controller {
 
 		// Get all posts with the specific tags.
 		// Construct the arguments array for the query.
-		if ( ! empty( $tag_ids ) && ! empty( $post_types ) ) {
+		if ( ! empty( $tags ) && ! empty( $post_types ) ) {
 
 			$query_args['tax_query'] = [
 				'relation' => 'AND',
 				[
 					'taxonomy' => 'post_tag',
 					'field'    => 'term_id',
-					'terms'    => $tag_ids,
+					'terms'    => $tags,
 				],
 				[
 					'taxonomy' => 'p4-page-type',
@@ -534,7 +538,7 @@ class NewCovers_Gutenberg_Controller extends Controller {
 				[
 					'taxonomy' => 'post_tag',
 					'field'    => 'term_id',
-					'terms'    => $tag_ids,
+					'terms'    => $tags,
 				],
 			];
 		} elseif ( empty( $tag_ids ) && ! empty( $post_types ) ) {
@@ -571,14 +575,12 @@ class NewCovers_Gutenberg_Controller extends Controller {
 	private function populate_posts_for_campaigns( &$fields ) {
 
 		// Get user defined tags from backend.
-		$tag_ids = $fields['tags'] ?? '';
-
 		// If tags is empty or is not a comma separated integers string then define tags as empty.
-		if ( empty( $tag_ids ) || 1 !== preg_match( '/^\d+(,\d+)*$/', $tag_ids ) ) {
+		if ( empty( $fields['tags'] ) ) {
 			$tags = [];
 		} else {
 			// Explode comma separated list of tag ids and get an array of \WP_Terms objects.
-			$tags = get_tags( [ 'include' => $tag_ids ] );
+			$tags = get_tags( [ 'include' => $fields['tags'] ] );
 		}
 
 		$covers = [];
@@ -662,9 +664,9 @@ class NewCovers_Gutenberg_Controller extends Controller {
 	 */
 	private function populate_posts_for_cfc( &$fields ) {
 
-		$post_ids = $fields['posts'] ?? '';
+		$post_ids = $fields['posts'] ?? [];
 
-		if ( '' !== $post_ids ) {
+		if ( ! empty( $post_ids )) {
 			$posts = $this->filter_posts_by_ids( $fields );
 		} else {
 			$posts = $this->filter_posts_for_cfc( $fields );
