@@ -12,7 +12,7 @@ function setNoTrackCookie()
 
 jQuery(document).ready(function () {
 
-  var cookie = readCookie('greenpeace');
+  const cookie = readCookie('greenpeace');
   if ('1' === cookie) {
     $('#necessary_cookies').prop('checked', true);
   } else if ('2' === cookie) {

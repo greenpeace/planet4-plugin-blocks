@@ -1,12 +1,14 @@
+/* exported NewCoversBlock */
+
 // Define hook functions for newcovers block fields to be used when creating/editing a newcovers block.
-function NewCoversBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
-  var me = this;
+function NewCoversBlock() {
+  const me = this;
 
   /**
    * Cover type field change hook.
    */
   me.type_of_cover_change_hook = function () {
-    var cover_type = $('input[name=cover_type]:checked').val();
+    const cover_type = $('input[name=cover_type]:checked').val();
     if ('undefined' === cover_type) {
       return;
     }
@@ -33,10 +35,10 @@ function NewCoversBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
    * Disable/enable fields of a newcovers block when rendering a preexisting newcovers block.
    */
   me.initialize_view_fields = function () {
-    var cover_type = $('input[name=cover_type]:checked').val();
-    var posts = $('select[id^=\'shortcode-ui-posts\']').val();
-    var tags = $('select[id^=\'shortcode-ui-tags\']').val();
-    var post_types = $('select[id^=\'shortcode-ui-post_types\']').val();
+    const cover_type = $('input[name=cover_type]:checked').val();
+    const posts = $('select[id^=\'shortcode-ui-posts\']').val();
+    const tags = $('select[id^=\'shortcode-ui-tags\']').val();
+    const post_types = $('select[id^=\'shortcode-ui-post_types\']').val();
     if ('undefined' === cover_type) {
       return;
     }
@@ -76,10 +78,10 @@ function NewCoversBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
    * Post types select box change hook.
    */
   me.post_types_change_hook = function () {
-    var cover_type = $('input[name=cover_type]:checked').val();
-    var tags = $('select[id^=\'shortcode-ui-tags\']').val();
-    var post_types = $('select[id^=\'shortcode-ui-post_types\']').val();
-    var posts = $('select[id^=\'shortcode-ui-posts\']').val();
+    const cover_type = $('input[name=cover_type]:checked').val();
+    const tags = $('select[id^=\'shortcode-ui-tags\']').val();
+    const post_types = $('select[id^=\'shortcode-ui-post_types\']').val();
+    const posts = $('select[id^=\'shortcode-ui-posts\']').val();
     if ('undefined' === cover_type) {
       return;
     }
@@ -103,8 +105,8 @@ function NewCoversBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
    * Post select box change hook.
    */
   me.posts_select_change_hook = function () {
-    var cover_type = $('input[name=cover_type]:checked').val();
-    var posts = $('select[id^=\'shortcode-ui-posts\']').val();
+    const cover_type = $('input[name=cover_type]:checked').val();
+    const posts = $('select[id^=\'shortcode-ui-posts\']').val();
     if ('undefined' === cover_type) {
       return;
     }
@@ -133,10 +135,10 @@ function NewCoversBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
    * Tags select box change hook.
    */
   me.tags_change_hook = function () {
-    var cover_type = $('input[name=cover_type]:checked').val();
-    var posts = $('select[id^=\'shortcode-ui-posts\']').val();
-    var tags = $('select[id^=\'shortcode-ui-tags\']').val();
-    var post_types = $('select[id^=\'shortcode-ui-post_types\']').val();
+    const cover_type = $('input[name=cover_type]:checked').val();
+    const posts = $('select[id^=\'shortcode-ui-posts\']').val();
+    const tags = $('select[id^=\'shortcode-ui-tags\']').val();
+    const post_types = $('select[id^=\'shortcode-ui-post_types\']').val();
     if ('undefined' === cover_type) {
       return;
     }
