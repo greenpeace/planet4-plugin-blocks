@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Planet4 blocks plugin backend\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-07 10:10+0000\n"
-"PO-Revision-Date: 2019-07-04 11:44+0000\n"
+"PO-Revision-Date: 2019-07-04 11:50+0000\n"
 "Last-Translator: Sagar Deshmuk <sdeshmuk@greenpeace.org>\n"
 "Language-Team: Greek\n"
 "Language: el\n"
@@ -419,7 +419,7 @@ msgstr "Τίτλος Εκστρατείας"
 
 #: classes/controller/blocks/class-splittwocolumns-controller.php:92
 msgid "(Optional) Fill this only if you need to override issue title."
-msgstr "."
+msgstr ""
 
 #: classes/controller/blocks/class-splittwocolumns-controller.php:95
 msgid "Issue Description"
