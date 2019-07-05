@@ -184,7 +184,7 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 			$image_sizes       = [
 				self::LAYOUT_SLIDER        => 'retina-large',
 				self::LAYOUT_THREE_COLUMNS => 'medium_large',
-				self::LAYOUT_GRID          => 'medium',
+				self::LAYOUT_GRID          => 'large',
 			];
 
 			foreach ( $exploded_images as $image_id ) {
