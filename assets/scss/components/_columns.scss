@@ -76,7 +76,6 @@
         }
 
         @include large-and-up {
-          margin-bottom: $space-lg;
           font-size: 1.25rem;
           width: 75%;
         }
@@ -154,7 +153,7 @@
 
       h3 {
         line-height: 1.2;
-        margin-bottom: $space-lg;
+        margin-bottom: $space-md;
         font-size: 1.25rem;
 
         @include large-and-up {
@@ -336,7 +335,7 @@
           line-height: 19px;
           font-weight: 700;
           color: $percentage-text;
-          margin-bottom: $space-lg;
+          margin-bottom: $space-md;
 
           @include medium-and-up {
             font-weight: 500;
