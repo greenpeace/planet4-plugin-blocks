@@ -68,6 +68,7 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 					$shortcode );
 
 				$results = $wpdb->get_results( $sql );
+				if ( !$results ) { continue; }
 
 				// Confusion between old and new covers.
 				if ( 'covers' === $block ) {
