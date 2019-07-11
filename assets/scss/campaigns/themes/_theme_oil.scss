@@ -155,11 +155,7 @@ body.theme-oil {
     }
 
     .btn-primary {
-      background: white;
-
-      &:hover {
-        background: $bg-button-alt;
-      }
+      display: none;
     }
   }
 
