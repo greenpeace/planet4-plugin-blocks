@@ -138,12 +138,24 @@ function ColumnsBlock() {
 
   /**
    * Show/hide images inputs depending on column block style.
+   * Hide CTA buttons for Campaigns on no_image style.
    */
   me.toggle_images = function() {
     [1, 2, 3, 4].forEach(function(row) {
       const column_is_visible = $('.field-block').filter($('div[class$=\'title_' + row + '\']')).is(':visible');
-      const block_style_allows_images = 'no_image' != $('input[name=columns_block_style]:checked').val();
-      $('.shortcode-ui-attribute-attachment_'+ row).toggle(column_is_visible && block_style_allows_images);
+      const style = $('input[name=columns_block_style]:checked').val();
+      const block_style_allows_images = 'no_image' != style;
+      $('.shortcode-ui-attribute-attachment_' + row).toggle(column_is_visible && block_style_allows_images);
+      const is_campaign = $('body').hasClass('post-type-campaign');
+      if (column_is_visible) {
+        if (style == 'no_image' && is_campaign) {
+          $('.shortcode-ui-attribute-link_' + row).hide();
+          $('.shortcode-ui-attribute-cta_text_' + row).hide();
+        } else {
+          $('.shortcode-ui-attribute-link_' + row).show();
+          $('.shortcode-ui-attribute-cta_text_' + row).show();
+        }
+      }
     });
   };
 }

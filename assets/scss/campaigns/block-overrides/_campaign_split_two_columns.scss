@@ -41,13 +41,7 @@ $right-overlay-mobile: none, $right-mobile-opacity: 1) {
 
   .split-two-column-item-link,
   .split-two-column-item-button {
-    display: inline-block;
-    width: auto;
-    max-width: 100%;
-    text-shadow: none;
-    padding: 0 50px;
-    margin: 0;
-    text-decoration: none;
+    display: none;
   }
 
   .split-two-column-item-content,
@@ -107,11 +101,6 @@ $right-overlay-mobile: none, $right-mobile-opacity: 1) {
     .split-two-column-item-subtitle,
     .split-two-column-item-tag {
       display: block;
-    }
-
-    .split-two-column-item-button,
-    .split-two-column-item-link {
-      display: inline-block;
     }
 
     .split-two-column-item-subtitle {

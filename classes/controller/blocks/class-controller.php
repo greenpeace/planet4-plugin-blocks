@@ -67,12 +67,12 @@ if ( ! class_exists( 'Controller' ) ) {
 		 * @param string $hook The slug name of the current admin page.
 		 */
 		public function load_base_admin_assets( $hook ) {
-			wp_enqueue_style( 'p4bks_admin_style_blocks', P4BKS_ADMIN_DIR . 'blocks-admin.css', [], '0.1' );
+			wp_enqueue_style( 'p4bks_admin_style_blocks', P4BKS_ADMIN_DIR . 'blocks-admin.css', [], '0.2' );
 
 			add_action(
 				'enqueue_shortcode_ui',
 				function () {
-					wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'blocks-admin.min.js', [ 'shortcode-ui' ], 0.4, true );
+					wp_enqueue_script( 'blocks-ui', P4BKS_ADMIN_DIR . 'blocks-admin.min.js', [ 'shortcode-ui' ], 0.5, true );
 				}
 			);
 		}
