@@ -1,6 +1,7 @@
 /* global sui, _, shortcodeUIData, ajaxurl */
+/* exported Select2FieldsSetup */
 
-function Select2FieldsSetup() { // eslint-disable-line no-unused-vars
+function Select2FieldsSetup() {
 
   // Override shortcake's editAttributeSelect2Field backbone view to manipulate select2 instance.
   // Modified versions of render and preselect functions of that view.
@@ -14,10 +15,10 @@ function Select2FieldsSetup() { // eslint-disable-line no-unused-vars
      * @param string includeField how to specify the current selection, ie 'post__in'
      */
     sui.views.editAttributeSelect2Field.prototype.preselect = function ($field) {
-      var _preselected = String(this.getValue());
+      const _preselected = String(this.getValue());
 
       if (_preselected.length) {
-        var request = {
+        let request = {
           include: _preselected,
           shortcode: this.shortcode.get('shortcode_tag'),
           attr: this.model.get('attr')
@@ -49,37 +50,37 @@ function Select2FieldsSetup() { // eslint-disable-line no-unused-vars
      *
      */
     sui.views.editAttributeSelect2Field.prototype.render = function () {
-      var self = this,
-        defaults = {multiple: false};
+      const self = this;
+      const defaults = {multiple: false};
 
-      for (var arg in defaults) {
+      for (let arg in defaults) {
         if (!this.model.get(arg)) {
           this.model.set(arg, defaults[arg]);
         }
       }
 
-      var data = this.model.toJSON();
+      const data = this.model.toJSON();
       data.id = 'shortcode-ui-' + this.model.get('attr') + '-' + this.model.cid;
 
       this.$el.html(this.template(data));
 
-      var $field = this.$el.find(this.selector);
+      const $field = this.$el.find(this.selector);
 
       if (this.shortcode.get('ajax_requests') === undefined) {
         this.shortcode.set('ajax_requests', []);
       }
-      var request = this.preselect($field);
+      let request = this.preselect($field);
       if (null !== request) {
-        var requests = this.shortcode.get('ajax_requests');
+        let requests = this.shortcode.get('ajax_requests');
         if (Array.isArray(requests)) {
           requests.push(request);
           this.shortcode.set('ajax_requests', requests);
         }
       }
 
-      var select2_options = this.model.get('meta').select2_options;
+      const select2_options = this.model.get('meta').select2_options;
 
-      var default_options = {
+      const default_options = {
         multiple: this.model.get('multiple'),
         dropdownParent: this.$el,
         allowClear: true,
@@ -112,7 +113,7 @@ function Select2FieldsSetup() { // eslint-disable-line no-unused-vars
             }
           },
           processResults: function (response, params) {
-            var data = response.data;
+            const data = response.data;
             params.page = params.page || 1;
             if (!response.success || 'undefined' === typeof response.data) {
               return {results: []};
@@ -135,11 +136,11 @@ function Select2FieldsSetup() { // eslint-disable-line no-unused-vars
         templateSelection: this.templateSelection,
       };
 
-      var soptions = Object.assign({}, default_options, select2_options);
+      const soptions = Object.assign({}, default_options, select2_options);
 
-      var that = this;
+      let that = this;
       _.defer(function () {
-        var $fieldSelect2 = $field[shortcodeUIData.select2_handle](soptions); // eslint-disable-line
+        let $fieldSelect2 = $field[shortcodeUIData.select2_handle](soptions); // eslint-disable-line
         if (that.model.get('multiple')) {
           that.sortable($field);
         }

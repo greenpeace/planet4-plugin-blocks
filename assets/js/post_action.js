@@ -3,9 +3,9 @@
 $(document).ready(function() {
   'use strict';
 
-  var $sidebar = $('.post-content').find('> #action-card');
-  var offset = $sidebar.offset();
-  var topPadding = 100;
+  const $sidebar = $('.post-content').find('> #action-card');
+  const offset = $sidebar.offset();
+  const topPadding = 100;
 
   function scroll_action_card() {
     if ($(window).width() > 992) {

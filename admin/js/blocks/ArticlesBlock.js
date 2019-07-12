@@ -1,13 +1,15 @@
+/* exported ArticlesBlock */
+
 // Define hook functions for articles block fields to be used when creating/editing an articles block.
-function ArticlesBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
-  var me = this;
+function ArticlesBlock(p4BlocksUI) {
+  const me = this;
 
   /**
    * Disable/Enable posts select box based on post types and tags select boxes.
    */
   me.page_types_change_hook = function () {
-    var posts_value = $('select[id^=\'shortcode-ui-post_types\']').val();
-    var tags = $('select[id^=\'shortcode-ui-tags\']').val();
+    const posts_value = $('select[id^=\'shortcode-ui-post_types\']').val();
+    const tags = $('select[id^=\'shortcode-ui-tags\']').val();
     if (null === posts_value && null === tags) {
       $('select[id^=\'shortcode-ui-posts\']').prop('disabled', false);
     } else {
@@ -20,7 +22,7 @@ function ArticlesBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
    * Disable/Enable p4 page types checkboxes based on posts select box value.
    */
   me.posts_select_change_hook = function () {
-    var posts_value = $('select[id^=\'shortcode-ui-posts\']').val();
+    const posts_value = $('select[id^=\'shortcode-ui-posts\']').val();
     if (null === posts_value) {
       $('select[id^=\'shortcode-ui-tags\']').prop('disabled', false);
       $('select[id^=\'shortcode-ui-post_types\']').prop('disabled', false);
@@ -35,11 +37,11 @@ function ArticlesBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
   };
 
   me.read_more_change_hook = function (changed, collection) {
-    var view = p4BlocksUI.find_view(collection, 'read_more_link');
+    const view = p4BlocksUI.find_view(collection, 'read_more_link');
     if ('undefined' !== view) {
       if (typeof changed.value !== 'undefined') {
-        var url    = '';
-        var format = /%[0-9a-f]/i;
+        let url    = '';
+        const format = /%[0-9a-f]/i;
         if ( format.test( changed.value ) ) {
           url = changed.value;
         } else {
@@ -57,9 +59,9 @@ function ArticlesBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
    * Disable/enable fields of an articles block when rendering a preexisting articles block.
    */
   me.initialize_view_fields = function () {
-    var posts = $('select[id^=\'shortcode-ui-posts\']').val();
-    var tags = $('select[id^=\'shortcode-ui-tags\']').val();
-    var post_types = $('select[id^=\'shortcode-ui-post_types\']').val();
+    const posts = $('select[id^=\'shortcode-ui-posts\']').val();
+    const tags = $('select[id^=\'shortcode-ui-tags\']').val();
+    const post_types = $('select[id^=\'shortcode-ui-post_types\']').val();
 
     if (null !== posts) {
       $('select[id^=\'shortcode-ui-post_types\']').prop('disabled', 'disabled');
