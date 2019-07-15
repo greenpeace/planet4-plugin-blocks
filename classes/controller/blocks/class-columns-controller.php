@@ -26,6 +26,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 		const LAYOUT_NO_IMAGE = 'no_image';
 		const LAYOUT_TASKS    = 'tasks';
 		const LAYOUT_ICONS    = 'icons';
+		const LAYOUT_IMAGES   = 'image';
 		const MAX_COLUMNS     = 4;
 
 		/**
@@ -63,6 +64,12 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 							'label' => __( 'Icons', 'planet4-blocks-backend' ),
 							'desc'  => 'For more static content, this display has an icon, header, description and text link.',
 							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/columns-icons.jpg' ),
+						],
+						[
+							'value' => static::LAYOUT_IMAGES,
+							'label' => __( 'Images', 'planet4-blocks-backend' ),
+							'desc'  => 'For more static content, this display has an image, header, description and text link.',
+							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/columns-images.jpg' ),
 						],
 					],
 				],
@@ -211,7 +218,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 			$columns_block_style = $attributes['columns_block_style'];
 			if ( static::LAYOUT_NO_IMAGE !== $columns_block_style ) {
 
-				if ( static::LAYOUT_TASKS === $columns_block_style ) {
+				if ( static::LAYOUT_TASKS === $columns_block_style || static::LAYOUT_IMAGES === $columns_block_style ) {
 					if ( $columns_set >= 3 ) {
 						$image_size = 'medium';
 					} elseif ( 2 === $columns_set ) {
