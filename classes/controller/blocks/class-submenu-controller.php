@@ -139,7 +139,7 @@ if ( ! class_exists( 'SubMenu_Controller' ) ) {
 				'label'         => __( 'Submenu', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/submenu.png' ) . '" />',
 				'attrs'         => $fields,
-				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
+				'post_type'     => array_diff( P4BKS_ALLOWED_PAGETYPE, [ 'campaign' ] ),
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
