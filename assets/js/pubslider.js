@@ -29,7 +29,7 @@ $(document).ready(function() {
 
   // Handle slick functionality for each Content Four Column blocks.
   $('.four-column-content').each( function() {
-    var pubSlidesNum = $('.publications-slider .post-column', $(this)).length;
+    const pubSlidesNum = $('.publications-slider .post-column', $(this)).length;
 
     if (pubSlidesNum > 3 && $(window).width() < 768) {
       slickify('.publications-slider');

@@ -22,15 +22,15 @@ $(document).ready(function() {
     * @returns {jQuery} A jQuery selection of the next slide.
     */
     nextSlide: function(el) {
-      var $el = $(el);
-      var $nextSlide = $el.next('.carousel-item');
+      const $el = $(el);
+      const $nextSlide = $el.next('.carousel-item');
       // prevAll returns items in reverse DOM order: the first slide is the last element.
       return $nextSlide.length ? $nextSlide : $el.prevAll('.carousel-item').last();
     },
 
     previousSlide: function(el) {
-      var $el = $(el);
-      var $previousSlide = $el.prev('.carousel-item');
+      const $el = $(el);
+      const $previousSlide = $el.prev('.carousel-item');
       return $previousSlide.length ? $previousSlide : $el.nextAll('.carousel-item').last();
     },
 
@@ -50,15 +50,15 @@ $(document).ready(function() {
       me.$Slides = me.$CarouselHeaderWrapper.find('.carousel-item');
 
       me.$CarouselHeaderWrapper.find('img').on('load', function () {
-        var current_img_src = $(this).get(0).currentSrc;
-        var current_bg_img = $(this).parent().css('background-image').replace(/.*\s?url\(['"]?/, '').replace(/['"]?\).*/, '');
+        const current_img_src = $(this).get(0).currentSrc;
+        const current_bg_img = $(this).parent().css('background-image').replace(/.*\s?url\(['"]?/, '').replace(/['"]?\).*/, '');
         if (current_img_src !== current_bg_img) {
           $(this).parent().css('background-image', 'url(' + $(this).get(0).currentSrc + ')');
         }
       });
 
       me.$Slides.each(function (i, el) {
-        var $slide = $(el);
+        const $slide = $(el);
 
         // Populate carousel indicators list
         $('<li>')
@@ -68,8 +68,8 @@ $(document).ready(function() {
           .appendTo(me.$CarouselIndicators);
 
         // Convert the provided image tag into background image styles.
-        var $img = $slide.find('img');
-        var img_src = $img.get(0).currentSrc || $img.attr('src');
+        const $img = $slide.find('img');
+        const img_src = $img.get(0).currentSrc || $img.attr('src');
         $slide
           .css('background-image', 'url(' + img_src + ')')
           .css('background-position', $img.data('background-position'));
@@ -79,7 +79,7 @@ $(document).ready(function() {
       });
 
       // Bind mouse interaction events
-      var clickTargets = '.carousel-control-next';
+      let clickTargets = '.carousel-control-next';
       if ($('html').attr('dir') == 'rtl') {
         clickTargets += ', .carousel-control-prev';
       }
@@ -95,10 +95,10 @@ $(document).ready(function() {
 
       /* Carousel header swipe on mobile */
       if($('.carousel-header').length > 0 && me.$Slides.length > 1) {
-        var carousel_element = $('.carousel-header')[0];
-        var carousel_head_hammer = new Hammer(carousel_element, { recognizers: [] });
-        var hammer = new Hammer.Manager(carousel_head_hammer.element);
-        var swipe = new Hammer.Swipe();
+        const carousel_element = $('.carousel-header')[0];
+        const carousel_head_hammer = new Hammer(carousel_element, { recognizers: [] });
+        const hammer = new Hammer.Manager(carousel_head_hammer.element);
+        const swipe = new Hammer.Swipe();
         hammer.add(swipe);
 
         hammer.on('swipeleft', function(){
@@ -111,28 +111,28 @@ $(document).ready(function() {
 
         // Vertical swiping on carousel should scroll the page
         hammer.on('swipeup', function(event){
-          var y = $(window).scrollTop();
+          const y = $(window).scrollTop();
           event.preventDefault();
           $('html, body').animate({scrollTop: y + 200});
         });
         hammer.on('swipedown', function(event){
-          var y = $(window).scrollTop();
+          const y = $(window).scrollTop();
           event.preventDefault();
           $('html, body').animate({scrollTop: y - 200});
         });
       }
 
       me.$Slides.each(function (i, el) {
-        var $slide = $(el);
-        var $nextImg = me.nextSlide($slide).find('img');
+        const $slide = $(el);
+        const $nextImg = me.nextSlide($slide).find('img');
 
         if ($nextImg.length > 0) {
           // Add an element within the slide to hold the next slide preview.
-          var $preview = $('<div>')
+          const $preview = $('<div>')
             .addClass('carousel-preview-wrap')
             .prependTo($slide);
 
-          var next_img_src = $nextImg.get(0).currentSrc || $nextImg.attr('src');
+          const next_img_src = $nextImg.get(0).currentSrc || $nextImg.attr('src');
           $('<div>')
             .addClass('carousel-preview')
             .css('background-image', 'url(' + next_img_src + ')')
@@ -143,8 +143,8 @@ $(document).ready(function() {
     },
 
     backwardsCarousel: function() {
-      var $active = this.$Slides.filter('.active');
-      var $previous = this.previousSlide($active);
+      const $active = this.$Slides.filter('.active');
+      const $previous = this.previousSlide($active);
       this.activate($previous.data('slide'));
     },
 
@@ -155,7 +155,7 @@ $(document).ready(function() {
     */
     activate: function(slideIndex) {
       const me = this;
-      var $slide = me.$Slides.eq(slideIndex);
+      const $slide = me.$Slides.eq(slideIndex);
 
       if ($slide.hasClass('active') && !$slide.hasClass('slide-over')) {
         // If the requested slide is active and not transitioning, do nothing.
@@ -186,10 +186,10 @@ $(document).ready(function() {
     */
     advanceCarousel: function() {
       const me = this;
-      var $active = me.$Slides.filter('.active');
+      const $active = me.$Slides.filter('.active');
 
       me.$Slides.removeClass('next');
-      var $next = me.nextSlide($active).addClass('next');
+      const $next = me.nextSlide($active).addClass('next');
 
       if (me.activeTransition) {
         // A transition is in progress, so proceed to the next pair of slides
@@ -230,15 +230,15 @@ $(document).ready(function() {
     * @returns {jQuery} A jQuery selection of the next slide.
     */
     nextSlide: function(el) {
-      var $el = $(el);
-      var $nextSlide = $el.next('.carousel-item');
+      const $el = $(el);
+      const $nextSlide = $el.next('.carousel-item');
       // prevAll returns items in reverse DOM order: the first slide is the last element.
       return $nextSlide.length ? $nextSlide : $el.prevAll('.carousel-item').last();
     },
 
     previousSlide: function(el) {
-      var $el = $(el);
-      var $previousSlide = $el.prev('.carousel-item');
+      const $el = $(el);
+      const $previousSlide = $el.prev('.carousel-item');
       return $previousSlide.length ? $previousSlide : $el.nextAll('.carousel-item').last();
     },
 
@@ -260,8 +260,8 @@ $(document).ready(function() {
       me.$Slides = me.$CarouselHeaderWrapper.find('.carousel-item');
 
       me.$CarouselHeaderWrapper.find('img').on('load', function () {
-        var current_img_src = $(this).get(0).currentSrc;
-        var current_bg_img = $(this).parent().css('background-image').replace(/.*\s?url\(['"]?/, '').replace(/['"]?\).*/, '');
+        const current_img_src = $(this).get(0).currentSrc;
+        const current_bg_img = $(this).parent().css('background-image').replace(/.*\s?url\(['"]?/, '').replace(/['"]?\).*/, '');
         if (current_img_src !== current_bg_img) {
           $(this).parent().css('background-image', 'url(' + $(this).get(0).currentSrc + ')');
         }
@@ -270,7 +270,7 @@ $(document).ready(function() {
       me.$CarouselIndicators = me.$CarouselHeaderWrapper.find('.carousel-indicators');
 
       me.$Slides.each(function (i, el) {
-        var $slide = $(el);
+        const $slide = $(el);
 
         // Populate carousel indicators list
         $('<li>')
@@ -280,8 +280,8 @@ $(document).ready(function() {
           .appendTo(me.$CarouselIndicators);
 
         // Convert the provided image tag into background image styles.
-        var $img = $slide.find('img');
-        var img_src = $img.get(0).currentSrc || $img.attr('src');
+        const $img = $slide.find('img');
+        const img_src = $img.get(0).currentSrc || $img.attr('src');
         $slide.find('.background-holder')
           .css('background-image', 'url(' + img_src + ')')
           .css('background-position', $img.data('background-position'));
@@ -291,7 +291,7 @@ $(document).ready(function() {
       });
 
       // Bind mouse interaction events
-      var clickTargets = ['.carousel-control-next', '.carousel-control-prev'];
+      const clickTargets = ['.carousel-control-next', '.carousel-control-prev'];
       if ($('html').attr('dir') == 'rtl') {
         clickTargets.reverse();
       }
@@ -315,10 +315,10 @@ $(document).ready(function() {
 
       /* Carousel header swipe on mobile */
       if($('.carousel-header_full-width-classic').length > 0 && me.$Slides.length > 1) {
-        var carousel_element = $('.carousel-header_full-width-classic')[0];
-        var carousel_head_hammer = new Hammer(carousel_element, { recognizers: [] });
-        var hammer = new Hammer.Manager(carousel_head_hammer.element);
-        var swipe = new Hammer.Swipe();
+        const carousel_element = $('.carousel-header_full-width-classic')[0];
+        const carousel_head_hammer = new Hammer(carousel_element, { recognizers: [] });
+        const hammer = new Hammer.Manager(carousel_head_hammer.element);
+        const swipe = new Hammer.Swipe();
         hammer.add(swipe);
 
         hammer.on('swipeleft', function(){
@@ -333,12 +333,12 @@ $(document).ready(function() {
 
         // Vertical swiping on carousel should scroll the page
         hammer.on('swipeup', function(event){
-          var y = $(window).scrollTop();
+          const y = $(window).scrollTop();
           event.preventDefault();
           $('html, body').animate({scrollTop: y + 200});
         });
         hammer.on('swipedown', function(event){
-          var y = $(window).scrollTop();
+          const y = $(window).scrollTop();
           event.preventDefault();
           $('html, body').animate({scrollTop: y - 200});
         });
@@ -352,7 +352,7 @@ $(document).ready(function() {
       });
 
       $(window).on('resize', function() {
-        var $currentSlide = $('.carousel-item.active');
+        const $currentSlide = $('.carousel-item.active');
         me.setCarouselHeight($currentSlide);
         me.positionIndicators();
       });
@@ -379,7 +379,7 @@ $(document).ready(function() {
     },
 
     startAutoplayInterval: function() {
-      var me = this;
+      const me = this;
       me.autoplayInterval = window.setInterval(function() {
         if (!me.autoplayPaused) {
           me.advanceCarousel();
@@ -398,8 +398,8 @@ $(document).ready(function() {
     */
     activate: function(slideIndex) {
       const me = this;
-      var $slide = me.$Slides.eq(slideIndex);
-      var currentIndex = me.getCurrentSlideIndex();
+      const $slide = me.$Slides.eq(slideIndex);
+      const currentIndex = me.getCurrentSlideIndex();
 
       if (slideIndex == currentIndex) {
         return;
@@ -413,18 +413,18 @@ $(document).ready(function() {
     },
 
     positionIndicators: function() {
-      var $indicators = this.$CarouselHeaderWrapper.find('.carousel-indicators');
-      var $header = this.$CarouselHeaderWrapper.find('.carousel-item.active .action-button');
-      var isRTL = $('html').attr('dir') == 'rtl';
-      var rightSide = (window.matchMedia('(min-width: 992px)').matches && isRTL)
-                      || (window.matchMedia('(min-width: 768px) and (max-width: 992px)').matches && !isRTL);
+      const $indicators = this.$CarouselHeaderWrapper.find('.carousel-indicators');
+      const $header = this.$CarouselHeaderWrapper.find('.carousel-item.active .action-button');
+      const isRTL = $('html').attr('dir') == 'rtl';
+      const rightSide = (window.matchMedia('(min-width: 992px)').matches && isRTL)
+        || (window.matchMedia('(min-width: 768px) and (max-width: 992px)').matches && !isRTL);
 
       if (window.matchMedia('(min-width: 768px)').matches) {
-        var leftOffset = $header.offset().left;
+        let leftOffset = $header.offset().left;
 
         if (rightSide) {
-          var rightOffset = leftOffset + (isRTL ? $header.width() : $header.parent().width());
-          var indicatorsRight = $(window).width() - rightOffset;
+          const rightOffset = leftOffset + (isRTL ? $header.width() : $header.parent().width());
+          const indicatorsRight = $(window).width() - rightOffset;
           $indicators.css('right', indicatorsRight + 'px')
             .css('left', '')
             .css('margin-left', '0')
@@ -457,8 +457,8 @@ $(document).ready(function() {
 
     backwardsCarousel: function($slide) {
       const me = this;
-      var $activeSlide = me.$Slides.filter('.active');
-      var $previousSlide = null;
+      const $activeSlide = me.$Slides.filter('.active');
+      let $previousSlide = null;
       if ($slide) {
         $previousSlide = $slide;
       } else {
@@ -484,8 +484,8 @@ $(document).ready(function() {
     */
     advanceCarousel: function($slide) {
       const me = this;
-      var $activeSlide = me.$Slides.filter('.active');
-      var $nextSlide = null;
+      const $activeSlide = me.$Slides.filter('.active');
+      let $nextSlide = null;
       if ($slide) {
         $nextSlide = $slide;
       } else {
@@ -509,7 +509,7 @@ $(document).ready(function() {
     },
   };
 
-  var $CarouselHeaderWrapper = $('#carousel-wrapper-header');
+  const $CarouselHeaderWrapper = $('#carousel-wrapper-header');
   switch ($CarouselHeaderWrapper.data('block-style')) {
   case 'full-width-classic':
     FullWidthClassicCarouselHeader.setup();

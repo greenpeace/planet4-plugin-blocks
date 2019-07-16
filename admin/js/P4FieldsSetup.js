@@ -1,6 +1,7 @@
 /* global wp, shortcodeUIFieldData */
+/* exported P4FieldsSetup */
 
-function P4FieldsSetup() { // eslint-disable-line no-unused-vars
+function P4FieldsSetup() {
   if ('undefined' !== typeof (wp.shortcake)) {
 
     shortcodeUIFieldData.p4_select = {
@@ -20,7 +21,7 @@ function P4FieldsSetup() { // eslint-disable-line no-unused-vars
     };
 
     // break submenu attribute groups into rows
-    var addTags = function () {
+    const addTags = function () {
       $('.shortcode-ui-attribute-heading2').parent().before('<p></p>');
       $('.shortcode-ui-attribute-heading3').parent().before('<p></p>');
     };

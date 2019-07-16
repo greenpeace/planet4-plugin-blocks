@@ -1,6 +1,8 @@
 /* global _, sui, wp */
-function SubmenuBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
-  var me = this;
+/* exported SubmenuBlock */
+
+function SubmenuBlock() {
+  const me = this;
 
   me.editAttributeHeading = sui.views.editAttributeField.extend({
     tagName: 'span',
@@ -14,7 +16,7 @@ function SubmenuBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
     },
 
     inputChanged: function (e) {
-      var $el;
+      let $el;
 
       if (this.model.get('attr')) {
         $el = this.$el.find('[name="' + this.model.get('attr') + '"]');
@@ -25,8 +27,8 @@ function SubmenuBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
       } else if ('checkbox' === this.model.attributes.type || 'p4_checkbox' === this.model.attributes.type) {
         this.setValue($el.is(':checked'));
       } else if ('range' === this.model.attributes.type) {
-        var rangeId = '#' + e.target.id + '_indicator';
-        var rangeValue = e.target.value;
+        const rangeId = '#' + e.target.id + '_indicator';
+        const rangeValue = e.target.value;
         document.querySelector(rangeId).value = rangeValue;
         this.setValue($el.val());
       } else {
@@ -41,12 +43,12 @@ function SubmenuBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
     },
 
     triggerCallbacks: function () {
-      var shortcodeName = this.shortcode.attributes.shortcode_tag,
-        attributeName = this.model.get('attr'),
-        hookName = [shortcodeName, attributeName].join('.'),
-        changed = this.model.changed,
-        collection = _.flatten(_.values(this.views.parent.views._views)),
-        shortcode = this.shortcode;
+      const shortcodeName = this.shortcode.attributes.shortcode_tag;
+      const attributeName = this.model.get('attr');
+      const hookName = [shortcodeName, attributeName].join('.');
+      const changed = this.model.changed;
+      const collection = _.flatten(_.values(this.views.parent.views._views));
+      const shortcode = this.shortcode;
 
       /*
       * Action run when an attribute value changes on a shortcode

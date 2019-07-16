@@ -16,13 +16,23 @@
 	{% endif %}
 
 	<div class="article-list-item-body">
+		{% set is_campaign = ( 'campaign' == fn( 'get_post_type' ) ) %}
+
 		{% if ( recent_post.tags or recent_post.page_type or recent_post.page_types ) %}
 			<div class="article-list-item-tags top-page-tags">
 				{% if ( recent_post.page_type ) %}
-					<a class="tag-item tag-item--main page-type page-type-{{ recent_post.page_type|replace(' ', '_')|lower }}" href="{{ fn( 'get_term_link', recent_post.page_type_id ) }}">{{ recent_post.page_type|e('wp_kses_post')|raw }}</a>
+					{% if is_campaign %}
+						<span class="tag-item tag-item--main page-type page-type-{{ recent_post.page_type|replace(' ', '_')|lower }}">{{ recent_post.page_type|e('wp_kses_post')|raw }}</span>
+					{% else %}
+						<a class="tag-item tag-item--main page-type page-type-{{ recent_post.page_type|replace(' ', '_')|lower }}" href="{{ fn( 'get_term_link', recent_post.page_type_id ) }}">{{ recent_post.page_type|e('wp_kses_post')|raw }}</a>
+					{% endif %}
 				{% else %}
 					{% for page_type in recent_post.page_types %}
-						<a class="tag-item tag-item--main page-type page-type-{{ page_type.name|replace(' ', '_')|lower }}" href="{{ page_type.link }}">{{ page_type.name|e('wp_kses_post')|raw }}</a>
+						{% if is_campaign %}
+							<span class="tag-item tag-item--main page-type page-type-{{ page_type.name|replace(' ', '_')|lower }}">{{ page_type.name|e('wp_kses_post')|raw }}</span>
+						{% else %}
+							<a class="tag-item tag-item--main page-type page-type-{{ page_type.name|replace(' ', '_')|lower }}" href="{{ page_type.link }}">{{ page_type.name|e('wp_kses_post')|raw }}</a>
+						{% endif %}
 					{% endfor %}
 				{% endif %}
 
@@ -45,15 +55,15 @@
 			<p class="article-list-item-meta">
 				{% if ( recent_post.author_name ) %}
 					<span class="article-list-item-author">{{ __( 'by', 'planet4-blocks' ) }}
-						{% if not ( recent_post.author_override ) %}
-							<a href="{{ recent_post.author_url }}">{{ recent_post.author_name }}</a>
-						{% else %}
+						{% if ( recent_post.author_override or is_campaign ) %}
 							{{ recent_post.author_name }}
+						{% else %}
+							<a href="{{ recent_post.author_url }}">{{ recent_post.author_name }}</a>
 						{% endif %}
 					</span>
 				{% elseif recent_post.author %}
 					<span class="article-list-item-author">{{ __( 'by', 'planet4-blocks' ) }}
-						{% if ( recent_post.author.is_fake ) %}
+						{% if ( recent_post.author.is_fake or is_campaign ) %}
 							{{ recent_post.author.name }}
 						{% else %}
 							<a href="{{ recent_post.author.link }}">{{ recent_post.author.name }}</a>

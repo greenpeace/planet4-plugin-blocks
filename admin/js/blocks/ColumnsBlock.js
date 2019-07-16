@@ -1,12 +1,14 @@
-function ColumnsBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
-  var me = this;
+/* exported ColumnsBlock */
+
+function ColumnsBlock() {
+  const me = this;
 
   /**
    * Called when a new columns block is rendered in the backend.
    * @param shortcode Shortcake backbone model.
    */
   me.render_new = function () {
-    var $shortcode_div = $('.shortcode-ui-edit-shortcake_columns');
+    const $shortcode_div = $('.shortcode-ui-edit-shortcake_columns');
     $shortcode_div.append('<div data-row="0"><button class="button button-small shortcake-columns-add-column">Add Column</button>'
       + '<button class="button button-small shortcake-columns-remove-column" disabled="disabled">Remove Column</button></div>');
     this.hide_all_columns();
@@ -19,13 +21,13 @@ function ColumnsBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
    * @param shortcode Shortcake backbone model.
    */
   me.render_edit = function () {
-    var $shortcode_div = $('.shortcode-ui-edit-shortcake_columns');
+    const $shortcode_div = $('.shortcode-ui-edit-shortcake_columns');
     $shortcode_div.append('<div data-row="0"><button class="button button-small shortcake-columns-add-column" data-row="1 data-action="add">Add Column</button>'
       + '<button class="button button-small shortcake-columns-remove-column">Remove Column</button></div>');
-    var row = 0;
+    let row = 0;
 
     [1, 2, 3, 4].forEach(function (index) {
-      var input_values = $('.field-block').filter($('div[class$=\'_' + index + '\']')).children().filter($('input, textarea')).map(function (idx, elem) {
+      const input_values = $('.field-block').filter($('div[class$=\'_' + index + '\']')).children().filter($('input, textarea')).map(function (idx, elem) {
         return $(elem).val();
       }).get().join('');
 
@@ -35,7 +37,7 @@ function ColumnsBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
     });
 
     $('.shortcake-columns-add-column').parent().data('row', row);
-    for (var i = row+1; i <= 4; i++) {
+    for (let i = row+1; i <= 4; i++) {
       $('.field-block').filter($('div[class$=\'_' + i + '\']')).hide();
     }
     if (row === 4) {
@@ -50,12 +52,12 @@ function ColumnsBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
    * Add click event handlers for add/remove buttons in columns block.
    */
   me.add_click_event_handlers = function () {
-    var columns = this;
+    const columns = this;
     // Add click event handlers for the elements.
     $('.shortcake-columns-add-column').on('click', function (event) {
       event.preventDefault();
-      var $element = $(event.currentTarget);
-      var row = $element.parent().data('row');
+      const $element = $(event.currentTarget);
+      let row = $element.parent().data('row');
 
       if (row < 5) {
         columns.show_column(++row);
@@ -69,8 +71,8 @@ function ColumnsBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
 
     $('.shortcake-columns-remove-column').on('click', function (event) {
       event.preventDefault();
-      var $element = $(event.currentTarget);
-      var row = $element.parent().data('row');
+      const $element = $(event.currentTarget);
+      let row = $element.parent().data('row');
 
       if (row >= 0) {
         columns.hide_column(row--);
@@ -93,7 +95,7 @@ function ColumnsBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
    * @param row
    */
   me.hide_column = function (row) {
-    var $column = $('.field-block').filter($('div[class$=\'_' + row + '\']'));
+    const $column = $('.field-block').filter($('div[class$=\'_' + row + '\']'));
     // Clear all text, textarea fields for this row/column.
     $column.
       children().
@@ -136,12 +138,24 @@ function ColumnsBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
 
   /**
    * Show/hide images inputs depending on column block style.
+   * Hide CTA buttons for Campaigns on no_image style.
    */
   me.toggle_images = function() {
     [1, 2, 3, 4].forEach(function(row) {
-      var column_is_visible = $('.field-block').filter($('div[class$=\'title_' + row + '\']')).is(':visible');
-      var block_style_allows_images = 'no_image' != $('input[name=columns_block_style]:checked').val();
-      $('.shortcode-ui-attribute-attachment_'+ row).toggle(column_is_visible && block_style_allows_images);
+      const column_is_visible = $('.field-block').filter($('div[class$=\'title_' + row + '\']')).is(':visible');
+      const style = $('input[name=columns_block_style]:checked').val();
+      const block_style_allows_images = 'no_image' != style;
+      $('.shortcode-ui-attribute-attachment_' + row).toggle(column_is_visible && block_style_allows_images);
+      const is_campaign = $('body').hasClass('post-type-campaign');
+      if (column_is_visible) {
+        if (style == 'no_image' && is_campaign) {
+          $('.shortcode-ui-attribute-link_' + row).hide();
+          $('.shortcode-ui-attribute-cta_text_' + row).hide();
+        } else {
+          $('.shortcode-ui-attribute-link_' + row).show();
+          $('.shortcode-ui-attribute-cta_text_' + row).show();
+        }
+      }
     });
   };
 }

@@ -1,7 +1,7 @@
 /* global wp */
 
 function WPShortcakeHooksSetup(p4BlocksUI) { // eslint-disable-line no-unused-vars
-  var me = this;
+  const me = this;
 
   // Define shortcake hooks for blocks fields and blocks views.
   if ('undefined' !== typeof (wp.shortcake)) {
@@ -35,7 +35,7 @@ function WPShortcakeHooksSetup(p4BlocksUI) { // eslint-disable-line no-unused-va
     wp.shortcake.hooks.addAction('shortcode-ui.render_new', function (shortcode) {
       me.attach_hooks();
 
-      var shortcode_tag = shortcode.get('shortcode_tag');
+      const shortcode_tag = shortcode.get('shortcode_tag');
       if ('shortcake_columns' === shortcode_tag) {
         p4BlocksUI.blocks['ColumnsBlock'].render_new(shortcode);
       }
@@ -49,16 +49,16 @@ function WPShortcakeHooksSetup(p4BlocksUI) { // eslint-disable-line no-unused-va
     wp.shortcake.hooks.addAction('shortcode-ui.render_edit', function (shortcode) {
       me.attach_hooks();
 
-      var shortcode_tag = shortcode.get('shortcode_tag');
-      var block_name = shortcode_tag.replace('shortcake_', '');
+      const shortcode_tag = shortcode.get('shortcode_tag');
+      const block_name = shortcode_tag.replace('shortcake_', '');
       if (['shortcake_articles', 'shortcake_newcovers'].includes(shortcode_tag)) {
 
-        var requests = shortcode.get('ajax_requests');
+        const requests = shortcode.get('ajax_requests');
 
         if (null !== requests) {
 
           // Block ui / shortcake block view until all fields are populated.
-          var $block_div = $('.shortcode-ui-edit-' + shortcode_tag);
+          const $block_div = $('.shortcode-ui-edit-' + shortcode_tag);
           $block_div.addClass('not-clickable');
           $block_div.prev().prepend('<span class="spinner is-active" id="bl_loader"></span>' +
             '<span id="bl_loading_span">Populating block\'s fields..</span>');
