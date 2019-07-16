@@ -46,7 +46,7 @@ if ( ! class_exists( 'Cookies_Controller' ) ) {
 					'label'       => __( 'Cookies general description', 'planet4-blocks-backend' ),
 					'description' => __( 'Main description for cookies block', 'planet4-blocks-backend' ),
 					'attr'        => 'description',
-					'type'        => 'text',
+					'type'        => 'textarea',
 				],
 				[
 					'label'       => __( 'Necessary Cookies Name', 'planet4-blocks-backend' ),
@@ -58,7 +58,7 @@ if ( ! class_exists( 'Cookies_Controller' ) ) {
 					'label'       => __( 'Necessary Cookies Description', 'planet4-blocks-backend' ),
 					'description' => __( 'Description for the \'necessary cookies\' paragraph', 'planet4-blocks-backend' ),
 					'attr'        => 'necessary_cookies_description',
-					'type'        => 'text',
+					'type'        => 'textarea',
 				],
 				[
 					'label'       => __( 'All Cookies Name', 'planet4-blocks-backend' ),
@@ -70,7 +70,7 @@ if ( ! class_exists( 'Cookies_Controller' ) ) {
 					'label'       => __( 'All Cookies Description', 'planet4-blocks-backend' ),
 					'description' => __( 'Description for the \'all cookies\' paragraph', 'planet4-blocks-backend' ),
 					'attr'        => 'all_cookies_description',
-					'type'        => 'text',
+					'type'        => 'textarea',
 				],
 			];
 
