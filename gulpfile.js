@@ -1,21 +1,22 @@
 /* global require, exports */
 
-const gulp = require('gulp');
-const stylelint = require('gulp-stylelint');
-const eslint = require('gulp-eslint');
-const js = require('gulp-uglify-es').default;
-const concat = require('gulp-concat');
-const scss = require('gulp-sass');
+const babel = require('gulp-babel');
 const cleancss = require('gulp-clean-css');
-const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
+const eslint = require('gulp-eslint');
+const gulp = require('gulp');
+const js = require('gulp-uglify-es').default;
+const livereload = require('gulp-livereload');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
-const livereload = require('gulp-livereload');
+const scss = require('gulp-sass');
+const sourcemaps = require('gulp-sourcemaps');
+const stylelint = require('gulp-stylelint');
 
-const path_js = 'assets/js/**/*.js';
+const path_dest = './';
+const path_js = 'assets/js/*.js';
 const path_scss = 'assets/scss/**/*.scss';
 const path_style = 'assets/scss/style.scss';
-const path_dest = './';
 
 const path_admin_dest = './admin/';
 const path_scss_admin = './admin/scss/**/*.scss';
@@ -39,7 +40,7 @@ let error_handler = {
 };
 
 function lint_css() {
-  return gulp.src([ path_scss, path_scss_admin ])
+  return gulp.src([path_scss, path_scss_admin])
     .pipe(plumber(error_handler))
     .pipe(stylelint({
       reporters: [{ formatter: 'string', console: true}]
@@ -48,7 +49,7 @@ function lint_css() {
 }
 
 function lint_js() {
-  return gulp.src([ path_js, ...blocks_javascripts ])
+  return gulp.src([path_js, ...blocks_javascripts])
     .pipe(plumber(error_handler))
     .pipe(eslint())
     .pipe(eslint.format())
@@ -83,6 +84,9 @@ function uglify() {
     .pipe(plumber(error_handler))
     .pipe(sourcemaps.init())
     .pipe(concat('main.js'))
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
     .pipe(js())
     .pipe(sourcemaps.write(path_dest))
     .pipe(gulp.dest(path_dest))
@@ -101,7 +105,7 @@ function uglify_admin() {
 }
 
 function watch() {
-  livereload.listen({ 'port': 35729 });
+  livereload.listen({'port': 35729});
   gulp.watch(path_scss, gulp.series(lint_css, sass));
   gulp.watch(path_scss_admin, gulp.series(lint_css, sass_admin));
   gulp.watch(path_js, gulp.series(lint_js, uglify));

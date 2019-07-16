@@ -63,10 +63,8 @@
       }
     }
 
-    .tag-item--main + .tag-wrap:before {
-      position: static;
-      padding-right: 20px;
-      color: $tag-colour;
+    .tag-wrap {
+      display: none;
     }
   }
 

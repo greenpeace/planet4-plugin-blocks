@@ -1,5 +1,7 @@
-function SocialMediaBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
-  var me = this;
+/* exported SocialMediaBlock */
+
+function SocialMediaBlock() {
+  const me = this;
 
   me.initialize_fields = function () {
     me.set_default_embed_type();
@@ -23,8 +25,8 @@ function SocialMediaBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
    * Show/hide Facebook page options according to embed_type
    */
   me.toggle_facebook_page_options = function () {
-    var $facebook_page_options = $('.shortcode-ui-attribute-facebook_page_tab');
-    var embed_type = $('input[name=embed_type]:checked').val();
+    const $facebook_page_options = $('.shortcode-ui-attribute-facebook_page_tab');
+    const embed_type = $('input[name=embed_type]:checked').val();
 
     if ('facebook_page' === embed_type) {
       $facebook_page_options.show();

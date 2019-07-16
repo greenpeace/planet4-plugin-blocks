@@ -14,7 +14,7 @@
 
 // Define a p4_blocks object that holds functions used during rendering backend blocks' views.
 function P4BlocksAdminUI(Select2FieldsSetup, P4FieldsSetup, WPShortcakeHooksSetup, blocksMap) {
-  var me = this;
+  const me = this;
 
   me.hooks_defined = false;
 
@@ -60,7 +60,7 @@ function P4BlocksAdminUI(Select2FieldsSetup, P4FieldsSetup, WPShortcakeHooksSetu
     me.setupP4Fields();
     me.setupWPShortcakeHooks(me);
 
-    for (var block in me.blocksMap) {
+    for (let block in me.blocksMap) {
       me.setupBlock(block);
     }
   };
@@ -69,7 +69,7 @@ function P4BlocksAdminUI(Select2FieldsSetup, P4FieldsSetup, WPShortcakeHooksSetu
 jQuery(function () {
   'use strict';
 
-  var blocksMap = {
+  const blocksMap = {
     'ArticlesBlock'       : ArticlesBlock,
     'CarouselHeaderBlock' : CarouselHeaderBlock,
     'ColumnsBlock'        : ColumnsBlock,
@@ -79,6 +79,6 @@ jQuery(function () {
     'GalleryBlock'        : GalleryBlock
   };
 
-  var p4BlocksUI = new P4BlocksAdminUI(Select2FieldsSetup, P4FieldsSetup, WPShortcakeHooksSetup, blocksMap);
+  const p4BlocksUI = new P4BlocksAdminUI(Select2FieldsSetup, P4FieldsSetup, WPShortcakeHooksSetup, blocksMap);
   p4BlocksUI.setup();
 });
