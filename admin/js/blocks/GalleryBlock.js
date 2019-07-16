@@ -1,11 +1,9 @@
-/*
-  global $,
-    Backbone,
-    image_focus_points
-*/
-function GalleryBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
-  var me = this;
-  var gallery_block_app = {
+/* global $, Backbone, image_focus_points */
+/* exported GalleryBlock */
+
+function GalleryBlock() {
+  const me = this;
+  let gallery_block_app = {
     views: {},
     models: {},
     data: {}
@@ -88,7 +86,7 @@ function GalleryBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
             focus_point_data = { img_id : updated_val };
           }
 
-          var json_data = $.parseJSON(focus_point_data);
+          const json_data = $.parseJSON(focus_point_data);
 
           if ( json_data.hasOwnProperty( img_id ) ) {
             json_data[ img_id ] = updated_val;

@@ -528,4 +528,118 @@
       }
     }
   }
+
+  &.block-style-image {
+    .column-wrap {
+      margin-bottom: $space-lg;
+
+      @include large-and-up {
+        margin-bottom: 0;
+      }
+
+      &.has-cta {
+        @include large-and-up {
+          padding-bottom: $space-md; // Leave enough room for the CTA link
+        }
+      }
+
+      h3,
+      .icon-container {
+        text-align: center;
+
+        @include medium-and-up {
+          text-align: inherit;
+        }
+      }
+
+      h3 {
+        line-height: 1.2;
+        margin-bottom: $space-md;
+        font-size: 1.25rem;
+
+        @include large-and-up {
+          font-weight: 500;
+        }
+
+        a {
+          font-weight: 700;
+
+          @include medium-and-up {
+            font-size: 1.125rem;
+          }
+
+          @include x-large-and-up {
+            font-size: 1.25rem;
+          }
+        }
+      }
+
+      p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: $dark-shade-black;
+
+        @include medium-and-up {
+          font-size: 0.875rem;
+          margin-bottom: $space-lg;
+        }
+
+        @include x-large-and-up {
+          font-size: 0.9375rem;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        a {
+          font-family: $lora;
+        }
+      }
+
+      a {
+        font-family: $roboto;
+
+        @include medium-and-up {
+          font-size: 0.9375rem;
+        }
+
+        @include large-and-up {
+          font-size: 0.875rem;
+        }
+
+        @include x-large-and-up {
+          font-size: 0.9375rem;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        &.call-to-action-link {
+          position: relative;
+
+          @include medium-and-up {
+            position: absolute;
+            bottom: 0;
+          }
+        }
+      }
+
+      .attachment-container {
+        text-align: center;
+        margin-bottom: $space-md;
+
+        @include medium-and-up {
+          text-align: inherit;
+        }
+      }
+
+      img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+      }
+    }
+  }
 }

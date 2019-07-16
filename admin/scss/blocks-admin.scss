@@ -73,6 +73,10 @@ div.shortcode-ui-edit-shortcake_newcovers > div:last-child {
   padding-top: 20px;
 }
 
+.shortcode-ui-edit-shortcake_columns .shortcode-ui-attribute-columns_block_style .shortcake-p4-radio-div {
+  max-width: 15%;
+}
+
 .field-caption {
   color: #aaa;
   font-style: italic;
@@ -136,4 +140,28 @@ div.shortcode-ui-edit-shortcake_newcovers > div:last-child {
 
 .shortcode-ui-attribute-gallery_block_focus_points {
   display: none;
+}
+
+/* Hide CTAs from Campaigns */
+body.post-type-campaign {
+  .shortcode-ui-edit-shortcake_carousel_header {
+    div[class*="shortcode-ui-attribute-link_"] {
+      display: none;
+    }
+  }
+
+  .shortcode-ui-attribute-columns_block_style {
+    .shortcode-ui-attribute-link_1[data="no-image"] {
+      display: none;
+    }
+  }
+
+  .shortcode-ui-edit-shortcake_split_two_columns {
+    .shortcode-ui-attribute-issue_link_text,
+    .shortcode-ui-attribute-issue_link_path,
+    .shortcode-ui-attribute-button_text,
+    .shortcode-ui-attribute-button_link {
+      display: none;
+    }
+  }
 }

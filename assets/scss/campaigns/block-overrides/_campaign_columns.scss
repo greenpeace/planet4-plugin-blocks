@@ -90,6 +90,8 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
   }
 
   .column-wrap {
+    padding-bottom: 0;
+
     h3 > a {
       font-family: $font;
       font-size: 1.75rem;
@@ -101,10 +103,11 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
     p {
       font-size: 1.125rem;
       line-height: 1.875rem;
+      margin-bottom: 0;
     }
 
     .btn-secondary {
-      @extend .btn-secondary;
+      display: none;
     }
   }
 }

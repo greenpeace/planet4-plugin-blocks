@@ -1,7 +1,8 @@
 /* global createCookie, readCookie */
+/* exported CookiesBlock */
 
-function CookiesBlock(p4BlocksUI) { // eslint-disable-line no-unused-vars
-  var me = this;
+function CookiesBlock() {
+  const me = this;
 
   me.cookie = readCookie('greenpeace');
 
