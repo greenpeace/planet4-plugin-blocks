@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: Planet4 blocks plugin frontend\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-20 10:13+0000\n"
-"PO-Revision-Date: 2019-07-17 11:00+0000\n"
-"Last-Translator: Luca Tiralongo <ltiralon@greenpeace.org>\n"
+"PO-Revision-Date: 2019-07-17 11:20+0000\n"
+"Last-Translator: lseverov <lseverov@greenpeace.org>\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgstr "Publikace"
 
 #: classes/controller/blocks/class-happypoint-controller.php:158
 msgid "Background image"
-msgstr ""
+msgstr "Obrázek na pozadí"
 
 #: classes/controller/blocks/class-articles-controller.php:75
 #: classes/controller/blocks/class-articles-controller.php:217
