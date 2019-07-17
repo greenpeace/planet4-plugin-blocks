@@ -10,7 +10,7 @@ function setNoTrackCookie()
   }
 }
 
-$(document).ready(function() {
+jQuery(function ($) {
   'use strict';
 
   const cookie = readCookie('greenpeace');

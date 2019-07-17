@@ -1,6 +1,6 @@
 // Underline headlines on thumbnail hover.
 
-$(document).ready(function() {
+jQuery(function ($) {
   'use strict';
 
   $('.article-listing').off('mouseenter').on('mouseenter', '.article-list-item-image',
