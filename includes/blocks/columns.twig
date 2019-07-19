@@ -41,6 +41,7 @@
 									{% endif %}
 									{% if cta_text and link %}
 										<a href="{{ link|e('esc_url') }}"
+											{{  'true' == attribute( fields, 'link_new_tab_'~i) ? 'target="_blank"' }}
 											{% if fields.columns_block_style == 'no_image' %}
 												class="btn btn-secondary"
 											{% else %}

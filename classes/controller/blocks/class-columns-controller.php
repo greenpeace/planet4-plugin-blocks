@@ -154,6 +154,16 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 
 				$fields[] =
 					[
+						'label'       => __( 'Open link in new tab', 'planet4-blocks-backend' ),
+						'attr'        => 'link_new_tab_' . $i,
+						// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
+						'description' => sprintf( __( 'Open Column %s: Button/CtA Link in a new tab', 'planet4-blocks-backend' ), $i ),
+						'type'        => 'checkbox',
+						'value'       => 'false',
+					];
+
+				$fields[] =
+					[
 						// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
 						'label' => sprintf( __( 'Column %s: Button/CtA Text', 'planet4-blocks-backend' ), $i ),
 						'attr'  => 'cta_text_' . $i,
@@ -199,11 +209,12 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 			$columns_set = 0;
 			for ( $i = 1; $i <= static::MAX_COLUMNS; $i++ ) {
 				$column_atts     = [
-					"title_$i"       => $attributes[ "title_$i" ] ?? '',
-					"description_$i" => $attributes[ "description_$i" ] ?? '',
-					"attachment_$i"  => $attributes[ "attachment_$i" ] ?? '',
-					"cta_text_$i"    => $attributes[ "cta_text_$i" ] ?? '',
-					"link_$i"        => $attributes[ "link_$i" ] ?? '',
+					"title_$i"        => $attributes[ "title_$i" ] ?? '',
+					"description_$i"  => $attributes[ "description_$i" ] ?? '',
+					"attachment_$i"   => $attributes[ "attachment_$i" ] ?? '',
+					"cta_text_$i"     => $attributes[ "cta_text_$i" ] ?? '',
+					"link_$i"         => $attributes[ "link_$i" ] ?? '',
+					"link_new_tab_$i" => $attributes[ "link_new_tab_$i" ] ?? '',
 				];
 				$attributes_temp = array_merge( $attributes_temp, $column_atts );
 
