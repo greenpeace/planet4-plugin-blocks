@@ -51,31 +51,8 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 		public function prepare_fields() {
 
 			$fields = [
-				[
-					'attr'    => 'cover_type',
-					'label'   => __( 'What style of cover do you need?', 'planet4-blocks-backend' ),
-					'type'    => 'p4_radio',
-					'options' => [
-						[
-							'value' => '1',
-							'label' => __( 'Take Action Covers', 'planet4-blocks-backend' ),
-							'desc'  => 'Take action covers pull the featured image, tags, have a 25 character excerpt and have a call to action button',
-							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/take_action_covers.png' ),
-						],
-						[
-							'value' => '2',
-							'label' => __( 'Campaign Covers', 'planet4-blocks-backend' ),
-							'desc'  => 'Campaign covers pull the associated image and hashtag from the system tag definitions.',
-							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/campaign_covers.png' ),
-						],
-						[
-							'value' => '3',
-							'label' => __( 'Content Covers', 'planet4-blocks-backend' ),
-							'desc'  => 'Content covers pull the image from the post.',
-							'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/content_covers.png' ),
-						],
-					],
-				],
+
+				$this->get_cover_type_options(),
 				[
 					'label' => __( 'Title', 'planet4-blocks-backend' ),
 					'attr'  => 'title',
@@ -201,6 +178,62 @@ if ( ! class_exists( 'NewCovers_Controller' ) ) {
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
+		}
+
+		/**
+		 * Get the cover type options based on the current post type
+		 *
+		 * @return array the cover options
+		 */
+		public function get_cover_type_options() {
+
+			$cover_type = [
+				'attr'  => 'cover_type',
+				'label' => __( 'What style of cover do you need?', 'planet4-blocks-backend' ),
+				'type'  => 'p4_radio',
+			];
+
+			$post_type = get_post_type();
+
+			if ( 'campaign' === $post_type ) {
+
+				$cover_type['value'] = '3';
+
+				$cover_type['options'] = [
+					[
+						'value' => '3',
+						'label' => __( 'Content Covers', 'planet4-blocks-backend' ),
+						'desc'  => 'Content covers pull the image from the post.',
+						'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/content_covers.png' ),
+					],
+				];
+
+			} else {
+
+				$cover_type['options'] = [
+					[
+						'value' => '1',
+						'label' => __( 'Take Action Covers', 'planet4-blocks-backend' ),
+						'desc'  => 'Take action covers pull the featured image, tags, have a 25 character excerpt and have a call to action button',
+						'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/take_action_covers.png' ),
+					],
+					[
+						'value' => '2',
+						'label' => __( 'Campaign Covers', 'planet4-blocks-backend' ),
+						'desc'  => 'Campaign covers pull the associated image and hashtag from the system tag definitions.',
+						'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/campaign_covers.png' ),
+					],
+					[
+						'value' => '3',
+						'label' => __( 'Content Covers', 'planet4-blocks-backend' ),
+						'desc'  => 'Content covers pull the image from the post.',
+						'image' => esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/content_covers.png' ),
+					],
+				];
+			}
+
+			return $cover_type;
+
 		}
 
 		/**
