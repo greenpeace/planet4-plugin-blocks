@@ -36,6 +36,7 @@
 								{% if ( attribute( fields, 'link_text_'~i ) ) %}
 									<div class="col-xs-12 col-sm-8 col-md-4 action-button">
 										<a href="{{ attribute( fields, 'link_url_'~i) }}"
+											{{  'true' == attribute( fields, 'link_url_new_tab_'~i) ? 'target="_blank"' }}
 											class="btn btn-small btn-medium btn-primary btn-block">{{ attribute( fields, 'link_text_'~i ) }}</a>
 									</div>
 								{% endif %}
