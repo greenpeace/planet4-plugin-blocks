@@ -217,12 +217,15 @@ if ( ! class_exists( 'Gallery_Controller' ) ) {
 
 			$gallery_id = 'gallery_' . uniqid();
 
+			$post_type = get_post_type();
+
 			$data = [
 				'id'          => $gallery_id,
 				'layout'      => $gallery_style,
 				'title'       => $gallery_title,
 				'description' => $gallery_description,
 				'images'      => $images,
+				'post_type'   => $post_type,
 			];
 
 			return $data;
