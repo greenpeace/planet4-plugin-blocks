@@ -25,9 +25,11 @@
       position: relative;
       left: -35%;
       max-width: inherit;
+      object-fit: cover;
 
       @include medium-and-up {
         height: 330px;
+        min-width: 500px;
       }
 
       @include large-and-up {
@@ -37,6 +39,7 @@
       @include x-large-and-up {
         left: -30%;
         height: 430px;
+        min-width: 600px;
       }
 
       html[dir="rtl"] & {
