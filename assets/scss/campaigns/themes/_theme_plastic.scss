@@ -62,7 +62,7 @@ body.theme-plastic {
     }
 
     .page-header-subtitle {
-      font-size: 1.75rem;
+      font-size: $font-size-xl;
       line-height: 2.5rem;
       color: white;
     }
@@ -178,7 +178,7 @@ body.theme-plastic {
     }
 
     .article-list-item-tags .tag-item {
-      font-size: 0.875rem;
+      font-size: $font-size-xxs;
       line-height: 1.125rem;
       @include letter-spacing(90);
       font-weight: $extra-bold;

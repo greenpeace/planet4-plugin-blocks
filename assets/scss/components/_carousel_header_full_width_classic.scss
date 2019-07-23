@@ -405,7 +405,7 @@ $medium-image-height: 600px;
           }
 
           @include small-and-up {
-            font-size: 1.75rem;
+            font-size: $font-size-xl;
           }
 
           @include medium-and-up {
@@ -418,11 +418,11 @@ $medium-image-height: 600px;
             color: $white;
             margin-bottom: 20px;
             line-height: 1.2;
-            font-size: 2.5rem;
+            font-size: $font-size-xxl;
           }
 
           @include x-large-and-up {
-            font-size: 3rem;
+            font-size: $font-size-xxxl;
             line-height: 1.1;
             max-width: 100%;
             width: 100%;
@@ -450,7 +450,7 @@ $medium-image-height: 600px;
           transform: translateX($text-slide-offset);
 
           @include small-and-up {
-            font-size: 1rem;
+            font-size: $font-size-sm;
           }
 
           @include medium-and-up {
@@ -507,7 +507,7 @@ $medium-image-height: 600px;
           }
 
           .btn {
-            font-size: 0.875rem;
+            font-size: $font-size-xxs;
             line-height: 58px;
             width: auto;
             min-width: 240px;
@@ -532,7 +532,7 @@ $medium-image-height: 600px;
             }
 
             @include medium-and-up {
-              font-size: 1rem;
+              font-size: $font-size-sm;
               min-width: 280px;
 
               html[dir="rtl"] & {

@@ -42,21 +42,21 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
         font-family: $header-font;
         font-weight: $header-weight;
         color: black;
-        font-size: 1.25rem;
+        font-size: $font-size-md;
         line-height: 1.5625rem;
       }
     }
 
     p {
       margin-bottom: 10px;
-      font-size: 0.875rem;
+      font-size: $font-size-xxs;
       line-height: 1.375rem;
     }
 
     a {
       font-family: $link-font;
       font-weight: $link-weight;
-      font-size: 0.875rem;
+      font-size: $font-size-xxs;
       line-height: 1.1875rem;
       text-transform: uppercase;
     }
@@ -94,7 +94,7 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
 
     h3 > a {
       font-family: $font;
-      font-size: 1.75rem;
+      font-size: $font-size-xl;
       font-weight: $header-weight;
       line-height: 2.5rem;
       text-transform: uppercase;
@@ -163,14 +163,14 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
 
       h5 {
         color: black;
-        font-size: 1.25rem;
+        font-size: $font-size-md;
         font-weight: $regular;
         line-height: 1.5625rem;
         text-transform: uppercase;
       }
 
       p {
-        font-size: 1rem;
+        font-size: $font-size-sm;
         line-height: 1.5625rem;
         opacity: unset;
       }
@@ -210,7 +210,7 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
       border-radius: 0;
       display: flex;
       flex-direction: column;
-      font-size: 1.25rem;
+      font-size: $font-size-md;
       height: 70px;
       justify-content: center;
       line-height: 1.5625rem;
@@ -226,7 +226,7 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
         border: none;
         color: inherit;
         float: unset;
-        font-size: 1rem;
+        font-size: $font-size-sm;
         font-weight: $regular;
         padding: unset;
         position: absolute;
