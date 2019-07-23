@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Planet4 blocks plugin frontend\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-07 11:24+0000\n"
-"PO-Revision-Date: 2018-10-29 13:01+0000\n"
+"POT-Creation-Date: 2018-12-20 10:13+0000\n"
+"PO-Revision-Date: 2019-07-17 11:20+0000\n"
 "Last-Translator: lseverov <lseverov@greenpeace.org>\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
@@ -16,48 +16,56 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=( n == 1 ) ? 0 : ( n >= 2 && n <= 4 ) ? 1 : "
 "2;\n"
-"X-Generator: Loco https://localise.biz/"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.3.0; wp-5.2.2"
 
-#: classes/controller/blocks/class-covers-controllers.php:142
+#: classes/controller/blocks/class-covers-controller.php:153
+#: classes/controller/blocks/class-newcovers-controller.php:475
 msgid "Take Action"
 msgstr "JDU DO TOHO"
 
-#: classes/controller/blocks/class-covers-controllers.php:165
-msgid "Load More ..."
-msgstr "Další..."
+#: classes/controller/blocks/class-covers-controller.php:176
+#: classes/controller/blocks/class-newcovers-controller.php:499
+#: includes/blocks/campaign_thumbnail.twig:47
+#: includes/blocks/content_four_column.twig:64
+#: includes/blocks/content_four_column.twig:72
+msgid "Load More"
+msgstr "Další"
 
-#: classes/controller/blocks/class-splittwocolumns-controller.php:240
+#: classes/controller/blocks/class-splittwocolumns-controller.php:277
 msgid "Learn more about this issue"
 msgstr "Zjisti více o tomto tématu "
 
-#: classes/controller/blocks/class-splittwocolumns-controller.php:261
+#: classes/controller/blocks/class-splittwocolumns-controller.php:298
 msgid "Get Involved"
 msgstr "Zapoj se"
 
-#: classes/controller/blocks/class-takeactionboxout-controller.php:123
+#: classes/controller/blocks/class-takeactionboxout-controller.php:129
 msgid "take action"
 msgstr "Jdu do toho"
 
-#: classes/controller/blocks/class-contentfourcolumn-controller.php:222
+#: classes/controller/blocks/class-contentfourcolumn-controller.php:236
 msgid "Publications"
 msgstr "Publikace"
 
-#: classes/controller/blocks/class-articles-controller.php:154
+#: classes/controller/blocks/class-happypoint-controller.php:158
+msgid "Background image"
+msgstr "Obrázek na pozadí"
+
+#: classes/controller/blocks/class-articles-controller.php:75
+#: classes/controller/blocks/class-articles-controller.php:217
 msgid "Related Articles"
 msgstr "Související články"
 
-#: classes/controller/blocks/class-articles-controller.php:155
+#: classes/controller/blocks/class-articles-controller.php:76
+#: classes/controller/blocks/class-articles-controller.php:218
 msgid "READ ALL THE NEWS"
 msgstr "PŘEČÍST VŠECHNY NOVINKY"
 
-#: includes/blocks/articles.twig:61
+#: includes/teasers/tease-articles.twig:47
+#: includes/teasers/tease-articles.twig:55
 msgid "by"
 msgstr "Napsal/a"
-
-#: includes/blocks/content_four_column.twig:60
-#: includes/blocks/content_four_column.twig:68
-msgid "Load More"
-msgstr "Další"
 
 #. Plugin Name of the plugin/theme
 msgid "Planet4 - Blocks"
