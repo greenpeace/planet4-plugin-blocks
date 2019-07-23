@@ -27,9 +27,13 @@
       max-width: inherit;
       object-fit: cover;
 
+      @include mobile-only {
+        width: 200px;
+      }
+
       @include medium-and-up {
         height: 330px;
-        min-width: 500px;
+        width: 400px;
       }
 
       @include large-and-up {
@@ -39,7 +43,7 @@
       @include x-large-and-up {
         left: -30%;
         height: 430px;
-        min-width: 600px;
+        width: 500px;
       }
 
       html[dir="rtl"] & {
@@ -106,9 +110,27 @@
     overflow: hidden;
 
     img {
+      width: 600px;
+
       transform: skew(-25deg);
       @include mobile-only {
+        width: 200px;
         left: -50px;
+      }
+
+      @include small-and-up {
+        left: -180px;
+      }
+
+      @include medium-and-up {
+        left: -100px;
+      }
+    }
+
+    .img_post {
+      @include small-and-up {
+        width: 500px;
+        left: -150px;
       }
     }
   }
