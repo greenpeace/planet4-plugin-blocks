@@ -1,4 +1,5 @@
-jQuery(document).ready(function() {
+$(document).ready(function() {
+  'use strict';
 
   $('.notice.is-dismissible').animate({'margin-left' : '+=20', 'opacity' : '+=0.9'}, 800);
 

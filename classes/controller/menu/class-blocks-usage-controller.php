@@ -68,6 +68,7 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 					$shortcode );
 
 				$results = $wpdb->get_results( $sql );
+				if ( !$results ) { continue; }
 
 				// Confusion between old and new covers.
 				if ( 'covers' === $block ) {
@@ -76,11 +77,13 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 
 				echo '<hr>';
 				echo '<h2>' . ucfirst( str_replace( '_', ' ', $block ) ) . '</h2>';
-
+				echo '<table>';
+				echo '<tr style="text-align: left"><th>ID</th><th>Title</th></tr>';
 				foreach ( $results as $result ) {
-					echo '<a href="post.php?post=' . $result->ID . '&action=edit" >' . $result->post_title . '</a>';
-					echo '<br>';
+					echo '<tr><td>'.$result->ID .'</td>';
+					echo  '<td><a href="post.php?post=' . $result->ID . '&action=edit" >' . $result->post_title . '</a></td></tr>';
 				}
+				echo '</table>';
 			}
 
 			// Add to the report a breakdown of different styles for carousel Header
@@ -91,10 +94,12 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 			$results = $wpdb->get_results( $sql );
 			echo '<hr>';
 			echo '<h2>Carousel Header Full Width Classic style</h2>';
+			echo '<table><tr style="text-align: left"><th>ID</th><th>Title</th></tr>';
 			foreach ( $results as $result ) {
-				echo '<a href="post.php?post=' . $result->ID . '&action=edit" >' . $result->post_title . '</a>';
-				echo '<br>';
+				echo '<tr><td>'.$result->ID .'</td>';
+				echo  '<td><a href="post.php?post=' . $result->ID . '&action=edit" >' . $result->post_title . '</a></td></tr>';
 			}
+			echo '</table>';
 
 			// Add to the report a breakdown of different styles for carousel Header
 			// Given that the default (if no style is defined) is the Slide to Gray, include in the query
@@ -110,10 +115,12 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 			$results = $wpdb->get_results( $sql );
 			echo '<hr>';
 			echo '<h2>Carousel Header Zoom and Slide to Grey</h2>';
+			echo '<table><tr style="text-align: left"><th>ID</th><th>Title</th></tr>';
 			foreach ( $results as $result ) {
-				echo '<a href="post.php?post=' . $result->ID . '&action=edit" >' . $result->post_title . '</a>';
-				echo '<br>';
+				echo '<tr><td>'.$result->ID .'</td>';
+				echo  '<td><a href="post.php?post=' . $result->ID . '&action=edit" >' . $result->post_title . '</a></td></tr>';
 			}
+			echo '</table>';
 
 
 			// Add to the report a breakdown of which tags are using a redirect page and which do not
@@ -147,10 +154,12 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 			$results = $wpdb->get_results( $sql );
 			echo '<hr>';
 			echo '<h2>Tags without redirection page</h2>';
+			echo '<table><tr style="text-align: left"><th>ID</th><th>Title</th></tr>';
 			foreach ( $results as $result ) {
-				echo '<a href="term.php?taxonomy=post_tag&tag_ID=' . $result->term_id . '" >' . $result->name . '</a>';
-				echo '<br>';
+				echo '<tr><td>'.$result->term_id .'</td>';
+				echo '<td><a href="term.php?taxonomy=post_tag&tag_ID=' . $result->term_id . '" >' . $result->name . '</a></td></tr>';
 			}
+			echo '</table>';
 
 			// Add to the report a breakdown of which tags are using a redirect page and which do not
 			// The second query shows the ones that do use a redirect page
@@ -164,10 +173,12 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 			$results = $wpdb->get_results( $sql );
 			echo '<hr>';
 			echo '<h2>Tags that use a redirection page</h2>';
+			echo '<table><tr style="text-align: left"><th>ID</th><th>Title</th></tr>';
 			foreach ( $results as $result ) {
-				echo '<a href="term.php?taxonomy=post_tag&tag_ID=' . $result->term_id . '" >' . $result->name . '</a>';
-				echo '<br>';
+				echo '<tr><td>'.$result->term_id .'</td>';
+				echo '<td><a href="term.php?taxonomy=post_tag&tag_ID=' . $result->term_id . '" >' . $result->name . '</a></td></tr>';
 			}
+			echo '</table>';
 
 
 			// phpcs:enable

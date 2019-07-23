@@ -177,6 +177,13 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 							'data-plugin' => 'planet4-blocks',
 						],
 					],
+					[
+						'label'       => __( 'Open in new tab', 'planet4-blocks-backend' ),
+						'attr'        => 'link_url_new_tab_' . $i,
+						'type'        => 'checkbox',
+						'description' => __( 'Open Link URL in new tab', 'planet4-blocks-backend' ),
+						'value'       => 'false',
+					],
 				];
 				$fields = array_merge( $fields, $field );
 			}
