@@ -9,6 +9,14 @@ workflows:
           filters:
             branches:
               ignore: languages
+      - rips-test:
+          context: rips-scans
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v\p{Digit}+\.\p{Digit}+.*/
+
 version: 2
 
 job-references:
@@ -137,3 +145,12 @@ jobs:
 
       - store_artifacts:
           path: planet4-docker-compose/artifacts
+
+  rips-test:
+    docker:
+      - image: rips/rips-cli:3
+    environment:
+      RIPS_APPLICATION_ID: 5
+    steps:
+      - checkout
+      - run: rips-cli -vvv rips:scan:start -a $RIPS_APPLICATION_ID -p ~/project/ -t 1

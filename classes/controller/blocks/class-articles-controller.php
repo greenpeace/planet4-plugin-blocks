@@ -107,6 +107,13 @@ if ( ! class_exists( 'Articles_Controller' ) ) {
 					],
 				],
 				[
+					'attr'        => 'button_link_new_tab',
+					'label'       => __( 'Open in a new Tab', 'planet4-blocks-backend' ),
+					'description' => __( 'Open button link in new tab', 'planet4-blocks-backend' ),
+					'type'        => 'checkbox',
+					'value'       => 'false',
+				],
+				[
 					'label'    => __( 'Tags', 'planet4-blocks-backend' ),
 					'attr'     => 'tags',
 					'type'     => 'term_select',

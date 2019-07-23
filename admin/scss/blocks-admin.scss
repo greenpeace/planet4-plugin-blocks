@@ -68,6 +68,10 @@ div.shortcode-ui-edit-shortcake_newcovers > div:last-child {
   flex: 0 90%;
 }
 
+div.shortcode-ui-edit-shortcake_newcovers > .block-attribute-wrapper {
+  width: 100%;
+}
+
 .shortcode-ui-edit-shortcake_columns div[class*=shortcode-ui-attribute-title_] {
   border-top: 2px dashed #ddd;
   padding-top: 20px;
