@@ -530,4 +530,14 @@ body.theme-oil {
       }
     }
   }
+
+  .enform-side-style {
+    &:after {
+      display: none;
+    }
+
+    .caption-overlay {
+      display: none;
+    }
+  }
 }
