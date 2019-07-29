@@ -83,6 +83,14 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
   }
 }
 
+@mixin campaign_columns_style_image() {
+  .column-wrap {
+    h3 {
+      font-family: $roboto !important;
+    }
+  }
+}
+
 @mixin campaign_columns_style_no_image($font, $header-colour: black, $header-weight: $regular) {
   h2 {
     @extend .page-section-header;
