@@ -189,7 +189,7 @@ $slide-transition-speed: 1s;
     }
 
     h1 {
-      font-size: 1.75rem;
+      font-size: $font-size-xl;
       margin-bottom: 10px;
       width: 70%;
       line-height: 1.2;
@@ -203,7 +203,7 @@ $slide-transition-speed: 1s;
       }
 
       @include medium-and-up {
-        font-size: 2.5rem;
+        font-size: $font-size-xxl;
       }
 
       @include large-and-up {
@@ -220,7 +220,7 @@ $slide-transition-speed: 1s;
     }
 
     h2 {
-      font-size: 1.25rem;
+      font-size: $font-size-md;
       line-height: 1.3;
       font-weight: 400;
       width: 55%;
@@ -306,7 +306,7 @@ $slide-transition-speed: 1s;
       }
 
       .btn {
-        font-size: 0.875rem;
+        font-size: $font-size-xxs;
         line-height: 2.8;
 
         html[dir="rtl"] & {
@@ -315,7 +315,7 @@ $slide-transition-speed: 1s;
         }
 
         @include medium-and-up {
-          font-size: 1rem;
+          font-size: $font-size-sm;
           line-height: 3;
           width: auto;
 

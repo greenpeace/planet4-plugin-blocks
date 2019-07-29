@@ -37,7 +37,7 @@
       margin: 0;
       width: auto;
       font-family: $cta-font;
-      font-size: 1rem;
+      font-size: $font-size-sm;
       line-height: 1.5625rem;
       transition: color $transition ease-in-out;
       @include letter-spacing($cta-spacing);
@@ -103,7 +103,7 @@
 
       .yellow-cta {
         text-align: center;
-        font-size: 1.25rem;
+        font-size: $font-size-md;
         font-family: $roboto;
         color: $yellow;
         font-weight: 500;
@@ -117,12 +117,12 @@
 
         @include medium-and-up {
           margin-bottom: 20px;
-          font-size: 0.9375rem;
+          font-size: $font-size-xs;
         }
 
         @include large-and-up {
           margin-bottom: 40px;
-          font-size: 1.25rem;
+          font-size: $font-size-md;
         }
 
         &:hover {

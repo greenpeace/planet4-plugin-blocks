@@ -67,7 +67,7 @@ body.theme-arctic {
     }
 
     .page-header-subtitle {
-      font-size: 1.75rem;
+      font-size: $font-size-xl;
       line-height: 2.125rem;
       color: $arctic-blue;
     }
@@ -133,7 +133,7 @@ body.theme-arctic {
     @include campaign_articles($open-sans, $open-sans, $arctic-turquoise, $open-sans, $arctic-faded-red, $bold);
 
     .article-list-item-tags .tag-item {
-      font-size: 0.875rem;
+      font-size: $font-size-xxs;
       line-height: 1.375rem;
     }
   } // end .article-listing
@@ -208,7 +208,7 @@ body.theme-arctic {
       .step-number {
         background: $arctic-light-blue;
         border: $arctic-blue 2px solid;
-        font-size: 2.5rem;
+        font-size: $font-size-xxl;
         height: 136px;
         width: 136px;
         margin-bottom: 27px;

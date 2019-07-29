@@ -207,7 +207,7 @@ body.theme-oceans {
     }
 
     .article-list-item-tags .tag-item {
-      font-size: 0.875rem;
+      font-size: $font-size-xxs;
       line-height: 1.125rem;
       @include letter-spacing(90);
       font-weight: $extra-bold;
