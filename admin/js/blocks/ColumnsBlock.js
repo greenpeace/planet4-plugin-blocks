@@ -27,11 +27,14 @@ function ColumnsBlock() {
     let row = 0;
 
     [1, 2, 3, 4].forEach(function (index) {
-      const input_values = $('.field-block').filter($('div[class$=\'_' + index + '\']')).children().filter($('input, textarea')).map(function (idx, elem) {
+      const row_elements = $('.field-block').filter($('div[class$=\'_' + index + '\']')).children();
+      const input_values = row_elements.filter($('input, textarea')).map(function (idx, elem) {
         return $(elem).val();
       }).get().join('');
 
-      if ('' !== input_values) {
+      const has_attachment = $(row_elements[7]).children().length > 0;
+
+      if ('' !== input_values || has_attachment) {
         row = index;
       }
     });

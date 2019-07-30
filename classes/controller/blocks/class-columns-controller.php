@@ -98,14 +98,8 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label' => sprintf(
-							// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
-							__(
-								'Column %s: Header <br><i>Header is mandatory. In order for the task to be appeared title has to be filled.</i>',
-								'planet4-blocks-backend'
-							),
-							$i
-						),
+						// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
+						'label' => sprintf( __( 'Column %s: Header', 'planet4-blocks-backend' ), $i ),
 						'attr'  => 'title_' . $i,
 						'type'  => 'text',
 						'meta'  => [
@@ -208,7 +202,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 			// Used to determine how many columns were set in the backend for this shortcode.
 			$columns_set = 0;
 			for ( $i = 1; $i <= static::MAX_COLUMNS; $i++ ) {
-				$column_atts     = [
+				$column_atts = [
 					"title_$i"        => $attributes[ "title_$i" ] ?? '',
 					"description_$i"  => $attributes[ "description_$i" ] ?? '',
 					"attachment_$i"   => $attributes[ "attachment_$i" ] ?? '',
@@ -216,11 +210,19 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 					"link_$i"         => $attributes[ "link_$i" ] ?? '',
 					"link_new_tab_$i" => $attributes[ "link_new_tab_$i" ] ?? '',
 				];
-				$attributes_temp = array_merge( $attributes_temp, $column_atts );
 
-				if ( ! empty( $attributes[ "title_$i" ] ) ) {
-					$columns_set = $i;
+				if ( empty( $column_atts[ "title_$i" ] ) ) {
+					foreach ( $column_atts as $key => $column_att ) {
+						if ( ! empty( $column_att ) && "link_new_tab_$i" !== $key ) {
+							$columns_set = $i;
+
+							$column_atts[ "column_$i" ] = 'true';
+							break;
+						}
+					}
 				}
+
+				$attributes_temp = array_merge( $attributes_temp, $column_atts );
 			}
 			$attributes                  = shortcode_atts( $attributes_temp, $attributes, $shortcode_tag );
 			$attributes['no_of_columns'] = $columns_set;

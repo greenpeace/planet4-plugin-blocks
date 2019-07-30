@@ -16,7 +16,7 @@
 
 					<div class="row">
 						{% for i in 1..4 %}
-							{% if fields['title_'~i] %}
+							{% if fields['column_'~i] %}
 								{% set title = fields['title_'~i] %}
 								{% set attachment = fields['attachment_'~i] %}
 								{% set description = fields['description_'~i] %}
