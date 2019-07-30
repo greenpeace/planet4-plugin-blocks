@@ -10,7 +10,7 @@
 					</header>
 				{% endif %}
 				{% if ( fields['columns_description'] ) %}
-					<p class="page-section-description">{{ fields['columns_description']|e('wp_kses_post')|raw }}</p>
+					<div class="page-section-description">{{ fields['columns_description']|e('wp_kses_post')|raw }}</div>
 				{% endif %}
 
 				<div class="tasks-wrap can-do-steps d-none d-lg-block">
