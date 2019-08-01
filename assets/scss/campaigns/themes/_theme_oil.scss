@@ -479,6 +479,10 @@ body.theme-oil {
     }
   }
 
+  .columns-block.block-style-image {
+    @include campaign_columns_style_image();
+  }
+
   .columns-block.block-style-no_image {
     @include campaign_columns_style_no_image($anton);
   }
