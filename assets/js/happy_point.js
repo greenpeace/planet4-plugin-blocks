@@ -1,5 +1,5 @@
 // Load happy point iframe only when visible
-$(document).ready(function() {
+jQuery(function ($) {
   'use strict';
 
   function load_happy_point() {

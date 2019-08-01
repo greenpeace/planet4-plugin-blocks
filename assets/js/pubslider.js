@@ -1,4 +1,4 @@
-$(document).ready(function() {
+jQuery(function ($) {
   'use strict';
 
   // convert an element to slider using slick js

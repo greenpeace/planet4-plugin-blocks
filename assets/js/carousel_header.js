@@ -1,6 +1,6 @@
 /* global Hammer */
 
-$(document).ready(function() {
+jQuery(function ($) {
   'use strict';
 
   const ZoomAndSlideToGrayCarouselHeader = {

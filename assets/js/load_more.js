@@ -1,5 +1,5 @@
 /* global p4_vars */
-$(document).ready(function () {
+jQuery(function ($) {
   // Block: Content Four Column functionality.
   // Find out how many posts per row are being displayed.
   $('.four-column-content').each( function() {
