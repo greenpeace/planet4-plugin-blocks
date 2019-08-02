@@ -14,9 +14,9 @@ body.theme-oil {
   $oil-pink: #ef629d;
   $oil-grey: #a5a8aa;
   $oil-black: #1f262a;
-  $bg-gradient-start: #30efe8;
-  $bg-gradient-end: #1fd59b;
-  $bg-button-alt: #27be9b;
+  $bg-gradient-start: $oil-red;
+  $bg-gradient-end: #e95332;
+  $bg-button-alt: #e64854;
   $oil-gradient-standard: linear-gradient(to right, $bg-gradient-start, $bg-gradient-end);
 
   $page-header-xl-width: 1140px;
