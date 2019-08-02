@@ -225,11 +225,13 @@ if ( ! class_exists( 'Timeline_Controller' ) ) {
 
 			$img_src = esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/timeline.png' );
 
+			$allowed_page_types = array_merge( P4BKS_ALLOWED_PAGETYPE, [ 'post' ] );
+
 			$shortcode_ui_args = [
 				'label'         => __( 'Timeline', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . $img_src . '" />',
 				'attrs'         => $fields,
-				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
+				'post_type'     => $allowed_page_types,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
