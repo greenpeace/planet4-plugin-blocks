@@ -14,9 +14,9 @@ body.theme-oil {
   $oil-pink: #ef629d;
   $oil-grey: #a5a8aa;
   $oil-black: #1f262a;
-  $bg-gradient-start: #30efe8;
-  $bg-gradient-end: #1fd59b;
-  $bg-button-alt: #27be9b;
+  $bg-gradient-start: $oil-red;
+  $bg-gradient-end: #e95332;
+  $bg-button-alt: #e64854;
   $oil-gradient-standard: linear-gradient(to right, $bg-gradient-start, $bg-gradient-end);
 
   $page-header-xl-width: 1140px;
@@ -85,7 +85,7 @@ body.theme-oil {
     }
 
     .page-header-subtitle {
-      font-size: 1.75rem;
+      font-size: $font-size-xl;
       line-height: 2.5rem;
     }
 
@@ -413,7 +413,7 @@ body.theme-oil {
     .can-do-steps {
       .step-number {
         background: $oil-gradient-standard;
-        font-size: 1.75rem;
+        font-size: $font-size-xl;
 
         .step-number-inner {
           background-image: url("images/oil/take-action.svg");
@@ -446,7 +446,7 @@ body.theme-oil {
           background-size: cover;
           color: black;
           font-family: $anton;
-          font-size: 0.9375rem;
+          font-size: $font-size-xs;
           height: 50px;
           line-height: 50px;
           width: 50px;
@@ -477,6 +477,10 @@ body.theme-oil {
         @include monochrome;
       }
     }
+  }
+
+  .columns-block.block-style-image {
+    @include campaign_columns_style_image();
   }
 
   .columns-block.block-style-no_image {

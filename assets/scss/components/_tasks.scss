@@ -10,7 +10,7 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
   }
 
   h3 {
-    font-size: 1.375rem;
+    font-size: $font-size-lg;
     font-weight: 700;
     margin-bottom: 15px;
     line-height: 1.2;
@@ -26,7 +26,7 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
     }
 
     @include large-and-up {
-      font-size: 1.75rem;
+      font-size: $font-size-xl;
     }
 
     @include x-large-and-up {
@@ -75,11 +75,11 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
     }
 
     @include large-and-up {
-      font-size: 1.25rem;
+      font-size: $font-size-md;
     }
 
     @include x-large-and-up {
-      font-size: 1.375rem;
+      font-size: $font-size-lg;
     }
   }
 }
@@ -158,7 +158,7 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
 
   .step-info {
     h5 {
-      font-size: 0.9375rem;
+      font-size: $font-size-xs;
       line-height: 19px;
       font-weight: 700;
       color: $percentage-text;
@@ -166,7 +166,7 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
       @include medium-and-up {
         font-weight: 500;
         color: $darkb-blue-text;
-        font-size: 1.25rem;
+        font-size: $font-size-md;
         line-height: 30px;
       }
 
@@ -177,11 +177,11 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
 
     p {
       color: $dark-shade-black;
-      font-size: 0.875rem;
+      font-size: $font-size-xxs;
       opacity: 0.75;
 
       @include x-large-and-up {
-        font-size: 0.9375rem;
+        font-size: $font-size-xs;
         line-height: 1.6;
         margin-bottom: 20px;
       }
@@ -227,7 +227,7 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
 
     .card-header {
       font-weight: 400;
-      font-size: 0.9375rem;
+      font-size: $font-size-xs;
       font-family: $roboto;
       text-decoration: none;
       padding: $n10 $n10 $n5 $n10;
@@ -244,7 +244,7 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
     .info-with-image-wrap {
       .mobile-accordion-info {
         color: $percentage-text;
-        font-size: 0.875rem;
+        font-size: $font-size-xxs;
       }
 
       .accordion-image-wrap {
@@ -279,14 +279,14 @@ NOTE: these styles are used in both tasks.twig and columns_tasks.twig
 
       p {
         color: $dark-shade-black;
-        font-size: 0.875rem;
+        font-size: $font-size-xxs;
         line-height: 22px;
       }
     }
 
     .step-number {
       font-family: $roboto;
-      font-size: 1rem;
+      font-size: $font-size-sm;
       font-weight: 900;
       color: $white;
       line-height: 1.5;

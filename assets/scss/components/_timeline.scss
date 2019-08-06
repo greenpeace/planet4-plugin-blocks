@@ -193,3 +193,129 @@
     font-family: $lora;
   }
 }
+
+.post-content {
+  .timeline-block {
+    h2.tl-headline {
+      font-size: 1.5rem;
+      line-height: 1.87rem;
+      margin-bottom: $n20;
+      padding: 0 !important;
+    }
+
+    .tl-timeline {
+      .tl-slidenav-next {
+        display: none;
+
+        @include small-and-up {
+          display: block;
+        }
+      }
+
+      .tl-slidenav-previous {
+        display: none;
+
+        @include small-and-up {
+          display: block;
+        }
+      }
+
+      .tl-slide {
+        padding-top: 24px;
+
+        .tl-slide-content-container {
+          .tl-slide-content {
+            width: 100% !important;
+            display: flex;
+            flex-direction: column-reverse;
+
+            @include medium-and-up {
+              padding-left: 120px !important;
+              padding-right: 120px !important;
+            }
+
+            @include large-and-up {
+              display: table;
+              padding-left: 120px !important;
+              padding-right: 120px !important;
+            }
+
+            .tl-media {
+              float: none;
+              width: auto;
+              min-width: 0;
+
+              @include small-and-up {
+                margin-right: $space-xxl;
+                margin-left: $space-xxl;
+              }
+
+              @include medium-and-up {
+                margin-right: 0;
+                margin-left: 0;
+                max-width: 50% !important;
+              }
+
+              @include large-and-up {
+                float: left;
+                width: 100%;
+                max-width: 100% !important;
+              }
+
+              img {
+                width: 100%;
+                max-width: 100%;
+                max-height: 100% !important;
+              }
+            }
+
+            .tl-text {
+              vertical-align: top;
+              width: auto;
+              padding-left: 0;
+              padding-right: 0;
+              margin-top: 0;
+              max-width: 100%;
+
+              @include small-and-up {
+                margin-right: $space-xxl;
+                margin-left: $space-xxl;
+              }
+
+              @include medium-and-up {
+                margin-right: 0;
+                margin-left: 0;
+              }
+
+              @include large-and-up {
+                margin-right: 0;
+                margin-left: 0;
+                padding-left: 28px;
+                width: 50%;
+              }
+
+              h3.tl-headline-date {
+                font-size: .875rem;
+                margin-bottom: $space-md;
+              }
+            }
+          }
+        }
+
+        .tl-text-content {
+          margin-bottom: 24px;
+
+          p {
+            font-size: .875rem;
+            line-height: 1.2rem;
+            margin-top: 0;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

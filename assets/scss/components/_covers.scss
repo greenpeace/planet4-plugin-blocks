@@ -170,7 +170,7 @@
   }
 
   p {
-    font-size: 0.9375rem;
+    font-size: $font-size-xs;
     line-height: 1.6;
     display: none;
   }
@@ -204,7 +204,7 @@
 
   @include large-and-up {
     margin-bottom: 0;
-    font-size: 0.875rem;
+    font-size: $font-size-xxs;
     margin-right: 4px;
   }
 }

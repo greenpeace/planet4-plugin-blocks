@@ -1,6 +1,6 @@
 // Force wide blocks outside the container
 
-$(document).ready(function() {
+jQuery(function ($) {
   'use strict';
 
   const $wideblocks = $('.block-wide');

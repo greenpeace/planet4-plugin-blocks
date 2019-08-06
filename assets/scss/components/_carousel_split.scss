@@ -57,7 +57,7 @@
         }
 
         @include x-large-and-up {
-          font-size: 0.875rem;
+          font-size: $font-size-xxs;
         }
       }
     }
@@ -103,7 +103,7 @@
         }
 
         @include x-large-and-up {
-          font-size: 1.375rem;
+          font-size: $font-size-lg;
           margin-bottom: 15px;
           line-height: normal;
         }
@@ -111,13 +111,13 @@
 
       p {
         @include small-and-up {
-          font-size: 0.875rem;
+          font-size: $font-size-xxs;
           width: 100%;
           line-height: 24px;
         }
 
         @include large-and-up {
-          font-size: 1rem;
+          font-size: $font-size-sm;
           width: 80%;
         }
 
