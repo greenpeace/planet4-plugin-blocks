@@ -43,24 +43,31 @@ if ( ! class_exists( 'P4_CounterTest' ) ) {
 			];
 			$data   = $this->block->prepare_data( $fields, '', '' );
 
-			$this->assertEquals( 0, $data['fields']['completed'] );
-			$this->assertEquals( '', $data['fields']['target'] );
+			$this->assertEquals( '0', $data['fields']['completed'] );
+			$this->assertEquals( '0', $data['fields']['target'] );
 			$this->assertEquals( 0, $data['fields']['percent'] );
 		}
 
 		/**
-		 * Test that the values are substituted into the text.
+		 * Test that the remaining value is calculated correctly.
 		 */
-		public function test_text_substitution() {
+		public function test_remaining_calculation() {
 
 			$fields = [
-				'completed' => '999',
-				'target'    => '1000',
-				'text'      => 'Completed %completed% of %target%, only %remaining% to go!',
+				'completed' => 999,
+				'target'    => 1000,
 			];
 			$data   = $this->block->prepare_data( $fields, '', '' );
 
-			$this->assertEquals( 'Completed 999 of 1,000, only 1 to go!', $data['fields']['text'] );
+			$this->assertEquals( '1', $data['fields']['remaining'] );
+
+			$fields = [
+				'completed' => 999,
+				'target'    => 100,
+			];
+			$data   = $this->block->prepare_data( $fields, '', '' );
+
+			$this->assertEquals( '0', $data['fields']['remaining'] );
 		}
 
 		/**

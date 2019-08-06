@@ -28,14 +28,14 @@
 
     @include large-and-up {
       text-align: left;
-      font-size: 3rem;
+      font-size: $font-size-xxxl;
       font-weight: 900;
       margin-top: 84px;
       margin-bottom: 66px;
     }
 
     @include x-large-and-up {
-      font-size: 2.5rem;
+      font-size: $font-size-xxl;
       margin-bottom: 30px;
     }
   }
@@ -127,18 +127,18 @@
       }
 
       @include x-large-and-up {
-        font-size: 1.25rem;
+        font-size: $font-size-md;
       }
     }
   }
 
   p {
-    font-size: 0.9375rem;
+    font-size: $font-size-xs;
     line-height: 1.6;
     color: $dark-shade-black;
 
     @include medium-and-up {
-      font-size: 0.875rem;
+      font-size: $font-size-xxs;
       margin-bottom: 24px;
     }
 
@@ -147,7 +147,7 @@
     }
 
     @include x-large-and-up {
-      font-size: 0.9375rem;
+      font-size: $font-size-xs;
       margin-bottom: 24px;
     }
   }
@@ -156,15 +156,15 @@
     font-family: $roboto;
 
     @include medium-and-up {
-      font-size: 0.9375rem;
+      font-size: $font-size-xs;
     }
 
     @include large-and-up {
-      font-size: 0.875rem;
+      font-size: $font-size-xxs;
     }
 
     @include x-large-and-up {
-      font-size: 0.9375rem;
+      font-size: $font-size-xs;
     }
 
     &:hover {

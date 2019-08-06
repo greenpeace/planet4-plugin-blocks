@@ -22,7 +22,7 @@
   }
 
   .counter-target {
-    display: block;
+    display: inline-block;
 
     line-height: 1;
     font-size: 2rem;
@@ -32,7 +32,7 @@
 
   &.counter-style-plain {
     .counter-target {
-      font-size: 3rem;
+      font-size: $font-size-xxxl;
       font-weight: bold;
       margin-bottom: $space-lg;
     }
@@ -74,7 +74,7 @@
 
   .counter-text {
     margin-bottom: 0;
-    font-size: 1rem;
+    font-size: $font-size-sm;
   }
 
   .counter-text-goal_reached {

@@ -134,28 +134,26 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 		 */
 		public function prepare_data( $fields, $content, $shortcode_tag ) : array {
 
-			$completed = 0;
-			if ( array_key_exists( 'completed', $fields ) ) {
-				$completed = floatval( $fields['completed'] );
-			}
-			$target = floatval( $fields['target'] );
+			$completed = isset( $fields['completed'] ) ? floatval( $fields['completed'] ) : 0;
+			$target    = isset( $fields['target'] ) ? floatval( $fields['target'] ) : 0;
 
 			if ( array_key_exists( 'completed_api', $fields ) ) {
-				$response_api  = wp_safe_remote_get( $fields['completed_api'] );
-				$response_body = json_decode( $response_api['body'], true );
-				if ( is_array( $response_body ) && array_key_exists( 'unique_count', $response_body ) && is_int( $response_body['unique_count'] ) ) {
-					$completed = floatval( $response_body['unique_count'] );
+				$response_api = wp_safe_remote_get( $fields['completed_api'] );
+				if ( is_array( $response_api ) ) {
+					$response_body = json_decode( $response_api['body'], true );
+					if ( is_array( $response_body ) && array_key_exists( 'unique_count', $response_body ) && is_int( $response_body['unique_count'] ) ) {
+						$completed = floatval( $response_body['unique_count'] );
+					}
 				}
 			}
 
-			$fields['completed'] = $completed;
+			$remaining = $target > $completed ? $target - $completed : 0;
+
+			// Note: something seems to strip out sensible delimiters like {}, <>, [] and $$ in the WYSIWYG.
+			$fields['completed'] = number_format( $completed );
+			$fields['target']    = number_format( $target );
+			$fields['remaining'] = number_format( $remaining );
 			$fields['percent']   = $target > 0 ? round( $completed / $target * 100 ) : 0;
-			$fields['text']      = str_replace(
-				// Note: something seems to strip out sensible delimiters like {}, <>, [] and $$ in the WYSIWYG.
-				[ '%completed%', '%target%', '%remaining%' ],
-				[ number_format( $completed ), number_format( $target ), number_format( $target - $completed ) ],
-				$fields['text']
-			);
 
 			return [
 				'fields' => $fields,

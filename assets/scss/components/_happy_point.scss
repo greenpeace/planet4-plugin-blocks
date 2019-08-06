@@ -74,7 +74,7 @@
     margin-bottom: 24px;
 
     @include medium-and-up {
-      font-size: 1.75rem;
+      font-size: $font-size-xl;
       line-height: 34px;
       margin-bottom: 20px;
       color: $black;
@@ -92,7 +92,7 @@
   }
 
   h5 {
-    font-size: 1rem;
+    font-size: $font-size-sm;
     line-height: 24px;
 
     @include medium-and-up {

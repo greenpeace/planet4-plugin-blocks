@@ -1,4 +1,4 @@
-$(document).ready(function () {
+jQuery(function ($) {
   'use strict';
 
   $('.can-do-steps .col').hover(function () {

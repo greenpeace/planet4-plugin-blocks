@@ -66,7 +66,7 @@ function P4BlocksAdminUI(Select2FieldsSetup, P4FieldsSetup, WPShortcakeHooksSetu
   };
 }
 
-$(document).ready(function() {
+jQuery(function ($) {
   'use strict';
 
   const blocksMap = {

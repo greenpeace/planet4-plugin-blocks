@@ -23,7 +23,7 @@
 
   .article-list-item-headline {
     margin-top: 0;
-    font-size: 1.25rem;
+    font-size: $font-size-md;
     line-height: 1.5625rem;
     font-family: $headline-font;
     font-weight: $font-weight;
@@ -38,7 +38,7 @@
     font-family: $meta-font;
     font-style: normal;
     color: $meta-colour;
-    font-size: 1rem;
+    font-size: $font-size-sm;
     line-height: 1.5625rem;
     font-weight: $font-weight;
 
@@ -52,7 +52,7 @@
     .tag-item {
       font-family: $tag-font;
       color: $tag-colour;
-      font-size: 1rem;
+      font-size: $font-size-sm;
       line-height: 1.5625rem;
       margin-bottom: 0;
       font-weight: $font-weight;
@@ -74,7 +74,7 @@
   }
 
   .article-list-item-content {
-    font-size: 0.875rem;
+    font-size: $font-size-xxs;
     line-height: 1.375rem;
     font-weight: $regular;
   }
