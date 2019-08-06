@@ -141,7 +141,6 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 						'attr'    => 'header_size_' . $i,
 						'type'    => 'select',
 						'options' => [
-							0    => __( ' - Select Text Size - ', 'planet4-blocks-backend' ),
 							'h1' => 'h1',
 							'h2' => 'h2',
 							'h3' => 'h3',
@@ -230,7 +229,7 @@ if ( ! class_exists( 'CarouselHeader_Controller' ) ) {
 				$temp_array      = [
 					"header_$i"      => $attributes[ "header_$i" ] ?? '',
 					"header_size_$i" => $attributes[ "header_size_$i" ] ?? '',
-					"subheader_$i"   => $attributes[ "subheader_$i" ] ?? '',
+					"subheader_$i"   => $attributes[ "subheader_$i" ] ?? 'h1',
 					"description_$i" => $attributes[ "description_$i" ] ?? '',
 					"image_$i"       => $attributes[ "image_$i" ] ?? '',
 					"focus_image_$i" => $attributes[ "focus_image_$i" ] ?? '',
