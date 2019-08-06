@@ -36,7 +36,7 @@
 										<div class="container main-header">
 											<div class="carousel-captions-wrapper">
 												{% if ( attribute( fields, 'header_' ~ i ) ) %}
-													<{{ fields['header_size_' ~ i] }}>{{ carouselTools.truncateChars( attribute( fields, 'header_' ~ i ), 32 ) }}</{{ fields['header_size_' ~ i] }}>
+													<{{ fields['header_size_' ~ i]|default('h1') }}>{{ carouselTools.truncateChars( attribute( fields, 'header_' ~ i ), 32 ) }}</{{ fields['header_size_' ~ i]|default('h1') }}>
 												{% endif %}
 												{% if ( attribute( fields, 'description_' ~ i )  ) %}
 													<p>{{ carouselTools.truncateChars( attribute( fields, 'description_' ~ i ), 200 ) }}</p>

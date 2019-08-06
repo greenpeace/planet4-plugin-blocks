@@ -24,7 +24,7 @@
 						<div class="carousel-caption">
 							<div class="container main-header">
 								{% if ( attribute( fields, 'header_'~i ) ) %}
-									<h1>{{ attribute( fields, 'header_'~i ) }}</h1>
+									<{{ fields['header_size_' ~ i]|default('h1') }}>{{ attribute( fields, 'header_'~i ) }}</{{ fields['header_size_' ~ i]|default('h1') }}>
 								{% endif %}
 								{% if ( attribute( fields, 'subheader_'~i ) and fields.block_style != 'full-width-classic' ) %}
 									<h2>{{ attribute( fields, 'subheader_'~i ) }}</h2>
