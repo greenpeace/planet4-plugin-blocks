@@ -101,7 +101,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 						'label' => sprintf(
 							// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
 							__(
-								'Column %s: Header <br><i>Header is mandatory. In order for the task to be appeared title has to be filled.</i>',
+								'<i>In order for the column to appear at least <strong>Header or Body</strong> has to be filled.</i><br /><br />Column %s: Header',
 								'planet4-blocks-backend'
 							),
 							$i
