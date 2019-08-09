@@ -230,9 +230,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 			if ( static::LAYOUT_NO_IMAGE !== $columns_block_style ) {
 
 				if ( static::LAYOUT_TASKS === $columns_block_style || static::LAYOUT_IMAGES === $columns_block_style ) {
-					if ( $columns_set >= 3 ) {
-						$image_size = 'medium';
-					} elseif ( 2 === $columns_set ) {
+					if ( $columns_set >= 2 ) {
 						$image_size = 'articles-medium-large';
 					} else {
 						$image_size = 'large';
