@@ -39,6 +39,10 @@
 
       @include large-and-up {
         grid-template-columns: repeat(4, 1fr);
+
+        .post-content & {
+          grid-template-columns: repeat(3, 1fr);
+        }
       }
 
       .grid-item {
