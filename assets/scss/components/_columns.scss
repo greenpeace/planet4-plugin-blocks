@@ -717,6 +717,22 @@
 
     &.block-style-tasks {
       .can-do-steps {
+        .step-number {
+          @include large-and-up {
+            width: 100px;
+            height: 100px;
+            font-size: 3rem;
+            line-height: 90px;
+          }
+
+          @include x-large-and-up {
+            width: 126px;
+            height: 126px;
+            font-size: 4.375rem;
+            line-height: 114px;
+          }
+        }
+
         .step-info {
           .steps-action {
             a.btn {
