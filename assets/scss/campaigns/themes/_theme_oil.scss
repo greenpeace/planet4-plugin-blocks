@@ -14,9 +14,9 @@ body.theme-oil {
   $oil-pink: #ef629d;
   $oil-grey: #a5a8aa;
   $oil-black: #1f262a;
-  $bg-gradient-start: #30efe8;
-  $bg-gradient-end: #1fd59b;
-  $bg-button-alt: #27be9b;
+  $bg-gradient-start: $oil-red;
+  $bg-gradient-end: #e95332;
+  $bg-button-alt: #e64854;
   $oil-gradient-standard: linear-gradient(to right, $bg-gradient-start, $bg-gradient-end);
 
   $page-header-xl-width: 1140px;
@@ -85,7 +85,7 @@ body.theme-oil {
     }
 
     .page-header-subtitle {
-      font-size: 1.75rem;
+      font-size: $font-size-xl;
       line-height: 2.5rem;
     }
 
@@ -413,7 +413,7 @@ body.theme-oil {
     .can-do-steps {
       .step-number {
         background: $oil-gradient-standard;
-        font-size: 1.75rem;
+        font-size: $font-size-xl;
 
         .step-number-inner {
           background-image: url("images/oil/take-action.svg");
@@ -446,7 +446,7 @@ body.theme-oil {
           background-size: cover;
           color: black;
           font-family: $anton;
-          font-size: 0.9375rem;
+          font-size: $font-size-xs;
           height: 50px;
           line-height: 50px;
           width: 50px;
@@ -479,12 +479,51 @@ body.theme-oil {
     }
   }
 
+  .columns-block.block-style-image {
+    @include campaign_columns_style_image($anton);
+  }
+
   .columns-block.block-style-no_image {
     @include campaign_columns_style_no_image($anton);
   }
 
   .video-block {
     @include campaign_video($oil-gradient-standard);
+  }
+
+  .enform-side-style {
+    .form-caption {
+      padding-bottom: $space-xxl;
+
+      h1 {
+        font-size: 3.62rem;
+        line-height: 4.875rem;
+        color: white !important;
+      }
+
+      p {
+        font-size: $font-size-sm;
+        line-height: 1.875rem;
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .enform {
+      padding-bottom: 0;
+
+      h2 {
+        font-family: $roboto !important;
+      }
+
+      .submit button {
+        margin-bottom: 0;
+        box-sizing: border-box;
+        width: 100%;
+      }
+    }
   }
 
   /** IE/Edge only **/

@@ -133,7 +133,7 @@ $medium-image-height: 600px;
       }
 
       .carousel-caption .main-header {
-        h1 {
+        h1, h2, h3 {
           animation-name: initial-header-animation;
           animation-duration: 1s;
           animation-timing-function: ease-in-out;
@@ -203,7 +203,7 @@ $medium-image-height: 600px;
       }
 
       .carousel-caption .main-header {
-        h1, p {
+        h1, h2, h3, p {
           transform: translateX(0);
           transition: unset;
         }
@@ -257,7 +257,7 @@ $medium-image-height: 600px;
       opacity: 1;
 
       .carousel-caption .main-header .carousel-captions-wrapper {
-        h1, p {
+        h1, h2, h3, p {
           animation-name: texts-from-left-animation;
           animation-duration: $slide-transition-speed;
           animation-timing-function: ease-in-out;
@@ -276,7 +276,7 @@ $medium-image-height: 600px;
       opacity: 1;
 
       .carousel-caption .main-header .carousel-captions-wrapper {
-        h1, p {
+        h1, h2, h3, p {
           animation-name: texts-from-right-animation;
           animation-duration: $slide-transition-speed;
           animation-timing-function: ease-in-out;
@@ -388,16 +388,19 @@ $medium-image-height: 600px;
           padding-bottom: 54px;
         }
 
-        h1 {
-          font-size: 1.62rem;
-          margin-bottom: 10px;
+        h1, h2, h3 {
           width: 100%;
-          line-height: 1.2;
           font-weight: bold;
           color: $black;
           padding-left: 0;
           transition: unset;
           transform: translateX($text-slide-offset);
+        }
+
+        h1 {
+          font-size: 1.62rem;
+          margin-bottom: 18px;
+          line-height: 1.2;
 
           html[dir="rtl"] & {
             text-align: right;
@@ -405,27 +408,85 @@ $medium-image-height: 600px;
           }
 
           @include small-and-up {
-            font-size: 1.75rem;
+            font-size: $font-size-xl;
           }
 
           @include medium-and-up {
             font-size: 2.25rem;
+            margin-bottom: 24px;
           }
 
           @include large-and-up {
             max-width: 100%;
             width: 100%;
             color: $white;
-            margin-bottom: 20px;
+            margin-bottom: 32px;
             line-height: 1.2;
-            font-size: 2.5rem;
+            font-size: $font-size-xxl;
           }
 
           @include x-large-and-up {
-            font-size: 3rem;
+            font-size: $font-size-xxxl;
             line-height: 1.1;
             max-width: 100%;
             width: 100%;
+          }
+        }
+
+        h2 {
+          font-size: $font-size-lg;
+          margin-bottom: 10px;
+          line-height: 1.2;
+          transform: translateX($text-slide-offset);
+
+          html[dir="rtl"] & {
+            text-align: right;
+            padding-right: 0;
+          }
+
+          @include medium-and-up {
+            font-size: $font-size-xl;
+            margin-bottom: 18px;
+          }
+
+          @include large-and-up {
+            line-height: 1.2;
+            color: $white;
+            max-width: 100%;
+            width: 100%;
+          }
+
+          @include x-large-and-up {
+            font-size: $font-size-xxl;
+            margin-bottom: 24px;
+          }
+        }
+
+        h3 {
+          font-size: $font-size-md;
+          margin-bottom: 8px;
+          line-height: 1.2;
+
+          html[dir="rtl"] & {
+            text-align: right;
+            padding-right: 0;
+          }
+
+          @include medium-and-up {
+            font-size: $font-size-lg;
+            margin-bottom: 12px;
+          }
+
+          @include large-and-up {
+            line-height: 1.2;
+            color: $white;
+            max-width: 100%;
+            width: 100%;
+          }
+
+          @include x-large-and-up {
+            font-size: $font-size-xl;
+            margin-bottom: 18px;
           }
         }
 
@@ -450,7 +511,7 @@ $medium-image-height: 600px;
           transform: translateX($text-slide-offset);
 
           @include small-and-up {
-            font-size: 1rem;
+            font-size: $font-size-sm;
           }
 
           @include medium-and-up {
@@ -507,7 +568,7 @@ $medium-image-height: 600px;
           }
 
           .btn {
-            font-size: 0.875rem;
+            font-size: $font-size-xxs;
             line-height: 58px;
             width: auto;
             min-width: 240px;
@@ -532,7 +593,7 @@ $medium-image-height: 600px;
             }
 
             @include medium-and-up {
-              font-size: 1rem;
+              font-size: $font-size-sm;
               min-width: 280px;
 
               html[dir="rtl"] & {

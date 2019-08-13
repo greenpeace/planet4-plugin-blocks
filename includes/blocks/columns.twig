@@ -1,3 +1,5 @@
+{% set is_campaign = ( 'campaign' == fn( 'get_post_type' ) ) %}
+
 {% block columns %}
 	{% if ( fields ) %}
 		{% if fields.columns_block_style == 'tasks' %}
@@ -11,17 +13,18 @@
 						</header>
 					{% endif %}
 					{% if ( fields.columns_description ) %}
-						<p class="page-section-description">{{ fields.columns_description|e('wp_kses_post')|raw }}</p>
+						<div class="page-section-description">{{ fields.columns_description|e('wp_kses_post')|raw }}</div>
 					{% endif %}
 
 					<div class="row">
 						{% for i in 1..4 %}
-							{% if fields['title_'~i] %}
-								{% set title = fields['title_'~i] %}
-								{% set attachment = fields['attachment_'~i] %}
-								{% set description = fields['description_'~i] %}
-								{% set link = fields['link_'~i] %}
-								{% set cta_text = fields['cta_text_'~i] %}
+							{% set title = fields['title_'~i] %}
+							{% set attachment = fields['attachment_'~i] %}
+							{% set description = fields['description_'~i] %}
+							{% set link = fields['link_'~i] %}
+							{% set cta_text = fields['cta_text_'~i] %}
+
+							{% if title or description %}
 								<div class="col-md-6 col-lg column-wrap {% if cta_text and link %}has-cta{% endif %}">
 									{% if attachment and fields.columns_block_style != 'no_image' %}
 										<div class="attachment-container">
@@ -32,9 +35,9 @@
 									{% endif %}
 
 									<h3>
-										{% if link %}<a href="{{ link|e('esc_url') }}">{% endif %}
+										{% if link and not is_campaign %}<a href="{{ link|e('esc_url') }}">{% endif %}
 											{{ title|e('wp_kses_post')|raw }}
-										{% if link %}</a>{% endif %}
+										{% if link and not is_campaign %}</a>{% endif %}
 									</h3>
 									{% if description %}
 										<p>{{ description|e('wp_kses_post')|raw }}</p>

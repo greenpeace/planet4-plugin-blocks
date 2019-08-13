@@ -42,21 +42,21 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
         font-family: $header-font;
         font-weight: $header-weight;
         color: black;
-        font-size: 1.25rem;
+        font-size: $font-size-md;
         line-height: 1.5625rem;
       }
     }
 
     p {
       margin-bottom: 10px;
-      font-size: 0.875rem;
+      font-size: $font-size-xxs;
       line-height: 1.375rem;
     }
 
     a {
       font-family: $link-font;
       font-weight: $link-weight;
-      font-size: 0.875rem;
+      font-size: $font-size-xxs;
       line-height: 1.1875rem;
       text-transform: uppercase;
     }
@@ -83,6 +83,14 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
   }
 }
 
+@mixin campaign_columns_style_image() {
+  .column-wrap {
+    h3 {
+      font-family: $roboto !important;
+    }
+  }
+}
+
 @mixin campaign_columns_style_no_image($font, $header-colour: black, $header-weight: $regular) {
   h2 {
     @extend .page-section-header;
@@ -94,7 +102,7 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
 
     h3 > a {
       font-family: $font;
-      font-size: 1.75rem;
+      font-size: $font-size-xl;
       font-weight: $header-weight;
       line-height: 2.5rem;
       text-transform: uppercase;
@@ -108,6 +116,62 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
 
     .btn-secondary {
       display: none;
+    }
+  }
+}
+
+@mixin campaign_columns_style_image($font, $header-colour: black, $header-weight: $regular) {
+  margin-bottom: $space-lg;
+
+  h2.page-section-header {
+    line-height: 3rem;
+    font-size: 2.5rem;
+    margin-bottom: $space-xl;
+
+    @include large-and-up {
+      margin-bottom: $space-xxl;
+    }
+  }
+
+  .column-wrap {
+    margin-bottom: $space-xl;
+
+    @include medium-and-up {
+      &.has-cta {
+        padding-bottom: $space-xl + $space-md;
+      }
+    }
+
+    a {
+      text-transform: none;
+      width: 100%;
+      display: block;
+      text-align: left;
+      font-size: $font-size-lg;
+
+      &.call-to-action-link {
+        display: block;
+        font-size: 1rem;
+        text-align: center;
+        left: 0;
+
+        @include medium-and-up {
+          margin-top: $space-lg;
+        }
+      }
+    }
+
+    h3 {
+      margin-bottom: $space-lg;
+
+      font-family: $roboto !important;
+      font-weight: bold;
+      display: block;
+      text-align: left;
+    }
+
+    .attachment-container {
+      margin-bottom: $space-lg;
     }
   }
 }
@@ -163,14 +227,14 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
 
       h5 {
         color: black;
-        font-size: 1.25rem;
+        font-size: $font-size-md;
         font-weight: $regular;
         line-height: 1.5625rem;
         text-transform: uppercase;
       }
 
       p {
-        font-size: 1rem;
+        font-size: $font-size-sm;
         line-height: 1.5625rem;
         opacity: unset;
       }
@@ -210,7 +274,7 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
       border-radius: 0;
       display: flex;
       flex-direction: column;
-      font-size: 1.25rem;
+      font-size: $font-size-md;
       height: 70px;
       justify-content: center;
       line-height: 1.5625rem;
@@ -226,7 +290,7 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
         border: none;
         color: inherit;
         float: unset;
-        font-size: 1rem;
+        font-size: $font-size-sm;
         font-weight: $regular;
         padding: unset;
         position: absolute;

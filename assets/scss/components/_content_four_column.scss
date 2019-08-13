@@ -67,7 +67,7 @@
       }
 
       h4 {
-        font-size: 0.875rem;
+        font-size: $font-size-xxs;
         line-height: 1.2;
         font-weight: 500;
         padding: 0;
@@ -79,7 +79,7 @@
         }
 
         @include large-and-up {
-          font-size: 1rem;
+          font-size: $font-size-sm;
         }
 
         @include large-and-up {
@@ -88,32 +88,32 @@
       }
 
       p {
-        font-size: 1rem;
+        font-size: $font-size-sm;
         margin-bottom: 0;
 
         @include large-and-up {
-          font-size: 0.875rem;
+          font-size: $font-size-xxs;
           line-height: 1.6;
         }
 
         @include x-large-and-up {
-          font-size: 0.9375rem;
+          font-size: $font-size-xs;
         }
 
         &.publication-date {
           font-family: $roboto;
-          font-size: 0.875rem;
+          font-size: $font-size-xxs;
           line-height: 1.6;
           font-style: italic;
           font-weight: 300;
           color: $grey-60;
 
           @include large-and-up {
-            font-size: 0.875rem;
+            font-size: $font-size-xxs;
           }
 
           @include x-large-and-up {
-            font-size: 0.9375rem;
+            font-size: $font-size-xs;
           }
         }
       }

@@ -101,7 +101,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 						'label' => sprintf(
 							// translators: placeholder needs to represent the ordinal of the task/column, eg. 1st, 2nd etc.
 							__(
-								'Column %s: Header <br><i>Header is mandatory. In order for the task to be appeared title has to be filled.</i>',
+								'<i>In order for the column to appear at least <strong>Header or Body</strong> has to be filled.</i><br /><br />Column %s: Header',
 								'planet4-blocks-backend'
 							),
 							$i
@@ -230,9 +230,7 @@ if ( ! class_exists( 'Columns_Controller' ) ) {
 			if ( static::LAYOUT_NO_IMAGE !== $columns_block_style ) {
 
 				if ( static::LAYOUT_TASKS === $columns_block_style || static::LAYOUT_IMAGES === $columns_block_style ) {
-					if ( $columns_set >= 3 ) {
-						$image_size = 'medium';
-					} elseif ( 2 === $columns_set ) {
+					if ( $columns_set >= 2 ) {
 						$image_size = 'articles-medium-large';
 					} else {
 						$image_size = 'large';

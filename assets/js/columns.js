@@ -1,4 +1,4 @@
-$(document).ready(function() {
+jQuery(function ($) {
   'use strict';
 
   // Check header heights to align them all vertically to the max one

@@ -19,7 +19,7 @@
   @include letter-spacing($letter-spacing);
   height: 50px;
   line-height: 50px;
-  font-size: 1rem;
+  font-size: $font-size-sm;
   transition: background $transition ease-in-out;
   padding: 0 40px;
   display: inline-block;

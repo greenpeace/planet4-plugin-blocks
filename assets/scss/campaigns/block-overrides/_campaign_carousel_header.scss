@@ -2,7 +2,9 @@ body.campaign-template-default {
   .carousel-header_full-width-classic,
   .carousel-header {
     .action-button {
-      display: none;
+      a {
+        display: none;
+      }
     }
   }
 }
