@@ -120,6 +120,62 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
   }
 }
 
+@mixin campaign_columns_style_image($font, $header-colour: black, $header-weight: $regular) {
+  margin-bottom: $space-lg;
+
+  h2.page-section-header {
+    line-height: 3rem;
+    font-size: 2.5rem;
+    margin-bottom: $space-xl;
+
+    @include large-and-up {
+      margin-bottom: $space-xxl;
+    }
+  }
+
+  .column-wrap {
+    margin-bottom: $space-xl;
+
+    @include medium-and-up {
+      &.has-cta {
+        padding-bottom: $space-xl + $space-md;
+      }
+    }
+
+    a {
+      text-transform: none;
+      width: 100%;
+      display: block;
+      text-align: left;
+      font-size: $font-size-lg;
+
+      &.call-to-action-link {
+        display: block;
+        font-size: 1rem;
+        text-align: center;
+        left: 0;
+
+        @include medium-and-up {
+          margin-top: $space-lg;
+        }
+      }
+    }
+
+    h3 {
+      margin-bottom: $space-lg;
+
+      font-family: $roboto !important;
+      font-weight: bold;
+      display: block;
+      text-align: left;
+    }
+
+    .attachment-container {
+      margin-bottom: $space-lg;
+    }
+  }
+}
+
 @mixin campaign_columns_style_tasks {
   font-size: 1.125rem;
   line-height: 1.875rem;
