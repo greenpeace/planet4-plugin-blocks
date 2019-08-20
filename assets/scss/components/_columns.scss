@@ -723,6 +723,7 @@
             height: 100px;
             font-size: 3rem;
             line-height: 90px;
+            margin-bottom: $space-lg;
           }
 
           @include x-large-and-up {
@@ -730,6 +731,7 @@
             height: 126px;
             font-size: 4.375rem;
             line-height: 114px;
+            margin-bottom: $space-xl;
           }
         }
 
