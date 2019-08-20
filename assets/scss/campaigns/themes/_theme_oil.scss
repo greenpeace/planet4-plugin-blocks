@@ -491,41 +491,6 @@ body.theme-oil {
     @include campaign_video($oil-gradient-standard);
   }
 
-  .enform-side-style {
-    .form-caption {
-      padding-bottom: $space-xxl;
-
-      h1 {
-        font-size: 3.62rem;
-        line-height: 4.875rem;
-        color: white !important;
-      }
-
-      p {
-        font-size: $font-size-sm;
-        line-height: 1.875rem;
-      }
-
-      p:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    .enform {
-      padding-bottom: 0;
-
-      h2 {
-        font-family: $roboto !important;
-      }
-
-      .submit button {
-        margin-bottom: 0;
-        box-sizing: border-box;
-        width: 100%;
-      }
-    }
-  }
-
   /** IE/Edge only **/
   _:-ms-lang(x), .page-header { /* stylelint-disable-line */
     background: mix($bg-gradient-start, $bg-gradient-end, 50%);
