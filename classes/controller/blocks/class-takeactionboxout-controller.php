@@ -66,6 +66,70 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 					'type'        => 'post_select',
 					'query'       => $take_action_pages_args,  // Filter select options only with ACT page children.
 				],
+				[
+					'label' => '<p class="field-caption">' . __( 'Or customise your take action boxout', 'planet4-blocks-backend' ) . '</p>' . __( 'Custom Title', 'planet4-blocks-backend' ),
+					'attr'  => 'custom_title',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Enter custom title', 'planet4-blocks-backend' ),
+						'required'    => '',
+					],
+				],
+				[
+					'label' => __( 'Custom excerpt', 'planet4-blocks-backend' ),
+					'attr'  => 'custom_excerpt',
+					'type'  => 'textarea',
+					'meta'  => [
+						'placeholder' => __( 'Enter custom excerpt', 'planet4-blocks-backend' ),
+					],
+				],
+				[
+					'label' => __( 'Custom Link', 'planet4-blocks-backend' ),
+					'attr'  => 'custom_link',
+					'type'  => 'url',
+					'meta'  => [
+						'placeholder' => __( 'Add custom link', 'planet4-blocks-backend' ),
+					],
+				],
+				[
+					'label' => __( 'Custom Link Text', 'planet4-blocks-backend' ),
+					'attr'  => 'custom_link_text',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Enter custom link text', 'planet4-blocks-backend' ),
+					],
+				],
+				[
+					'attr'        => 'custom_link_new_tab',
+					'label'       => __( 'Open in a new Tab', 'planet4-blocks-backend' ),
+					'description' => __( 'Open custom link in new tab', 'planet4-blocks-backend' ),
+					'type'        => 'checkbox',
+					'value'       => 'false',
+				],
+				[
+					'attr'        => 'tag_ids',
+					'label'       => __( 'Select Tags', 'planet4-blocks-backend' ),
+					'description' => __( 'Associate this block with Actions that have specific Tags', 'planet4-blocks-backend' ),
+					'type'        => 'term_select',
+					'taxonomy'    => 'post_tag',
+					'multiple'    => true,
+					'meta'        => [
+						'select2_options' => [
+							'allowClear'         => true,
+							'placeholder'        => __( 'Select Tags', 'planet4-blocks-backend' ),
+							'closeOnSelect'      => true,
+							'minimumInputLength' => 0,
+						],
+					],
+				],
+				[
+					'label'       => __( 'Select background image', 'planet4-blocks-backend' ),
+					'attr'        => 'background_image',
+					'type'        => 'attachment',
+					'libraryType' => [ 'image' ],
+					'addButton'   => __( 'Select Image', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Select Image', 'planet4-blocks-backend' ),
+				],
 			];
 
 			// Define the Shortcode UI arguments.
@@ -90,6 +154,36 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 		 */
 		public function prepare_data( $fields, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 			$page_id = $fields['take_action_page'] ?? '';
+
+			if ( empty( $page_id ) ) {
+				$tag_ids = $fields['tag_ids'] ?? '';
+
+				if ( empty( $tag_ids ) || 1 !== preg_match( '/^\d+(,\d+)*$/', $tag_ids ) ) {
+					$tags = [];
+				} else {
+					// Explode comma separated list of tag ids and get an array of \WP_Terms objects.
+					$tags = get_tags( [ 'include' => $tag_ids ] );
+				}
+
+				if ( ! empty( $fields['background_image'] ) ) {
+					list( $src ) = wp_get_attachment_image_src( $fields['background_image'], 'large' );
+				}
+
+				$block = [
+					'campaigns' => $tags,
+					'title'     => $fields['custom_title'] ?? '',
+					'excerpt'   => $fields['custom_excerpt'] ?? '',
+					'link'      => $fields['custom_link'] ?? '',
+					'new_tab'   => $fields['custom_link_new_tab'] ?? false,
+					'link_text' => $fields['custom_link_text'] ?? '',
+					'image'     => $src ?? '',
+				];
+
+				$data = [
+					'boxout' => $block,
+				];
+				return $data;
+			}
 
 			$args = [
 				'p'         => intval( $page_id ), // ID of a page, post.
@@ -126,6 +220,7 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 				'title'     => null === $page ? '' : $page->post_title,
 				'excerpt'   => null === $page ? '' : $page->post_excerpt,
 				'link'      => null === $page ? '' : get_permalink( $page ),
+				'new_tab'   => false,
 				'link_text' => $options['take_action_covers_button_text'] ?? __( 'take action', 'planet4-blocks' ),
 				'image'     => null === $page ? '' : get_the_post_thumbnail_url( $page, 'large' ),
 			];
