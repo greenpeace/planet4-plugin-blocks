@@ -20,7 +20,7 @@
 				<p>{{ boxout.excerpt|e('wp_kses_post')|excerpt(25)|raw }}</p>
 			{% endif %}
 			{% if ( boxout.link ) %}
-				<a class="btn btn-action btn-block cover-card-btn" href="{{ boxout.link }}">{{ boxout.link_text }}</a>
+				<a class="btn btn-action btn-block cover-card-btn" {{  'true' == boxout.new_tab ? 'target="_blank"' }} href="{{ boxout.link }}">{{ boxout.link_text }}</a>
 			{% endif %}
 		</section>
 	{% endif %}
