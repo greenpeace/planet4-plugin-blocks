@@ -1,10 +1,39 @@
 @font-face {
-  font-family: sanctuary;
+  font-family: Sanctuary;
   src: url("assets/fonts/SanctuaryLC-Regular.otf");
 }
+
 @font-face {
   font-family: "Save the Arctic";
   src: url("assets/fonts/save-the-arctic.otf");
+}
+
+@font-face {
+  font-family: Jost;
+  src: url("assets/fonts/Jost-Book.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Jost;
+  src: url("assets/fonts/Jost-BookItalic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Jost;
+  src: url("assets/fonts/Jost-Black.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Jost;
+  src: url("assets/fonts/Jost-BlackItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800");
