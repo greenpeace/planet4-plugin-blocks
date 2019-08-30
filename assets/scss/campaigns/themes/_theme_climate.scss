@@ -39,6 +39,14 @@ body.theme-climate {
     box-sizing: content-box;
   }
 
+  .block.enform-wrap.enform-side-style {
+    .form-caption {
+      h1 {
+        text-transform: none;
+      }
+    }
+  }
+
   .btn-primary {
     @include climate-button;
 
