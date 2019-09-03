@@ -102,7 +102,7 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 				[
 					'label'       => __( 'Text', 'planet4-blocks-backend' ),
 					'attr'        => 'text',
-					'type'        => 'text',
+					'type'        => 'textarea',
 					'description' => __( 'These placeholders can be used: ', 'planet4-blocks-backend' ) .
 								'<code>%completed%</code>, <code>%target%</code>, <code>%remaining%</code>',
 					'meta'        => [
