@@ -14,7 +14,7 @@ function TakeActionBoxoutBlock() {
 			$( '[name="custom_link_text"]' ).val() ||
 			$( '[name="tag_ids"]' ).val() ||
 			$( '.shortcake-attachment-preview' ).length > 0 ||
-      ( $( '[name="custom_link_new_tab"]' ) && $( '[name="custom_link_new_tab"]' )[0].checked ) ) {
+      ( $( '[name="custom_link_new_tab"]' )[0] && $( '[name="custom_link_new_tab"]' )[0].checked ) ) {
       $( '.shortcode-ui-post-select' ).prop( 'disabled', true );
     } else if ( $( '.shortcode-ui-post-select' ).val() ) {
       $( '[name="custom_title"]' ).prop( 'disabled', true );
