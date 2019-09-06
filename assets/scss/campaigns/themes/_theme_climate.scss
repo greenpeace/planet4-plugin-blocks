@@ -23,6 +23,9 @@ body.theme-climate {
   $page-header-medium-width: 720px;
   $page-header-small-width: 540px;
 
+  font-family: $jost;
+  background: #f8f7f7 !important;
+
   @mixin climate-button($background: $climate-green, $foreground: white) {
     @include button($background, $foreground, $jost, -30);
 
@@ -30,9 +33,6 @@ body.theme-climate {
     transition: none;
     line-height: 54px;
   }
-
-  font-family: $jost;
-  background: white;
 
   .navigation-bar_border {
     border-bottom: 4px solid white;
@@ -66,7 +66,23 @@ body.theme-climate {
   }
 
   .page-section-header {
-    @include page-section-header($jost);
+    @include page-section-header($jost, $dark-shade-black, 800, 2rem);
+    margin-bottom: $space-md;
+    font-size: 1.75rem;
+
+    @include medium-and-up {
+      font-size: 2.5rem;
+    }
+  }
+
+  .page-section-description {
+    font-size: $font-size-sm;
+    line-height: 1.2;
+    margin-bottom: 32px;
+
+    @include medium-and-up {
+      width: 60%;
+    }
   }
 
   a {
@@ -548,6 +564,8 @@ body.theme-climate {
   }
 
   .counter-block {
+    text-align: left;
+
     @include campaign-counter($climate-red, $jost);
   }
 }
