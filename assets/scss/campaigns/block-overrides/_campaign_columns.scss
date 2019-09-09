@@ -120,7 +120,7 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
   }
 }
 
-@mixin campaign_columns_style_image($font, $header-colour: black, $header-weight: $regular) {
+@mixin campaign_columns_style_image($font: $roboto, $header-colour: black, $header-weight: $regular) {
   margin-bottom: $space-lg;
 
   h2.page-section-header {
@@ -164,7 +164,7 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
     h3 {
       margin-bottom: $space-lg;
 
-      font-family: $roboto !important;
+      font-family: $font !important;
       font-weight: bold;
       display: block;
       text-align: left;

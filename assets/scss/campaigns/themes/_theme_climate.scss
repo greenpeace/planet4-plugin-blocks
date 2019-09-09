@@ -68,10 +68,11 @@ body.theme-climate {
   .page-section-header {
     @include page-section-header($jost, $dark-shade-black, 800, 2rem);
     margin-bottom: $space-md;
-    font-size: 1.75rem;
+    font-size: $font-size-xl;
+    text-transform: capitalize;
 
     @include medium-and-up {
-      font-size: 2.5rem;
+      font-size: $font-size-xxl;
     }
   }
 
