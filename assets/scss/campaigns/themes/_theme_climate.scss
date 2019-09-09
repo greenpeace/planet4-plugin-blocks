@@ -513,7 +513,7 @@ body.theme-climate {
   }
 
   .columns-block.block-style-no_image {
-    @include campaign_columns_style_no_image($jost);
+    @include campaign_columns_style_no_image($jost, black, bold, none);
   }
 
   .video-block {
