@@ -50,6 +50,7 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 		 */
 		public function plugin_blocks_report() {
 			global $wpdb, $shortcode_tags;
+			$wpdb_prefix = $wpdb->prefix;
 
 			// Array filtering on shortcake shortcodes.
 			$blocks = array_filter( array_keys( $shortcode_tags ), [ $this, 'is_shortcake' ] );
@@ -87,11 +88,13 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 			}
 
 			// Add to the report a breakdown of different styles for carousel Header
-			$sql     = "SELECT ID, post_title
-                        FROM ". $wpdb->prefix . "posts 
-                        WHERE post_status = 'publish'
-                        AND `post_content` REGEXP 'shortcake_carousel_header.*full-width-classic'";
-			$results = $wpdb->get_results( $sql );
+			$sql = 'SELECT ID, post_title
+                    FROM %1$s 
+                    WHERE post_status = \'publish\'
+                        AND `post_content` REGEXP \'shortcake_carousel_header.*full-width-classic\'';
+
+			$prepared_sql = $wpdb->prepare( $sql, $wpdb->posts );
+			$results      = $wpdb->get_results( $prepared_sql );
 			echo '<hr>';
 			echo '<h2>Carousel Header Full Width Classic style</h2>';
 			echo '<table><tr style="text-align: left"><th>ID</th><th>Title</th></tr>';
@@ -104,15 +107,17 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 			// Add to the report a breakdown of different styles for carousel Header
 			// Given that the default (if no style is defined) is the Slide to Gray, include in the query
 			// everything that is not Full Width Classic.
-			$sql     = "SELECT ID, post_title
-                        FROM ". $wpdb->prefix . "posts 
-                        WHERE post_status = 'publish'
-                        AND `post_content` REGEXP 'shortcake_carousel_header'
+			$sql = 'SELECT ID, post_title
+                    FROM %1$s 
+                    WHERE post_status = \'publish\'
+                        AND `post_content` REGEXP \'shortcake_carousel_header\'
                         AND ID NOT IN (SELECT ID
-                            FROM ". $wpdb->prefix . "posts 
-                            WHERE post_status = 'publish'
-                            AND `post_content` REGEXP 'shortcake_carousel_header.*full-width-classic')";
-			$results = $wpdb->get_results( $sql );
+                            FROM %2$s 
+                            WHERE post_status = \'publish\'
+                            AND `post_content` REGEXP \'shortcake_carousel_header.*full-width-classic\')';
+
+			$prepared_sql = $wpdb->prepare( $sql, [ $wpdb->posts, $wpdb->posts ] );
+			$results      = $wpdb->get_results( $prepared_sql );
 			echo '<hr>';
 			echo '<h2>Carousel Header Zoom and Slide to Grey</h2>';
 			echo '<table><tr style="text-align: left"><th>ID</th><th>Title</th></tr>';
@@ -125,33 +130,47 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 
 			// Add to the report a breakdown of which tags are using a redirect page and which do not
 			// The first query shows the ones that do not use a redirect page
-			$sql = "( SELECT term.name, tt.term_id 
-							FROM " . $wpdb->prefix . "term_taxonomy AS tt, 
-							" . $wpdb->prefix . "terms AS term, 
-							" . $wpdb->prefix . "termmeta AS tm 
-							WHERE tt.`taxonomy`='post_tag' 
+			$sql = '( SELECT term.name, tt.term_id 
+							FROM %1$sterm_taxonomy AS tt, 
+								 %2$sterms AS term, 
+								 %3$stermmeta AS tm 
+							WHERE tt.`taxonomy`= \'post_tag\' 
 							AND term.term_id = tt.term_id 
 							AND tm.term_id=tt.term_id 
-							AND tm.meta_key='redirect_page' 
-							AND tm.meta_value ='' )
+							AND tm.meta_key=\'redirect_page\' 
+							AND tm.meta_value =\'\' )
 						UNION 
 						( SELECT term.name, tt.term_id 
-							FROM " . $wpdb->prefix . "term_taxonomy AS tt, 
-							" . $wpdb->prefix . "terms AS term, 
-							" . $wpdb->prefix . "termmeta AS tm
-							WHERE tt.`taxonomy`='post_tag' 
+							FROM %4$sterm_taxonomy AS tt, 
+								 %5$sterms AS term, 
+								 %6$stermmeta AS tm
+							WHERE tt.`taxonomy`=\'post_tag\' 
 							AND term.term_id = tt.term_id 
 							AND tm.term_id=tt.term_id 
 							AND tm.term_id NOT IN (SELECT tt.term_id 
-													FROM " . $wpdb->prefix . "term_taxonomy AS tt, 
-													" . $wpdb->prefix . "terms AS term, 
-													" . $wpdb->prefix . "termmeta AS tm 
-													WHERE tt.`taxonomy`='post_tag' 
+													FROM %7$sterm_taxonomy AS tt, 
+														 %8$sterms AS term, 
+														 %9$stermmeta AS tm 
+													WHERE tt.`taxonomy`=\'post_tag\' 
 													AND term.term_id = tt.term_id 
 													AND tm.term_id=tt.term_id 
-													AND tm.meta_key='redirect_page')
-							GROUP BY term.name, tt.term_id )";
-			$results = $wpdb->get_results( $sql );
+													AND tm.meta_key=\'redirect_page\')
+							GROUP BY term.name, tt.term_id )';
+			$prepared_sql = $wpdb->prepare(
+				$sql,
+				[
+					$wpdb_prefix,
+					$wpdb_prefix,
+					$wpdb_prefix,
+					$wpdb_prefix,
+					$wpdb_prefix,
+					$wpdb_prefix,
+					$wpdb_prefix,
+					$wpdb_prefix,
+					$wpdb_prefix
+				]
+			);
+			$results = $wpdb->get_results( $prepared_sql );
 			echo '<hr>';
 			echo '<h2>Tags without redirection page</h2>';
 			echo '<table><tr style="text-align: left"><th>ID</th><th>Title</th></tr>';
@@ -163,14 +182,24 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 
 			// Add to the report a breakdown of which tags are using a redirect page and which do not
 			// The second query shows the ones that do use a redirect page
-			$sql     = "SELECT term.name, tm.meta_value, tt.term_id
-						FROM " . $wpdb->prefix . "term_taxonomy AS tt, " . $wpdb->prefix . "terms AS term, " . $wpdb->prefix . "termmeta AS tm
-						WHERE tt.`taxonomy`='post_tag' 
+			$sql     = 'SELECT term.name, tm.meta_value, tt.term_id
+						FROM %1$sterm_taxonomy AS tt, 
+							 %2$sterms AS term, 
+							 %3$stermmeta AS tm
+						WHERE tt.`taxonomy`=\'post_tag\' 
 						AND term.term_id = tt.term_id
 						AND tm.term_id=tt.term_id
-						AND tm.meta_key='redirect_page'
-						AND tm.meta_value !=''";
-			$results = $wpdb->get_results( $sql );
+						AND tm.meta_key=\'redirect_page\'
+						AND tm.meta_value !=\'\'';
+			$prepared_sql = $wpdb->prepare(
+				$sql,
+				[
+					$wpdb_prefix,
+					$wpdb_prefix,
+					$wpdb_prefix,
+				]
+			);
+			$results = $wpdb->get_results( $prepared_sql );
 			echo '<hr>';
 			echo '<h2>Tags that use a redirection page</h2>';
 			echo '<table><tr style="text-align: left"><th>ID</th><th>Title</th></tr>';
