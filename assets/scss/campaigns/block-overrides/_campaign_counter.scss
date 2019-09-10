@@ -14,6 +14,10 @@
     margin-bottom: 0;
     color: $counter-color;
     font-weight: bold;
-    font-size: $font-size-md;
+    font-size: $font-size-lg;
+
+    @include medium-and-up {
+      font-size: $font-size-xl;
+    }
   }
 }
