@@ -91,7 +91,7 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
   }
 }
 
-@mixin campaign_columns_style_no_image($font, $header-colour: black, $header-weight: $regular) {
+@mixin campaign_columns_style_no_image($font, $header-colour: black, $header-weight: $regular, $text-transform: uppercase) {
   h2 {
     @extend .page-section-header;
     margin-bottom: 40px;
@@ -100,12 +100,13 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
   .column-wrap {
     padding-bottom: 0;
 
-    h3 > a {
+    h3 > a,
+    h3 {
       font-family: $font;
       font-size: $font-size-xl;
       font-weight: $header-weight;
       line-height: 2.5rem;
-      text-transform: uppercase;
+      text-transform: $text-transform;
     }
 
     p {
@@ -120,7 +121,7 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
   }
 }
 
-@mixin campaign_columns_style_image($font, $header-colour: black, $header-weight: $regular) {
+@mixin campaign_columns_style_image($font: $roboto, $header-colour: black, $header-weight: $regular) {
   margin-bottom: $space-lg;
 
   h2.page-section-header {
@@ -164,7 +165,7 @@ $link-font, $link-weight, $link-icon: none, $link-icon-hover: none) {
     h3 {
       margin-bottom: $space-lg;
 
-      font-family: $roboto !important;
+      font-family: $font !important;
       font-weight: bold;
       display: block;
       text-align: left;

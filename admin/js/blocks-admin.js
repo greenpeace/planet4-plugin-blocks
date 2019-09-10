@@ -9,6 +9,7 @@
     CarouselHeaderBlock,
     SocialMediaBlock,
     SubmenuBlock,
+    TakeActionBoxoutBlock,
     GalleryBlock
 */
 
@@ -70,13 +71,14 @@ jQuery(function ($) { // eslint-disable-line no-unused-vars
   'use strict';
 
   const blocksMap = {
-    'ArticlesBlock'       : ArticlesBlock,
-    'CarouselHeaderBlock' : CarouselHeaderBlock,
-    'ColumnsBlock'        : ColumnsBlock,
-    'NewCoversBlock'      : NewCoversBlock,
-    'SocialMediaBlock'    : SocialMediaBlock,
-    'SubmenuBlock'        : SubmenuBlock,
-    'GalleryBlock'        : GalleryBlock
+    'ArticlesBlock'         : ArticlesBlock,
+    'CarouselHeaderBlock'   : CarouselHeaderBlock,
+    'ColumnsBlock'          : ColumnsBlock,
+    'NewCoversBlock'        : NewCoversBlock,
+    'SocialMediaBlock'      : SocialMediaBlock,
+    'SubmenuBlock'          : SubmenuBlock,
+    'TakeActionBoxoutBlock' : TakeActionBoxoutBlock,
+    'GalleryBlock'          : GalleryBlock
   };
 
   const p4BlocksUI = new P4BlocksAdminUI(Select2FieldsSetup, P4FieldsSetup, WPShortcakeHooksSetup, blocksMap);
