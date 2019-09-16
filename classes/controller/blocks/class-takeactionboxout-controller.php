@@ -58,6 +58,11 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 				];
 			}
 
+			$take_action_pages_args += [
+				'orderby' => 'post_title',
+				'order'   => 'ASC',
+			];
+
 			$fields = [
 				[
 					'attr'        => 'take_action_page',
