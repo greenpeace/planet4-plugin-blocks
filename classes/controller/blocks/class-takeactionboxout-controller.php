@@ -70,6 +70,14 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 					'description' => __( 'Associate this block with a Take Action page', 'planet4-blocks-backend' ),
 					'type'        => 'post_select',
 					'query'       => $take_action_pages_args,  // Filter select options only with ACT page children.
+					'meta'        => [
+						'select2_options' => [
+							'allowClear'         => true,
+							'placeholder'        => __( 'Select Take Action Page', 'planet4-blocks-backend' ),
+							'closeOnSelect'      => true,
+							'minimumInputLength' => 0,
+						],
+					]
 				],
 				[
 					'label' => '<p class="field-caption">' . __( 'Or customise your take action boxout (if inserted in POSTS, the block will float on the side, if inserted in PAGES, it will appear in the page body)', 'planet4-blocks-backend' ) . '</p>' . __( 'Custom Title', 'planet4-blocks-backend' ),
