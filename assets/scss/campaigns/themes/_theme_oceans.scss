@@ -48,7 +48,9 @@ body.theme-oceans {
   }
 
   .btn-secondary {
-    @include oceans-button($oceans-aqua);
+    &:not(#hidecookie) {
+      @include oceans-button($oceans-aqua);
+    }
   }
 
   .page-section-header {

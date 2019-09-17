@@ -29,11 +29,13 @@ body.theme-plastic {
   }
 
   .btn-secondary {
-    @include plastics-button($plastics-blue-light);
+    &:not(#hidecookie) {
+      @include plastics-button($plastics-blue-light);
 
-    &:hover {
-      background: $plastics-blue-mid;
-      color: white;
+      &:hover {
+        background: $plastics-blue-mid;
+        color: white;
+      }
     }
   }
 

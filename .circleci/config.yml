@@ -2,7 +2,7 @@ workflows:
   version: 2
   main:
     jobs:
-      - php70-build
+      - php72-build
       - php73-build
       - build-and-test-codeception:
           context: org-global
@@ -61,20 +61,20 @@ job-references:
       - run:
           name: "stylelint"
           when: always
-          command: stylelint $HOME/project/assets/scss/**/*.scss $HOME/project/assets/css/*.css $HOME/project/admin/css/*.css $HOME/project/admin/scss/*.scss
+          command: stylelint "$HOME/project/assets/scss/**/*.scss" "$HOME/project/admin/css/*.css" "$HOME/project/admin/scss/*.scss"
       - run:
           name: "eslint"
           when: always
-          command: eslint $HOME/project/assets/js/**/*.js $HOME/project/admin/js/blocks/*.js
+          command: eslint "$HOME/project/assets/js/**/*.js" "$HOME/project/admin/js/blocks/*.js"
       - store_test_results:
           path: /tmp/test-results
 
 
 jobs:
-  php70-build:
+  php72-build:
     <<: *php_job
     docker:
-      - image: gcr.io/planet-4-151612/p4-unit-tests:php7.0-develop
+      - image: gcr.io/planet-4-151612/p4-unit-tests:php7.2-develop
       - image: *mysql_image
 
   php73-build:
