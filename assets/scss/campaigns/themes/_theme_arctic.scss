@@ -31,15 +31,17 @@ body.theme-arctic {
   }
 
   .btn-secondary {
-    @include arctic-button(white, $arctic-blue);
-    border: 3px solid $arctic-light-blue;
-    height: 44px;
-    line-height: 38px;
+    &:not(#hidecookie) {
+      @include arctic-button(white, $arctic-blue);
+      border: 3px solid $arctic-light-blue;
+      height: 44px;
+      line-height: 38px;
 
-    &:hover {
-      background: $arctic-light-blue;
-      border-color: $arctic-light-blue;
-      color: $arctic-blue;
+      &:hover {
+        background: $arctic-light-blue;
+        border-color: $arctic-light-blue;
+        color: $arctic-blue;
+      }
     }
   }
 

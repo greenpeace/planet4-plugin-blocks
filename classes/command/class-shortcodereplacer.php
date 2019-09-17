@@ -62,6 +62,12 @@ class ShortcodeReplacer {
 			'nopaging'    => true,
 		];
 
+		// If wpml plugin is installed and activated enable suppress filters,
+		// so we can retrieve posts for all languages.
+		if ( function_exists( 'icl_object_id' ) ) {
+			$args['suppress_filters'] = true;
+		}
+
 		if ( $post_id ) {
 			$args['p'] = $post_id;
 		}

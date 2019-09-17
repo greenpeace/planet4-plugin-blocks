@@ -30,11 +30,13 @@ body.theme-antarctic {
   }
 
   .btn-secondary {
-    @include antarctic-button($antarctic-dark-blue);
+    &:not(#hidecookie) {
+      @include antarctic-button($antarctic-dark-blue);
 
-    &:hover {
-      color: white;
-      background: $antarctic-light-blue;
+      &:hover {
+        color: white;
+        background: $antarctic-light-blue;
+      }
     }
   }
 

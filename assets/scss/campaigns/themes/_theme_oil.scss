@@ -45,11 +45,13 @@ body.theme-oil {
   }
 
   .btn-secondary {
-    @include oil-button(black, white);
+    &:not(#hidecookie) {
+      @include oil-button(black, white);
 
-    &:hover {
-      color: black;
-      background: $oil-gradient-standard;
+      &:hover {
+        color: black;
+        background: $oil-gradient-standard;
+      }
     }
   }
 

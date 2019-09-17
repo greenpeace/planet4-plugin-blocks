@@ -20,6 +20,7 @@ const path_style = 'assets/scss/style.scss';
 
 const path_admin_dest = './admin/';
 const path_scss_admin = './admin/scss/**/*.scss';
+const path_css_admin = './admin/css/**/*.css';
 const path_style_admin = './admin/scss/blocks-admin.scss';
 
 const blocks_javascripts = [
@@ -40,7 +41,7 @@ let error_handler = {
 };
 
 function lint_css() {
-  return gulp.src([path_scss, path_scss_admin])
+  return gulp.src([path_scss, path_scss_admin, path_css_admin])
     .pipe(plumber(error_handler))
     .pipe(stylelint({
       reporters: [{ formatter: 'string', console: true}]
