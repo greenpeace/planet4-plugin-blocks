@@ -58,16 +58,29 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 				];
 			}
 
+			$take_action_pages_args += [
+				'orderby' => 'post_title',
+				'order'   => 'ASC',
+			];
+
 			$fields = [
 				[
 					'attr'        => 'take_action_page',
-					'label'       => __( 'Select a Take Action Page', 'planet4-blocks-backend' ),
+					'label'       => '<p class="field-caption">' . __( 'When used in POSTS only 1 Take Action boxout block is supported', 'planet4-blocks-backend' ) . '</p>' . __( 'Select a Take Action Page', 'planet4-blocks-backend' ),
 					'description' => __( 'Associate this block with a Take Action page', 'planet4-blocks-backend' ),
 					'type'        => 'post_select',
 					'query'       => $take_action_pages_args,  // Filter select options only with ACT page children.
+					'meta'        => [
+						'select2_options' => [
+							'allowClear'         => true,
+							'placeholder'        => __( 'Select Take Action Page', 'planet4-blocks-backend' ),
+							'closeOnSelect'      => true,
+							'minimumInputLength' => 0,
+						],
+					]
 				],
 				[
-					'label' => '<p class="field-caption">' . __( 'Or customise your take action boxout', 'planet4-blocks-backend' ) . '</p>' . __( 'Custom Title', 'planet4-blocks-backend' ),
+					'label' => '<p class="field-caption">' . __( 'Or customise your take action boxout (if inserted in POSTS, the block will float on the side, if inserted in PAGES, it will appear in the page body)', 'planet4-blocks-backend' ) . '</p>' . __( 'Custom Title', 'planet4-blocks-backend' ),
 					'attr'  => 'custom_title',
 					'type'  => 'text',
 					'meta'  => [
@@ -137,7 +150,7 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 				'label'         => __( 'Take Action Boxout', 'planet4-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-plugin-blocks/admin/images/take_action_boxout.png' ) . '" />',
 				'attrs'         => $fields,
-				'post_type'     => P4BKS_ALLOWED_PAGETYPE,
+				'post_type'     => array_merge( P4BKS_ALLOWED_PAGETYPE, [ 'post' ] ),
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

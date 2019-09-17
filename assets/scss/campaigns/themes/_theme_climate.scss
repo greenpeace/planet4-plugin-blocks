@@ -48,20 +48,24 @@ body.theme-climate {
   }
 
   .btn-primary {
-    @include climate-button;
+    &:not(#hidecookie) {
+      @include climate-button;
 
-    &:hover {
-      color: black;
-      background: $climate-gradient-standard;
+      &:hover {
+        color: black;
+        background: $climate-gradient-standard;
+      }
     }
   }
 
   .btn-secondary {
-    @include climate-button(black, white);
+    &:not(#hidecookie) {
+      @include climate-button(black, white);
 
-    &:hover {
-      color: black;
-      background: $climate-gradient-standard;
+      &:hover {
+        color: black;
+        background: $climate-gradient-standard;
+      }
     }
   }
 
@@ -78,7 +82,6 @@ body.theme-climate {
 
   .page-section-description {
     font-size: $font-size-sm;
-    line-height: 1.2;
     margin-bottom: 32px;
 
     @include medium-and-up {

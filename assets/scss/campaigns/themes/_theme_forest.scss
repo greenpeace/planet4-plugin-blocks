@@ -29,10 +29,12 @@ body.theme-forest {
   }
 
   .btn-secondary {
-    @include forest-button($forest-green);
+    &:not(#hidecookie) {
+      @include forest-button($forest-green);
 
-    &:hover {
-      background: white;
+      &:hover {
+        background: white;
+      }
     }
   }
 
