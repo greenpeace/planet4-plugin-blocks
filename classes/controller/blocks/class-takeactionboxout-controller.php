@@ -77,7 +77,7 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 							'closeOnSelect'      => true,
 							'minimumInputLength' => 0,
 						],
-					]
+					],
 				],
 				[
 					'label' => '<p class="field-caption">' . __( 'Or customise your take action boxout (if inserted in POSTS, the block will float on the side, if inserted in PAGES, it will appear in the page body)', 'planet4-blocks-backend' ) . '</p>' . __( 'Custom Title', 'planet4-blocks-backend' ),
