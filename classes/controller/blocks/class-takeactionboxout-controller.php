@@ -208,8 +208,9 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 			}
 
 			$args = [
-				'p'         => intval( $page_id ), // ID of a page, post.
-				'post_type' => 'any',
+				'p'           => intval( $page_id ), // ID of a page, post.
+				'post_type'   => 'any',
+				'post_status' => 'publish',
 			];
 
 			// Try to find the page that the user selected.
@@ -232,6 +233,8 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 						];
 					}
 				}
+			} else {
+				return [];
 			}
 
 			$options = get_option( 'planet4_options' );
