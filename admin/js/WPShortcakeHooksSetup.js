@@ -26,14 +26,14 @@ function WPShortcakeHooksSetup(p4BlocksUI) { // eslint-disable-line no-unused-va
 
         wp.shortcake.hooks.addAction('shortcake_gallery.multiple_image', p4BlocksUI.blocks['GalleryBlock'].gallery_image_change_hook);
 
-        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.custom_title', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_filed_hook);
-        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.custom_excerpt', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_filed_hook);
-        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.custom_link', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_filed_hook);
-        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.custom_link_text', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_filed_hook);
-        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.custom_link_new_tab', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_filed_hook);
-        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.tag_ids', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_filed_hook);
-        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.background_image', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_filed_hook);
-        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.take_action_page', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_filed_hook);
+        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.custom_title', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_field_hook);
+        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.custom_excerpt', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_field_hook);
+        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.custom_link', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_field_hook);
+        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.custom_link_text', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_field_hook);
+        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.custom_link_new_tab', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_field_hook);
+        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.tag_ids', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_field_hook);
+        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.background_image', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_field_hook);
+        wp.shortcake.hooks.addAction('shortcake_take_action_boxout.take_action_page', p4BlocksUI.blocks['TakeActionBoxoutBlock'].edit_custom_field_hook);
       }
 
       // There may be multiple social media embeds on a page; fields need initializing separately for each one.
