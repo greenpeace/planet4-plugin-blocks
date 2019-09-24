@@ -77,7 +77,7 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 							'closeOnSelect'      => true,
 							'minimumInputLength' => 0,
 						],
-					]
+					],
 				],
 				[
 					'label' => '<p class="field-caption">' . __( 'Or customise your take action boxout (if inserted in POSTS, the block will float on the side, if inserted in PAGES, it will appear in the page body)', 'planet4-blocks-backend' ) . '</p>' . __( 'Custom Title', 'planet4-blocks-backend' ),
@@ -208,8 +208,9 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 			}
 
 			$args = [
-				'p'         => intval( $page_id ), // ID of a page, post.
-				'post_type' => 'any',
+				'p'           => intval( $page_id ), // ID of a page, post.
+				'post_type'   => 'any',
+				'post_status' => 'publish',
 			];
 
 			// Try to find the page that the user selected.
@@ -232,6 +233,8 @@ if ( ! class_exists( 'TakeActionBoxout_Controller' ) ) {
 						];
 					}
 				}
+			} else {
+				return [];
 			}
 
 			$options = get_option( 'planet4_options' );
