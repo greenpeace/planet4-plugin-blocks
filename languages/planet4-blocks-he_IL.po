@@ -1,0 +1,80 @@
+# Planet4 Plugin Blocks English base file.
+# Copyright (C) 2017 Greenpeace International
+# License:     GPLv3
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Planet4 blocks plugin frontend\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-07 11:24+0000\n"
+"PO-Revision-Date: 2019-09-25 10:28+0000\n"
+"Last-Translator: Elad Aybes <eaybes@greenpeace.org>\n"
+"Language-Team: Hebrew\n"
+"Language: he_IL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.3.0; wp-5.2.3"
+
+#: classes/controller/blocks/class-covers-controllers.php:142
+msgid "Take Action"
+msgstr "לעשות משהו"
+
+#: classes/controller/blocks/class-covers-controllers.php:165
+msgid "Load More ..."
+msgstr "טען עוד ..."
+
+#: classes/controller/blocks/class-splittwocolumns-controller.php:240
+msgid "Learn more about this issue"
+msgstr "ללמוד עוד על הנושא הזה"
+
+#: classes/controller/blocks/class-splittwocolumns-controller.php:261
+msgid "Get Involved"
+msgstr "לעשות משהו"
+
+#: classes/controller/blocks/class-takeactionboxout-controller.php:123
+msgid "take action"
+msgstr "לעשות משהו"
+
+#: classes/controller/blocks/class-contentfourcolumn-controller.php:222
+msgid "Publications"
+msgstr "פרסומים"
+
+#: classes/controller/blocks/class-articles-controller.php:154
+msgid "Related Articles"
+msgstr "מאמרים קשורים"
+
+#: classes/controller/blocks/class-articles-controller.php:155
+msgid "READ ALL THE NEWS"
+msgstr "קרא את כל החדשות"
+
+#: includes/blocks/articles.twig:61
+msgid "by"
+msgstr "על-ידי"
+
+#: includes/blocks/content_four_column.twig:60
+#: includes/blocks/content_four_column.twig:68
+msgid "Load More"
+msgstr "טען עוד"
+
+#. Plugin Name of the plugin/theme
+msgid "Planet4 - Blocks"
+msgstr "פלאנט4 - בלוקים"
+
+#. Description of the plugin/theme
+msgid "Creates all the blocks that will be available for usage by Shortcake."
+msgstr "יוצר את כל הבלוקים שיהיו זמינים לשימוש עם שורטקייק."
+
+#. URI of the plugin
+msgid "http://github.com/greenpeace/planet4-plugin-blocks"
+msgstr "http://github.com/greenpeace/planet4-plugin-blocks"
+
+#. Author of the plugin/theme
+msgid "Greenpeace International"
+msgstr "גרינפיס אינטרנשיונל"
+
+#. Author URI of the plugin/theme
+msgid "http://www.greenpeace.org/"
+msgstr "http://www.greenpeace.org/"
