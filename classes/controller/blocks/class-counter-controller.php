@@ -138,7 +138,15 @@ if ( ! class_exists( 'Counter_Controller' ) ) {
 			$target    = isset( $fields['target'] ) ? floatval( $fields['target'] ) : 0;
 
 			if ( array_key_exists( 'completed_api', $fields ) ) {
-				$response_api = wp_safe_remote_get( $fields['completed_api'] );
+				if ( get_transient( $fields['completed_api'] ) ) {
+					$response_api = get_transient( $fields['completed_api'] );
+				} else {
+					$response_api = wp_safe_remote_get( $fields['completed_api'] );
+					if ( ! is_wp_error( $response_api ) ) {
+						$one_hour = 3600;
+						set_transient( $fields['completed_api'], $response_api, $one_hour );
+					}
+				}
 				if ( is_array( $response_api ) ) {
 					$response_body = json_decode( $response_api['body'], true );
 					if ( is_array( $response_body ) && array_key_exists( 'unique_count', $response_body ) && is_int( $response_body['unique_count'] ) ) {
